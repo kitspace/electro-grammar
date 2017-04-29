@@ -7,6 +7,7 @@
     "test": "nearley-test grammar.js --input '10/((1+4)*8)*4'"
   },
   "dependencies": {
+    "js-quantities": "^1.6.6",
     "nearley": "^2.8.0"
   }
 }
