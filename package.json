@@ -2,6 +2,10 @@
   "name": "nearley",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "build": "nearleyc grammar.ne --out grammar.js",
+    "test": "nearley-test grammar.js --input '102+2+0'"
+  },
   "dependencies": {
     "nearley": "^2.8.0"
   }
