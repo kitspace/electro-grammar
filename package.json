@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "nearleyc grammar.ne --out grammar.js",
-    "test": "nearley-test grammar.js --input '102+2+0'"
+    "test": "nearley-test grammar.js --input '10/((1+4)*8)*4'"
   },
   "dependencies": {
     "nearley": "^2.8.0"
