@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "nearleyc grammar.ne --out grammar.js",
-    "test": "nearley-test grammar.js --input '1uF 0603'"
+    "test": "nearley-test grammar.js --input '1uF 0603 25%'"
   },
   "dependencies": {
     "js-quantities": "^1.6.6",

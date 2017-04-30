@@ -4,9 +4,13 @@
 
 main -> capacitor {% d => filter(ramda.flatten(d)) %}
 
-capacitor -> capacitance _ package_size:?
+capacitor ->
+    specs capacitance specs package_size specs
+  | specs package_size specs capacitance specs
 
-capacitance_expression -> capacitance | package_size
+specs -> (_ spec _):* | _
+
+spec -> "25%"
 
 package_size -> "0603" | "0805" | "1206"
 
