@@ -1,17 +1,27 @@
-#Addition and subtraction
-AS ->
-    AS "+" MD {% d => d[0] + d[2] %}
-  | AS "-" MD {% d => d[0] - d[2] %}
-  | MD {% d => d[0] %}
+@builtin "number.ne"
+@include "letters.ne"
 
-#Parens
-P -> "(" AS ")" {% d => d[1] %}
-    | N {% d => d[0] %}
+main -> capacitor
 
-#Multiplication and division
-MD -> MD "*" P {% d => d[0] * d[2] %}
-    | MD "/" P {% d => d[0] / d[2] %}
-    | P {% d => d[0] %}
+capacitor -> ( _ capacitance_expression _ ):+
 
-N ->
-    [0-9]:+ {% d => parseInt(d[0].join(''), 10) %}
+capacitance_expression -> capacitance | package_size
+
+package_size -> "0603" | "0805" | "1206"
+
+capacitance -> decimal _ unit _ farad
+
+unit ->
+    micro {% () => 'u' %}
+  | pico  {% () => 'p' %}
+  | nano  {% () => 'n' %}
+  | null
+
+farad -> "F" {% () => "F" %} | F A R A D {% () => "F" %}
+micro -> "u" | "μ" | "𝜇" | "𝛍" | "𝝻" | "𝞵" | M I C R O
+pico -> "p"
+nano -> "n"
+
+# Whitespace. The important thing here is that the postprocessor
+# is a null-returning function. This is a memory efficiency trick.
+_ -> [\s]:*     {% function(d) {return null } %}
