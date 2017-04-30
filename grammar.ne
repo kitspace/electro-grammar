@@ -12,7 +12,7 @@ specs -> (_ spec _):* | __
 
 spec -> "25%"
 
-package_size -> "0603" | "0805" | "1206"
+package_size -> "0402" | "0603" | "0805" | "1206"
 
 capacitance -> decimal _ unit _ farad {% d => filter(d).join('') %}
 
