@@ -24,7 +24,6 @@ capacitance -> decimal _ modifier _ farad {%capacitance%}
 @{%
   function capacitance(d) {
     [quantity, _, modifier, _, farad] = d
-    console.log(quantity, modifier)
 
     return {capacitance: quantity * modifier}
   }

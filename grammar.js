@@ -19,7 +19,6 @@ function id(x) {return x[0]; }
 
   function capacitance(d) {
     [quantity, _, modifier, _, farad] = d
-    console.log(quantity, modifier)
 
     return {capacitance: quantity * modifier}
   }
@@ -165,8 +164,10 @@ var grammar = {
     {"name": "Z", "symbols": [{"literal":"z"}]},
     {"name": "_$ebnf$1", "symbols": []},
     {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null }},
-    {"name": "__", "symbols": [/[\s]/], "postprocess": function(d) {return null }},
+    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": () => null},
+    {"name": "__$ebnf$1", "symbols": [/[\s]/]},
+    {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": () => null},
     {"name": "main", "symbols": ["capacitor"], "postprocess": d => assignAll(filter(ramda.flatten(d)))},
     {"name": "capacitor", "symbols": ["specs", "capacitance", "specs", "package_size", "specs"]},
     {"name": "capacitor", "symbols": ["specs", "package_size", "specs", "capacitance", "specs"]},

@@ -1,8 +1,6 @@
-# Whitespace. The important thing here is that the postprocessor
-# is a null-returning function. This is a memory efficiency trick.
-_ -> [\s]:*     {% function(d) {return null } %}
-
-__ -> [\s]     {% function(d) {return null } %}
+#whitespace
+_  -> [\s]:*  {% () => null %}
+__ -> [\s]:+  {% () => null %}
 
 @{%
   const ramda = require('ramda')
