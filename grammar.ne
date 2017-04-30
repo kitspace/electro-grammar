@@ -10,15 +10,17 @@ capacitor ->
 
 specs -> (_ spec _):* | __
 
-spec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance:d[1]}) %}
+spec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plus_minus -> "+/-" | "±"
 
-package_size ->
-    "0402"  {% d => ({size: d[0]}) %}
-  | "0603"  {% d => ({size: d[0]}) %}
-  | "0805"  {% d => ({size: d[0]}) %}
-  | "1206"  {% d => ({size: d[0]}) %}
+package_size -> _package_size {% d => ({size: d[0]}) %}
+
+_package_size ->
+    "0402"
+  | "0603"
+  | "0805"
+  | "1206"
 
 capacitance -> decimal _ metric_prefix _ farad {%capacitance%}
 @{%
