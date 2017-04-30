@@ -1,6 +1,6 @@
 @builtin "number.ne"
-@include "letters.ne"
 @include "util.ne"
+@include "metric_prefix.ne"
 
 main -> capacitor {% d => assignAll(filter(ramda.flatten(d))) %}
 
@@ -20,22 +20,13 @@ package_size ->
   | "0805"  {% d => ({size: d[0]}) %}
   | "1206"  {% d => ({size: d[0]}) %}
 
-capacitance -> decimal _ modifier _ farad {%capacitance%}
+capacitance -> decimal _ metric_prefix _ farad {%capacitance%}
 @{%
   function capacitance(d) {
-    [quantity, _, modifier, _, farad] = d
+    [quantity, _, metric_prefix, _, farad] = d
 
-    return {capacitance: quantity * modifier}
+    return {capacitance: quantity * metric_prefix}
   }
 %}
 
-modifier ->
-    micro {% () => 10e-6 %}
-  | pico  {% () => 10e-12 %}
-  | nano  {% () => 10e-9 %}
-  | null
-
-farad -> "F" {% () => "F" %} | F A R A D {% () => "F" %}
-micro -> "u" | "μ" | "𝜇" | "𝛍" | "𝝻" | "𝞵" | M I C R O
-pico -> "p"
-nano -> "n"
+farad -> "F" {% () => null %} | F A R A D {% () => null %}
