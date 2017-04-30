@@ -13,4 +13,8 @@ __ -> [\s]     {% function(d) {return null } %}
     });
   };
 
+  function assignAll(objs) {
+    return objs.reduce((prev, obj) => Object.assign(prev, obj))
+  }
+
 %}

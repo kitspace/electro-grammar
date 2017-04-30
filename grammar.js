@@ -11,6 +11,18 @@ function id(x) {return x[0]; }
     });
   };
 
+  function assignAll(objs) {
+    return objs.reduce((prev, obj) => Object.assign(prev, obj))
+  }
+
+
+
+  function capacitance(d) {
+    [quantity, _, modifier, _, farad] = d
+    console.log(quantity, modifier)
+
+    return {capacitance: quantity * modifier}
+  }
 var grammar = {
     ParserRules: [
     {"name": "unsigned_int$ebnf$1", "symbols": [/[0-9]/]},
@@ -155,7 +167,7 @@ var grammar = {
     {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null }},
     {"name": "__", "symbols": [/[\s]/], "postprocess": function(d) {return null }},
-    {"name": "main", "symbols": ["capacitor"], "postprocess": d => filter(ramda.flatten(d))},
+    {"name": "main", "symbols": ["capacitor"], "postprocess": d => assignAll(filter(ramda.flatten(d)))},
     {"name": "capacitor", "symbols": ["specs", "capacitance", "specs", "package_size", "specs"]},
     {"name": "capacitor", "symbols": ["specs", "package_size", "specs", "capacitance", "specs"]},
     {"name": "specs$ebnf$1", "symbols": []},
@@ -163,25 +175,26 @@ var grammar = {
     {"name": "specs$ebnf$1", "symbols": ["specs$ebnf$1", "specs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
     {"name": "specs", "symbols": ["specs$ebnf$1"]},
     {"name": "specs", "symbols": ["__"]},
-    {"name": "spec$ebnf$1", "symbols": ["plus_minus"], "postprocess": id},
+    {"name": "spec$ebnf$1$subexpression$1", "symbols": ["plus_minus", "_"]},
+    {"name": "spec$ebnf$1", "symbols": ["spec$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "spec$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "spec", "symbols": ["spec$ebnf$1", "_", "decimal", "_", {"literal":"%"}], "postprocess": d => d[2] + '%'},
+    {"name": "spec", "symbols": ["spec$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": d => ({tolerance:d[1]})},
     {"name": "plus_minus$string$1", "symbols": [{"literal":"+"}, {"literal":"/"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plus_minus", "symbols": ["plus_minus$string$1"]},
     {"name": "plus_minus", "symbols": [{"literal":"±"}]},
     {"name": "package_size$string$1", "symbols": [{"literal":"0"}, {"literal":"4"}, {"literal":"0"}, {"literal":"2"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "package_size", "symbols": ["package_size$string$1"]},
+    {"name": "package_size", "symbols": ["package_size$string$1"], "postprocess": d => ({size: d[0]})},
     {"name": "package_size$string$2", "symbols": [{"literal":"0"}, {"literal":"6"}, {"literal":"0"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "package_size", "symbols": ["package_size$string$2"]},
+    {"name": "package_size", "symbols": ["package_size$string$2"], "postprocess": d => ({size: d[0]})},
     {"name": "package_size$string$3", "symbols": [{"literal":"0"}, {"literal":"8"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "package_size", "symbols": ["package_size$string$3"]},
+    {"name": "package_size", "symbols": ["package_size$string$3"], "postprocess": d => ({size: d[0]})},
     {"name": "package_size$string$4", "symbols": [{"literal":"1"}, {"literal":"2"}, {"literal":"0"}, {"literal":"6"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "package_size", "symbols": ["package_size$string$4"]},
-    {"name": "capacitance", "symbols": ["decimal", "_", "unit", "_", "farad"], "postprocess": d => filter(d).join('')},
-    {"name": "unit", "symbols": ["micro"], "postprocess": () => 'u'},
-    {"name": "unit", "symbols": ["pico"], "postprocess": () => 'p'},
-    {"name": "unit", "symbols": ["nano"], "postprocess": () => 'n'},
-    {"name": "unit", "symbols": []},
+    {"name": "package_size", "symbols": ["package_size$string$4"], "postprocess": d => ({size: d[0]})},
+    {"name": "capacitance", "symbols": ["decimal", "_", "modifier", "_", "farad"], "postprocess": capacitance},
+    {"name": "modifier", "symbols": ["micro"], "postprocess": () => 10e-6},
+    {"name": "modifier", "symbols": ["pico"], "postprocess": () => 10e-12},
+    {"name": "modifier", "symbols": ["nano"], "postprocess": () => 10e-9},
+    {"name": "modifier", "symbols": []},
     {"name": "farad", "symbols": [{"literal":"F"}], "postprocess": () => "F"},
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": () => "F"},
     {"name": "micro", "symbols": [{"literal":"u"}]},
