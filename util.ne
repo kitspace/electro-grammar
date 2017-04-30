@@ -2,6 +2,8 @@
 # is a null-returning function. This is a memory efficiency trick.
 _ -> [\s]:*     {% function(d) {return null } %}
 
+__ -> [\s]     {% function(d) {return null } %}
+
 @{%
   const ramda = require('ramda')
 

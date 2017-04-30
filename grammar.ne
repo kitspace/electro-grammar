@@ -8,7 +8,7 @@ capacitor ->
     specs capacitance specs package_size specs
   | specs package_size specs capacitance specs
 
-specs -> (_ spec _):* | _
+specs -> (_ spec _):* | __
 
 spec -> "25%"
 
