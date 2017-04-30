@@ -1,15 +1,16 @@
 @builtin "number.ne"
 @include "letters.ne"
+@include "util.ne"
 
-main -> capacitor
+main -> capacitor {% d => filter(ramda.flatten(d)) %}
 
-capacitor -> ( _ capacitance_expression _ ):+
+capacitor -> capacitance _ package_size:?
 
 capacitance_expression -> capacitance | package_size
 
 package_size -> "0603" | "0805" | "1206"
 
-capacitance -> decimal _ unit _ farad
+capacitance -> decimal _ unit _ farad {% d => filter(d).join('') %}
 
 unit ->
     micro {% () => 'u' %}
@@ -21,7 +22,3 @@ farad -> "F" {% () => "F" %} | F A R A D {% () => "F" %}
 micro -> "u" | "μ" | "𝜇" | "𝛍" | "𝝻" | "𝞵" | M I C R O
 pico -> "p"
 nano -> "n"
-
-# Whitespace. The important thing here is that the postprocessor
-# is a null-returning function. This is a memory efficiency trick.
-_ -> [\s]:*     {% function(d) {return null } %}

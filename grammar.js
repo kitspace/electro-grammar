@@ -2,6 +2,15 @@
 // http://github.com/Hardmath123/nearley
 (function () {
 function id(x) {return x[0]; }
+
+  const ramda = require('ramda')
+
+  const filter = d => {
+    return d.filter((token) => {
+      return token !== null;
+    });
+  };
+
 var grammar = {
     ParserRules: [
     {"name": "unsigned_int$ebnf$1", "symbols": [/[0-9]/]},
@@ -142,12 +151,13 @@ var grammar = {
     {"name": "Y", "symbols": [{"literal":"y"}]},
     {"name": "Z", "symbols": [{"literal":"Z"}]},
     {"name": "Z", "symbols": [{"literal":"z"}]},
-    {"name": "main", "symbols": ["capacitor"]},
-    {"name": "capacitor$ebnf$1$subexpression$1", "symbols": ["_", "capacitance_expression", "_"]},
-    {"name": "capacitor$ebnf$1", "symbols": ["capacitor$ebnf$1$subexpression$1"]},
-    {"name": "capacitor$ebnf$1$subexpression$2", "symbols": ["_", "capacitance_expression", "_"]},
-    {"name": "capacitor$ebnf$1", "symbols": ["capacitor$ebnf$1", "capacitor$ebnf$1$subexpression$2"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "capacitor", "symbols": ["capacitor$ebnf$1"]},
+    {"name": "_$ebnf$1", "symbols": []},
+    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null }},
+    {"name": "main", "symbols": ["capacitor"], "postprocess": d => filter(ramda.flatten(d))},
+    {"name": "capacitor$ebnf$1", "symbols": ["package_size"], "postprocess": id},
+    {"name": "capacitor$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitor", "symbols": ["capacitance", "_", "capacitor$ebnf$1"]},
     {"name": "capacitance_expression", "symbols": ["capacitance"]},
     {"name": "capacitance_expression", "symbols": ["package_size"]},
     {"name": "package_size$string$1", "symbols": [{"literal":"0"}, {"literal":"6"}, {"literal":"0"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
@@ -156,7 +166,7 @@ var grammar = {
     {"name": "package_size", "symbols": ["package_size$string$2"]},
     {"name": "package_size$string$3", "symbols": [{"literal":"1"}, {"literal":"2"}, {"literal":"0"}, {"literal":"6"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "package_size", "symbols": ["package_size$string$3"]},
-    {"name": "capacitance", "symbols": ["decimal", "_", "unit", "_", "farad"]},
+    {"name": "capacitance", "symbols": ["decimal", "_", "unit", "_", "farad"], "postprocess": d => filter(d).join('')},
     {"name": "unit", "symbols": ["micro"], "postprocess": () => 'u'},
     {"name": "unit", "symbols": ["pico"], "postprocess": () => 'p'},
     {"name": "unit", "symbols": ["nano"], "postprocess": () => 'n'},
@@ -175,10 +185,7 @@ var grammar = {
     {"name": "micro", "symbols": ["micro$string$4"]},
     {"name": "micro", "symbols": ["M", "I", "C", "R", "O"]},
     {"name": "pico", "symbols": [{"literal":"p"}]},
-    {"name": "nano", "symbols": [{"literal":"n"}]},
-    {"name": "_$ebnf$1", "symbols": []},
-    {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function(d) {return null }}
+    {"name": "nano", "symbols": [{"literal":"n"}]}
 ]
   , ParserStart: "main"
 }
