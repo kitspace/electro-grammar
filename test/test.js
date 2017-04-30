@@ -3,7 +3,7 @@ const assert  = require('assert')
 
 const grammar = require('../grammar')
 
-describe('parser', () => {
+describe('SMD capacitors', () => {
   it('parses', () => {
     const p = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
     p.feed('1uF 0603')
@@ -13,6 +13,18 @@ describe('parser', () => {
   it('parses tolerance', () => {
     const p = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
     p.feed('1uF 0603 25%')
+    assert(p.results.length > 0, 'has no result')
+  })
+
+  it('parses tolerance 2', () => {
+    const p = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
+    p.feed('1uF 0603 +/-30%')
+    assert(p.results.length > 0, 'has no result')
+  })
+
+  it('parses tolerance 3', () => {
+    const p = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
+    p.feed('1uF 0603 ±10%')
     assert(p.results.length > 0, 'has no result')
   })
 

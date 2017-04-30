@@ -10,7 +10,9 @@ capacitor ->
 
 specs -> (_ spec _):* | __
 
-spec -> "25%"
+spec -> plus_minus:? _ decimal _ "%" {% d => d[2] + '%' %}
+
+plus_minus -> "+/-" | "±"
 
 package_size -> "0402" | "0603" | "0805" | "1206"
 
