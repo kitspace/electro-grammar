@@ -3,7 +3,7 @@
 @include "metric_prefix.ne"
 @include "package_size.ne"
 
-main -> component {% d => assignAll(filter(ramda.flatten(d))) %}
+main -> component {% d => assignAll(filter(lodashFlattenDeep(d))) %}
 
 component -> capacitor | resistor
 

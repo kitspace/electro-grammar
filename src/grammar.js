@@ -3,7 +3,7 @@
 (function () {
 function id(x) {return x[0]; }
 
-  const ramda = require('ramda')
+  const lodashFlattenDeep = require('lodash.flattendeep')
 
   const filter = d => {
     return d.filter((token) => {
@@ -252,7 +252,7 @@ var grammar = {
     {"name": "femto", "symbols": ["F", "E", "M", "T", "O"]},
     {"name": "atto", "symbols": [{"literal":"a"}]},
     {"name": "atto", "symbols": ["A", "T", "T", "O"]},
-    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": d => ({size: filter(ramda.flatten(d))[0]})},
+    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": d => ({size: filter(lodashFlattenDeep(d))[0]})},
     {"name": "_packageSize", "symbols": ["_imperialSize"]},
     {"name": "_packageSize", "symbols": ["_metricSize"]},
     {"name": "_imperialSize$string$1", "symbols": [{"literal":"0"}, {"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
@@ -319,7 +319,7 @@ var grammar = {
     {"name": "I", "symbols": [{"literal":"i"}]},
     {"name": "C", "symbols": [{"literal":"C"}]},
     {"name": "C", "symbols": [{"literal":"c"}]},
-    {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(ramda.flatten(d)))},
+    {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(lodashFlattenDeep(d)))},
     {"name": "component", "symbols": ["capacitor"]},
     {"name": "component", "symbols": ["resistor"]},
     {"name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "packageSize", "cSpecs"]},

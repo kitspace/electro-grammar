@@ -1,4 +1,4 @@
-packageSize -> _packageSize {% d => ({size: filter(ramda.flatten(d))[0]}) %}
+packageSize -> _packageSize {% d => ({size: filter(lodashFlattenDeep(d))[0]}) %}
 _packageSize -> _imperialSize | _metricSize
 _imperialSize ->
     "01005"

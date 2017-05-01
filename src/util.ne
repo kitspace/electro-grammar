@@ -3,7 +3,7 @@ _  -> [\s]:*  {% () => null %}
 __ -> [\s]:+  {% () => null %}
 
 @{%
-  const ramda = require('ramda')
+  const lodashFlattenDeep = require('lodash.flattendeep')
 
   const filter = d => {
     return d.filter((token) => {
