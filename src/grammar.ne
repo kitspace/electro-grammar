@@ -6,21 +6,21 @@
 main -> capacitor {% d => assignAll(filter(ramda.flatten(d))) %}
 
 capacitor ->
-    cSpecs capacitance cSpecs package_size cSpecs
-  | cSpecs package_size cSpecs capacitance cSpecs
+    cSpecs capacitance cSpecs packageSize cSpecs
+  | cSpecs packageSize cSpecs capacitance cSpecs
 
 cSpecs -> (_ cSpec _):* | __
 
-cSpec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
+cSpec -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
-plus_minus -> "+/-" | "±" | "+-"
+plusMinus -> "+/-" | "±" | "+-"
 
-capacitance -> decimal _ metric_prefix _ farad {%capacitance%}
+capacitance -> decimal _ metricPrefix _ farad {%capacitance%}
 @{%
   function capacitance(d) {
-    const [quantity, , metric_prefix, , farad] = d
+    const [quantity, , metricPrefix, , farad] = d
 
-    return {capacitance: quantity * metric_prefix}
+    return {capacitance: quantity * metricPrefix}
   }
 %}
 

@@ -1,6 +1,6 @@
-package_size -> _package_size {% d => ({size: filter(ramda.flatten(d))[0]}) %}
-_package_size -> _imperial_size | _metric_size
-_imperial_size ->
+packageSize -> _packageSize {% d => ({size: filter(ramda.flatten(d))[0]}) %}
+_packageSize -> _imperialSize | _metricSize
+_imperialSize ->
     "01005"
   | "0201"
   | "0402"
@@ -13,10 +13,10 @@ _imperial_size ->
   | "2010"
   | "2512"
 
-_metric_size ->
-    __metric_size [\s]:* M E T R I C {% d => toImperial[d[0]] %}
-  | M E T R I C [\s]:* __metric_size {% d => toImperial[d[7]] %}
-  | unambigious_metric_size     {% d => toImperial[d[0]] %}
+_metricSize ->
+    __metricSize [\s]:* M E T R I C {% d => toImperial[d[0]] %}
+  | M E T R I C [\s]:* __metricSize {% d => toImperial[d[7]] %}
+  | unambigiousMetricSize           {% d => toImperial[d[0]] %}
 @{%
   const toImperial = {
     '0402': '01005',
@@ -34,7 +34,7 @@ _metric_size ->
   }
 %}
 
-unambigious_metric_size ->
+unambigiousMetricSize ->
     "1005"
   | "1608"
   | "2012"
@@ -45,8 +45,8 @@ unambigious_metric_size ->
   | "5025"
   | "6332"
 
-__metric_size ->
-    unambigious_metric_size
+__metricSize ->
+    unambigiousMetricSize
   | "0402"
   | "0603"
 

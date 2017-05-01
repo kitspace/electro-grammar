@@ -1,6 +1,6 @@
 @include "letters.ne"
 
-metric_prefix ->
+metricPrefix ->
     exa   {% () => 10e18  %}
   | peta  {% () => 10e15  %}
   | tera  {% () => 10e12  %}
