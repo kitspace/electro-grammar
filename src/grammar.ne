@@ -13,7 +13,14 @@ capacitor ->
 
 cSpecs -> (_ cSpec _):* | __
 
-cSpec -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
+cSpec -> tolerance | characteristic
+
+characteristic -> _characteristic {% d => ({characteristic: d[0][0]}) %}
+
+_characteristic ->
+    "X7R"
+
+tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
@@ -35,7 +42,7 @@ resistor ->
 
 rSpecs -> (_ rSpec _):* | __
 
-rSpec -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
+rSpec -> tolerance
 
 resistance ->
   decimal metricPrefix int:? (_ ohm):? {% resistance %}

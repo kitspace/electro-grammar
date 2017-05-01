@@ -8,7 +8,7 @@ function parseElectronicComponent(str) {
     {keepHistory: true}
   )
   const chars = str.split('')
-  let results = chars.map(c => {
+  return chars.reduce((prev, c) => {
     const info = parser.save()
     //if it fails, roll it back
     try {
@@ -16,11 +16,9 @@ function parseElectronicComponent(str) {
     } catch(e) {
       parser.restore(info)
     }
-    return parser.results[0]
-  })
-  //return the last valid result
-  results = results.filter(r => r != null)
-  return results[results.length - 1]
+    //return the latest valid result
+    return parser.results[0] || prev
+  }, null)
 }
 
 module.exports = parseElectronicComponent
