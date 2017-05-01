@@ -53,10 +53,10 @@ describe('SMD Capacitors', () => {
 describe('SMD Resistors', () => {
   it('parses a resistor', () => {
     const c = parseElectronicComponent('1k 0603')
-    assert(c.resistance === (1e3), 'resistance value is wrong')
+    assert(c.resistance === 1000, 'resistance value is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
-  it('parses "ohm"', () => {
+  it('parses "1k ohm"', () => {
     const c = parseElectronicComponent('1k ohm 0603')
     assert(c.resistance === 1000, 'resistance value is wrong')
     assert(c.size === '0603', 'size is wrong')
@@ -70,5 +70,16 @@ describe('SMD Resistors', () => {
     const c = parseElectronicComponent('1k5 0402')
     assert(c.resistance === 1500, 'resistance value is wrong')
     assert(c.size === '0402', 'size is wrong')
+  })
+  it('parses "1Ω"', () => {
+    const c = parseElectronicComponent('1Ω 0805')
+    assert(c.resistance === 1, 'resistance value is wrong')
+    assert(c.size === '0805', 'size is wrong')
+  })
+  it('parses tolerance', () => {
+    const c = parseElectronicComponent('1k 0805 5%')
+    assert(c.resistance === 1000, 'resistance value is wrong')
+    assert(c.tolerance === 5, 'tolerance value is wrong')
+    assert(c.size === '0805', 'size is wrong')
   })
 })

@@ -25,7 +25,6 @@ giga  -> "G" | G I G A
 mega  -> "M" | M E G A
 kilo  -> "k" | K I L O
 hecto -> "h" | H E C T O
-deca  -> "da" | D E C A
 deci  -> "d" | D E C I
 centi -> "c" | C E N T I
 milli -> "m" | M I L L I
