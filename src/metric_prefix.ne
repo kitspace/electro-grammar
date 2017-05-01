@@ -30,7 +30,16 @@ deca  -> "da" | D E C A
 deci  -> "d" | D E C I
 centi -> "c" | C E N T I
 milli -> "m" | M I L L I
-micro -> "u" | "μ" | "𝜇" | "𝛍" | "𝝻" | "𝞵" | M I C R O
+micro ->
+    "u"
+  | [\u03BC]
+  | [\u00B5]
+  | [\uD835] [\uDECD]
+  | [\uD835] [\uDF07]
+  | [\uD835] [\uDF41]
+  | [\uD835] [\uDF7B]
+  | [\uD835] [\uDFB5]
+  | M I C R O
 nano  -> "n" | N A N O
 pico  -> "p" | P I C O
 femto -> "f" | F E M T O

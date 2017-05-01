@@ -3,7 +3,7 @@ const assert  = require('assert')
 
 const grammar = require('../lib/grammar')
 
-describe('SMD capacitors', () => {
+describe('grammar', () => {
   it('parses', () => {
     const p = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
     p.feed('1uF 0603')
