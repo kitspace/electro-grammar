@@ -13,7 +13,7 @@ specs -> (_ spec _):* | __
 
 spec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
-plus_minus -> "+/-" | "±"
+plus_minus -> "+/-" | "±" | "+-"
 
 capacitance -> decimal _ metric_prefix _ farad {%capacitance%}
 @{%

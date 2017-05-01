@@ -26,6 +26,12 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
     assert(c.tolerance === 30, 'tolerance is wrong')
   })
+  it('parses +- in tolerance', () => {
+    const c = parseElectronicComponent('2uF 0603 +-30%')
+    assert(c.capacitance === (2 * 10e-6), 'capacitance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.tolerance === 30, 'tolerance is wrong')
+  })
   it('parses all the various ways of saying micro', () => {
     const descriptions = [
       '10uF 0402',

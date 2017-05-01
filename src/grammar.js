@@ -324,6 +324,8 @@ var grammar = {
     {"name": "plus_minus$string$1", "symbols": [{"literal":"+"}, {"literal":"/"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plus_minus", "symbols": ["plus_minus$string$1"]},
     {"name": "plus_minus", "symbols": [{"literal":"±"}]},
+    {"name": "plus_minus$string$2", "symbols": [{"literal":"+"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "plus_minus", "symbols": ["plus_minus$string$2"]},
     {"name": "capacitance", "symbols": ["decimal", "_", "metric_prefix", "_", "farad"], "postprocess": capacitance},
     {"name": "farad", "symbols": [{"literal":"F"}], "postprocess": () => null},
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": () => null}
