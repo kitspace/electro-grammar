@@ -18,7 +18,7 @@ plus_minus -> "+/-" | "±"
 capacitance -> decimal _ metric_prefix _ farad {%capacitance%}
 @{%
   function capacitance(d) {
-    [quantity, _, metric_prefix, _, farad] = d
+    const [quantity, , metric_prefix, , farad] = d
 
     return {capacitance: quantity * metric_prefix}
   }

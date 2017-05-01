@@ -18,7 +18,7 @@ _metric_size ->
   | M E T R I C [\s]:* __metric_size {% d => toImperial[d[7]] %}
   | unambigious_metric_size     {% d => toImperial[d[0]] %}
 @{%
-  toImperial = {
+  const toImperial = {
     '0402': '01005',
     '0603': '0201',
     '1005': '0402',
