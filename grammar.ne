@@ -1,6 +1,7 @@
 @builtin "number.ne"
 @include "util.ne"
 @include "metric_prefix.ne"
+@include "package_size.ne"
 
 main -> capacitor {% d => assignAll(filter(ramda.flatten(d))) %}
 
@@ -13,14 +14,6 @@ specs -> (_ spec _):* | __
 spec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plus_minus -> "+/-" | "±"
-
-package_size -> _package_size {% d => ({size: d[0]}) %}
-
-_package_size ->
-    "0402"
-  | "0603"
-  | "0805"
-  | "1206"
 
 capacitance -> decimal _ metric_prefix _ farad {%capacitance%}
 @{%
