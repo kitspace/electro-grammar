@@ -1,7 +1,7 @@
 const nearley = require('nearley')
 const assert  = require('assert')
 
-const grammar = require('../grammar')
+const grammar = require('../lib/grammar')
 
 describe('SMD capacitors', () => {
   it('parses', () => {

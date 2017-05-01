@@ -1,15 +1,16 @@
 {
-  "name": "nearley",
+  "name": "parse-electronic-component",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "nearleyc grammar.ne --out grammar.js",
+    "build": "nearleyc src/grammar.ne --out lib/grammar.js",
     "test": "yarn build && mocha"
   },
   "dependencies": {
-    "js-quantities": "^1.6.6",
-    "mocha": "^3.3.0",
-    "nearley": "^2.8.0",
+    "nearley": "https://github.com/Hardmath123/nearley/",
     "ramda": "^0.23.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.3.0"
   }
 }
