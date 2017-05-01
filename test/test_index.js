@@ -48,6 +48,21 @@ describe('SMD Capacitors', () => {
       assert(c.size === '0402', 'size is wrong')
     })
   })
+  it('ignores extra words', () => {
+    const c = parseElectronicComponent('100nF 0603 kajdlkja alkdjlkajd')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('ignores extra words 2', () => {
+    const c = parseElectronicComponent('adjalkjd 100nF akjdlkjda 0603 kajdlkja alkdjlkajd')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('ignores extra words 3', () => {
+    const c = parseElectronicComponent('capacitor 100nF 0603, warehouse 5')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
 })
 
 describe('SMD Resistors', () => {
