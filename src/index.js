@@ -8,13 +8,16 @@ function parseElectronicComponent(str) {
     {keepHistory: true}
   )
   const chars = str.split('')
+  let info = parser.save()
   return chars.reduce((prev, c) => {
-    const info = parser.save()
     //if it fails, roll it back
     try {
       parser.feed(c)
     } catch(e) {
       parser.restore(info)
+    }
+    if (parser.results.length) {
+      info = parser.save()
     }
     //return the latest valid result
     return parser.results[0] || prev

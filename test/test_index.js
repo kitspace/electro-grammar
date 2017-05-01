@@ -63,11 +63,46 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it('ignores extra words 4', () => {
+    const c = parseElectronicComponent('adjalkjd 0603 akjdlkjda 100nF kajdlkja alkdjlkajd')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
   it('parses characteristic X7R', () => {
     const c = parseElectronicComponent('100nF 0603 X7R')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.characteristic === 'X7R', 'characteristic is wrong')
+  })
+  it('parses characteristic C0G', () => {
+    const c = parseElectronicComponent('100nF 0603 C0G')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'C0G/NP0', 'characteristic is wrong')
+  })
+  it('parses characteristic NPO', () => {
+    const c = parseElectronicComponent('100nF 0603 NP0')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'C0G/NP0', 'characteristic is wrong')
+  })
+  it('parses characteristic np0', () => {
+    const c = parseElectronicComponent('100nF 0603 NP0')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'C0G/NP0', 'characteristic is wrong')
+  })
+  it('parses characteristic c0g', () => {
+    const c = parseElectronicComponent('100nF 0603 NP0')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'C0G/NP0', 'characteristic is wrong')
+  })
+  it('parses characteristic C0G/NP0', () => {
+    const c = parseElectronicComponent('100nF 0603 C0G/NP0')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'C0G/NP0', 'characteristic is wrong')
   })
 })
 
