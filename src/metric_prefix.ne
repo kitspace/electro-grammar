@@ -1,23 +1,22 @@
 @include "letters.ne"
 
 metricPrefix ->
-    exa   {% () => 10e18  %}
-  | peta  {% () => 10e15  %}
-  | tera  {% () => 10e12  %}
-  | giga  {% () => 10e9   %}
-  | mega  {% () => 10e6   %}
-  | kilo  {% () => 10e3   %}
-  | hecto {% () => 10e2   %}
-  | deca  {% () => 10     %}
-  | deci  {% () => 10e-1  %}
-  | centi {% () => 10e-2  %}
-  | milli {% () => 10e-3  %}
-  | micro {% () => 10e-6  %}
-  | nano  {% () => 10e-9  %}
-  | pico  {% () => 10e-12 %}
-  | femto {% () => 10e-15 %}
-  | atto  {% () => 10e-18 %}
-  | null
+    exa   {% () => 'e18 ' %}
+  | peta  {% () => 'e15 ' %}
+  | tera  {% () => 'e12 ' %}
+  | giga  {% () => 'e9  ' %}
+  | mega  {% () => 'e6  ' %}
+  | kilo  {% () => 'e3  ' %}
+  | hecto {% () => 'e2  ' %}
+  | deci  {% () => 'e-1 ' %}
+  | centi {% () => 'e-2 ' %}
+  | milli {% () => 'e-3 ' %}
+  | micro {% () => 'e-6 ' %}
+  | nano  {% () => 'e-9 ' %}
+  | pico  {% () => 'e-12' %}
+  | femto {% () => 'e-15' %}
+  | atto  {% () => 'e-18' %}
+  | null  {% () => '' %}
 
 exa   -> "E" | E X A
 peta  -> "P" | P E T A

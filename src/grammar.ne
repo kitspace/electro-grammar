@@ -22,7 +22,7 @@ capacitance -> decimal _ metricPrefix _ farad {%capacitance%}
   function capacitance(d) {
     const [quantity, , metricPrefix, , farad] = d
 
-    return {capacitance: quantity * metricPrefix}
+    return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 %}
 
@@ -37,12 +37,21 @@ rSpecs -> (_ rSpec _):* | __
 
 rSpec -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
-resistance -> decimal _ metricPrefix (_ ohm):? {% resistance %}
-@{%
-  function resistance(d) {
-    const [quantity, , metricPrefix, ohm] = d
+resistance ->
+  decimal metricPrefix int:? (_ ohm):? {% resistance %}
 
-    return {resistance: quantity * metricPrefix}
+@{%
+  function resistance(d, i, reject) {
+    const [significantQuantity, metricPrefix, subQuantity, ohm] = d
+    if (subQuantity) {
+      if (/\./.test(significantQuantity.toString())) {
+        return reject
+      }
+      var quantity = `${significantQuantity}.${subQuantity}`
+    } else {
+      var quantity = significantQuantity
+    }
+    return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 %}
 

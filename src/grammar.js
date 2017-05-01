@@ -36,14 +36,21 @@ function id(x) {return x[0]; }
   function capacitance(d) {
     const [quantity, , metricPrefix, , farad] = d
 
-    return {capacitance: quantity * metricPrefix}
+    return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 
 
-  function resistance(d) {
-    const [quantity, , metricPrefix, ohm] = d
-
-    return {resistance: quantity * metricPrefix}
+  function resistance(d, i, reject) {
+    const [significantQuantity, metricPrefix, subQuantity, ohm] = d
+    if (subQuantity) {
+      if (/\./.test(significantQuantity.toString())) {
+        return reject
+      }
+      var quantity = `${significantQuantity}.${subQuantity}`
+    } else {
+      var quantity = significantQuantity
+    }
+    return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 var grammar = {
     Lexer: undefined,
@@ -192,23 +199,22 @@ var grammar = {
     {"name": "Y", "symbols": [{"literal":"y"}]},
     {"name": "Z", "symbols": [{"literal":"Z"}]},
     {"name": "Z", "symbols": [{"literal":"z"}]},
-    {"name": "metricPrefix", "symbols": ["exa"], "postprocess": () => 10e18},
-    {"name": "metricPrefix", "symbols": ["peta"], "postprocess": () => 10e15},
-    {"name": "metricPrefix", "symbols": ["tera"], "postprocess": () => 10e12},
-    {"name": "metricPrefix", "symbols": ["giga"], "postprocess": () => 10e9},
-    {"name": "metricPrefix", "symbols": ["mega"], "postprocess": () => 10e6},
-    {"name": "metricPrefix", "symbols": ["kilo"], "postprocess": () => 10e3},
-    {"name": "metricPrefix", "symbols": ["hecto"], "postprocess": () => 10e2},
-    {"name": "metricPrefix", "symbols": ["deca"], "postprocess": () => 10},
-    {"name": "metricPrefix", "symbols": ["deci"], "postprocess": () => 10e-1},
-    {"name": "metricPrefix", "symbols": ["centi"], "postprocess": () => 10e-2},
-    {"name": "metricPrefix", "symbols": ["milli"], "postprocess": () => 10e-3},
-    {"name": "metricPrefix", "symbols": ["micro"], "postprocess": () => 10e-6},
-    {"name": "metricPrefix", "symbols": ["nano"], "postprocess": () => 10e-9},
-    {"name": "metricPrefix", "symbols": ["pico"], "postprocess": () => 10e-12},
-    {"name": "metricPrefix", "symbols": ["femto"], "postprocess": () => 10e-15},
-    {"name": "metricPrefix", "symbols": ["atto"], "postprocess": () => 10e-18},
-    {"name": "metricPrefix", "symbols": []},
+    {"name": "metricPrefix", "symbols": ["exa"], "postprocess": () => 'e18 '},
+    {"name": "metricPrefix", "symbols": ["peta"], "postprocess": () => 'e15 '},
+    {"name": "metricPrefix", "symbols": ["tera"], "postprocess": () => 'e12 '},
+    {"name": "metricPrefix", "symbols": ["giga"], "postprocess": () => 'e9  '},
+    {"name": "metricPrefix", "symbols": ["mega"], "postprocess": () => 'e6  '},
+    {"name": "metricPrefix", "symbols": ["kilo"], "postprocess": () => 'e3  '},
+    {"name": "metricPrefix", "symbols": ["hecto"], "postprocess": () => 'e2  '},
+    {"name": "metricPrefix", "symbols": ["deci"], "postprocess": () => 'e-1 '},
+    {"name": "metricPrefix", "symbols": ["centi"], "postprocess": () => 'e-2 '},
+    {"name": "metricPrefix", "symbols": ["milli"], "postprocess": () => 'e-3 '},
+    {"name": "metricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
+    {"name": "metricPrefix", "symbols": ["nano"], "postprocess": () => 'e-9 '},
+    {"name": "metricPrefix", "symbols": ["pico"], "postprocess": () => 'e-12'},
+    {"name": "metricPrefix", "symbols": ["femto"], "postprocess": () => 'e-15'},
+    {"name": "metricPrefix", "symbols": ["atto"], "postprocess": () => 'e-18'},
+    {"name": "metricPrefix", "symbols": [], "postprocess": () => ''},
     {"name": "exa", "symbols": [{"literal":"E"}]},
     {"name": "exa", "symbols": ["E", "X", "A"]},
     {"name": "peta", "symbols": [{"literal":"P"}]},
@@ -349,10 +355,12 @@ var grammar = {
     {"name": "rSpec$ebnf$1", "symbols": ["rSpec$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "rSpec$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "rSpec", "symbols": ["rSpec$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": d => ({tolerance: d[1]})},
-    {"name": "resistance$ebnf$1$subexpression$1", "symbols": ["_", "ohm"]},
-    {"name": "resistance$ebnf$1", "symbols": ["resistance$ebnf$1$subexpression$1"], "postprocess": id},
+    {"name": "resistance$ebnf$1", "symbols": ["int"], "postprocess": id},
     {"name": "resistance$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistance", "symbols": ["decimal", "_", "metricPrefix", "resistance$ebnf$1"], "postprocess": resistance},
+    {"name": "resistance$ebnf$2$subexpression$1", "symbols": ["_", "ohm"]},
+    {"name": "resistance$ebnf$2", "symbols": ["resistance$ebnf$2$subexpression$1"], "postprocess": id},
+    {"name": "resistance$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "resistance", "symbols": ["decimal", "metricPrefix", "resistance$ebnf$1", "resistance$ebnf$2"], "postprocess": resistance},
     {"name": "ohm", "symbols": ["O", "H", "M"], "postprocess": () => null}
 ]
   , ParserStart: "main"
