@@ -38,6 +38,13 @@ function id(x) {return x[0]; }
 
     return {capacitance: quantity * metricPrefix}
   }
+
+
+  function resistance(d) {
+    const [quantity, , metricPrefix, ohm] = d
+
+    return {resistance: quantity * metricPrefix}
+  }
 var grammar = {
     Lexer: undefined,
     ParserRules: [
@@ -309,7 +316,9 @@ var grammar = {
     {"name": "I", "symbols": [{"literal":"i"}]},
     {"name": "C", "symbols": [{"literal":"C"}]},
     {"name": "C", "symbols": [{"literal":"c"}]},
-    {"name": "main", "symbols": ["capacitor"], "postprocess": d => assignAll(filter(ramda.flatten(d)))},
+    {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(ramda.flatten(d)))},
+    {"name": "component", "symbols": ["capacitor"]},
+    {"name": "component", "symbols": ["resistor"]},
     {"name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "packageSize", "cSpecs"]},
     {"name": "capacitor", "symbols": ["cSpecs", "packageSize", "cSpecs", "capacitance", "cSpecs"]},
     {"name": "cSpecs$ebnf$1", "symbols": []},
@@ -328,7 +337,23 @@ var grammar = {
     {"name": "plusMinus", "symbols": ["plusMinus$string$2"]},
     {"name": "capacitance", "symbols": ["decimal", "_", "metricPrefix", "_", "farad"], "postprocess": capacitance},
     {"name": "farad", "symbols": [{"literal":"F"}], "postprocess": () => null},
-    {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": () => null}
+    {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": () => null},
+    {"name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "packageSize", "rSpecs"]},
+    {"name": "resistor", "symbols": ["rSpecs", "packageSize", "rSpecs", "resistance", "rSpecs"]},
+    {"name": "rSpecs$ebnf$1", "symbols": []},
+    {"name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"]},
+    {"name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "rSpecs", "symbols": ["rSpecs$ebnf$1"]},
+    {"name": "rSpecs", "symbols": ["__"]},
+    {"name": "rSpec$ebnf$1$subexpression$1", "symbols": ["plusMinus", "_"]},
+    {"name": "rSpec$ebnf$1", "symbols": ["rSpec$ebnf$1$subexpression$1"], "postprocess": id},
+    {"name": "rSpec$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "rSpec", "symbols": ["rSpec$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": d => ({tolerance: d[1]})},
+    {"name": "resistance$ebnf$1$subexpression$1", "symbols": ["_", "ohm"]},
+    {"name": "resistance$ebnf$1", "symbols": ["resistance$ebnf$1$subexpression$1"], "postprocess": id},
+    {"name": "resistance$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "resistance", "symbols": ["decimal", "_", "metricPrefix", "resistance$ebnf$1"], "postprocess": resistance},
+    {"name": "ohm", "symbols": ["O", "H", "M"], "postprocess": () => null}
 ]
   , ParserStart: "main"
 }

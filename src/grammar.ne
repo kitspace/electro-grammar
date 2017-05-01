@@ -3,7 +3,9 @@
 @include "metric_prefix.ne"
 @include "package_size.ne"
 
-main -> capacitor {% d => assignAll(filter(ramda.flatten(d))) %}
+main -> component {% d => assignAll(filter(ramda.flatten(d))) %}
+
+component -> capacitor | resistor
 
 capacitor ->
     cSpecs capacitance cSpecs packageSize cSpecs
@@ -25,3 +27,23 @@ capacitance -> decimal _ metricPrefix _ farad {%capacitance%}
 %}
 
 farad -> "F" {% () => null %} | F A R A D {% () => null %}
+
+resistor ->
+    rSpecs resistance rSpecs packageSize rSpecs
+  | rSpecs packageSize rSpecs resistance rSpecs
+
+
+rSpecs -> (_ rSpec _):* | __
+
+rSpec -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
+
+resistance -> decimal _ metricPrefix (_ ohm):? {% resistance %}
+@{%
+  function resistance(d) {
+    const [quantity, , metricPrefix, ohm] = d
+
+    return {resistance: quantity * metricPrefix}
+  }
+%}
+
+ohm -> O H M {% () => null %}

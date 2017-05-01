@@ -49,3 +49,16 @@ describe('SMD Capacitors', () => {
     })
   })
 })
+
+describe('SMD Resistors', () => {
+  it('parses a resistor', () => {
+    const c = parseElectronicComponent('1k 0603')
+    assert(c.resistance === (1 * 10e3), 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses "ohm"', () => {
+    const c = parseElectronicComponent('1k ohm 0603')
+    assert(c.resistance === (1 * 10e3), 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+})
