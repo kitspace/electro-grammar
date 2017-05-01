@@ -6,12 +6,12 @@
 main -> capacitor {% d => assignAll(filter(ramda.flatten(d))) %}
 
 capacitor ->
-    specs capacitance specs package_size specs
-  | specs package_size specs capacitance specs
+    cSpecs capacitance cSpecs package_size cSpecs
+  | cSpecs package_size cSpecs capacitance cSpecs
 
-specs -> (_ spec _):* | __
+cSpecs -> (_ cSpec _):* | __
 
-spec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
+cSpec -> (plus_minus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plus_minus -> "+/-" | "±" | "+-"
 
