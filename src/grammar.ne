@@ -17,12 +17,22 @@ cSpec -> tolerance | characteristic
 
 characteristic -> _characteristic {% d => ({characteristic: d[0]}) %}
 
+combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 _characteristic ->
     X "7" R             {% d => "X7R" %}
   | X "5" R             {% d => "X5R" %}
-  | C "0" G             {% d => "C0G/NP0" %}
-  | N P "0"             {% d => "C0G/NP0" %}
-  | C "0" G "/" N P "0" {% d => "C0G/NP0" %}
+  | combine[C "0" G,  N P "0"] {% () => 'C0G' %}
+  | combine[P "100",  M "7" G] {% () => 'M7G' %}
+  | combine[N "33",   H "2" G] {% () => 'H2G' %}
+  | combine[N "75",   L "2" G] {% () => 'L2G' %}
+  | combine[N "150",  P "2" H] {% () => 'P2H' %}
+  | combine[N "220",  R "2" H] {% () => 'R2H' %}
+  | combine[N "330",  S "2" H] {% () => 'S2H' %}
+  | combine[N "470",  T "2" H] {% () => 'T2H' %}
+  | combine[N "750",  U "2" J] {% () => 'U2J' %}
+  | combine[N "1000", Q "3" K] {% () => 'Q3K' %}
+  | combine[N "1500", P "3" K] {% () => 'P3K' %}
+
 
 tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
