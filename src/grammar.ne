@@ -10,6 +10,10 @@ component -> capacitor | resistor
 capacitor ->
     cSpecs capacitance cSpecs packageSize:? cSpecs
   | cSpecs packageSize:? cSpecs capacitance cSpecs
+  | cap cSpecs packageSize:? cSpecs capacitanceNoFarad cSpecs
+  | cap cSpecs capacitanceNoFarad cSpecs packageSize:? cSpecs
+
+cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% () => null %}
 
 cSpecs -> (_ cSpec _):* | __
 
@@ -38,7 +42,8 @@ tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
-capacitance -> decimal _ metricPrefix _ farad {%capacitance%}
+capacitance -> decimal _ cMetricPrefix _ farad {%capacitance%}
+capacitanceNoFarad -> decimal _ cMetricPrefix {%capacitance%}
 @{%
   function capacitance(d) {
     const [quantity, , metricPrefix, , farad] = d
@@ -46,6 +51,7 @@ capacitance -> decimal _ metricPrefix _ farad {%capacitance%}
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 %}
+
 
 farad -> "F" {% () => null %} | F A R A D {% () => null %}
 
@@ -59,7 +65,7 @@ rSpecs -> (_ rSpec _):* | __
 rSpec -> tolerance
 
 resistance ->
-  decimal metricPrefix int:? (_ ohm):? {% resistance %}
+  decimal rMetricPrefix int:? (_ ohm):? {% resistance %}
 
 @{%
   function resistance(d, i, reject) {
@@ -77,3 +83,17 @@ resistance ->
 %}
 
 ohm -> O H M {% () => null %}
+
+rMetricPrefix ->
+    giga  {% () => 'e9  ' %}
+  | mega  {% () => 'e6  ' %}
+  | kilo  {% () => 'e3  ' %}
+  | null  {% () => '' %}
+
+cMetricPrefix ->
+    micro {% () => 'e-6 ' %}
+  | nano  {% () => 'e-9 ' %}
+  | pico  {% () => 'e-12' %}
+  | femto {% () => 'e-15' %}
+  | null  {% () => '' %}
+

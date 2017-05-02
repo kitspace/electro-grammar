@@ -104,6 +104,21 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
     assert(c.characteristic === 'C0G', 'characteristic is wrong')
   })
+  it('takes a hint', () => {
+    const c = parseElectronicComponent('C 100n 0603')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('takes a hint 2', () => {
+    const c = parseElectronicComponent('Capacitor 100n 0603')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('takes a hint 3', () => {
+    const c = parseElectronicComponent('cap 100n 0603')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
 })
 
 describe('SMD Resistors', () => {

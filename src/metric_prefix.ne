@@ -1,15 +1,5 @@
 @include "letters.ne"
 
-metricPrefix ->
-    giga  {% () => 'e9  ' %}
-  | mega  {% () => 'e6  ' %}
-  | kilo  {% () => 'e3  ' %}
-  | micro {% () => 'e-6 ' %}
-  | nano  {% () => 'e-9 ' %}
-  | pico  {% () => 'e-12' %}
-  | femto {% () => 'e-15' %}
-  | null  {% () => '' %}
-
 exa   -> "E" | E X A
 peta  -> "P" | P E T A
 tera  -> "T" | T E R A
