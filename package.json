@@ -1,5 +1,6 @@
 {
   "name": "parse-electronic-component",
+  "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
   "version": "1.0.0",
   "main": "lib/index.js",
   "scripts": {
