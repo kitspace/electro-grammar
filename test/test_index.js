@@ -5,30 +5,30 @@ const parseElectronicComponent = require('../lib/index')
 describe('SMD Capacitors', () => {
   it('parses a capacitor', () => {
     const c = parseElectronicComponent('2uF 0603')
-    assert(c.capacitance === (2e-6), 'capacitance value is wrong')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
   it('parses tolerance', () => {
     const c = parseElectronicComponent('2uF 0603 30%')
-    assert(c.capacitance === (2e-6), 'capacitance value is wrong')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.tolerance === 30, 'tolerance is wrong')
   })
   it('parses +/- in tolerance', () => {
     const c = parseElectronicComponent('2uF 0603 +/-30%')
-    assert(c.capacitance === (2e-6), 'capacitance value is wrong')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.tolerance === 30, 'tolerance is wrong')
   })
   it('parses ± in tolerance', () => {
     const c = parseElectronicComponent('2uF 0603 ±30%')
-    assert(c.capacitance === (2e-6), 'capacitance value is wrong')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.tolerance === 30, 'tolerance is wrong')
   })
   it('parses +- in tolerance', () => {
     const c = parseElectronicComponent('2uF 0603 +-30%')
-    assert(c.capacitance === (2e-6), 'capacitance value is wrong')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.tolerance === 30, 'tolerance is wrong')
   })
@@ -44,7 +44,7 @@ describe('SMD Capacitors', () => {
     ]
     descriptions.forEach(d => {
       const c = parseElectronicComponent(d)
-      assert(c.capacitance === (10e-6), 'capacitance is wrong')
+      assert(c.capacitance === 10e-6, 'capacitance is wrong')
       assert(c.size === '0402', 'size is wrong')
     })
   })
