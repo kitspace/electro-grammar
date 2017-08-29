@@ -1,5 +1,5 @@
-import resistors from '../cpl-data/CPL for Production/Resistors.yaml'
-import capacitors from '../cpl-data/CPL for Production/Capacitors.yaml'
+const resistors  = require('./cpl_resistors')
+const capacitors = require('./cpl_capacitors')
 
 function matchCPL(component) {
   if (component.capacitance != null) {

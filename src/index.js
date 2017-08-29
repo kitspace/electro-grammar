@@ -1,29 +1,3 @@
-const nearley = require('nearley')
-const grammar = require('./grammar')
-
-function parseElectronicComponent(str) {
-  const parser = new nearley.Parser(
-    grammar.ParserRules,
-    grammar.ParserStart,
-    {keepHistory: true}
-  )
-  const chars = str.split('')
-  let info = parser.save()
-  return chars.reduce((prev, c) => {
-    //if it fails, roll it back
-    try {
-      parser.feed(c)
-    } catch(e) {
-      parser.restore(info)
-    }
-    if (parser.results.length) {
-      info = parser.save()
-    }
-    //return the latest valid result
-    return parser.results[0] || prev
-  }, null)
-}
-
-parseElectronicComponent.matchCPL = require('./match_cpl')
-
-module.exports = parseElectronicComponent
+const parse = require('./parse')
+const matchCPL = require('./match_cpl')
+module.exports = {parse, matchCPL}
