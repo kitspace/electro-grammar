@@ -57,4 +57,10 @@ describe('grammar', () => {
     p.feed('1uF 25V')
     assert(p.results.length > 0, 'has no result')
   })
+
+  it("doesn't match a random number to a resistor", () => {
+    p.feed('0603 5')
+    assert(p.results.length === 0, 'has a result')
+  })
+
 })

@@ -41,7 +41,7 @@ function id(x) {return x[0]; }
 
 
   function resistance(d, i, reject) {
-    const [integral, metricPrefix, fractional, ohm] = d
+    const [integral, , [metricPrefix, fractional, ohm]] = d
     if (/\./.test(integral.toString())) {
       return reject
     }
@@ -314,10 +314,14 @@ var grammar = {
     {"name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"]},
     {"name": "capacitor$ebnf$3", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$3", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitanceNoFarad", "cSpecs"]},
+    {"name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"]},
+    {"name": "capacitor$subexpression$1", "symbols": ["capacitance"]},
+    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"]},
+    {"name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"]},
+    {"name": "capacitor$subexpression$2", "symbols": ["capacitance"]},
     {"name": "capacitor$ebnf$4", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$4", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitanceNoFarad", "cSpecs", "capacitor$ebnf$4", "cSpecs"]},
+    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"]},
     {"name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id},
     {"name": "cap$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "cap$ebnf$2", "symbols": ["P"], "postprocess": id},
@@ -459,17 +463,20 @@ var grammar = {
     {"name": "rSpecs", "symbols": ["rSpecs$ebnf$1"]},
     {"name": "rSpecs", "symbols": ["__"]},
     {"name": "rSpec", "symbols": ["tolerance"]},
-    {"name": "resistance$ebnf$1", "symbols": ["int"], "postprocess": id},
-    {"name": "resistance$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistance$ebnf$2$subexpression$1", "symbols": ["_", "ohm"]},
-    {"name": "resistance$ebnf$2", "symbols": ["resistance$ebnf$2$subexpression$1"], "postprocess": id},
-    {"name": "resistance$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistance", "symbols": ["decimal", "rMetricPrefix", "resistance$ebnf$1", "resistance$ebnf$2"], "postprocess": resistance},
-    {"name": "ohm", "symbols": ["O", "H", "M"], "postprocess": () => null},
+    {"name": "resistance", "symbols": ["decimal", "_", "rest"], "postprocess": resistance},
+    {"name": "rest$ebnf$1", "symbols": ["int"], "postprocess": id},
+    {"name": "rest$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "rest$ebnf$2$subexpression$1", "symbols": ["_", "ohm"]},
+    {"name": "rest$ebnf$2", "symbols": ["rest$ebnf$2$subexpression$1"], "postprocess": id},
+    {"name": "rest$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "rest", "symbols": ["rMetricPrefix", "rest$ebnf$1", "rest$ebnf$2"]},
+    {"name": "rest", "symbols": ["ohm"]},
+    {"name": "ohm", "symbols": ["ohm_"], "postprocess": () => null},
+    {"name": "ohm_", "symbols": ["O", "H", "M"]},
+    {"name": "ohm_", "symbols": [{"literal":"Ω"}]},
     {"name": "rMetricPrefix", "symbols": ["giga"], "postprocess": () => 'e9  '},
     {"name": "rMetricPrefix", "symbols": ["mega"], "postprocess": () => 'e6  '},
     {"name": "rMetricPrefix", "symbols": ["kilo"], "postprocess": () => 'e3  '},
-    {"name": "rMetricPrefix", "symbols": [], "postprocess": () => ''},
     {"name": "cMetricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
     {"name": "cMetricPrefix", "symbols": ["nano"], "postprocess": () => 'e-9 '},
     {"name": "cMetricPrefix", "symbols": ["pico"], "postprocess": () => 'e-12'},

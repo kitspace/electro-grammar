@@ -10,8 +10,8 @@ component -> capacitor | resistor
 capacitor ->
     cSpecs capacitance cSpecs packageSize:? cSpecs
   | cSpecs packageSize:? cSpecs capacitance cSpecs
-  | cap cSpecs packageSize:? cSpecs capacitanceNoFarad cSpecs
-  | cap cSpecs capacitanceNoFarad cSpecs packageSize:? cSpecs
+  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs
+  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs
 
 cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% () => null %}
 
@@ -68,11 +68,13 @@ rSpec -> tolerance
 
 
 resistance ->
-  decimal rMetricPrefix int:? (_ ohm):? {% resistance %}
+  decimal _ rest {% resistance %}
+
+rest -> rMetricPrefix int:? (_ ohm):? | ohm
 
 @{%
   function resistance(d, i, reject) {
-    const [integral, metricPrefix, fractional, ohm] = d
+    const [integral, , [metricPrefix, fractional, ohm]] = d
     if (/\./.test(integral.toString())) {
       return reject
     }
@@ -85,13 +87,13 @@ resistance ->
   }
 %}
 
-ohm -> O H M {% () => null %}
+ohm -> ohm_ {% () => null %}
+ohm_ -> O H M | "Ω"
 
 rMetricPrefix ->
     giga  {% () => 'e9  ' %}
   | mega  {% () => 'e6  ' %}
   | kilo  {% () => 'e3  ' %}
-  | null  {% () => '' %}
 
 cMetricPrefix ->
     micro {% () => 'e-6 ' %}

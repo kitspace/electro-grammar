@@ -7,18 +7,17 @@ function parseElectronicComponent(str) {
     grammar.ParserStart,
     {keepHistory: true}
   )
-  const chars = str.split('')
+  const chars = str.split(' ')
   let info = parser.save()
   return chars.reduce((prev, c) => {
     //if it fails, roll it back
+    c = c.replace(/,|;/, '') + ' '
     try {
       parser.feed(c)
     } catch(e) {
       parser.restore(info)
     }
-    if (parser.results.length) {
-      info = parser.save()
-    }
+    info = parser.save()
     //return the latest valid result
     return parser.results[0] || prev
   }, null)
