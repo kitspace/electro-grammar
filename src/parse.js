@@ -1,7 +1,7 @@
 const nearley = require('nearley')
 const grammar = require('./grammar')
 
-function parseElectronicComponent(str) {
+function parse(str) {
   const parser = new nearley.Parser(
     grammar.ParserRules,
     grammar.ParserStart,
@@ -23,4 +23,4 @@ function parseElectronicComponent(str) {
   }, null)
 }
 
-module.exports = parseElectronicComponent
+module.exports = parse
