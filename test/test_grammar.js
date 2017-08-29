@@ -1,5 +1,5 @@
 const nearley = require('nearley')
-const assert  = require('assert')
+const assert  = require('better-assert')
 
 const grammar = require('../lib/grammar')
 
@@ -53,4 +53,8 @@ describe('grammar', () => {
     assert(p.results == null, 'got a result')
   })
 
+  it('parses voltage rating', () => {
+    p.feed('1uF 25V')
+    assert(p.results.length > 0, 'has no result')
+  })
 })

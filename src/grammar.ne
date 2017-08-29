@@ -17,7 +17,9 @@ cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% () => null %}
 
 cSpecs -> (_ cSpec _):* | __
 
-cSpec -> tolerance | characteristic
+cSpec -> tolerance | characteristic | voltage_rating
+
+voltage_rating -> decimal _ V {% d => ({voltage_rating: d[0]}) %}
 
 characteristic -> _characteristic {% d => ({characteristic: d[0]}) %}
 
@@ -63,6 +65,7 @@ resistor ->
 rSpecs -> (_ rSpec _):* | __
 
 rSpec -> tolerance
+
 
 resistance ->
   decimal rMetricPrefix int:? (_ ohm):? {% resistance %}

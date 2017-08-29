@@ -342,6 +342,8 @@ var grammar = {
     {"name": "cSpecs", "symbols": ["__"]},
     {"name": "cSpec", "symbols": ["tolerance"]},
     {"name": "cSpec", "symbols": ["characteristic"]},
+    {"name": "cSpec", "symbols": ["voltage_rating"]},
+    {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": d => ({voltage_rating: d[0]})},
     {"name": "characteristic", "symbols": ["_characteristic"], "postprocess": d => ({characteristic: d[0]})},
     {"name": "_characteristic", "symbols": ["X", {"literal":"7"}, "R"], "postprocess": d => "X7R"},
     {"name": "_characteristic", "symbols": ["X", {"literal":"5"}, "R"], "postprocess": d => "X5R"},

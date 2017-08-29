@@ -1,4 +1,4 @@
-const assert  = require('assert')
+const assert = require('better-assert')
 
 const parseElectronicComponent = require('../lib/index')
 
@@ -103,6 +103,18 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.characteristic === 'C0G', 'characteristic is wrong')
+  })
+  it('parses voltage rating', () => {
+    const c = parseElectronicComponent('100nF 0603 25V')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.voltage_rating === 25, 'rating is wrong')
+  })
+  it('parses voltage rating with small v and space', () => {
+    const c = parseElectronicComponent('100nF 0603 25 v')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.voltage_rating === 25, 'rating is wrong')
   })
   it('takes a hint', () => {
     const c = parseElectronicComponent('C 100n 0603')
