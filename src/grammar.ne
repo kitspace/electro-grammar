@@ -23,8 +23,8 @@ characteristic -> _characteristic {% d => ({characteristic: d[0]}) %}
 
 combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 _characteristic ->
-    X "7" R             {% d => "X7R" %}
-  | X "5" R             {% d => "X5R" %}
+    X "7" R                    {% d => "X7R" %}
+  | X "5" R                    {% d => "X5R" %}
   | combine[C "0" G,  N P "0"] {% () => 'C0G' %}
   | combine[P "100",  M "7" G] {% () => 'M7G' %}
   | combine[N "33",   H "2" G] {% () => 'H2G' %}
@@ -69,14 +69,14 @@ resistance ->
 
 @{%
   function resistance(d, i, reject) {
-    const [significantQuantity, metricPrefix, subQuantity, ohm] = d
-    if (subQuantity) {
-      if (/\./.test(significantQuantity.toString())) {
-        return reject
-      }
-      var quantity = `${significantQuantity}.${subQuantity}`
+    const [integral, metricPrefix, fractional, ohm] = d
+    if (/\./.test(integral.toString())) {
+      return reject
+    }
+    if (fractional) {
+      var quantity = `${integral}.${fractional}`
     } else {
-      var quantity = significantQuantity
+      var quantity = integral
     }
     return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
   }

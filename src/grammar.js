@@ -41,14 +41,14 @@ function id(x) {return x[0]; }
 
 
   function resistance(d, i, reject) {
-    const [significantQuantity, metricPrefix, subQuantity, ohm] = d
-    if (subQuantity) {
-      if (/\./.test(significantQuantity.toString())) {
-        return reject
-      }
-      var quantity = `${significantQuantity}.${subQuantity}`
+    const [integral, metricPrefix, fractional, ohm] = d
+    if (/\./.test(integral.toString())) {
+      return reject
+    }
+    if (fractional) {
+      var quantity = `${integral}.${fractional}`
     } else {
-      var quantity = significantQuantity
+      var quantity = integral
     }
     return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
   }
