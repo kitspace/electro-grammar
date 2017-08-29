@@ -1,12 +1,16 @@
-# NPM module for parsing electronic component descriptions
+# Electro Grammar
+>NPM module for parsing electronic component descriptions
 
-This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors. A function to match the result to part in the [Common Parts Library][CPL] is also provided.
+This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
+A function to match the result to a part in the [Common Parts Library][CPL] is also provided.
 
 ```js
 const {parse, matchCPL} = require('electro-grammar')
 ```
 
 ## Parsing
+
+### Resistors
 Parses capacitance, package size, characteristic, tolerance and voltage rating for capacitors.
 
 ```js
@@ -18,6 +22,15 @@ Parses capacitance, package size, characteristic, tolerance and voltage rating f
   voltage_rating: 25 }
 ```
 
+### Capacitors
+Parses resistance, size and tolerance for resistors.
+
+```js
+> parse('1k 0805 5%')
+{ resistance: 1000, size: '0805', tolerance: 5 }
+
+### Parsing Details
+
 Converts all units to floating point numbers.
 
 ```js
@@ -25,11 +38,6 @@ Converts all units to floating point numbers.
 { capacitance: 1e-7, size: '0603' }
 ```
 
-Parses resistance, size and tolerance for resistors.
-
-```js
-> parse('1k 0805 5%')
-{ resistance: 1000, size: '0805', tolerance: 5 }
 ```
 You can use metric package sizes as long as you specify.
 Output for package sizes is always in imperial.
@@ -49,5 +57,10 @@ Text that is not part of the grammar is simply ignored.
 ```
 
 ## Matching
+
+```js
+> c = parse(
+
+```
 
 [CPL]: https://octopart.com/common-parts-library
