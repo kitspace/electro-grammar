@@ -24,4 +24,6 @@ function parseElectronicComponent(str) {
   }, null)
 }
 
+parseElectronicComponent.matchCPL = require('./match_cpl')
+
 module.exports = parseElectronicComponent

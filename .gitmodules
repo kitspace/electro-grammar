@@ -1,0 +1,3 @@
+[submodule "cpl-data"]
+	path = cpl-data
+	url = https://github.com/octopart/cpl-data
