@@ -3,16 +3,28 @@
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
 
 ```js
-const parseElectronicComponent = require('parse-electronic-component')
-
-const c = parseElectronicComponent('100nF 0603 C0G 10%')
-assert(c.capacitance    === 100e-9)
-assert(c.size           === '0603')
-assert(c.characteristic === 'C0G')
-assert(c.tolerance      === 10)
-
-const r = parseElectronicComponent('1k 0805 5%')
-assert(r.resistance === 1000)
-assert(r.size       === '0805')
-assert(r.tolerance  === 5)
+> parseElectronicComponent = require('parse-electronic-component')
+> // parses capacitance, package size, characteristic, tolerance and voltage
+> // rating for capacitors
+> parseElectronicComponent('100nF 0603 C0G 10% 25V')
+{ capacitance: 1e-7,
+  size: '0603',
+  characteristic: 'C0G',
+  tolerance: 10,
+  voltage_rating: 25 }
+> // converts all units to floating point numbers
+> parseElectronicComponent('0.1uF 0603')
+{ capacitance: 1e-7, size: '0603' }
+> // parses resistance, size and tolerance for resistors
+> parseElectronicComponent('1k 0805 5%')
+{ resistance: 1000, size: '0805', tolerance: 5 }
+> // you can use metric package sizes as long as you specify
+> // output for package sizes is always in imperial
+> parseElectronicComponent('1k metric 0603')
+{ resistance: 1000, size: '0201' }
+> parseElectronicComponent('1k 0603 metric')
+{ resistance: 1000, size: '0201' }
+> //text that are not part of the grammer is simply ignored
+> parseElectronicComponent('these words 1k are ignored 0805')
+{ resistance: 1000, size: '0805' }
 ```
