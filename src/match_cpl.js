@@ -2,6 +2,7 @@ const resistors  = require('./cpl_resistors')
 const capacitors = require('./cpl_capacitors')
 
 function matchCPL(component) {
+  component = component || {}
   if (component.capacitance != null) {
     return matchCapacitor(component)
   } else if (component.resistance != null) {

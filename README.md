@@ -95,6 +95,9 @@ If no matches are found or the function is given invalid input an empty array is
 
 > matchCPL({invalid: 'input'})
 []
+
+> matchCPL(null)
+[]
 ```
 
 [CPL]: https://octopart.com/common-parts-library#Resistors
