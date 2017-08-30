@@ -1,5 +1,5 @@
 # Electro Grammar
->NPM module for parsing electronic component descriptions
+>Javascript module for parsing electronic component descriptions
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
 A function to match the result to a part in the [Common Parts Library][CPL] is also provided.
@@ -44,6 +44,21 @@ Parses resistance, package size, tolerance and power rating for resistors.
   power_rating: 0.125 }
 ```
 
+Electro-grammar supports several different ways to express resistance.
+
+```js
+> parse('1.5k')
+{ resistance: 1500 }
+> parse('1k5')
+{ resistance: 1500 }
+> parse('1500 ohm')
+{ resistance: 1500 }
+> parse('1500.0 ohm')
+{ resistance: 1500 }
+> parse('1500 Ω')
+{ resistance: 1500 }
+```
+
 
 ### Parsing Details
 
@@ -54,7 +69,7 @@ Converts all units to floating point numbers.
 { capacitance: 1e-7, size: '0603' }
 ```
 
-You can use metric package sizes as long as you specify.
+You can use metric package sizes as long as you specify using the `metric` keyword.
 Output for package sizes is always in imperial.
 
 ```js
@@ -73,7 +88,7 @@ Text that is not part of the grammar is simply ignored.
 
 ## CPL Matching
 `matchCPL` tries to find as many matches as it can from the [Common Parts Library][CPL] and returns an array of CPL IDs.
-You could match these against [CPL data][CPL Data] or search for them on Octopart to get exact part numbers.
+You could match these against [CPL data][CPL-Data] or search for them on Octopart to get exact part numbers.
 If no matches are found or the function is given invalid input an empty array is returned.
 
 ```js
