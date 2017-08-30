@@ -111,7 +111,6 @@ describe('SMD Capacitors', () => {
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
-    console.log(c)
     assert(c.characteristic === 'Y5V', 'characteristic is wrong')
   })
   it('parses characteristic C0G', () => {

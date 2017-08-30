@@ -3,6 +3,12 @@ const assert  = require('better-assert')
 
 const grammar = require('../lib/grammar')
 
+//XXX need to check why this is leaking token
+//this global config is for zuul
+if (global.mocha) {
+  global.mocha.globals(['token'])
+}
+
 describe('grammar', () => {
   let p
   beforeEach(() => {
