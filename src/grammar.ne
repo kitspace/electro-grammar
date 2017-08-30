@@ -64,8 +64,15 @@ resistor ->
 
 rSpecs -> (_ rSpec _):* | __
 
-rSpec -> tolerance
+rSpec -> tolerance | power_rating
 
+power_rating -> decimal _ powerMetricPrefix _ watts {% d => {
+  const [quantity, , metricPrefix] = d
+  return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
+} %}
+
+watts -> watts_ {% () => null %}
+watts_ -> W | W A T T S
 
 resistance ->
   decimal _ rest {% resistance %}
@@ -89,6 +96,17 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 
 ohm -> ohm_ {% () => null %}
 ohm_ -> O H M | "Ω"
+
+powerMetricPrefix ->
+    giga  {% () => 'e9  ' %}
+  | mega  {% () => 'e6  ' %}
+  | kilo  {% () => 'e3  ' %}
+  | milli {% () => 'e-3 ' %}
+  | micro {% () => 'e-6 ' %}
+  | nano  {% () => 'e-9 ' %}
+  | pico  {% () => 'e-12' %}
+  | femto {% () => 'e-15' %}
+  | null  {% () => '' %}
 
 rMetricPrefix ->
     giga  {% () => 'e9  ' %}

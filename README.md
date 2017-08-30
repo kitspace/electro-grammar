@@ -10,7 +10,7 @@ const {parse, matchCPL} = require('electro-grammar')
 
 ## Parsing
 
-### Resistors
+### Capacitors
 Parses capacitance, package size, characteristic, tolerance and voltage rating for capacitors.
 
 ```js
@@ -22,12 +22,16 @@ Parses capacitance, package size, characteristic, tolerance and voltage rating f
   voltage_rating: 25 }
 ```
 
-### Capacitors
-Parses resistance, size and tolerance for resistors.
+### Resistors
+Parses resistance, package size, tolerance and power rating for resistors.
 
 ```js
-> parse('1k 0805 5%')
-{ resistance: 1000, size: '0805', tolerance: 5 }
+> parse('1k 0805 5% 125mW')
+{ resistance: 1000,
+  size: '0805',
+  tolerance: 5,
+  power_rating: 0.125 }
+
 
 ### Parsing Details
 
@@ -59,7 +63,7 @@ Text that is not part of the grammar is simply ignored.
 ## Matching
 
 ```js
-> c = parse(
+> c = parse('0.1uF 0603 5%')
 
 ```
 

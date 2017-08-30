@@ -10,8 +10,8 @@ function parse(str) {
   const chars = str.split(' ')
   let info = parser.save()
   return chars.reduce((prev, c) => {
-    //if it fails, roll it back
     c = c.replace(/,|;/, '') + ' '
+    //if it fails, roll it back
     try {
       parser.feed(c)
     } catch(e) {

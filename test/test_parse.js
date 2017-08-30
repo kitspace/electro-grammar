@@ -165,4 +165,17 @@ describe('SMD Resistors', () => {
     assert(c.tolerance === 5, 'tolerance value is wrong')
     assert(c.size === '0805', 'size is wrong')
   })
+  it('parses power rating', () => {
+    const c = parse('1k 0805 5% 100mW')
+    assert(c.resistance === 1000, 'resistance value is wrong')
+    assert(c.tolerance === 5, 'tolerance value is wrong')
+    assert(c.size === '0805', 'size is wrong')
+    assert(c.power_rating === 0.100, 'power rating is wrong')
+  })
+  it('parses power rating 2', () => {
+    const c = parse('0 ohm 0201 0.125W')
+    assert(c.resistance === 0, 'resistance value is wrong')
+    assert(c.size === '0201', 'size is wrong')
+    assert(c.power_rating === 0.125, 'power rating is wrong')
+  })
 })
