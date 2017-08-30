@@ -3,16 +3,9 @@ _  -> [\s]:*  {% () => null %}
 __ -> [\s]:+  {% () => null %}
 
 @{%
-  const lodashFlattenDeep = require('lodash.flattendeep')
+  const flatten = require('./flatten')
 
-  const filter = d => {
-    return d.filter((token) => {
-      return token !== null;
-    });
-  };
+  const filter = d => d.filter(token => token !== null)
 
-  function assignAll(objs) {
-    return objs.reduce((prev, obj) => Object.assign(prev, obj))
-  }
-
+  const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
 %}

@@ -3,7 +3,7 @@
 @include "metric_prefix.ne"
 @include "package_size.ne"
 
-main -> component {% d => assignAll(filter(lodashFlattenDeep(d))) %}
+main -> component {% d => assignAll(filter(flatten(d))) %}
 
 component -> capacitor | resistor
 
@@ -25,8 +25,8 @@ characteristic -> _characteristic {% d => ({characteristic: d[0]}) %}
 
 combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 _characteristic ->
-    X "7" R                    {% d => "X7R" %}
-  | X "5" R                    {% d => "X5R" %}
+    X "7" R                    {% () => "X7R" %}
+  | X "5" R                    {% () => "X5R" %}
   | combine[C "0" G,  N P "0"] {% () => 'C0G' %}
   | combine[P "100",  M "7" G] {% () => 'M7G' %}
   | combine[N "33",   H "2" G] {% () => 'H2G' %}

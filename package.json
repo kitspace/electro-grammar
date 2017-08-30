@@ -15,7 +15,6 @@
     "coverage:html": "nyc report --reporter=html"
   },
   "dependencies": {
-    "lodash.flattendeep": "^4.4.0",
     "nearley": "https://github.com/Hardmath123/nearley/"
   },
   "devDependencies": {

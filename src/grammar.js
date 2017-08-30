@@ -3,18 +3,11 @@
 (function () {
 function id(x) {return x[0]; }
 
-  const lodashFlattenDeep = require('lodash.flattendeep')
+  const flatten = require('./flatten')
 
-  const filter = d => {
-    return d.filter((token) => {
-      return token !== null;
-    });
-  };
+  const filter = d => d.filter(token => token !== null)
 
-  function assignAll(objs) {
-    return objs.reduce((prev, obj) => Object.assign(prev, obj))
-  }
-
+  const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
 
 
   const toImperial = {
@@ -236,7 +229,7 @@ var grammar = {
     {"name": "femto", "symbols": ["F", "E", "M", "T", "O"]},
     {"name": "atto", "symbols": [{"literal":"a"}]},
     {"name": "atto", "symbols": ["A", "T", "T", "O"]},
-    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": d => ({size: filter(lodashFlattenDeep(d))[0]})},
+    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": d => ({size: filter(flatten(d))[0]})},
     {"name": "_packageSize", "symbols": ["_imperialSize"]},
     {"name": "_packageSize", "symbols": ["_metricSize"]},
     {"name": "_imperialSize$string$1", "symbols": [{"literal":"0"}, {"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
@@ -303,7 +296,7 @@ var grammar = {
     {"name": "I", "symbols": [{"literal":"i"}]},
     {"name": "C", "symbols": [{"literal":"C"}]},
     {"name": "C", "symbols": [{"literal":"c"}]},
-    {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(lodashFlattenDeep(d)))},
+    {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(flatten(d)))},
     {"name": "component", "symbols": ["capacitor"]},
     {"name": "component", "symbols": ["resistor"]},
     {"name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
@@ -349,8 +342,8 @@ var grammar = {
     {"name": "cSpec", "symbols": ["voltage_rating"]},
     {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": d => ({voltage_rating: d[0]})},
     {"name": "characteristic", "symbols": ["_characteristic"], "postprocess": d => ({characteristic: d[0]})},
-    {"name": "_characteristic", "symbols": ["X", {"literal":"7"}, "R"], "postprocess": d => "X7R"},
-    {"name": "_characteristic", "symbols": ["X", {"literal":"5"}, "R"], "postprocess": d => "X5R"},
+    {"name": "_characteristic", "symbols": ["X", {"literal":"7"}, "R"], "postprocess": () => "X7R"},
+    {"name": "_characteristic", "symbols": ["X", {"literal":"5"}, "R"], "postprocess": () => "X5R"},
     {"name": "_characteristic$macrocall$2", "symbols": ["C", {"literal":"0"}, "G"]},
     {"name": "_characteristic$macrocall$3", "symbols": ["N", "P", {"literal":"0"}]},
     {"name": "_characteristic$macrocall$1", "symbols": ["_characteristic$macrocall$2"]},
