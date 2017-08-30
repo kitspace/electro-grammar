@@ -252,13 +252,13 @@ describe('SMD LEDs', () => {
   it('parses red LED' , () => {
     const c = parse('led red 0603')
     assert(c.type === 'led')
-    assert(c.led_color === 'red')
+    assert(c.color === 'red')
     assert(c.size === '0603', 'size is wrong')
   })
   it('parses green LED' , () => {
     const c = parse('SMD LED GREEN 0805')
     assert(c.type === 'led')
-    assert(c.led_color === 'green')
+    assert(c.color === 'green')
     assert(c.size === '0805', 'size is wrong')
   })
 })

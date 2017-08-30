@@ -433,43 +433,43 @@ module.exports=[
 },{}],3:[function(require,module,exports){
 module.exports=[
   {
-    "led_color": "green",
+    "color": "green",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-GREEN"
   },
   {
-    "led_color": "red",
+    "color": "red",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-RED"
   },
   {
-    "led_color": "yellow",
+    "color": "yellow",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-YELLOW"
   },
   {
-    "led_color": "orange",
+    "color": "orange",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-ORANGE"
   },
   {
-    "led_color": "amber",
+    "color": "amber",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-AMBER"
   },
   {
-    "led_color": "blue",
+    "color": "blue",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-BLUE"
   },
   {
-    "led_color": "white",
+    "color": "white",
     "type": "led",
     "size": "0603",
     "cplid": "CPL-LED-0603-WHITE"
@@ -1421,7 +1421,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
             } }, { "name": "ledSpecs$ebnf$1$subexpression$1", "symbols": ["_", "ledSpec", "_"] }, { "name": "ledSpecs$ebnf$1", "symbols": ["ledSpecs$ebnf$1$subexpression$1"] }, { "name": "ledSpecs$ebnf$1$subexpression$2", "symbols": ["_", "ledSpec", "_"] }, { "name": "ledSpecs$ebnf$1", "symbols": ["ledSpecs$ebnf$1", "ledSpecs$ebnf$1$subexpression$2"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
             } }, { "name": "ledSpecs", "symbols": ["ledSpecs$ebnf$1"] }, { "name": "ledSpec", "symbols": ["packageSize"] }, { "name": "ledSpec", "symbols": ["color"] }, { "name": "color", "symbols": ["color_name"], "postprocess": function postprocess(d) {
-                return { led_color: d[0] };
+                return { color: d[0] };
             } }, { "name": "color_name", "symbols": ["R", "E", "D"], "postprocess": function postprocess() {
                 return 'red';
             } }, { "name": "color_name", "symbols": ["G", "R", "E", "E", "N"], "postprocess": function postprocess() {
@@ -1540,9 +1540,9 @@ function matchCapacitor(c) {
 
 function matchLED(c) {
   return leds.reduce(function (prev, cpl) {
-    var led_color = cpl.led_color === c.led_color;
+    var color = c.color == null || cpl.color === c.color;
     var size = c.size == null || cpl.size === c.size;
-    if (led_color && size) {
+    if (color && size) {
       return prev.concat([cpl.cplid]);
     }
     return prev;

@@ -136,7 +136,7 @@ ledSpecs -> (_ ledSpec _):+
 
 ledSpec -> packageSize | color
 
-color -> color_name {% d => ({led_color: d[0]}) %}
+color -> color_name {% d => ({color: d[0]}) %}
 color_name ->
   R E D                        {% () => 'red' %}
   | G R E E N                  {% () => 'green' %}

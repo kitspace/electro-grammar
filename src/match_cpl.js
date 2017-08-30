@@ -47,9 +47,9 @@ function matchCapacitor(c) {
 
 function matchLED(c) {
   return leds.reduce((prev, cpl) => {
-    const led_color = cpl.led_color === c.led_color
-    const size      = c.size == null || cpl.size === c.size
-    if (led_color && size) {
+    const color = c.color == null || cpl.color === c.color
+    const size  = c.size == null || cpl.size === c.size
+    if (color && size) {
       return prev.concat([cpl.cplid])
     }
     return prev

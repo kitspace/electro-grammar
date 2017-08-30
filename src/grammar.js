@@ -516,7 +516,7 @@ var grammar = {
     {"name": "ledSpecs", "symbols": ["ledSpecs$ebnf$1"]},
     {"name": "ledSpec", "symbols": ["packageSize"]},
     {"name": "ledSpec", "symbols": ["color"]},
-    {"name": "color", "symbols": ["color_name"], "postprocess": d => ({led_color: d[0]})},
+    {"name": "color", "symbols": ["color_name"], "postprocess": d => ({color: d[0]})},
     {"name": "color_name", "symbols": ["R", "E", "D"], "postprocess": () => 'red'},
     {"name": "color_name", "symbols": ["G", "R", "E", "E", "N"], "postprocess": () => 'green'},
     {"name": "color_name", "symbols": ["B", "L", "U", "E"], "postprocess": () => 'blue'},
