@@ -33,7 +33,7 @@ fs.writeFileSync('./lib/cpl_capacitors.json', capacitors)
 let leds = fs.readFileSync('./cpl-data/CPL for Production/LEDs.yaml')
 leds = yaml.safeLoad(leds)
 leds = leds.rows.map(c => {
-  const v = parse(`${c.title} ${c.extravals.Characteristic}`)
+  const v = parse(c.title)
   if (v) {
     v.cplid = c.cplid
     return v
