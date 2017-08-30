@@ -71,6 +71,19 @@ Converts all units to floating point numbers.
 { capacitance: 1e-7, size: '0603' }
 ```
 
+The order of the terms doesn't matter.
+
+```js
+> parse('1% 0603 1uF')
+{ "capacitance": 0.000001,
+  "tolerance": 1,
+  "size": "0603" }
+> parse('0603 1% 1uF')
+{ "capacitance": 0.000001,
+  "tolerance": 1,
+  "size": "0603" }
+```
+
 You can use metric package sizes as long as you specify using the `metric` keyword.
 Output for package sizes is always in imperial.
 
