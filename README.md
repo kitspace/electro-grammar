@@ -1,10 +1,10 @@
-# Electro Grammar
+# Electro Grammar [![Build Status][BADGE]][BUILD]
 >Javascript module for parsing electronic component descriptions
 
 [:zap: demo](https://monostable.github.io/electro-grammar/)
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
-A function to match the result to a part in the [Common Parts Library][CPL] is also provided.
+A function to match the result to parts in the [Common Parts Library][CPL] is also provided.
 
 ```js
 const {parse, matchCPL} = require('electro-grammar')
@@ -117,7 +117,7 @@ If no matches are found or the function is given invalid input an empty array is
 > matchCPL(r)
 [ 'CPL-RES-0603-10K-0.1W' ]
 
-> // I don't think it's possible to make a such a resistor
+> // I don't think it's possible to make such a resistor
 > r = parse('1k 1000000W')
 { resistance: 1000, power_rating: 1000000 }
 > matchCPL(r)
@@ -132,3 +132,5 @@ If no matches are found or the function is given invalid input an empty array is
 
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
+[BADGE]: https://travis-ci.org/monostable/electro-grammar.svg?branch=master
+[BUILD]: https://travis-ci.org/monostable/electro-grammar

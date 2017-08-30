@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "6"
+  - "8"
+  - "node"
+script:
+  - yarn test
+  - yarn demo
+  - git diff --quiet
