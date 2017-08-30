@@ -29,3 +29,15 @@ capacitors = capacitors.rows.map(c => {
 }).filter(v => v)
 capacitors = JSON.stringify(capacitors, null, 2)
 fs.writeFileSync('./lib/cpl_capacitors.json', capacitors)
+
+let leds = fs.readFileSync('./cpl-data/CPL for Production/LEDs.yaml')
+leds = yaml.safeLoad(leds)
+leds = leds.rows.map(c => {
+  const v = parse(`${c.title} ${c.extravals.Characteristic}`)
+  if (v) {
+    v.cplid = c.cplid
+    return v
+  }
+}).filter(v => v)
+leds = JSON.stringify(leds, null, 2)
+fs.writeFileSync('./lib/cpl_leds.json', leds)

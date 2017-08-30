@@ -18,4 +18,9 @@ describe('match CPL', () => {
     const cpl_ids = matchCPL(c)
     assert(cpl_ids.length === 0)
   })
+  it("matches an 0603 red LED", () => {
+    const c = parse('LED red 0603')
+    const cpl_ids = matchCPL(c)
+    assert(cpl_ids.length > 0)
+  })
 })

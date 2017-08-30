@@ -1,0 +1,44 @@
+[
+  {
+    "led_color": "green",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-GREEN"
+  },
+  {
+    "led_color": "red",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-RED"
+  },
+  {
+    "led_color": "yellow",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-YELLOW"
+  },
+  {
+    "led_color": "orange",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-ORANGE"
+  },
+  {
+    "led_color": "amber",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-AMBER"
+  },
+  {
+    "led_color": "blue",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-BLUE"
+  },
+  {
+    "led_color": "white",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-WHITE"
+  }
+]

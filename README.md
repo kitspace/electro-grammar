@@ -2,7 +2,7 @@
 
 [:zap: demo](https://monostable.github.io/electro-grammar/)
 
-This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
+This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors, capacitors and LEDs.
 A function to match the result to parts in the [Common Parts Library][CPL] is also provided.
 
 ```js
@@ -61,6 +61,11 @@ Electro-grammar supports several different ways to express resistance.
 > parse('1500 Ω')
 { resistance: 1500 }
 ```
+
+### LEDs
+
+
+
 
 
 ### Parsing Details

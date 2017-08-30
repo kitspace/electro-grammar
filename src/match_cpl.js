@@ -1,5 +1,6 @@
 const resistors  = require('./cpl_resistors')
 const capacitors = require('./cpl_capacitors')
+const leds       = require('./cpl_leds')
 
 function matchCPL(component) {
   component = component || {}
@@ -7,6 +8,8 @@ function matchCPL(component) {
     return matchCapacitor(component)
   } else if (component.resistance != null) {
     return matchResistor(component)
+  } else if (component.led_color != null) {
+    return matchLED(component)
   }
   return []
 }
@@ -35,6 +38,17 @@ function matchCapacitor(c) {
     const voltage_rating = c.voltage_rating == null
       || cpl.voltage_rating >= c.voltage_rating
     if (capacitance && size && characteristic && tolerance && voltage_rating) {
+      return prev.concat([cpl.cplid])
+    }
+    return prev
+  }, [])
+}
+
+function matchLED(c) {
+  return leds.reduce((prev, cpl) => {
+    const led_color = cpl.led_color === c.led_color
+    const size      = c.size == null || cpl.size === c.size
+    if (led_color && size) {
       return prev.concat([cpl.cplid])
     }
     return prev
