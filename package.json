@@ -14,7 +14,8 @@
     "coverage": "nyc report",
     "coverage:html": "nyc report --reporter=html",
     "test:browser": "zuul --local -- test/*.js",
-    "test:sauce": "zuul -- test/*.js"
+    "pretest:sauce": "babel test/ -d test-lib/",
+    "test:sauce": "zuul -- test-lib/*.js"
   },
   "dependencies": {
     "nearley": "https://github.com/Hardmath123/nearley/"
