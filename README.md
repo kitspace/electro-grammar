@@ -24,7 +24,7 @@ Parses capacitance, package size, characteristic, tolerance and voltage rating f
   voltage_rating: 25 }
 ```
 
-For [class 1][CLASS-1] ceramic names and EIA letter codes are understood
+For [class 1][CLASS-1] ceramic names and EIA letter codes are understood.
 For [class 2][CLASS-2] only EIA letter codes are understood.
 In both cases only EIA letter codes are returned.
 
@@ -66,8 +66,16 @@ Electro-grammar supports several different ways to express resistance.
 
 ### LEDs
 
+LEDs need to include the word 'LED' or 'led'.
 
-
+```js
+> parse('LED red')
+{ color: 'red', type: 'led' }
+> parse('LED 0603')
+{ size: '0603', type: 'led' }
+> parse('green led 1206')
+{ color: 'green', type: 'led', size: '1206' }
+```
 
 
 ### Parsing Details
@@ -89,7 +97,7 @@ The order of the terms doesn't matter.
   size: "0603" }
 > parse('0603 1% 1uF')
 { type: 'capacitor',
-  capacitance": 0.000001,
+  capacitance: 0.000001,
   tolerance: 1,
   size: "0603" }
 ```
