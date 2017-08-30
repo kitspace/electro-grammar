@@ -2,12 +2,20 @@ ui: mocha-bdd
 globals: token
 browsers:
   - name: chrome
-    version: -1..latest
+    version: [26, latest]
   - name: safari
-    version: -1..latest
+    version: [5, latest]
   - name: firefox
-    version: -1..latest
+    version: [4, latest]
   - name: ie
-    version: -1..latest
+    version: [9, latest]
   - name: microsoftedge
-    version: latest
+    version: [13, latest]
+  - name: opera
+    version: [11, latest]
+  - name: android
+    version: [4.4, latest]
+  - name: iphone
+    version: [8.1, latest]
+  - name: ipad
+    version: [8.1, latest]

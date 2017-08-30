@@ -1,7 +1,5 @@
 # Electro Grammar [![Build Status][BADGE]][BUILD]
 
-[:zap: demo](https://monostable.github.io/electro-grammar/)
-
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/electro-grammar.svg)](https://saucelabs.com/u/electro-grammar)
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors, capacitors and LEDs.
@@ -10,6 +8,7 @@ A function to match the result to parts in the [Common Parts Library][CPL] is al
 ```js
 const {parse, matchCPL} = require('electro-grammar')
 ```
+[:zap: demo](https://monostable.github.io/electro-grammar/)
 
 ## Parsing
 
