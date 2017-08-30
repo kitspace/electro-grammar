@@ -5,7 +5,7 @@
 
 main -> component {% d => assignAll(filter(flatten(d))) %}
 
-component -> capacitor | resistor
+component -> capacitor | resistor | led
 
 ## Capacitors ##
 
@@ -105,6 +105,36 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 
 ohm -> ohm_ {% () => null %}
 ohm_ -> O H M | "Ω" | "Ω" | R
+
+
+## LEDs ##
+
+led ->
+     led_letters ledSpecs
+   | ledSpecs led_letters
+   | ledSpecs led_letters ledSpecs
+
+led_letters -> L E D {% () => null %}
+
+ledSpecs -> (_ ledSpec _):+
+
+ledSpec -> packageSize | color
+
+color -> color_name {% d => ({led_color: d[0]}) %}
+color_name ->
+  R E D                        {% () => 'red' %}
+  | G R E E N                  {% () => 'green' %}
+  | B L U E                    {% () => 'blue' %}
+  | Y E L L O W                {% () => 'yellow' %}
+  | O R A N G E                {% () => 'orange' %}
+  | W H I T E                  {% () => 'white' %}
+  | A M B E R                  {% () => 'amber' %}
+  | C Y A N                    {% () => 'cyan' %}
+  | P U R P L E                {% () => 'purple' %}
+  | Y E L L O W _ G R E E N    {% () => 'yellow green' %}
+
+
+## Metric Prefixes ##
 
 powerMetricPrefix ->
     giga  {% () => 'e9  ' %}
