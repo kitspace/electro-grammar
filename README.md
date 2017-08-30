@@ -1,4 +1,4 @@
-# Electro Grammar
+# :zap: Electro Grammar
 >Javascript module for parsing electronic component descriptions
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
