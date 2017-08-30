@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>electro-grammar demo</title>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css'></link>
+        <style>
+            body {
+                padding-top: 50px;
+            }
+        </style>
+    </head>
+    <body class='ui container'>
+        <h1 class="ui header">electro-grammar</h1>
+        <p>
+        This is a demo of
+        <a href='https://github.com/monostable/electro-grammar'>
+            electro-grammar</a>,
+        a lightning fast parser of electronic component descriptions.  A
+        function to match the result to a part in the
+        <a href='https://octopart.com/common-parts-library#Resistors'>
+            Common Parts Library</a>
+        is also provided.
+        </p>
+        <p>
+        Try typing in descriptions of surface mount resistors and capacitors below.
+        </p>
+        <div class='ui input focus'>
+            <input id='input' placeholder='0.1uF 0603 X7R' type='text'>
+        </div>
+        <div id='output' class='ui segment'>
+            <h3 class="ui header">Component</h3>
+            <pre id='component'></pre>
+            <h3 class="ui header">CPL IDs</h3>
+            <pre id='cplids'></pre>
+        </div>
+        <script src='bundle.js'></script>
+    </body>
+</html>
+
