@@ -23,4 +23,12 @@ describe('match CPL', () => {
     const cpl_ids = matchCPL(c)
     assert(cpl_ids.length > 0)
   })
+  it('returns [] on invalid input', () => {
+    assert(matchCPL().length === 0)
+    assert(matchCPL(null).length === 0)
+    assert(matchCPL(undefined).length === 0)
+    assert(matchCPL({}).length === 0)
+    assert(matchCPL({whatever:1}).length === 0)
+    assert(matchCPL(['whatever', 2]).length === 0)
+  })
 })
