@@ -11,19 +11,28 @@
         </style>
     </head>
     <body class='ui container'>
-        <h1 class="ui header">electro-grammar</h1>
+        <h1 class="ui header">
+            <i class='lightning icon'></i>
+            <div class='content'>
+                electro-grammar
+            </div>
+        </h1>
         <p>
         This is a demo of
         <a href='https://github.com/monostable/electro-grammar'>
             electro-grammar</a>,
-        a lightning fast parser of electronic component descriptions.  A
-        function to match the result to a part in the
-        <a href='https://octopart.com/common-parts-library#Resistors'>
-            Common Parts Library</a>
-        is also provided.
+        a lightning fast parser of electronic component descriptions.
+        Electro-grammar defines a <a
+            href='https://github.com/monostable/electro-grammar/blob/master/src/grammar.ne'>grammar
+            of electronic parts</a> which is executed by <a
+            href='https://nearley.js.org/'>Nearly</a>.  Currently only surface mount
+        resistors and capacitors are supported but the grammar could be expanded to
+        include other parts. A function to match the result to a part in the <a
+            href='https://octopart.com/common-parts-library#Resistors'> Common
+            Parts Library</a> is also provided.
         </p>
         <p>
-        Try typing in descriptions of surface mount resistors and capacitors below.
+        Try typing in a description of a surface mount resistor or capacitor below.
         </p>
         <div class='ui input focus'>
             <input id='input' placeholder='0.1uF 0603 X7R' type='text'>
