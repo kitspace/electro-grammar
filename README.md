@@ -22,6 +22,17 @@ Parses capacitance, package size, characteristic, tolerance and voltage rating f
   voltage_rating: 25 }
 ```
 
+Ceramic names and EIA letter codes are understood, only EIA letter codes are returned.
+
+```js
+> parse('10pF C0G/NP0')
+{ capacitance: 1e-11, characteristic: 'C0G' }
+> parse('10pF NP0')
+{ capacitance: 1e-11, characteristic: 'C0G' }
+> parse('10pF X7R')
+{ capacitance: 1e-11, characteristic: 'X7R' }
+```
+
 ### Resistors
 Parses resistance, package size, tolerance and power rating for resistors.
 
@@ -60,7 +71,7 @@ Text that is not part of the grammar is simply ignored.
 { resistance: 1000, size: '0805' }
 ```
 
-## Matching
+## CPL Matching
 `matchCPL` tries to find as many matches as it can from the [Common Parts Library][CPL] and returns an array of CPL IDs.
 You could match these against [CPL data][CPL Data] or search for them on Octopart to get exact part numbers.
 If no matches are found or the function is given invalid input an empty array is returned.
