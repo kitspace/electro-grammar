@@ -4,12 +4,13 @@ const leds       = require('./cpl_leds')
 
 function matchCPL(component) {
   component = component || {}
-  if (component.capacitance != null) {
-    return matchCapacitor(component)
-  } else if (component.resistance != null) {
-    return matchResistor(component)
-  } else if (component.led_color != null) {
-    return matchLED(component)
+  switch (component.type) {
+    case 'capacitor':
+      return matchCapacitor(component)
+    case 'resistor':
+      return matchResistor(component)
+    case 'led':
+      return matchLED(component)
   }
   return []
 }

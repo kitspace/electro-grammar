@@ -10,16 +10,6 @@ component ->
   | resistor {%type_resistor%}
   | led {%type_led%}
 
-## Capacitors ##
-
-# the description can come in any order
-# if it starts with 'c' or 'capacitor' then F or farad can be ommitted
-capacitor ->
-    cSpecs capacitance cSpecs packageSize:? cSpecs {%type_capacitor%}
-  | cSpecs packageSize:? cSpecs capacitance cSpecs {%type_capacitor%}
-  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs {%type_capacitor%}
-  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs {%type_capacitor%}
-
 @{%
     function type_capacitor(d) {
       return d.concat([{type: 'capacitor'}])
@@ -31,6 +21,16 @@ capacitor ->
       return d.concat([{type: 'led'}])
     }
 %}
+
+## Capacitors ##
+
+# the description can come in any order
+# if it starts with 'c' or 'capacitor' then F or farad can be ommitted
+capacitor ->
+    cSpecs capacitance cSpecs packageSize:? cSpecs
+  | cSpecs packageSize:? cSpecs capacitance cSpecs
+  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs
+  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs
 
 
 cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% () => null %}
