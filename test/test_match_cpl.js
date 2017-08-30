@@ -4,7 +4,7 @@ const {parse, matchCPL} = require('../lib/index')
 
 describe('match CPL', () => {
   it('matches a capacitor', () => {
-    const c = parse('0.1uF 0603')
+    const c = parse('0.1uF 0805 X7R')
     const cpl_ids = matchCPL(c)
     assert(cpl_ids.length > 0)
   })
