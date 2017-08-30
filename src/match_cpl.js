@@ -15,7 +15,9 @@ function matchResistor(c) {
     const resistance = cpl.resistance === c.resistance
     const size       = c.size == null || cpl.size === c.size
     const tolerance  = c.tolerance == null || cpl.tolerance <= c.tolerance
-    if (resistance && size && tolerance) {
+    const power_rating = c.power_rating == null
+      || cpl.power_rating >= c.power_rating
+    if (resistance && size && tolerance && power_rating) {
       return prev.concat([cpl.cplid])
     }
     return prev

@@ -13,4 +13,9 @@ describe('match CPL', () => {
     const cpl_ids = matchCPL(c)
     assert(cpl_ids.length > 0)
   })
+  it("doesn't match a redonculous power resistor", () => {
+    const c = parse('10k 0805 10000W')
+    const cpl_ids = matchCPL(c)
+    assert(cpl_ids.length === 0)
+  })
 })

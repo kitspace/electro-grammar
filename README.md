@@ -31,6 +31,7 @@ Parses resistance, package size, tolerance and power rating for resistors.
   size: '0805',
   tolerance: 5,
   power_rating: 0.125 }
+```
 
 
 ### Parsing Details
@@ -42,7 +43,6 @@ Converts all units to floating point numbers.
 { capacitance: 1e-7, size: '0603' }
 ```
 
-```
 You can use metric package sizes as long as you specify.
 Output for package sizes is always in imperial.
 
@@ -61,10 +61,30 @@ Text that is not part of the grammar is simply ignored.
 ```
 
 ## Matching
+`matchCPL` tries to find as many matches as it can from the [Common Parts Library][CPL] and returns an array of CPL IDs.
+You could match these against [CPL data][CPL Data] or search for them on Octopart to get exact part numbers.
+If no matches are found or the function is given invalid input an empty array is returned.
 
 ```js
-> c = parse('0.1uF 0603 5%')
+> c = parse('0.1uF 0805 25V')
+{ capacitance: 1e-7, size: '0805', voltage_rating: 25 }
+> matchCPL(c)
+[ 'CPL-CAP-X7R-0805-100NF-50V' ]
 
+> r = parse('10k 0603')
+{ resistance: 10000, size: '0603' }
+> matchCPL(r)
+[ 'CPL-RES-0603-10K-0.1W' ]
+
+> // I don't think it's possible to make a such a resistor
+> r = parse('1k 1000000W')
+{ resistance: 1000, power_rating: 1000000 }
+> matchCPL(r)
+[]
+
+> matchCPL({invalid: 'input'})
+[]
 ```
 
-[CPL]: https://octopart.com/common-parts-library
+[CPL]: https://octopart.com/common-parts-library#Resistors
+[CPL-DATA]: https://github.com/octopart/CPL-Data
