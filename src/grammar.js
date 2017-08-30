@@ -42,10 +42,10 @@ function id(x) {return x[0]; }
 
   function resistance(d, i, reject) {
     const [integral, , [metricPrefix, fractional, ohm]] = d
-    if (/\./.test(integral.toString())) {
-      return reject
-    }
     if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
       var quantity = `${integral}.${fractional}`
     } else {
       var quantity = integral

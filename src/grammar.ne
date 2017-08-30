@@ -82,10 +82,10 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 @{%
   function resistance(d, i, reject) {
     const [integral, , [metricPrefix, fractional, ohm]] = d
-    if (/\./.test(integral.toString())) {
-      return reject
-    }
     if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
       var quantity = `${integral}.${fractional}`
     } else {
       var quantity = integral

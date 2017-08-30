@@ -73,6 +73,13 @@
     "cplid": "CPL-RES-0603-22-0.1W"
   },
   {
+    "resistance": 33.2,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-33.2-0.1W"
+  },
+  {
     "resistance": 47,
     "tolerance": 1,
     "size": "0603",
@@ -80,11 +87,39 @@
     "cplid": "CPL-RES-0603-47-0.1W"
   },
   {
+    "resistance": 49.9,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-49.9-0.1W"
+  },
+  {
+    "resistance": 56.2,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-56.2-0.1W"
+  },
+  {
+    "resistance": 68.1,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-68.1-0.1W"
+  },
+  {
     "resistance": 75,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-75-0.1W"
+  },
+  {
+    "resistance": 82.5,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-82.5-0.1W"
   },
   {
     "resistance": 100,
@@ -206,11 +241,109 @@
     "cplid": "CPL-RES-1206-1K-0.25W"
   },
   {
+    "resistance": 1200,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-1.2K-0.1W"
+  },
+  {
+    "resistance": 1500,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-1.5K-0.1W"
+  },
+  {
     "resistance": 2000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-2K-0.1W"
+  },
+  {
+    "resistance": 3300,
+    "tolerance": 1,
+    "size": "0402",
+    "power_rating": 0.063,
+    "cplid": "CPL-RES-0603-3.3K-0.1W"
+  },
+  {
+    "resistance": 3300,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-3.3K-0.1W"
+  },
+  {
+    "resistance": 3300,
+    "tolerance": 1,
+    "size": "0805",
+    "power_rating": 0.125,
+    "cplid": "CPL-RES-0603-3.3K-0.1W"
+  },
+  {
+    "resistance": 3300,
+    "tolerance": 1,
+    "size": "1206",
+    "power_rating": 0.25,
+    "cplid": "CPL-RES-0603-3.3K-0.1W"
+  },
+  {
+    "resistance": 3600,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-3.6K-0.1W"
+  },
+  {
+    "resistance": 4700,
+    "tolerance": 1,
+    "size": "0402",
+    "power_rating": 0.063,
+    "cplid": "CPL-RES-0402-4.7K-0.063W"
+  },
+  {
+    "resistance": 4700,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-4.7K-0.1W"
+  },
+  {
+    "resistance": 4700,
+    "tolerance": 1,
+    "size": "0805",
+    "power_rating": 0.125,
+    "cplid": "CPL-RES-0805-4.7K-0.125W"
+  },
+  {
+    "resistance": 4700,
+    "tolerance": 1,
+    "size": "1206",
+    "power_rating": 0.25,
+    "cplid": "CPL-RES-1206-4.7K-0.25W"
+  },
+  {
+    "resistance": 5600,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-5.6K-0.1W"
+  },
+  {
+    "resistance": 6800,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-6.8K-0.1W"
+  },
+  {
+    "resistance": 8200,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-8.2K-0.1W"
   },
   {
     "resistance": 10000,
@@ -262,11 +395,39 @@
     "cplid": "CPL-RES-0603-22K-0.1W"
   },
   {
+    "resistance": 33200,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-33.2K-0.1W"
+  },
+  {
     "resistance": 47000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-47K-0.1W"
+  },
+  {
+    "resistance": 56200,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-56.2K-0.1W"
+  },
+  {
+    "resistance": 68100,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-68.1K-0.1W"
+  },
+  {
+    "resistance": 82500,
+    "tolerance": 1,
+    "size": "0603",
+    "power_rating": 0.1,
+    "cplid": "CPL-RES-0603-82.5K-0.1W"
   },
   {
     "resistance": 100000,
@@ -358,5 +519,12 @@
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-1M-0.1W"
+  },
+  {
+    "resistance": 0.05,
+    "tolerance": 1,
+    "size": "1206",
+    "power_rating": 1,
+    "cplid": "CPL-RES-1206-0.05-1W"
   }
 ]

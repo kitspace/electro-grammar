@@ -154,6 +154,11 @@ describe('SMD Resistors', () => {
     assert(c.resistance === 1500, 'resistance value is wrong')
     assert(c.size === '0402', 'size is wrong')
   })
+  it('parses "1.5k"', () => {
+    const c = parse('1.5k 0402')
+    assert(c.resistance === 1500, 'resistance value is wrong')
+    assert(c.size === '0402', 'size is wrong')
+  })
   it('parses "1Ω"', () => {
     const c = parse('1Ω 0805')
     assert(c.resistance === 1, 'resistance value is wrong')
