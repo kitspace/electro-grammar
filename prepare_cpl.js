@@ -1,6 +1,6 @@
-const yaml    = require('js-yaml')
-const fs      = require('fs')
-const {parse} = require('./src/index')
+const yaml  = require('js-yaml')
+const fs    = require('fs')
+const parse = require('./src/parse')
 
 let resistors = fs.readFileSync('./cpl-data/CPL for Production/Resistors.yaml')
 resistors = yaml.safeLoad(resistors)
@@ -16,7 +16,6 @@ resistors = resistors.rows.map(r => {
   }
 }).filter(v => v)
 resistors = JSON.stringify(resistors, null, 2)
-fs.writeFileSync('./src/cpl_resistors.json', resistors)
 fs.writeFileSync('./lib/cpl_resistors.json', resistors)
 
 let capacitors = fs.readFileSync('./cpl-data/CPL for Production/Capacitors.yaml')
@@ -29,5 +28,4 @@ capacitors = capacitors.rows.map(c => {
   }
 }).filter(v => v)
 capacitors = JSON.stringify(capacitors, null, 2)
-fs.writeFileSync('./src/cpl_capacitors.json', capacitors)
 fs.writeFileSync('./lib/cpl_capacitors.json', capacitors)
