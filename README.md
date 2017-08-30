@@ -1,5 +1,4 @@
 # Electro Grammar [![Build Status][BADGE]][BUILD]
->Javascript module for parsing electronic component descriptions
 
 [:zap: demo](https://monostable.github.io/electro-grammar/)
 
@@ -84,6 +83,22 @@ The order of the terms doesn't matter.
   "size": "0603" }
 ```
 
+If no match is found `null` is returned.
+
+```js
+> parse('NE555P')
+null
+```
+
+Text that is not part of the grammar is simply ignored.
+
+```js
+> parse('NE555P 1uF')
+{ capacitance: 0.000001 }
+> parse('these words 1k are ignored 0805')
+{ resistance: 1000, size: '0805' }
+```
+
 You can use metric package sizes as long as you specify using the `metric` keyword.
 Output for package sizes is always in imperial.
 
@@ -92,13 +107,6 @@ Output for package sizes is always in imperial.
 { resistance: 1000, size: '0201' }
 > parse('1k 0603 metric')
 { resistance: 1000, size: '0201' }
-```
-
-Text that is not part of the grammar is simply ignored.
-
-```js
-> parse('these words 1k are ignored 0805')
-{ resistance: 1000, size: '0805' }
 ```
 
 ## CPL Matching
