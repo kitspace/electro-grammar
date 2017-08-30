@@ -102,11 +102,20 @@ The order of the terms doesn't matter.
   size: "0603" }
 ```
 
-If no match is found `null` is returned.
+If no match is found and empty object is returned.
 
 ```js
+> parse('')
+{}
 > parse('NE555P')
-null
+{}
+```
+
+But invalid input types will throw.
+
+```js
+> parse({})
+TypeError: str.split is not a function
 ```
 
 Text that is not part of the grammar is simply ignored.

@@ -20,7 +20,7 @@ function parse(str) {
     info = parser.save()
     //return the latest valid result
     return parser.results[0] || prev
-  }, null)
+  }, {})
 }
 
 module.exports = parse

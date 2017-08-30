@@ -10,7 +10,7 @@ resistors = resistors.rows.map(r => {
     return
   }
   const v = parse(r.title)
-  if (v) {
+  if (v.type === 'resistor') {
     v.cplid = r.cplid
     return v
   }
@@ -22,7 +22,7 @@ let capacitors = fs.readFileSync('./cpl-data/CPL for Production/Capacitors.yaml'
 capacitors = yaml.safeLoad(capacitors)
 capacitors = capacitors.rows.map(c => {
   const v = parse(`${c.title} ${c.extravals.Characteristic}`)
-  if (v) {
+  if (v.type === 'capacitor') {
     v.cplid = c.cplid
     return v
   }
@@ -34,7 +34,7 @@ let leds = fs.readFileSync('./cpl-data/CPL for Production/LEDs.yaml')
 leds = yaml.safeLoad(leds)
 leds = leds.rows.map(c => {
   const v = parse(c.title)
-  if (v) {
+  if (v.type === 'led') {
     v.cplid = c.cplid
     return v
   }

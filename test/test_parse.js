@@ -2,12 +2,26 @@ const assert = require('better-assert')
 
 const {parse} = require('../lib/index')
 
+describe('parsing', () => {
+  it("doesn't parse nonsense", () => {
+    const c = parse('this is total rubbish')
+    assert(c.type == null)
+  })
+  it('returns empty object on empty', () => {
+    assert(parse('').type == null)
+  })
+})
+
 describe('SMD Capacitors', () => {
   it('parses a capacitor', () => {
     const c = parse('2uF 0603')
     assert(c.type === 'capacitor')
     assert(c.capacitance === 2e-6, 'capacitance value is wrong')
     assert(c.size === '0603', 'size is wrong')
+  })
+  it("doesn't parse nonsense", () => {
+    const c = parse('this is total rubbish')
+    assert(c.type == null)
   })
   it('parses tolerance', () => {
     const c = parse('2uF 0603 30%')
