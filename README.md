@@ -83,8 +83,10 @@ LEDs need to include the word 'LED' or 'led'.
 Converts all units to floating point numbers.
 
 ```js
-> parse('0.1uF 0603')
-{ type: 'capacitor', capacitance: 1e-7, size: '0603' }
+> parse('100nF')
+{ type: 'capacitor', capacitance: 1e-7 }
+> parse('0.1uF')
+{ type: 'capacitor', capacitance: 1e-7 }
 ```
 
 The order of the terms doesn't matter.
