@@ -23,7 +23,9 @@ Parses capacitance, package size, characteristic, tolerance and voltage rating f
   voltage_rating: 25 }
 ```
 
-Ceramic names and EIA letter codes are understood, only EIA letter codes are returned.
+For [class 1][CLASS-1] ceramic names and EIA letter codes are understood
+For [class 2][CLASS-2] only EIA letter codes are understood.
+In both cases only EIA letter codes are returned.
 
 ```js
 > parse('10pF C0G/NP0')
@@ -142,3 +144,5 @@ If no matches are found or the function is given invalid input an empty array is
 [CPL-DATA]: https://github.com/octopart/CPL-Data
 [BADGE]: https://travis-ci.org/monostable/electro-grammar.svg?branch=master
 [BUILD]: https://travis-ci.org/monostable/electro-grammar
+[CLASS-1]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitors
+[CLASS-2]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitors

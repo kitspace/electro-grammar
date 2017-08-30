@@ -7,6 +7,10 @@ main -> component {% d => assignAll(filter(flatten(d))) %}
 
 component -> capacitor | resistor
 
+## Capacitors ##
+
+# the description can come in any order
+# if it starts with 'c' or 'capacitor' then F or farad can be ommitted
 capacitor ->
     cSpecs capacitance cSpecs packageSize:? cSpecs
   | cSpecs packageSize:? cSpecs capacitance cSpecs
@@ -21,13 +25,13 @@ cSpec -> tolerance | characteristic | voltage_rating
 
 voltage_rating -> decimal _ V {% d => ({voltage_rating: d[0]}) %}
 
-characteristic -> _characteristic {% d => ({characteristic: d[0]}) %}
+characteristic -> _characteristic {% d => ({characteristic: d[0][0]}) %}
+
+_characteristic -> class1 | class2
 
 combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
-_characteristic ->
-    X "7" R                    {% () => "X7R" %}
-  | X "5" R                    {% () => "X5R" %}
-  | combine[C "0" G,  N P "0"] {% () => 'C0G' %}
+class1 ->
+    combine[C "0" G,  N P "0"] {% () => 'C0G' %}
   | combine[P "100",  M "7" G] {% () => 'M7G' %}
   | combine[N "33",   H "2" G] {% () => 'H2G' %}
   | combine[N "75",   L "2" G] {% () => 'L2G' %}
@@ -39,6 +43,10 @@ _characteristic ->
   | combine[N "1000", Q "3" K] {% () => 'Q3K' %}
   | combine[N "1500", P "3" K] {% () => 'P3K' %}
 
+class2 -> class2_letter class2_number class2_code {% d => d.join('') %}
+class2_letter -> X | Y | Z
+class2_number -> "4" | "5" | "6" | "7" | "8" | "9"
+class2_code -> P | R | S | T | U | V
 
 tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
@@ -54,8 +62,9 @@ capacitanceNoFarad -> decimal _ cMetricPrefix {%capacitance%}
   }
 %}
 
-
 farad -> "F" {% () => null %} | F A R A D {% () => null %}
+
+## Resistors ##
 
 resistor ->
     rSpecs resistance rSpecs packageSize:? rSpecs
