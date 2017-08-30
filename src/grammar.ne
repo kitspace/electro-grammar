@@ -6,19 +6,13 @@
 main -> component {% d => assignAll(filter(flatten(d))) %}
 
 component ->
-    capacitor {%type_capacitor%}
-  | resistor {%type_resistor%}
-  | led {%type_led%}
+    capacitor {% type('capacitor') %}
+  | resistor {% type('resistor') %}
+  | led {% type('led') %}
 
 @{%
-    function type_capacitor(d) {
-      return d.concat([{type: 'capacitor'}])
-    }
-    function type_resistor(d) {
-      return d.concat([{type: 'resistor'}])
-    }
-    function type_led(d) {
-      return d.concat([{type: 'led'}])
+    function type(t) {
+      return d => [{type: t}].concat(d)
     }
 %}
 
@@ -85,8 +79,8 @@ farad -> "F" {% () => null %} | F A R A D {% () => null %}
 ## Resistors ##
 
 resistor ->
-    rSpecs resistance rSpecs packageSize:? rSpecs {%type_resistor%}
-  | rSpecs packageSize:? rSpecs resistance rSpecs {%type_resistor%}
+    rSpecs resistance rSpecs packageSize:? rSpecs
+  | rSpecs packageSize:? rSpecs resistance rSpecs
 
 
 rSpecs -> (_ rSpec _):* | __

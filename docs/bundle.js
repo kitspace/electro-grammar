@@ -20,24 +20,24 @@ input.oninput = setOutput
 },{"../lib/index":7}],2:[function(require,module,exports){
 module.exports=[
   {
-    "capacitance": 1e-12,
     "type": "capacitor",
+    "capacitance": 1e-12,
     "voltage_rating": 50,
     "size": "0402",
     "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0402-1PF-50V"
   },
   {
-    "capacitance": 1e-12,
     "type": "capacitor",
+    "capacitance": 1e-12,
     "voltage_rating": 50,
     "size": "0603",
     "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-1PF-50V"
   },
   {
-    "capacitance": 1e-11,
     "type": "capacitor",
+    "capacitance": 1e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
@@ -45,8 +45,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0402-10PF-50V"
   },
   {
-    "capacitance": 1e-11,
     "type": "capacitor",
+    "capacitance": 1e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -54,8 +54,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-10PF-50V"
   },
   {
-    "capacitance": 1.2e-11,
     "type": "capacitor",
+    "capacitance": 1.2e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -63,8 +63,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-12PF-50V"
   },
   {
-    "capacitance": 1.8e-11,
     "type": "capacitor",
+    "capacitance": 1.8e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -72,8 +72,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-18PF-50V"
   },
   {
-    "capacitance": 2.2e-11,
     "type": "capacitor",
+    "capacitance": 2.2e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
@@ -81,8 +81,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0402-22PF-50V"
   },
   {
-    "capacitance": 2.2e-11,
     "type": "capacitor",
+    "capacitance": 2.2e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -90,8 +90,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-22PF-50V"
   },
   {
-    "capacitance": 2.7e-11,
     "type": "capacitor",
+    "capacitance": 2.7e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -99,8 +99,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-27PF-50V"
   },
   {
-    "capacitance": 3.3e-11,
     "type": "capacitor",
+    "capacitance": 3.3e-11,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -108,8 +108,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-33PF-50V"
   },
   {
-    "capacitance": 1e-10,
     "type": "capacitor",
+    "capacitance": 1e-10,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -117,8 +117,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-100PF-50V"
   },
   {
-    "capacitance": 2.2e-10,
     "type": "capacitor",
+    "capacitance": 2.2e-10,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -126,8 +126,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-220PF-50V"
   },
   {
-    "capacitance": 1e-9,
     "type": "capacitor",
+    "capacitance": 1e-9,
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -135,8 +135,8 @@ module.exports=[
     "cplid": "CPL-CAP-C0G-0603-1NF-50V"
   },
   {
-    "capacitance": 1e-9,
     "type": "capacitor",
+    "capacitance": 1e-9,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0402",
@@ -144,8 +144,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0402-1NF-50V"
   },
   {
-    "capacitance": 1e-9,
     "type": "capacitor",
+    "capacitance": 1e-9,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -153,8 +153,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-1NF-50V"
   },
   {
-    "capacitance": 4.7e-9,
     "type": "capacitor",
+    "capacitance": 4.7e-9,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -162,8 +162,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-4.7NF-50V"
   },
   {
-    "capacitance": 1e-8,
     "type": "capacitor",
+    "capacitance": 1e-8,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0402",
@@ -171,8 +171,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0402-10NF-50V"
   },
   {
-    "capacitance": 1e-8,
     "type": "capacitor",
+    "capacitance": 1e-8,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -180,8 +180,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-10NF-50V"
   },
   {
-    "capacitance": 2.2e-8,
     "type": "capacitor",
+    "capacitance": 2.2e-8,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -189,8 +189,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-22NF-50V"
   },
   {
-    "capacitance": 4.7e-8,
     "type": "capacitor",
+    "capacitance": 4.7e-8,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -198,8 +198,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-47NF-50V"
   },
   {
-    "capacitance": 1e-7,
     "type": "capacitor",
+    "capacitance": 1e-7,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0402",
@@ -207,8 +207,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0402-100NF-16V"
   },
   {
-    "capacitance": 1e-7,
     "type": "capacitor",
+    "capacitance": 1e-7,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -216,8 +216,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-100NF-50V"
   },
   {
-    "capacitance": 1e-7,
     "type": "capacitor",
+    "capacitance": 1e-7,
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0805",
@@ -225,8 +225,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0805-100NF-50V"
   },
   {
-    "capacitance": 2.2e-7,
     "type": "capacitor",
+    "capacitance": 2.2e-7,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0603",
@@ -234,8 +234,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-220NF-16V"
   },
   {
-    "capacitance": 0.000001,
     "type": "capacitor",
+    "capacitance": 0.000001,
     "tolerance": 10,
     "voltage_rating": 6.3,
     "size": "0402",
@@ -243,8 +243,8 @@ module.exports=[
     "cplid": "CPL-CAP-X5R-0402-1UF-6.3V"
   },
   {
-    "capacitance": 0.000001,
     "type": "capacitor",
+    "capacitance": 0.000001,
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0603",
@@ -252,8 +252,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0603-1UF-25V"
   },
   {
-    "capacitance": 0.000001,
     "type": "capacitor",
+    "capacitance": 0.000001,
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0805",
@@ -261,8 +261,8 @@ module.exports=[
     "cplid": "CPL-CAP-X7R-0805-1UF-25V"
   },
   {
-    "capacitance": 0.0000047,
     "type": "capacitor",
+    "capacitance": 0.0000047,
     "tolerance": 10,
     "voltage_rating": 10,
     "size": "0603",
@@ -270,8 +270,8 @@ module.exports=[
     "cplid": "CPL-CAP-X5R-0603-4.7UF-10V"
   },
   {
-    "capacitance": 0.0000047,
     "type": "capacitor",
+    "capacitance": 0.0000047,
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0805",
@@ -279,8 +279,8 @@ module.exports=[
     "cplid": "CPL-CAP-X5R-0805-4.7UF-25V"
   },
   {
-    "capacitance": 0.00001,
     "type": "capacitor",
+    "capacitance": 0.00001,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0805",
@@ -288,8 +288,8 @@ module.exports=[
     "cplid": "CPL-CAP-X5R-0805-10UF-16V"
   },
   {
-    "capacitance": 0.000022,
     "type": "capacitor",
+    "capacitance": 0.000022,
     "tolerance": 20,
     "voltage_rating": 6.3,
     "size": "0805",
@@ -297,8 +297,8 @@ module.exports=[
     "cplid": "CPL-CAP-X5R-0805-22UF-6.3V"
   },
   {
-    "capacitance": 0.0001,
     "type": "capacitor",
+    "capacitance": 0.0001,
     "tolerance": 20,
     "voltage_rating": 6.3,
     "size": "1206",
@@ -306,125 +306,125 @@ module.exports=[
     "cplid": "CPL-CAP-X5R-1206-100UF-6.3V"
   },
   {
-    "capacitance": 0.000001,
     "type": "capacitor",
+    "capacitance": 0.000001,
     "tolerance": 10,
     "voltage_rating": 35,
     "size": "1206",
     "cplid": "CPL-CAP-TAN-1206-1UF-35V"
   },
   {
-    "capacitance": 0.0000047,
     "type": "capacitor",
+    "capacitance": 0.0000047,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1206",
     "cplid": "CPL-CAP-TAN-1206-4.7UF-16V"
   },
   {
-    "capacitance": 0.00001,
     "type": "capacitor",
+    "capacitance": 0.00001,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1206",
     "cplid": "CPL-CAP-TAN-1206-10UF-16V"
   },
   {
-    "capacitance": 0.00001,
     "type": "capacitor",
+    "capacitance": 0.00001,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1210",
     "cplid": "CPL-CAP-TAN-1210-10UF-16V"
   },
   {
-    "capacitance": 0.000022,
     "type": "capacitor",
+    "capacitance": 0.000022,
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1210",
     "cplid": "CPL-CAP-TAN-1210-22UF-16V"
   },
   {
-    "capacitance": 0.000047,
     "type": "capacitor",
+    "capacitance": 0.000047,
     "tolerance": 10,
     "voltage_rating": 16,
     "cplid": "CPL-CAP-TAN-2312-47UF-16V"
   },
   {
-    "capacitance": 0.0001,
     "type": "capacitor",
+    "capacitance": 0.0001,
     "tolerance": 10,
     "voltage_rating": 16,
     "cplid": "CPL-CAP-TAN-2312-100UF-16V"
   },
   {
-    "capacitance": 0.0001,
     "type": "capacitor",
+    "capacitance": 0.0001,
     "tolerance": 10,
     "voltage_rating": 10,
     "cplid": "CPL-CAP-TAN-2312-100UF-10V"
   },
   {
-    "capacitance": 0.0000022,
     "type": "capacitor",
+    "capacitance": 0.0000022,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-2.2UF-50V"
   },
   {
-    "capacitance": 0.0000047,
     "type": "capacitor",
+    "capacitance": 0.0000047,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-4.7UF-50V"
   },
   {
-    "capacitance": 0.00001,
     "type": "capacitor",
+    "capacitance": 0.00001,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-10UF-50V"
   },
   {
-    "capacitance": 0.000022,
     "type": "capacitor",
+    "capacitance": 0.000022,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-22UF-50V"
   },
   {
-    "capacitance": 0.000047,
     "type": "capacitor",
+    "capacitance": 0.000047,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-47UF-50V"
   },
   {
-    "capacitance": 0.0001,
     "type": "capacitor",
+    "capacitance": 0.0001,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-100UF-50V"
   },
   {
-    "capacitance": 0.00022,
     "type": "capacitor",
+    "capacitance": 0.00022,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-220UF-50V"
   },
   {
-    "capacitance": 0.00047,
     "type": "capacitor",
+    "capacitance": 0.00047,
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-470UF-50V"
   },
   {
-    "capacitance": 0.001,
     "type": "capacitor",
+    "capacitance": 0.001,
     "tolerance": 20,
     "voltage_rating": 25,
     "cplid": "CPL-CAP-ALU-RAD-1000UF-25V"
@@ -433,44 +433,44 @@ module.exports=[
 },{}],3:[function(require,module,exports){
 module.exports=[
   {
-    "color": "green",
     "type": "led",
+    "color": "green",
     "size": "0603",
     "cplid": "CPL-LED-0603-GREEN"
   },
   {
-    "color": "red",
     "type": "led",
+    "color": "red",
     "size": "0603",
     "cplid": "CPL-LED-0603-RED"
   },
   {
-    "color": "yellow",
     "type": "led",
+    "color": "yellow",
     "size": "0603",
     "cplid": "CPL-LED-0603-YELLOW"
   },
   {
-    "color": "orange",
     "type": "led",
+    "color": "orange",
     "size": "0603",
     "cplid": "CPL-LED-0603-ORANGE"
   },
   {
-    "color": "amber",
     "type": "led",
+    "color": "amber",
     "size": "0603",
     "cplid": "CPL-LED-0603-AMBER"
   },
   {
-    "color": "blue",
     "type": "led",
+    "color": "blue",
     "size": "0603",
     "cplid": "CPL-LED-0603-BLUE"
   },
   {
-    "color": "white",
     "type": "led",
+    "color": "white",
     "size": "0603",
     "cplid": "CPL-LED-0603-WHITE"
   }
@@ -478,604 +478,604 @@ module.exports=[
 },{}],4:[function(require,module,exports){
 module.exports=[
   {
-    "resistance": 0,
     "type": "resistor",
+    "resistance": 0,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-0-0.063W"
   },
   {
-    "resistance": 0,
     "type": "resistor",
+    "resistance": 0,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-0-0.1W"
   },
   {
-    "resistance": 0,
     "type": "resistor",
+    "resistance": 0,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-0-0.125W"
   },
   {
-    "resistance": 0,
     "type": "resistor",
+    "resistance": 0,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-0-0.25W"
   },
   {
-    "resistance": 10,
     "type": "resistor",
+    "resistance": 10,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-10-0.063W"
   },
   {
-    "resistance": 10,
     "type": "resistor",
+    "resistance": 10,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-10-0.1W"
   },
   {
-    "resistance": 10,
     "type": "resistor",
+    "resistance": 10,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-10-0.125W"
   },
   {
-    "resistance": 10,
     "type": "resistor",
+    "resistance": 10,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-10-0.25W"
   },
   {
-    "resistance": 12,
     "type": "resistor",
+    "resistance": 12,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-12-0.1W"
   },
   {
-    "resistance": 15,
     "type": "resistor",
+    "resistance": 15,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-15-0.1W"
   },
   {
-    "resistance": 22,
     "type": "resistor",
+    "resistance": 22,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-22-0.1W"
   },
   {
-    "resistance": 33.2,
     "type": "resistor",
+    "resistance": 33.2,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-33.2-0.1W"
   },
   {
-    "resistance": 47,
     "type": "resistor",
+    "resistance": 47,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-47-0.1W"
   },
   {
-    "resistance": 49.9,
     "type": "resistor",
+    "resistance": 49.9,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-49.9-0.1W"
   },
   {
-    "resistance": 56.2,
     "type": "resistor",
+    "resistance": 56.2,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-56.2-0.1W"
   },
   {
-    "resistance": 68.1,
     "type": "resistor",
+    "resistance": 68.1,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-68.1-0.1W"
   },
   {
-    "resistance": 75,
     "type": "resistor",
+    "resistance": 75,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-75-0.1W"
   },
   {
-    "resistance": 82.5,
     "type": "resistor",
+    "resistance": 82.5,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-82.5-0.1W"
   },
   {
-    "resistance": 100,
     "type": "resistor",
+    "resistance": 100,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-100-0.063W"
   },
   {
-    "resistance": 100,
     "type": "resistor",
+    "resistance": 100,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-100-0.1W"
   },
   {
-    "resistance": 100,
     "type": "resistor",
+    "resistance": 100,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-100-0.125W"
   },
   {
-    "resistance": 100,
     "type": "resistor",
+    "resistance": 100,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-100-0.25W"
   },
   {
-    "resistance": 120,
     "type": "resistor",
+    "resistance": 120,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-120-0.1W"
   },
   {
-    "resistance": 150,
     "type": "resistor",
+    "resistance": 150,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-150-0.1W"
   },
   {
-    "resistance": 220,
     "type": "resistor",
+    "resistance": 220,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-220-0.1W"
   },
   {
-    "resistance": 330,
     "type": "resistor",
+    "resistance": 330,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-330-0.1W"
   },
   {
-    "resistance": 390,
     "type": "resistor",
+    "resistance": 390,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-390-0.1W"
   },
   {
-    "resistance": 470,
     "type": "resistor",
+    "resistance": 470,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-470-0.1W"
   },
   {
-    "resistance": 560,
     "type": "resistor",
+    "resistance": 560,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-560-0.1W"
   },
   {
-    "resistance": 681,
     "type": "resistor",
+    "resistance": 681,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-681-0.1W"
   },
   {
-    "resistance": 820,
     "type": "resistor",
+    "resistance": 820,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-820-0.1W"
   },
   {
-    "resistance": 1000,
     "type": "resistor",
+    "resistance": 1000,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-1K-0.063W"
   },
   {
-    "resistance": 1000,
     "type": "resistor",
+    "resistance": 1000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-1K-0.1W"
   },
   {
-    "resistance": 1000,
     "type": "resistor",
+    "resistance": 1000,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-1K-0.125W"
   },
   {
-    "resistance": 1000,
     "type": "resistor",
+    "resistance": 1000,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-1K-0.25W"
   },
   {
-    "resistance": 1200,
     "type": "resistor",
+    "resistance": 1200,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-1.2K-0.1W"
   },
   {
-    "resistance": 1500,
     "type": "resistor",
+    "resistance": 1500,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-1.5K-0.1W"
   },
   {
-    "resistance": 2000,
     "type": "resistor",
+    "resistance": 2000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-2K-0.1W"
   },
   {
-    "resistance": 3300,
     "type": "resistor",
+    "resistance": 3300,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0603-3.3K-0.1W"
   },
   {
-    "resistance": 3300,
     "type": "resistor",
+    "resistance": 3300,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-3.3K-0.1W"
   },
   {
-    "resistance": 3300,
     "type": "resistor",
+    "resistance": 3300,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0603-3.3K-0.1W"
   },
   {
-    "resistance": 3300,
     "type": "resistor",
+    "resistance": 3300,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-0603-3.3K-0.1W"
   },
   {
-    "resistance": 3600,
     "type": "resistor",
+    "resistance": 3600,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-3.6K-0.1W"
   },
   {
-    "resistance": 4700,
     "type": "resistor",
+    "resistance": 4700,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-4.7K-0.063W"
   },
   {
-    "resistance": 4700,
     "type": "resistor",
+    "resistance": 4700,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-4.7K-0.1W"
   },
   {
-    "resistance": 4700,
     "type": "resistor",
+    "resistance": 4700,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-4.7K-0.125W"
   },
   {
-    "resistance": 4700,
     "type": "resistor",
+    "resistance": 4700,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-4.7K-0.25W"
   },
   {
-    "resistance": 5600,
     "type": "resistor",
+    "resistance": 5600,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-5.6K-0.1W"
   },
   {
-    "resistance": 6800,
     "type": "resistor",
+    "resistance": 6800,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-6.8K-0.1W"
   },
   {
-    "resistance": 8200,
     "type": "resistor",
+    "resistance": 8200,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-8.2K-0.1W"
   },
   {
-    "resistance": 10000,
     "type": "resistor",
+    "resistance": 10000,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-10K-0.063W"
   },
   {
-    "resistance": 10000,
     "type": "resistor",
+    "resistance": 10000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-10K-0.1W"
   },
   {
-    "resistance": 10000,
     "type": "resistor",
+    "resistance": 10000,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-10K-0.125W"
   },
   {
-    "resistance": 10000,
     "type": "resistor",
+    "resistance": 10000,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-10K-0.25W"
   },
   {
-    "resistance": 12000,
     "type": "resistor",
+    "resistance": 12000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-12K-0.1W"
   },
   {
-    "resistance": 15000,
     "type": "resistor",
+    "resistance": 15000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-15K-0.1W"
   },
   {
-    "resistance": 22000,
     "type": "resistor",
+    "resistance": 22000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-22K-0.1W"
   },
   {
-    "resistance": 33200,
     "type": "resistor",
+    "resistance": 33200,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-33.2K-0.1W"
   },
   {
-    "resistance": 47000,
     "type": "resistor",
+    "resistance": 47000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-47K-0.1W"
   },
   {
-    "resistance": 56200,
     "type": "resistor",
+    "resistance": 56200,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-56.2K-0.1W"
   },
   {
-    "resistance": 68100,
     "type": "resistor",
+    "resistance": 68100,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-68.1K-0.1W"
   },
   {
-    "resistance": 82500,
     "type": "resistor",
+    "resistance": 82500,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-82.5K-0.1W"
   },
   {
-    "resistance": 100000,
     "type": "resistor",
+    "resistance": 100000,
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-100K-0.063W"
   },
   {
-    "resistance": 100000,
     "type": "resistor",
+    "resistance": 100000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-100K-0.1W"
   },
   {
-    "resistance": 100000,
     "type": "resistor",
+    "resistance": 100000,
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-100K-0.125W"
   },
   {
-    "resistance": 100000,
     "type": "resistor",
+    "resistance": 100000,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-100K-0.25W"
   },
   {
-    "resistance": 120000,
     "type": "resistor",
+    "resistance": 120000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-120K-0.1W"
   },
   {
-    "resistance": 150000,
     "type": "resistor",
+    "resistance": 150000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-150K-0.1W"
   },
   {
-    "resistance": 220000,
     "type": "resistor",
+    "resistance": 220000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-220K-0.1W"
   },
   {
-    "resistance": 332000,
     "type": "resistor",
+    "resistance": 332000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-332K-0.1W"
   },
   {
-    "resistance": 470000,
     "type": "resistor",
+    "resistance": 470000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-470K-0.1W"
   },
   {
-    "resistance": 562000,
     "type": "resistor",
+    "resistance": 562000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-562K-0.1W"
   },
   {
-    "resistance": 681000,
     "type": "resistor",
+    "resistance": 681000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-681K-0.1W"
   },
   {
-    "resistance": 825000,
     "type": "resistor",
+    "resistance": 825000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-825K-0.1W"
   },
   {
-    "resistance": 1000000,
     "type": "resistor",
+    "resistance": 1000000,
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-1M-0.1W"
   },
   {
-    "resistance": 0.05,
     "type": "resistor",
+    "resistance": 0.05,
     "tolerance": 1,
     "size": "1206",
     "power_rating": 1,
@@ -1149,14 +1149,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         '6332': '2512'
     };
 
-    function type_capacitor(d) {
-        return d.concat([{ type: 'capacitor' }]);
-    }
-    function type_resistor(d) {
-        return d.concat([{ type: 'resistor' }]);
-    }
-    function type_led(d) {
-        return d.concat([{ type: 'led' }]);
+    function type(t) {
+        return function (d) {
+            return [{ type: t }].concat(d);
+        };
     }
 
     function capacitance(d) {
@@ -1310,7 +1306,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return d.join('');
             } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "main", "symbols": ["component"], "postprocess": function postprocess(d) {
                 return assignAll(filter(flatten(d)));
-            } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type_capacitor }, { "name": "component", "symbols": ["resistor"], "postprocess": type_resistor }, { "name": "component", "symbols": ["led"], "postprocess": type_led }, { "name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor') }, { "name": "component", "symbols": ["resistor"], "postprocess": type('resistor') }, { "name": "component", "symbols": ["led"], "postprocess": type('led') }, { "name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"] }, { "name": "capacitor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
@@ -1400,9 +1396,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return null;
             } }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"], "postprocess": type_resistor }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"] }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"], "postprocess": type_resistor }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
+            } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"] }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
             } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess": function postprocess(d) {
                 var _d3 = _slicedToArray(d, 3),
