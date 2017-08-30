@@ -95,7 +95,7 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 %}
 
 ohm -> ohm_ {% () => null %}
-ohm_ -> O H M | "Ω"
+ohm_ -> O H M | "Ω" | "Ω"
 
 powerMetricPrefix ->
     giga  {% () => 'e9  ' %}
