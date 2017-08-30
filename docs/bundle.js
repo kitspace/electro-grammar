@@ -1220,7 +1220,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 return null;
             } }, { "name": "rest", "symbols": ["rMetricPrefix", "rest$ebnf$1", "rest$ebnf$2"] }, { "name": "rest", "symbols": ["ohm"] }, { "name": "ohm", "symbols": ["ohm_"], "postprocess": function postprocess() {
                 return null;
-            } }, { "name": "ohm_", "symbols": ["O", "H", "M"] }, { "name": "ohm_", "symbols": [{ "literal": "Ω" }] }, { "name": "ohm_", "symbols": [{ "literal": "Ω" }] }, { "name": "powerMetricPrefix", "symbols": ["giga"], "postprocess": function postprocess() {
+            } }, { "name": "ohm_", "symbols": ["O", "H", "M"] }, { "name": "ohm_", "symbols": [{ "literal": "Ω" }] }, { "name": "ohm_", "symbols": [{ "literal": "Ω" }] }, { "name": "ohm_", "symbols": ["R"] }, { "name": "powerMetricPrefix", "symbols": ["giga"], "postprocess": function postprocess() {
                 return 'e9  ';
             } }, { "name": "powerMetricPrefix", "symbols": ["mega"], "postprocess": function postprocess() {
                 return 'e6  ';

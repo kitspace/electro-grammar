@@ -483,6 +483,7 @@ var grammar = {
     {"name": "ohm_", "symbols": ["O", "H", "M"]},
     {"name": "ohm_", "symbols": [{"literal":"Ω"}]},
     {"name": "ohm_", "symbols": [{"literal":"Ω"}]},
+    {"name": "ohm_", "symbols": ["R"]},
     {"name": "powerMetricPrefix", "symbols": ["giga"], "postprocess": () => 'e9  '},
     {"name": "powerMetricPrefix", "symbols": ["mega"], "postprocess": () => 'e6  '},
     {"name": "powerMetricPrefix", "symbols": ["kilo"], "postprocess": () => 'e3  '},
