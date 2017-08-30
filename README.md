@@ -1,5 +1,7 @@
-# :zap: Electro Grammar
+# Electro Grammar
 >Javascript module for parsing electronic component descriptions
+
+[:zap: demo](https://monostable.github.io/electro-grammar/)
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors and capacitors.
 A function to match the result to a part in the [Common Parts Library][CPL] is also provided.
