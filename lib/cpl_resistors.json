@@ -1,30 +1,35 @@
 [
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-0-0.063W"
   },
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-0-0.1W"
   },
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-0-0.125W"
   },
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-0-0.25W"
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -32,6 +37,7 @@
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -39,6 +45,7 @@
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -46,6 +53,7 @@
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -53,6 +61,7 @@
   },
   {
     "resistance": 12,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -60,6 +69,7 @@
   },
   {
     "resistance": 15,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -67,6 +77,7 @@
   },
   {
     "resistance": 22,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -74,6 +85,7 @@
   },
   {
     "resistance": 33.2,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -81,6 +93,7 @@
   },
   {
     "resistance": 47,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -88,6 +101,7 @@
   },
   {
     "resistance": 49.9,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -95,6 +109,7 @@
   },
   {
     "resistance": 56.2,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -102,6 +117,7 @@
   },
   {
     "resistance": 68.1,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -109,6 +125,7 @@
   },
   {
     "resistance": 75,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -116,6 +133,7 @@
   },
   {
     "resistance": 82.5,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -123,6 +141,7 @@
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -130,6 +149,7 @@
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -137,6 +157,7 @@
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -144,6 +165,7 @@
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -151,6 +173,7 @@
   },
   {
     "resistance": 120,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -158,6 +181,7 @@
   },
   {
     "resistance": 150,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -165,6 +189,7 @@
   },
   {
     "resistance": 220,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -172,6 +197,7 @@
   },
   {
     "resistance": 330,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -179,6 +205,7 @@
   },
   {
     "resistance": 390,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -186,6 +213,7 @@
   },
   {
     "resistance": 470,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -193,6 +221,7 @@
   },
   {
     "resistance": 560,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -200,6 +229,7 @@
   },
   {
     "resistance": 681,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -207,6 +237,7 @@
   },
   {
     "resistance": 820,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -214,6 +245,7 @@
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -221,6 +253,7 @@
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -228,6 +261,7 @@
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -235,6 +269,7 @@
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -242,6 +277,7 @@
   },
   {
     "resistance": 1200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -249,6 +285,7 @@
   },
   {
     "resistance": 1500,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -256,6 +293,7 @@
   },
   {
     "resistance": 2000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -263,6 +301,7 @@
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -270,6 +309,7 @@
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -277,6 +317,7 @@
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -284,6 +325,7 @@
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -291,6 +333,7 @@
   },
   {
     "resistance": 3600,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -298,6 +341,7 @@
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -305,6 +349,7 @@
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -312,6 +357,7 @@
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -319,6 +365,7 @@
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -326,6 +373,7 @@
   },
   {
     "resistance": 5600,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -333,6 +381,7 @@
   },
   {
     "resistance": 6800,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -340,6 +389,7 @@
   },
   {
     "resistance": 8200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -347,6 +397,7 @@
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -354,6 +405,7 @@
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -361,6 +413,7 @@
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -368,6 +421,7 @@
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -375,6 +429,7 @@
   },
   {
     "resistance": 12000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -382,6 +437,7 @@
   },
   {
     "resistance": 15000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -389,6 +445,7 @@
   },
   {
     "resistance": 22000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -396,6 +453,7 @@
   },
   {
     "resistance": 33200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -403,6 +461,7 @@
   },
   {
     "resistance": 47000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -410,6 +469,7 @@
   },
   {
     "resistance": 56200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -417,6 +477,7 @@
   },
   {
     "resistance": 68100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -424,6 +485,7 @@
   },
   {
     "resistance": 82500,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -431,6 +493,7 @@
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -438,6 +501,7 @@
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -445,6 +509,7 @@
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -452,6 +517,7 @@
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -459,6 +525,7 @@
   },
   {
     "resistance": 120000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -466,6 +533,7 @@
   },
   {
     "resistance": 150000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -473,6 +541,7 @@
   },
   {
     "resistance": 220000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -480,6 +549,7 @@
   },
   {
     "resistance": 332000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -487,6 +557,7 @@
   },
   {
     "resistance": 470000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -494,6 +565,7 @@
   },
   {
     "resistance": 562000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -501,6 +573,7 @@
   },
   {
     "resistance": 681000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -508,6 +581,7 @@
   },
   {
     "resistance": 825000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -515,6 +589,7 @@
   },
   {
     "resistance": 1000000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -522,6 +597,7 @@
   },
   {
     "resistance": 0.05,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 1,

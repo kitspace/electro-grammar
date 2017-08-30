@@ -5,17 +5,33 @@
 
 main -> component {% d => assignAll(filter(flatten(d))) %}
 
-component -> capacitor | resistor | led
+component ->
+    capacitor {%type_capacitor%}
+  | resistor {%type_resistor%}
+  | led {%type_led%}
 
 ## Capacitors ##
 
 # the description can come in any order
 # if it starts with 'c' or 'capacitor' then F or farad can be ommitted
 capacitor ->
-    cSpecs capacitance cSpecs packageSize:? cSpecs
-  | cSpecs packageSize:? cSpecs capacitance cSpecs
-  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs
-  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs
+    cSpecs capacitance cSpecs packageSize:? cSpecs {%type_capacitor%}
+  | cSpecs packageSize:? cSpecs capacitance cSpecs {%type_capacitor%}
+  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs {%type_capacitor%}
+  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs {%type_capacitor%}
+
+@{%
+    function type_capacitor(d) {
+      return d.concat([{type: 'capacitor'}])
+    }
+    function type_resistor(d) {
+      return d.concat([{type: 'resistor'}])
+    }
+    function type_led(d) {
+      return d.concat([{type: 'led'}])
+    }
+%}
+
 
 cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% () => null %}
 
@@ -67,8 +83,8 @@ farad -> "F" {% () => null %} | F A R A D {% () => null %}
 ## Resistors ##
 
 resistor ->
-    rSpecs resistance rSpecs packageSize:? rSpecs
-  | rSpecs packageSize:? rSpecs resistance rSpecs
+    rSpecs resistance rSpecs packageSize:? rSpecs {%type_resistor%}
+  | rSpecs packageSize:? rSpecs resistance rSpecs {%type_resistor%}
 
 
 rSpecs -> (_ rSpec _):* | __

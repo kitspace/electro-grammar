@@ -26,6 +26,17 @@ function id(x) {return x[0]; }
   }
 
 
+    function type_capacitor(d) {
+      return d.concat([{type: 'capacitor'}])
+    }
+    function type_resistor(d) {
+      return d.concat([{type: 'resistor'}])
+    }
+    function type_led(d) {
+      return d.concat([{type: 'led'}])
+    }
+
+
   function capacitance(d) {
     const [quantity, , metricPrefix, , farad] = d
 
@@ -297,25 +308,25 @@ var grammar = {
     {"name": "C", "symbols": [{"literal":"C"}]},
     {"name": "C", "symbols": [{"literal":"c"}]},
     {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(flatten(d)))},
-    {"name": "component", "symbols": ["capacitor"]},
-    {"name": "component", "symbols": ["resistor"]},
-    {"name": "component", "symbols": ["led"]},
+    {"name": "component", "symbols": ["capacitor"], "postprocess": type_capacitor},
+    {"name": "component", "symbols": ["resistor"], "postprocess": type_resistor},
+    {"name": "component", "symbols": ["led"], "postprocess": type_led},
     {"name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"]},
+    {"name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"], "postprocess": type_capacitor},
     {"name": "capacitor$ebnf$2", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"]},
+    {"name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"], "postprocess": type_capacitor},
     {"name": "capacitor$ebnf$3", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$3", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"]},
     {"name": "capacitor$subexpression$1", "symbols": ["capacitance"]},
-    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"]},
+    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"], "postprocess": type_capacitor},
     {"name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"]},
     {"name": "capacitor$subexpression$2", "symbols": ["capacitance"]},
     {"name": "capacitor$ebnf$4", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$4", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"]},
+    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"], "postprocess": type_capacitor},
     {"name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id},
     {"name": "cap$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "cap$ebnf$2", "symbols": ["P"], "postprocess": id},
@@ -463,10 +474,10 @@ var grammar = {
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": () => null},
     {"name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
     {"name": "resistor$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"]},
+    {"name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"], "postprocess": type_resistor},
     {"name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id},
     {"name": "resistor$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"]},
+    {"name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"], "postprocess": type_resistor},
     {"name": "rSpecs$ebnf$1", "symbols": []},
     {"name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"]},
     {"name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},

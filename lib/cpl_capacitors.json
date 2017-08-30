@@ -1,6 +1,7 @@
 [
   {
     "capacitance": 1e-12,
+    "type": "capacitor",
     "voltage_rating": 50,
     "size": "0402",
     "characteristic": "C0G",
@@ -8,6 +9,7 @@
   },
   {
     "capacitance": 1e-12,
+    "type": "capacitor",
     "voltage_rating": 50,
     "size": "0603",
     "characteristic": "C0G",
@@ -15,6 +17,7 @@
   },
   {
     "capacitance": 1e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
@@ -23,6 +26,7 @@
   },
   {
     "capacitance": 1e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -31,6 +35,7 @@
   },
   {
     "capacitance": 1.2e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -39,6 +44,7 @@
   },
   {
     "capacitance": 1.8e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -47,6 +53,7 @@
   },
   {
     "capacitance": 2.2e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
@@ -55,6 +62,7 @@
   },
   {
     "capacitance": 2.2e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -63,6 +71,7 @@
   },
   {
     "capacitance": 2.7e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -71,6 +80,7 @@
   },
   {
     "capacitance": 3.3e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -79,6 +89,7 @@
   },
   {
     "capacitance": 1e-10,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -87,6 +98,7 @@
   },
   {
     "capacitance": 2.2e-10,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -95,6 +107,7 @@
   },
   {
     "capacitance": 1e-9,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -103,6 +116,7 @@
   },
   {
     "capacitance": 1e-9,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0402",
@@ -111,6 +125,7 @@
   },
   {
     "capacitance": 1e-9,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -119,6 +134,7 @@
   },
   {
     "capacitance": 4.7e-9,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -127,6 +143,7 @@
   },
   {
     "capacitance": 1e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0402",
@@ -135,6 +152,7 @@
   },
   {
     "capacitance": 1e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -143,6 +161,7 @@
   },
   {
     "capacitance": 2.2e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -151,6 +170,7 @@
   },
   {
     "capacitance": 4.7e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -159,6 +179,7 @@
   },
   {
     "capacitance": 1e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0402",
@@ -167,6 +188,7 @@
   },
   {
     "capacitance": 1e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -175,6 +197,7 @@
   },
   {
     "capacitance": 1e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0805",
@@ -183,6 +206,7 @@
   },
   {
     "capacitance": 2.2e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0603",
@@ -191,6 +215,7 @@
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 6.3,
     "size": "0402",
@@ -199,6 +224,7 @@
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0603",
@@ -207,6 +233,7 @@
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0805",
@@ -215,6 +242,7 @@
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 10,
     "size": "0603",
@@ -223,6 +251,7 @@
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0805",
@@ -231,6 +260,7 @@
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0805",
@@ -239,6 +269,7 @@
   },
   {
     "capacitance": 0.000022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 6.3,
     "size": "0805",
@@ -247,6 +278,7 @@
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 6.3,
     "size": "1206",
@@ -255,6 +287,7 @@
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 35,
     "size": "1206",
@@ -262,6 +295,7 @@
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1206",
@@ -269,6 +303,7 @@
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1206",
@@ -276,6 +311,7 @@
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1210",
@@ -283,6 +319,7 @@
   },
   {
     "capacitance": 0.000022,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1210",
@@ -290,72 +327,84 @@
   },
   {
     "capacitance": 0.000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "cplid": "CPL-CAP-TAN-2312-47UF-16V"
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "cplid": "CPL-CAP-TAN-2312-100UF-16V"
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 10,
     "cplid": "CPL-CAP-TAN-2312-100UF-10V"
   },
   {
     "capacitance": 0.0000022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-2.2UF-50V"
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-4.7UF-50V"
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-10UF-50V"
   },
   {
     "capacitance": 0.000022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-22UF-50V"
   },
   {
     "capacitance": 0.000047,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-47UF-50V"
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-100UF-50V"
   },
   {
     "capacitance": 0.00022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-220UF-50V"
   },
   {
     "capacitance": 0.00047,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-470UF-50V"
   },
   {
     "capacitance": 0.001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 25,
     "cplid": "CPL-CAP-ALU-RAD-1000UF-25V"

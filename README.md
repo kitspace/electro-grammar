@@ -16,7 +16,8 @@ Parses capacitance, package size, characteristic, tolerance and voltage rating f
 
 ```js
 > parse('100nF 0603 C0G 10% 25V')
-{ capacitance: 1e-7,
+{ type: 'capacitor',
+  capacitance: 1e-7,
   size: '0603',
   characteristic: 'C0G',
   tolerance: 10,
@@ -29,11 +30,11 @@ In both cases only EIA letter codes are returned.
 
 ```js
 > parse('10pF C0G/NP0')
-{ capacitance: 1e-11, characteristic: 'C0G' }
+{ type: 'capacitor', capacitance: 1e-11, characteristic: 'C0G' }
 > parse('10pF NP0')
-{ capacitance: 1e-11, characteristic: 'C0G' }
+{ type: 'capacitor', capacitance: 1e-11, characteristic: 'C0G' }
 > parse('10pF X7R')
-{ capacitance: 1e-11, characteristic: 'X7R' }
+{ type: 'capacitor', capacitance: 1e-11, characteristic: 'X7R' }
 ```
 
 ### Resistors
@@ -41,7 +42,8 @@ Parses resistance, package size, tolerance and power rating for resistors.
 
 ```js
 > parse('1k 0805 5% 125mW')
-{ resistance: 1000,
+{ type: 'resistor',
+  resistance: 1000,
   size: '0805',
   tolerance: 5,
   power_rating: 0.125 }
@@ -51,15 +53,15 @@ Electro-grammar supports several different ways to express resistance.
 
 ```js
 > parse('1.5k')
-{ resistance: 1500 }
+{ type: 'resistor', resistance: 1500 }
 > parse('1k5')
-{ resistance: 1500 }
+{ type: 'resistor', resistance: 1500 }
 > parse('1500 ohm')
-{ resistance: 1500 }
+{ type: 'resistor', resistance: 1500 }
 > parse('1500.0 ohm')
-{ resistance: 1500 }
+{ type: 'resistor', resistance: 1500 }
 > parse('1500 Ω')
-{ resistance: 1500 }
+{ type: 'resistor', resistance: 1500 }
 ```
 
 ### LEDs
@@ -74,20 +76,22 @@ Converts all units to floating point numbers.
 
 ```js
 > parse('0.1uF 0603')
-{ capacitance: 1e-7, size: '0603' }
+{ type: 'capacitor', capacitance: 1e-7, size: '0603' }
 ```
 
 The order of the terms doesn't matter.
 
 ```js
 > parse('1% 0603 1uF')
-{ "capacitance": 0.000001,
-  "tolerance": 1,
-  "size": "0603" }
+{ type: 'capacitor'
+  capacitance: 0.000001,
+  tolerance: 1,
+  size: "0603" }
 > parse('0603 1% 1uF')
-{ "capacitance": 0.000001,
-  "tolerance": 1,
-  "size": "0603" }
+{ type: 'capacitor',
+  capacitance": 0.000001,
+  tolerance: 1,
+  size: "0603" }
 ```
 
 If no match is found `null` is returned.
@@ -101,9 +105,9 @@ Text that is not part of the grammar is simply ignored.
 
 ```js
 > parse('NE555P 1uF')
-{ capacitance: 0.000001 }
+{ type: 'capacitor', capacitance: 0.000001 }
 > parse('these words 1k are ignored 0805')
-{ resistance: 1000, size: '0805' }
+{ type: 'resistor', resistance: 1000, size: '0805' }
 ```
 
 You can use metric package sizes as long as you specify using the `metric` keyword.
@@ -111,9 +115,9 @@ Output for package sizes is always in imperial.
 
 ```js
 > parse('1k metric 0603')
-{ resistance: 1000, size: '0201' }
+{ type: 'resistor', resistance: 1000, size: '0201' }
 > parse('1k 0603 metric')
-{ resistance: 1000, size: '0201' }
+{ type: 'resistor', resistance: 1000, size: '0201' }
 ```
 
 ## CPL Matching
@@ -123,18 +127,21 @@ If no matches are found or the function is given invalid input an empty array is
 
 ```js
 > c = parse('0.1uF 0805 25V')
-{ capacitance: 1e-7, size: '0805', voltage_rating: 25 }
+{ type: 'capacitor',
+  capacitance: 1e-7,
+  size: '0805',
+  voltage_rating: 25 }
 > matchCPL(c)
 [ 'CPL-CAP-X7R-0805-100NF-50V' ]
 
 > r = parse('10k 0603')
-{ resistance: 10000, size: '0603' }
+{ type: 'resistor', resistance: 10000, size: '0603' }
 > matchCPL(r)
 [ 'CPL-RES-0603-10K-0.1W' ]
 
 > // I don't think it's possible to make such a resistor
 > r = parse('1k 1000000W')
-{ resistance: 1000, power_rating: 1000000 }
+{ type: 'resistor', resistance: 1000, power_rating: 1000000 }
 > matchCPL(r)
 []
 

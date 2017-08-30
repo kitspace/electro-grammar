@@ -17,10 +17,11 @@ function setOutput() {
 setOutput()
 input.oninput = setOutput
 
-},{"../lib/index":6}],2:[function(require,module,exports){
+},{"../lib/index":7}],2:[function(require,module,exports){
 module.exports=[
   {
     "capacitance": 1e-12,
+    "type": "capacitor",
     "voltage_rating": 50,
     "size": "0402",
     "characteristic": "C0G",
@@ -28,6 +29,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-12,
+    "type": "capacitor",
     "voltage_rating": 50,
     "size": "0603",
     "characteristic": "C0G",
@@ -35,6 +37,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
@@ -43,6 +46,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -51,6 +55,7 @@ module.exports=[
   },
   {
     "capacitance": 1.2e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -59,6 +64,7 @@ module.exports=[
   },
   {
     "capacitance": 1.8e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -67,6 +73,7 @@ module.exports=[
   },
   {
     "capacitance": 2.2e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
@@ -75,6 +82,7 @@ module.exports=[
   },
   {
     "capacitance": 2.2e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -83,6 +91,7 @@ module.exports=[
   },
   {
     "capacitance": 2.7e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -91,6 +100,7 @@ module.exports=[
   },
   {
     "capacitance": 3.3e-11,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -99,6 +109,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-10,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -107,6 +118,7 @@ module.exports=[
   },
   {
     "capacitance": 2.2e-10,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -115,6 +127,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-9,
+    "type": "capacitor",
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
@@ -123,6 +136,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-9,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0402",
@@ -131,6 +145,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-9,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -139,6 +154,7 @@ module.exports=[
   },
   {
     "capacitance": 4.7e-9,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -147,6 +163,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0402",
@@ -155,6 +172,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -163,6 +181,7 @@ module.exports=[
   },
   {
     "capacitance": 2.2e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -171,6 +190,7 @@ module.exports=[
   },
   {
     "capacitance": 4.7e-8,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -179,6 +199,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0402",
@@ -187,6 +208,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0603",
@@ -195,6 +217,7 @@ module.exports=[
   },
   {
     "capacitance": 1e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 50,
     "size": "0805",
@@ -203,6 +226,7 @@ module.exports=[
   },
   {
     "capacitance": 2.2e-7,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0603",
@@ -211,6 +235,7 @@ module.exports=[
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 6.3,
     "size": "0402",
@@ -219,6 +244,7 @@ module.exports=[
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0603",
@@ -227,6 +253,7 @@ module.exports=[
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0805",
@@ -235,6 +262,7 @@ module.exports=[
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 10,
     "size": "0603",
@@ -243,6 +271,7 @@ module.exports=[
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 25,
     "size": "0805",
@@ -251,6 +280,7 @@ module.exports=[
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "0805",
@@ -259,6 +289,7 @@ module.exports=[
   },
   {
     "capacitance": 0.000022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 6.3,
     "size": "0805",
@@ -267,6 +298,7 @@ module.exports=[
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 6.3,
     "size": "1206",
@@ -275,6 +307,7 @@ module.exports=[
   },
   {
     "capacitance": 0.000001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 35,
     "size": "1206",
@@ -282,6 +315,7 @@ module.exports=[
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1206",
@@ -289,6 +323,7 @@ module.exports=[
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1206",
@@ -296,6 +331,7 @@ module.exports=[
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1210",
@@ -303,6 +339,7 @@ module.exports=[
   },
   {
     "capacitance": 0.000022,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "size": "1210",
@@ -310,72 +347,84 @@ module.exports=[
   },
   {
     "capacitance": 0.000047,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "cplid": "CPL-CAP-TAN-2312-47UF-16V"
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 16,
     "cplid": "CPL-CAP-TAN-2312-100UF-16V"
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 10,
     "voltage_rating": 10,
     "cplid": "CPL-CAP-TAN-2312-100UF-10V"
   },
   {
     "capacitance": 0.0000022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-2.2UF-50V"
   },
   {
     "capacitance": 0.0000047,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-4.7UF-50V"
   },
   {
     "capacitance": 0.00001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-10UF-50V"
   },
   {
     "capacitance": 0.000022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-22UF-50V"
   },
   {
     "capacitance": 0.000047,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-47UF-50V"
   },
   {
     "capacitance": 0.0001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-100UF-50V"
   },
   {
     "capacitance": 0.00022,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-220UF-50V"
   },
   {
     "capacitance": 0.00047,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 50,
     "cplid": "CPL-CAP-ALU-RAD-470UF-50V"
   },
   {
     "capacitance": 0.001,
+    "type": "capacitor",
     "tolerance": 20,
     "voltage_rating": 25,
     "cplid": "CPL-CAP-ALU-RAD-1000UF-25V"
@@ -384,31 +433,81 @@ module.exports=[
 },{}],3:[function(require,module,exports){
 module.exports=[
   {
+    "led_color": "green",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-GREEN"
+  },
+  {
+    "led_color": "red",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-RED"
+  },
+  {
+    "led_color": "yellow",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-YELLOW"
+  },
+  {
+    "led_color": "orange",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-ORANGE"
+  },
+  {
+    "led_color": "amber",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-AMBER"
+  },
+  {
+    "led_color": "blue",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-BLUE"
+  },
+  {
+    "led_color": "white",
+    "type": "led",
+    "size": "0603",
+    "cplid": "CPL-LED-0603-WHITE"
+  }
+]
+},{}],4:[function(require,module,exports){
+module.exports=[
+  {
     "resistance": 0,
+    "type": "resistor",
     "size": "0402",
     "power_rating": 0.063,
     "cplid": "CPL-RES-0402-0-0.063W"
   },
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "0603",
     "power_rating": 0.1,
     "cplid": "CPL-RES-0603-0-0.1W"
   },
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "0805",
     "power_rating": 0.125,
     "cplid": "CPL-RES-0805-0-0.125W"
   },
   {
     "resistance": 0,
+    "type": "resistor",
     "size": "1206",
     "power_rating": 0.25,
     "cplid": "CPL-RES-1206-0-0.25W"
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -416,6 +515,7 @@ module.exports=[
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -423,6 +523,7 @@ module.exports=[
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -430,6 +531,7 @@ module.exports=[
   },
   {
     "resistance": 10,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -437,6 +539,7 @@ module.exports=[
   },
   {
     "resistance": 12,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -444,6 +547,7 @@ module.exports=[
   },
   {
     "resistance": 15,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -451,6 +555,7 @@ module.exports=[
   },
   {
     "resistance": 22,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -458,6 +563,7 @@ module.exports=[
   },
   {
     "resistance": 33.2,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -465,6 +571,7 @@ module.exports=[
   },
   {
     "resistance": 47,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -472,6 +579,7 @@ module.exports=[
   },
   {
     "resistance": 49.9,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -479,6 +587,7 @@ module.exports=[
   },
   {
     "resistance": 56.2,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -486,6 +595,7 @@ module.exports=[
   },
   {
     "resistance": 68.1,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -493,6 +603,7 @@ module.exports=[
   },
   {
     "resistance": 75,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -500,6 +611,7 @@ module.exports=[
   },
   {
     "resistance": 82.5,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -507,6 +619,7 @@ module.exports=[
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -514,6 +627,7 @@ module.exports=[
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -521,6 +635,7 @@ module.exports=[
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -528,6 +643,7 @@ module.exports=[
   },
   {
     "resistance": 100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -535,6 +651,7 @@ module.exports=[
   },
   {
     "resistance": 120,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -542,6 +659,7 @@ module.exports=[
   },
   {
     "resistance": 150,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -549,6 +667,7 @@ module.exports=[
   },
   {
     "resistance": 220,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -556,6 +675,7 @@ module.exports=[
   },
   {
     "resistance": 330,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -563,6 +683,7 @@ module.exports=[
   },
   {
     "resistance": 390,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -570,6 +691,7 @@ module.exports=[
   },
   {
     "resistance": 470,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -577,6 +699,7 @@ module.exports=[
   },
   {
     "resistance": 560,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -584,6 +707,7 @@ module.exports=[
   },
   {
     "resistance": 681,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -591,6 +715,7 @@ module.exports=[
   },
   {
     "resistance": 820,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -598,6 +723,7 @@ module.exports=[
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -605,6 +731,7 @@ module.exports=[
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -612,6 +739,7 @@ module.exports=[
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -619,6 +747,7 @@ module.exports=[
   },
   {
     "resistance": 1000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -626,6 +755,7 @@ module.exports=[
   },
   {
     "resistance": 1200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -633,6 +763,7 @@ module.exports=[
   },
   {
     "resistance": 1500,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -640,6 +771,7 @@ module.exports=[
   },
   {
     "resistance": 2000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -647,6 +779,7 @@ module.exports=[
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -654,6 +787,7 @@ module.exports=[
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -661,6 +795,7 @@ module.exports=[
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -668,6 +803,7 @@ module.exports=[
   },
   {
     "resistance": 3300,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -675,6 +811,7 @@ module.exports=[
   },
   {
     "resistance": 3600,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -682,6 +819,7 @@ module.exports=[
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -689,6 +827,7 @@ module.exports=[
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -696,6 +835,7 @@ module.exports=[
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -703,6 +843,7 @@ module.exports=[
   },
   {
     "resistance": 4700,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -710,6 +851,7 @@ module.exports=[
   },
   {
     "resistance": 5600,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -717,6 +859,7 @@ module.exports=[
   },
   {
     "resistance": 6800,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -724,6 +867,7 @@ module.exports=[
   },
   {
     "resistance": 8200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -731,6 +875,7 @@ module.exports=[
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -738,6 +883,7 @@ module.exports=[
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -745,6 +891,7 @@ module.exports=[
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -752,6 +899,7 @@ module.exports=[
   },
   {
     "resistance": 10000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -759,6 +907,7 @@ module.exports=[
   },
   {
     "resistance": 12000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -766,6 +915,7 @@ module.exports=[
   },
   {
     "resistance": 15000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -773,6 +923,7 @@ module.exports=[
   },
   {
     "resistance": 22000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -780,6 +931,7 @@ module.exports=[
   },
   {
     "resistance": 33200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -787,6 +939,7 @@ module.exports=[
   },
   {
     "resistance": 47000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -794,6 +947,7 @@ module.exports=[
   },
   {
     "resistance": 56200,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -801,6 +955,7 @@ module.exports=[
   },
   {
     "resistance": 68100,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -808,6 +963,7 @@ module.exports=[
   },
   {
     "resistance": 82500,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -815,6 +971,7 @@ module.exports=[
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0402",
     "power_rating": 0.063,
@@ -822,6 +979,7 @@ module.exports=[
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -829,6 +987,7 @@ module.exports=[
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0805",
     "power_rating": 0.125,
@@ -836,6 +995,7 @@ module.exports=[
   },
   {
     "resistance": 100000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 0.25,
@@ -843,6 +1003,7 @@ module.exports=[
   },
   {
     "resistance": 120000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -850,6 +1011,7 @@ module.exports=[
   },
   {
     "resistance": 150000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -857,6 +1019,7 @@ module.exports=[
   },
   {
     "resistance": 220000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -864,6 +1027,7 @@ module.exports=[
   },
   {
     "resistance": 332000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -871,6 +1035,7 @@ module.exports=[
   },
   {
     "resistance": 470000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -878,6 +1043,7 @@ module.exports=[
   },
   {
     "resistance": 562000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -885,6 +1051,7 @@ module.exports=[
   },
   {
     "resistance": 681000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -892,6 +1059,7 @@ module.exports=[
   },
   {
     "resistance": 825000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -899,6 +1067,7 @@ module.exports=[
   },
   {
     "resistance": 1000000,
+    "type": "resistor",
     "tolerance": 1,
     "size": "0603",
     "power_rating": 0.1,
@@ -906,13 +1075,14 @@ module.exports=[
   },
   {
     "resistance": 0.05,
+    "type": "resistor",
     "tolerance": 1,
     "size": "1206",
     "power_rating": 1,
     "cplid": "CPL-RES-1206-0.05-1W"
   }
 ]
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /*!
  * arr-flatten <https://github.com/jonschlinkert/arr-flatten>
  *
@@ -936,7 +1106,7 @@ function flat(arr, res) {
   }
   return res;
 }
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -976,6 +1146,16 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         '5025': '2010',
         '6332': '2512'
     };
+
+    function type_capacitor(d) {
+        return d.concat([{ type: 'capacitor' }]);
+    }
+    function type_resistor(d) {
+        return d.concat([{ type: 'resistor' }]);
+    }
+    function type_led(d) {
+        return d.concat([{ type: 'led' }]);
+    }
 
     function capacitance(d) {
         var _d = _slicedToArray(d, 5),
@@ -1128,15 +1308,15 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 return d.join('');
             } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "main", "symbols": ["component"], "postprocess": function postprocess(d) {
                 return assignAll(filter(flatten(d)));
-            } }, { "name": "component", "symbols": ["capacitor"] }, { "name": "component", "symbols": ["resistor"] }, { "name": "component", "symbols": ["led"] }, { "name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type_capacitor }, { "name": "component", "symbols": ["resistor"], "postprocess": type_resistor }, { "name": "component", "symbols": ["led"], "postprocess": type_led }, { "name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"] }, { "name": "capacitor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"], "postprocess": type_capacitor }, { "name": "capacitor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor$ebnf$3", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$3", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"], "postprocess": type_capacitor }, { "name": "capacitor$ebnf$3", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$3", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitance"] }, { "name": "capacitor$ebnf$4", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$4", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"], "postprocess": type_capacitor }, { "name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitance"] }, { "name": "capacitor$ebnf$4", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$4", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"] }, { "name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id }, { "name": "cap$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"], "postprocess": type_capacitor }, { "name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id }, { "name": "cap$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "cap$ebnf$2", "symbols": ["P"], "postprocess": id }, { "name": "cap$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
@@ -1218,9 +1398,9 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
                 return null;
             } }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"] }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"], "postprocess": type_resistor }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"] }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
+            } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"], "postprocess": type_resistor }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
             } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess": function postprocess(d) {
                 var _d3 = _slicedToArray(d, 3),
@@ -1305,17 +1485,18 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
         window.grammar = grammar;
     }
 })();
-},{"./flatten":4}],6:[function(require,module,exports){
+},{"./flatten":5}],7:[function(require,module,exports){
 'use strict';
 
 var parse = require('./parse');
 var matchCPL = require('./match_cpl');
 module.exports = { parse: parse, matchCPL: matchCPL };
-},{"./match_cpl":7,"./parse":8}],7:[function(require,module,exports){
+},{"./match_cpl":8,"./parse":9}],8:[function(require,module,exports){
 'use strict';
 
 var resistors = require('./cpl_resistors');
 var capacitors = require('./cpl_capacitors');
+var leds = require('./cpl_leds');
 
 function matchCPL(component) {
   component = component || {};
@@ -1323,6 +1504,8 @@ function matchCPL(component) {
     return matchCapacitor(component);
   } else if (component.resistance != null) {
     return matchResistor(component);
+  } else if (component.led_color != null) {
+    return matchLED(component);
   }
   return [];
 }
@@ -1354,8 +1537,19 @@ function matchCapacitor(c) {
   }, []);
 }
 
+function matchLED(c) {
+  return leds.reduce(function (prev, cpl) {
+    var led_color = cpl.led_color === c.led_color;
+    var size = c.size == null || cpl.size === c.size;
+    if (led_color && size) {
+      return prev.concat([cpl.cplid]);
+    }
+    return prev;
+  }, []);
+}
+
 module.exports = matchCPL;
-},{"./cpl_capacitors":2,"./cpl_resistors":3}],8:[function(require,module,exports){
+},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],9:[function(require,module,exports){
 'use strict';
 
 var nearley = require('nearley');
@@ -1380,7 +1574,7 @@ function parse(str) {
 }
 
 module.exports = parse;
-},{"./grammar":5,"nearley":9}],9:[function(require,module,exports){
+},{"./grammar":6,"nearley":10}],10:[function(require,module,exports){
 (function(root, factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();
