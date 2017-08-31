@@ -1,5 +1,6 @@
 ui: mocha-bdd
 globals: token
+concurrency: 1
 browsers:
   - name: chrome
     version: [26, latest]
