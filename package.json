@@ -10,7 +10,7 @@
     "demo": "browserify docs/index.js > docs/bundle.js",
     "build": "npm run build:grammar && npm run build:cpl && npm run build:lib",
     "pretest": "npm run build",
-    "test": "nyc -- mocha --check-leaks --globals token",
+    "test": "nyc -- mocha --check-leaks",
     "coverage": "nyc report",
     "coverage:html": "nyc report --reporter=html",
     "test:browser": "zuul --local -- test/*.js",
@@ -18,7 +18,7 @@
     "test:sauce": "zuul -- test-lib/*.js"
   },
   "dependencies": {
-    "nearley": "https://github.com/Hardmath123/nearley/"
+    "nearley": "https://github.com/Hardmath123/nearley"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

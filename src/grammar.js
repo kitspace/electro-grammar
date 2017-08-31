@@ -1,11 +1,11 @@
-// Generated automatically by nearley
+// Generated automatically by nearley, version 2.11.0
 // http://github.com/Hardmath123/nearley
 (function () {
-function id(x) {return x[0]; }
+function id(x) { return x[0]; }
 
   const flatten = require('./flatten')
 
-  const filter = d => d.filter(token => token !== null)
+  const filter = d => d.filter(t => t !== null)
 
   const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
 

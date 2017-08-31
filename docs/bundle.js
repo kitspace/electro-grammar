@@ -1113,7 +1113,7 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-// Generated automatically by nearley
+// Generated automatically by nearley, version 2.11.0
 // http://github.com/Hardmath123/nearley
 (function () {
     function id(x) {
@@ -1123,8 +1123,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     var flatten = require('./flatten');
 
     var filter = function filter(d) {
-        return d.filter(function (token) {
-            return token !== null;
+        return d.filter(function (t) {
+            return t !== null;
         });
     };
 
@@ -1714,11 +1714,8 @@ Column.prototype.predict = function(exp) {
 }
 
 Column.prototype.complete = function(left, right) {
-    var inp = right.rule.name;
-    if (left.rule.symbols[left.dot] === inp) {
-        var copy = left.nextState(right);
-        this.states.push(copy);
-    }
+    var copy = left.nextState(right);
+    this.states.push(copy);
 }
 
 
@@ -1837,6 +1834,7 @@ Parser.prototype.feed = function(chunk) {
     var lexer = this.lexer;
     lexer.reset(chunk, this.lexerState);
 
+    var token;
     while (token = lexer.next()) {
         // We add new states to table[current+1]
         var column = this.table[this.current];
@@ -1863,7 +1861,7 @@ Parser.prototype.feed = function(chunk) {
                 expect.type ? expect.type === token.type
                             : expect.literal === literal) {
                 // Add it
-                var next = state.nextState({data: value, token: token, isToken: true});
+                var next = state.nextState({data: value, token: token, isToken: true, reference: n - 1});
                 nextColumn.states.push(next);
             }
         }
@@ -1886,6 +1884,7 @@ Parser.prototype.feed = function(chunk) {
             message += JSON.stringify(token.value !== undefined ? token.value : token) + "\n";
             var err = new Error(message);
             err.offset = this.current;
+            err.token = token;
             throw err;
         }
 
