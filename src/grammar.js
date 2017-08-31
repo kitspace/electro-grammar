@@ -443,7 +443,9 @@ var grammar = {
     {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$32", {"literal":"/"}, "class1$macrocall$33"]},
     {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$33", {"literal":"/"}, "class1$macrocall$32"]},
     {"name": "class1", "symbols": ["class1$macrocall$31"], "postprocess": () => 'P3K'},
-    {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": d => d.join('')},
+    {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess":  d => (
+          d.join('').toUpperCase()
+        )},
     {"name": "class2_letter", "symbols": ["X"]},
     {"name": "class2_letter", "symbols": ["Y"]},
     {"name": "class2_letter", "symbols": ["Z"]},

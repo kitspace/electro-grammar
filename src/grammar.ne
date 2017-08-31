@@ -59,7 +59,9 @@ class1 ->
   | combine[N "1000", Q "3" K] {% () => 'Q3K' %}
   | combine[N "1500", P "3" K] {% () => 'P3K' %}
 
-class2 -> class2_letter class2_number class2_code {% d => d.join('') %}
+class2 -> class2_letter class2_number class2_code {% d => (
+  d.join('').toUpperCase()
+)%}
 class2_letter -> X | Y | Z
 class2_number -> "4" | "5" | "6" | "7" | "8" | "9"
 class2_code -> P | R | S | T | U | V

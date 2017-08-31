@@ -99,6 +99,13 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
     assert(c.characteristic === 'X7R', 'characteristic is wrong')
   })
+  it('parses characteristic x7r', () => {
+    const c = parse('100nF 0603 x7r')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'X7R', 'characteristic is wrong')
+  })
   it('parses characteristic Z5U', () => {
     const c = parse('100nF 0603 Z5U')
     assert(c.type === 'capacitor')
