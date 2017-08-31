@@ -16,6 +16,7 @@ component ->
     }
 %}
 
+
 ## Capacitors ##
 
 # the description can come in any order
@@ -35,9 +36,11 @@ cSpec -> tolerance | characteristic | voltage_rating
 
 voltage_rating -> decimal _ V {% d => ({voltage_rating: d[0]}) %}
 
-characteristic -> _characteristic {% d => ({characteristic: d[0][0]}) %}
+characteristic -> characteristic_ {% d => ({characteristic: d[0][0]}) %}
 
-_characteristic -> class1 | class2
+# see https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitor
+# https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitor
+characteristic_ -> class1 | class2
 
 combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 class1 ->
@@ -53,9 +56,8 @@ class1 ->
   | combine[N "1000", Q "3" K] {% () => 'Q3K' %}
   | combine[N "1500", P "3" K] {% () => 'P3K' %}
 
-class2 -> class2_letter class2_number class2_code {% d => (
-  d.join('').toUpperCase()
-)%}
+class2 -> class2_letter class2_number class2_code
+  {% d => d.join('').toUpperCase() %}
 class2_letter -> X | Y | Z
 class2_number -> "4" | "5" | "6" | "7" | "8" | "9"
 class2_code -> P | R | S | T | U | V
@@ -64,8 +66,8 @@ tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
-capacitance -> decimal _ cMetricPrefix _ farad {%capacitance%}
-capacitanceNoFarad -> decimal _ cMetricPrefix {%capacitance%}
+capacitance -> decimal _ cMetricPrefix _ farad {% capacitance %}
+capacitanceNoFarad -> decimal _ cMetricPrefix {% capacitance %}
 @{%
   function capacitance(d) {
     const [quantity, , metricPrefix, , farad] = d
@@ -75,6 +77,7 @@ capacitanceNoFarad -> decimal _ cMetricPrefix {%capacitance%}
 %}
 
 farad -> "F" {% nuller %} | F A R A D {% nuller %}
+
 
 ## Resistors ##
 
@@ -134,16 +137,16 @@ ledSpec -> packageSize | color
 
 color -> color_name {% d => ({color: d[0]}) %}
 color_name ->
-  R E D                        {% () => 'red' %}
-  | G R E E N                  {% () => 'green' %}
-  | B L U E                    {% () => 'blue' %}
-  | Y E L L O W                {% () => 'yellow' %}
-  | O R A N G E                {% () => 'orange' %}
-  | W H I T E                  {% () => 'white' %}
-  | A M B E R                  {% () => 'amber' %}
-  | C Y A N                    {% () => 'cyan' %}
-  | P U R P L E                {% () => 'purple' %}
-  | Y E L L O W _ G R E E N    {% () => 'yellow green' %}
+    R E D                   {% () => 'red' %}
+  | G R E E N               {% () => 'green' %}
+  | B L U E                 {% () => 'blue' %}
+  | Y E L L O W             {% () => 'yellow' %}
+  | O R A N G E             {% () => 'orange' %}
+  | W H I T E               {% () => 'white' %}
+  | A M B E R               {% () => 'amber' %}
+  | C Y A N                 {% () => 'cyan' %}
+  | P U R P L E             {% () => 'purple' %}
+  | Y E L L O W _ G R E E N {% () => 'yellow green' %}
 
 
 ## Metric Prefixes ##

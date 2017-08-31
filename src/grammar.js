@@ -349,9 +349,9 @@ var grammar = {
     {"name": "cSpec", "symbols": ["characteristic"]},
     {"name": "cSpec", "symbols": ["voltage_rating"]},
     {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": d => ({voltage_rating: d[0]})},
-    {"name": "characteristic", "symbols": ["_characteristic"], "postprocess": d => ({characteristic: d[0][0]})},
-    {"name": "_characteristic", "symbols": ["class1"]},
-    {"name": "_characteristic", "symbols": ["class2"]},
+    {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": d => ({characteristic: d[0][0]})},
+    {"name": "characteristic_", "symbols": ["class1"]},
+    {"name": "characteristic_", "symbols": ["class2"]},
     {"name": "class1$macrocall$2", "symbols": ["C", {"literal":"0"}, "G"]},
     {"name": "class1$macrocall$3", "symbols": ["N", "P", {"literal":"0"}]},
     {"name": "class1$macrocall$1", "symbols": ["class1$macrocall$2"]},
@@ -439,9 +439,7 @@ var grammar = {
     {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$32", {"literal":"/"}, "class1$macrocall$33"]},
     {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$33", {"literal":"/"}, "class1$macrocall$32"]},
     {"name": "class1", "symbols": ["class1$macrocall$31"], "postprocess": () => 'P3K'},
-    {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess":  d => (
-          d.join('').toUpperCase()
-        )},
+    {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": d => d.join('').toUpperCase()},
     {"name": "class2_letter", "symbols": ["X"]},
     {"name": "class2_letter", "symbols": ["Y"]},
     {"name": "class2_letter", "symbols": ["Z"]},
