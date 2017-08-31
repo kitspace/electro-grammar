@@ -132,7 +132,7 @@ Text that is not part of the grammar is simply ignored.
 { type: 'resistor', resistance: 1000, size: '0805' }
 ```
 
-You can use metric package sizes as long as you specify using the `metric` keyword.
+You can use metric package sizes as long as you make it clear by using the `metric` keyword.
 Output for package sizes is always in imperial.
 
 ```js
