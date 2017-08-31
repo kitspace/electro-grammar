@@ -57,6 +57,8 @@ Electro-grammar supports several different ways to express resistance.
 { type: 'resistor', resistance: 1500 }
 > parse('1k5')
 { type: 'resistor', resistance: 1500 }
+> parse('500R')
+{ type: 'resistor', resistance: 500 }
 > parse('1500 ohm')
 { type: 'resistor', resistance: 1500 }
 > parse('1500.0 ohm')
