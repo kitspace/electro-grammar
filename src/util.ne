@@ -8,4 +8,6 @@ __ -> [\s]:+  {% () => null %}
   const filter = d => d.filter(token => token !== null)
 
   const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
+
+  const nuller = () => null
 %}

@@ -27,7 +27,7 @@ capacitor ->
   | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs
 
 
-cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% () => null %}
+cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% nuller %}
 
 cSpecs -> (_ cSpec _):* | __
 
@@ -74,7 +74,7 @@ capacitanceNoFarad -> decimal _ cMetricPrefix {%capacitance%}
   }
 %}
 
-farad -> "F" {% () => null %} | F A R A D {% () => null %}
+farad -> "F" {% nuller %} | F A R A D {% nuller %}
 
 ## Resistors ##
 
@@ -92,7 +92,7 @@ power_rating -> decimal _ powerMetricPrefix _ watts {% d => {
   return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
 } %}
 
-watts -> watts_ {% () => null %}
+watts -> watts_ {% nuller %}
 watts_ -> W | W A T T S
 
 resistance ->
@@ -115,7 +115,7 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
   }
 %}
 
-ohm -> ohm_ {% () => null %}
+ohm -> ohm_ {% nuller %}
 ohm_ -> O H M | "Ω" | "Ω" | R
 
 
@@ -126,7 +126,7 @@ led ->
    | ledSpecs led_letters
    | ledSpecs led_letters ledSpecs
 
-led_letters -> L E D {% () => null %}
+led_letters -> L E D {% nuller %}
 
 ledSpecs -> (_ ledSpec _):+
 

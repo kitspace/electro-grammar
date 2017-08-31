@@ -9,6 +9,8 @@ function id(x) {return x[0]; }
 
   const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
 
+  const nuller = () => null
+
 
   const toImperial = {
     '0402': '01005',
@@ -337,7 +339,7 @@ var grammar = {
     {"name": "cap$ebnf$7", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "cap$ebnf$8", "symbols": ["R"], "postprocess": id},
     {"name": "cap$ebnf$8", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "cap", "symbols": ["C", "cap$ebnf$1", "cap$ebnf$2", "cap$ebnf$3", "cap$ebnf$4", "cap$ebnf$5", "cap$ebnf$6", "cap$ebnf$7", "cap$ebnf$8"], "postprocess": () => null},
+    {"name": "cap", "symbols": ["C", "cap$ebnf$1", "cap$ebnf$2", "cap$ebnf$3", "cap$ebnf$4", "cap$ebnf$5", "cap$ebnf$6", "cap$ebnf$7", "cap$ebnf$8"], "postprocess": nuller},
     {"name": "cSpecs$ebnf$1", "symbols": []},
     {"name": "cSpecs$ebnf$1$subexpression$1", "symbols": ["_", "cSpec", "_"]},
     {"name": "cSpecs$ebnf$1", "symbols": ["cSpecs$ebnf$1", "cSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
@@ -466,8 +468,8 @@ var grammar = {
     {"name": "plusMinus", "symbols": ["plusMinus$string$2"]},
     {"name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance},
     {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance},
-    {"name": "farad", "symbols": [{"literal":"F"}], "postprocess": () => null},
-    {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": () => null},
+    {"name": "farad", "symbols": [{"literal":"F"}], "postprocess": nuller},
+    {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller},
     {"name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
     {"name": "resistor$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"]},
@@ -485,7 +487,7 @@ var grammar = {
           const [quantity, , metricPrefix] = d
           return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
         } },
-    {"name": "watts", "symbols": ["watts_"], "postprocess": () => null},
+    {"name": "watts", "symbols": ["watts_"], "postprocess": nuller},
     {"name": "watts_", "symbols": ["W"]},
     {"name": "watts_", "symbols": ["W", "A", "T", "T", "S"]},
     {"name": "resistance", "symbols": ["decimal", "_", "rest"], "postprocess": resistance},
@@ -496,7 +498,7 @@ var grammar = {
     {"name": "rest$ebnf$2", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "rest", "symbols": ["rMetricPrefix", "rest$ebnf$1", "rest$ebnf$2"]},
     {"name": "rest", "symbols": ["ohm"]},
-    {"name": "ohm", "symbols": ["ohm_"], "postprocess": () => null},
+    {"name": "ohm", "symbols": ["ohm_"], "postprocess": nuller},
     {"name": "ohm_", "symbols": ["O", "H", "M"]},
     {"name": "ohm_", "symbols": [{"literal":"Ω"}]},
     {"name": "ohm_", "symbols": [{"literal":"Ω"}]},
@@ -504,7 +506,7 @@ var grammar = {
     {"name": "led", "symbols": ["led_letters", "ledSpecs"]},
     {"name": "led", "symbols": ["ledSpecs", "led_letters"]},
     {"name": "led", "symbols": ["ledSpecs", "led_letters", "ledSpecs"]},
-    {"name": "led_letters", "symbols": ["L", "E", "D"], "postprocess": () => null},
+    {"name": "led_letters", "symbols": ["L", "E", "D"], "postprocess": nuller},
     {"name": "ledSpecs$ebnf$1$subexpression$1", "symbols": ["_", "ledSpec", "_"]},
     {"name": "ledSpecs$ebnf$1", "symbols": ["ledSpecs$ebnf$1$subexpression$1"]},
     {"name": "ledSpecs$ebnf$1$subexpression$2", "symbols": ["_", "ledSpec", "_"]},
