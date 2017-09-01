@@ -119,7 +119,7 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 %}
 
 ohm -> ohm_ {% nuller %}
-ohm_ -> O H M | "Ω" | "Ω" | R
+ohm_ -> O H M | "Ω" | "Ω"
 
 
 ## LEDs ##
@@ -166,6 +166,7 @@ rMetricPrefix ->
     giga  {% () => 'e9  ' %}
   | mega  {% () => 'e6  ' %}
   | kilo  {% () => 'e3  ' %}
+  | R     {% () => ''     %}
 
 cMetricPrefix ->
     micro {% () => 'e-6 ' %}
