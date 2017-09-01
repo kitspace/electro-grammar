@@ -162,6 +162,16 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
     assert(c.voltage_rating === 25, 'rating is wrong')
   })
+  it('parses lower case f as farad', () => {
+    const c = parse('1f 0603 25V')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 1, 'capacitance is wrong')
+  })
+  it('parses "Farad" as farad', () => {
+    const c = parse('1 Farad 0603 25V')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 1, 'capacitance is wrong')
+  })
   it('parses voltage rating', () => {
     const c = parse('100nF 0603 25V')
     assert(c.type === 'capacitor')

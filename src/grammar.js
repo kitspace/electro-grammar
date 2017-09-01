@@ -466,7 +466,7 @@ var grammar = {
     {"name": "plusMinus", "symbols": ["plusMinus$string$2"]},
     {"name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance},
     {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance},
-    {"name": "farad", "symbols": [{"literal":"F"}], "postprocess": nuller},
+    {"name": "farad", "symbols": ["F"], "postprocess": nuller},
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller},
     {"name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
     {"name": "resistor$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
@@ -538,7 +538,6 @@ var grammar = {
     {"name": "cMetricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
     {"name": "cMetricPrefix", "symbols": ["nano"], "postprocess": () => 'e-9 '},
     {"name": "cMetricPrefix", "symbols": ["pico"], "postprocess": () => 'e-12'},
-    {"name": "cMetricPrefix", "symbols": ["femto"], "postprocess": () => 'e-15'},
     {"name": "cMetricPrefix", "symbols": [], "postprocess": () => ''}
 ]
   , ParserStart: "main"

@@ -76,7 +76,7 @@ capacitanceNoFarad -> decimal _ cMetricPrefix {% capacitance %}
   }
 %}
 
-farad -> "F" {% nuller %} | F A R A D {% nuller %}
+farad -> F {% nuller %} | F A R A D {% nuller %}
 
 
 ## Resistors ##
@@ -172,6 +172,5 @@ cMetricPrefix ->
     micro {% () => 'e-6 ' %}
   | nano  {% () => 'e-9 ' %}
   | pico  {% () => 'e-12' %}
-  | femto {% () => 'e-15' %}
   | null  {% () => '' %}
 
