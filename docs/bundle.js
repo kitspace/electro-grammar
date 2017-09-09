@@ -9,7 +9,7 @@ var component = document.getElementById('component')
 var cplids    = document.getElementById('cplids')
 
 function setOutput() {
-  var c = parse(input.value || input.placeholder)
+  var c = parse(input.value || input.placeholder, {returnIgnored: true})
   component.innerHTML = JSON.stringify(c, null, 2)
   cplids.innerHTML    = JSON.stringify(matchCPL(c), null, 2)
 }
@@ -17,7 +17,7 @@ function setOutput() {
 setOutput()
 input.oninput = setOutput
 
-},{"../lib/index":7}],2:[function(require,module,exports){
+},{"../lib/index":8}],2:[function(require,module,exports){
 module.exports = [
   {
     "type": "capacitor",
@@ -1083,6 +1083,41 @@ module.exports = [
   }
 ]
 },{}],5:[function(require,module,exports){
+'use strict';
+
+function equals(c1, c2) {
+  c1 = c1 || {};
+  c2 = c2 || {};
+  if (!c1.type && !c2.type) {
+    return true;
+  }
+  if (c1.type !== c2.type) {
+    return false;
+  }
+  switch (c1.type) {
+    case 'resistor':
+      return sameResistor(c1, c2);
+    case 'capacitor':
+      return sameCapacitor(c1, c2);
+    case 'led':
+      return sameLED(c1, c2);
+  }
+}
+
+function sameCapacitor(c1, c2) {
+  return c1.capacitance === c2.capacitance && c1.size === c2.size && c1.characteristic === c2.characteristic && c1.tolerance === c2.tolerance && c1.voltage_rating === c2.voltage_rating;
+}
+
+function sameResistor(c1, c2) {
+  return c1.resistance === c2.resistance && c1.size === c2.size && c1.tolerance === c2.tolerance && c1.power_rating === c2.power_rating;
+}
+
+function sameLED(c1, c2) {
+  return c1.color === c2.color && c1.size === c2.size;
+}
+
+module.exports = equals;
+},{}],6:[function(require,module,exports){
 /*!
  * arr-flatten <https://github.com/jonschlinkert/arr-flatten>
  *
@@ -1106,7 +1141,7 @@ function flat(arr, res) {
   }
   return res;
 }
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -1475,13 +1510,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         window.grammar = grammar;
     }
 })();
-},{"./flatten":5}],7:[function(require,module,exports){
+},{"./flatten":6}],8:[function(require,module,exports){
 'use strict';
 
 var parse = require('./parse');
 var matchCPL = require('./match_cpl');
 module.exports = { parse: parse, matchCPL: matchCPL };
-},{"./match_cpl":8,"./parse":9}],8:[function(require,module,exports){
+},{"./match_cpl":9,"./parse":10}],9:[function(require,module,exports){
 'use strict';
 
 var resistors = require('./cpl_resistors');
@@ -1540,32 +1575,47 @@ function matchLED(c) {
 }
 
 module.exports = matchCPL;
-},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],9:[function(require,module,exports){
+},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],10:[function(require,module,exports){
 'use strict';
 
 var nearley = require('nearley');
 var grammar = require('./grammar');
+var equals = require('./equals');
 
 function parse(str) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      returnIgnored = _ref.returnIgnored;
+
   var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart, { keepHistory: true });
-  var words = str.split(' ');
+  var words = str.split(/;|,| /).filter(function (word) {
+    return word !== '';
+  }).map(function (word) {
+    return word + ' ';
+  });
   var info = parser.save();
-  return words.reduce(function (prev, word) {
-    word = word.replace(/,|;/, '') + ' ';
-    //if it fails, roll it back
+  var r = words.reduce(function (prev, word) {
+    // if it fails, roll it back
     try {
       parser.feed(word);
     } catch (e) {
       parser.restore(info);
     }
     info = parser.save();
-    //return the latest valid result
-    return parser.results[0] || prev;
-  }, {});
+    var result = parser.results[0];
+    var ignored = prev.ignored;
+    if (!result || equals(result, prev.result)) {
+      ignored += word;
+    }
+    return { result: result || prev.result, ignored: ignored };
+  }, { result: {}, ignored: '' });
+  if (returnIgnored) {
+    return { result: r.result, ignored: r.ignored.trim() };
+  }
+  return r.result;
 }
 
 module.exports = parse;
-},{"./grammar":6,"nearley":10}],10:[function(require,module,exports){
+},{"./equals":5,"./grammar":7,"nearley":11}],11:[function(require,module,exports){
 (function(root, factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();

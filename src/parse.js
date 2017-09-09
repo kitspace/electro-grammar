@@ -1,5 +1,6 @@
 const nearley = require('nearley')
 const grammar = require('./grammar')
+const equals  = require('./equals')
 
 function parse(str, {returnIgnored} = {}) {
   const parser = new nearley.Parser(
@@ -11,26 +12,25 @@ function parse(str, {returnIgnored} = {}) {
     .filter(word => word !== '')
     .map(word => word + ' ')
   let info = parser.save()
-  let ignored = ''
-  return words.reduce((prev, word) => {
+  const r = words.reduce((prev, word) => {
     // if it fails, roll it back
     try {
       parser.feed(word)
     } catch(e) {
-      ignored += word
       parser.restore(info)
     }
     info = parser.save()
-    // return the latest valid result
     const result = parser.results[0]
-    if (result && returnIgnored) {
-      return {result, ignored: ignored.trim()}
-    } else if (result) {
-      return result
-    } else {
-      return prev
+    let ignored = prev.ignored
+    if (!result || equals(result, prev.result)) {
+      ignored += word
     }
-  }, {})
+    return {result: result || prev.result, ignored}
+  }, {result: {}, ignored: ''})
+  if (returnIgnored) {
+    return {result: r.result, ignored: r.ignored.trim()}
+  }
+  return r.result
 }
 
 module.exports = parse

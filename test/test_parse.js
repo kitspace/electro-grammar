@@ -85,6 +85,7 @@ describe('SMD Capacitors', () => {
       'capacitor 100nF 0603, warehouse 5',
       {returnIgnored: true}
     )
+    assert(ignored === 'warehouse 5')
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
