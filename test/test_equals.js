@@ -9,6 +9,18 @@ describe('equality check', () => {
     const c2 = parse('1k 0603 1%')
     assert(!equals(c1, c2))
   })
+  it('equals empty objects', () => {
+    assert(equals({}, {}))
+  })
+  it('equals empty string and empty object', () => {
+    assert(equals('', {}))
+  })
+  it('equals null and empty object', () => {
+    assert(equals(null, {}))
+  })
+  it('equals undefined and empty object', () => {
+    assert(equals(undefined, {}))
+  })
   it('equals capacitors', () => {
     const c1 = parse('0.1uF 0402 10% 25V X7R')
     const c2 = parse('100nF 0402 10% 25V X7R')

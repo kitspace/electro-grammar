@@ -1,4 +1,9 @@
 function equals(c1, c2) {
+  c1 = c1 || {}
+  c2 = c2 || {}
+  if (!c1.type && !c2.type) {
+    return true
+  }
   if (c1.type !== c2.type) {
     return false
   }
