@@ -144,7 +144,7 @@ Output for package sizes is always in imperial.
 
 ## CPL Matching
 `matchCPL` tries to find as many matches as it can from the [Common Parts Library][CPL] and returns an array of CPL IDs.
-You could match these against [CPL data][CPL-Data] or search for them on Octopart to get exact part numbers.
+You could match these against [CPL data][CPL-DATA] or search for them on Octopart to get exact part numbers.
 If no matches are found or the function is given invalid input an empty array is returned.
 
 ```js

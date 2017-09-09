@@ -81,13 +81,20 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
   })
   it('ignores extra words 3', () => {
-    const c = parse('capacitor 100nF 0603, warehouse 5')
+    const {result: c, ignored} = parse(
+      'capacitor 100nF 0603, warehouse 5',
+      {returnIgnored: true}
+    )
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
   it('ignores extra words 4', () => {
-    const c = parse('adjalkjd 0603 akjdlkjda 100nF kajdlkja alkdjlkajd')
+    const {result: c, ignored} = parse(
+      'adjalkjd 0603 akjdlkjda 100nF kajdlkja alkdjlkajd',
+      {returnIgnored: true}
+    )
+    assert(ignored === 'adjalkjd akjdlkjda kajdlkja alkdjlkajd')
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
