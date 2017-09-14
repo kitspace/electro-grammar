@@ -221,6 +221,12 @@ describe('SMD Resistors', () => {
     assert(c.resistance === 1000, 'resistance value is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it('parses a resistor with extra package sizes at the start', () => {
+    const c = parse('0603 0805 1k')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
   it('parses "1k ohm"', () => {
     const c = parse('1k ohm 0603')
     assert(c.type === 'resistor')
