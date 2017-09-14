@@ -9,9 +9,9 @@ var component = document.getElementById('component')
 var cplids    = document.getElementById('cplids')
 
 function setOutput() {
-  var c = parse(input.value || input.placeholder, {returnIgnored: true})
-  component.innerHTML = JSON.stringify(c, null, 2)
-  cplids.innerHTML    = JSON.stringify(matchCPL(c), null, 2)
+  var r = parse(input.value || input.placeholder, {returnIgnored: true})
+  component.innerHTML = JSON.stringify(r, null, 2)
+  cplids.innerHTML    = JSON.stringify(matchCPL(r.component), null, 2)
 }
 
 setOutput()
@@ -1595,16 +1595,22 @@ function parse(str) {
   var info = parser.save();
   var r = words.reduce(function (prev, word) {
     // if it fails, roll it back
+    var ignored = prev.ignored;
+    var failed = false;
     try {
       parser.feed(word);
     } catch (e) {
+      failed = true;
       parser.restore(info);
-    }
-    info = parser.save();
-    var component = parser.results[0];
-    var ignored = prev.ignored;
-    if (!component || equals(component, prev.component)) {
       ignored += word;
+    }
+    var component = parser.results[0];
+    if (!failed) {
+      if (Object.keys(prev.component) > 0 && equals(component, prev.component)) {
+        parser.restore(info);
+        ignored += word;
+      }
+      info = parser.save();
     }
     return { component: component || prev.component, ignored: ignored };
   }, { component: {}, ignored: '' });

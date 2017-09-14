@@ -14,16 +14,22 @@ function parse(str, {returnIgnored} = {}) {
   let info = parser.save()
   const r = words.reduce((prev, word) => {
     // if it fails, roll it back
+    let ignored = prev.ignored
+    let failed = false
     try {
       parser.feed(word)
     } catch(e) {
+      failed = true
       parser.restore(info)
-    }
-    info = parser.save()
-    const component = parser.results[0]
-    let ignored = prev.ignored
-    if (!component || equals(component, prev.component)) {
       ignored += word
+    }
+    const component = parser.results[0]
+    if (!failed) {
+      if (Object.keys(prev.component) > 0 && equals(component, prev.component)) {
+        parser.restore(info)
+        ignored += word
+      }
+      info = parser.save()
     }
     return {component: component || prev.component, ignored}
   }, {component: {}, ignored: ''})
