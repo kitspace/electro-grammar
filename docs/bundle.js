@@ -1601,17 +1601,17 @@ function parse(str) {
       parser.restore(info);
     }
     info = parser.save();
-    var result = parser.results[0];
+    var component = parser.results[0];
     var ignored = prev.ignored;
-    if (!result || equals(result, prev.result)) {
+    if (!component || equals(component, prev.component)) {
       ignored += word;
     }
-    return { result: result || prev.result, ignored: ignored };
-  }, { result: {}, ignored: '' });
+    return { component: component || prev.component, ignored: ignored };
+  }, { component: {}, ignored: '' });
   if (returnIgnored) {
-    return { result: r.result, ignored: r.ignored.trim() };
+    return { component: r.component, ignored: r.ignored.trim() };
   }
-  return r.result;
+  return r.component;
 }
 
 module.exports = parse;

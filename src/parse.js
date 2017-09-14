@@ -20,17 +20,17 @@ function parse(str, {returnIgnored} = {}) {
       parser.restore(info)
     }
     info = parser.save()
-    const result = parser.results[0]
+    const component = parser.results[0]
     let ignored = prev.ignored
-    if (!result || equals(result, prev.result)) {
+    if (!component || equals(component, prev.component)) {
       ignored += word
     }
-    return {result: result || prev.result, ignored}
-  }, {result: {}, ignored: ''})
+    return {component: component || prev.component, ignored}
+  }, {component: {}, ignored: ''})
   if (returnIgnored) {
-    return {result: r.result, ignored: r.ignored.trim()}
+    return {component: r.component, ignored: r.ignored.trim()}
   }
-  return r.result
+  return r.component
 }
 
 module.exports = parse

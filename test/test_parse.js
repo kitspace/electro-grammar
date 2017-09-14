@@ -81,7 +81,7 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
   })
   it('ignores extra words 3', () => {
-    const {result: c, ignored} = parse(
+    const {component: c, ignored} = parse(
       'capacitor 100nF 0603, warehouse 5',
       {returnIgnored: true}
     )
@@ -91,7 +91,7 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
   })
   it('ignores extra words 4', () => {
-    const {result: c, ignored} = parse(
+    const {component: c, ignored} = parse(
       'adjalkjd 0603 akjdlkjda 100nF kajdlkja alkdjlkajd',
       {returnIgnored: true}
     )
