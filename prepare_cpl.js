@@ -15,8 +15,8 @@ resistors = resistors.rows.map(r => {
     return v
   }
 }).filter(v => v)
-resistors = JSON.stringify(resistors, null, 2)
-fs.writeFileSync('./lib/cpl_resistors.json', resistors)
+resistors = 'module.exports = ' + JSON.stringify(resistors, null, 2)
+fs.writeFileSync('./lib/cpl_resistors.js', resistors)
 
 let capacitors = fs.readFileSync('./cpl-data/CPL for Production/Capacitors.yaml')
 capacitors = yaml.safeLoad(capacitors)
@@ -27,8 +27,8 @@ capacitors = capacitors.rows.map(c => {
     return v
   }
 }).filter(v => v)
-capacitors = JSON.stringify(capacitors, null, 2)
-fs.writeFileSync('./lib/cpl_capacitors.json', capacitors)
+capacitors = 'module.exports = ' + JSON.stringify(capacitors, null, 2)
+fs.writeFileSync('./lib/cpl_capacitors.js', capacitors)
 
 let leds = fs.readFileSync('./cpl-data/CPL for Production/LEDs.yaml')
 leds = yaml.safeLoad(leds)
@@ -39,5 +39,5 @@ leds = leds.rows.map(c => {
     return v
   }
 }).filter(v => v)
-leds = JSON.stringify(leds, null, 2)
-fs.writeFileSync('./lib/cpl_leds.json', leds)
+leds = 'module.exports = ' + JSON.stringify(leds, null, 2)
+fs.writeFileSync('./lib/cpl_leds.js', leds)

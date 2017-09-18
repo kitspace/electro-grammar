@@ -18,7 +18,7 @@ setOutput()
 input.oninput = setOutput
 
 },{"../lib/index":7}],2:[function(require,module,exports){
-module.exports=[
+module.exports = [
   {
     "type": "capacitor",
     "capacitance": 1e-12,
@@ -431,7 +431,7 @@ module.exports=[
   }
 ]
 },{}],3:[function(require,module,exports){
-module.exports=[
+module.exports = [
   {
     "type": "led",
     "color": "green",
@@ -476,7 +476,7 @@ module.exports=[
   }
 ]
 },{}],4:[function(require,module,exports){
-module.exports=[
+module.exports = [
   {
     "type": "resistor",
     "resistance": 0,
