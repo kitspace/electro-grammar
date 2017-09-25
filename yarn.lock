@@ -3290,22 +3290,14 @@ ncp@~0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/ncp/-/ncp-0.4.2.tgz#abcc6cbd3ec2ed2a729ff6e7c1fa8f01784a8574"
 
-"nearley@https://github.com/Hardmath123/nearley":
+"nearley@https://github.com/kasbah/nearley#fix-include":
   version "2.11.0"
-  resolved "https://github.com/Hardmath123/nearley#03171a8c0de3503679484456a3222855cd44b2a6"
+  resolved "https://github.com/kasbah/nearley#bc38f5c43d2628e3e750ab3f00388fdc3035b06d"
   dependencies:
     nomnom "~1.6.2"
     railroad-diagrams "^1.0.0"
     randexp "^0.4.2"
     semver "^5.4.1"
-
-"nearley@https://github.com/Hardmath123/nearley/":
-  version "2.8.0"
-  resolved "https://github.com/Hardmath123/nearley/#fafd74a8e1ae1ea25e566890ed0b1ea545b7c1f7"
-  dependencies:
-    nomnom "~1.6.2"
-    railroad-diagrams "^1.0.0"
-    randexp "^0.4.2"
 
 negotiator@0.3.0:
   version "0.3.0"
