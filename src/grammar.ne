@@ -42,19 +42,18 @@ characteristic -> characteristic_ {% d => ({characteristic: d[0][0]}) %}
 # https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitor
 characteristic_ -> class1 | class2
 
-combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 class1 ->
-    combine[C "0" G,  N P "0"] {% () => 'C0G' %}
-  | combine[P "100",  M "7" G] {% () => 'M7G' %}
-  | combine[N "33",   H "2" G] {% () => 'H2G' %}
-  | combine[N "75",   L "2" G] {% () => 'L2G' %}
-  | combine[N "150",  P "2" H] {% () => 'P2H' %}
-  | combine[N "220",  R "2" H] {% () => 'R2H' %}
-  | combine[N "330",  S "2" H] {% () => 'S2H' %}
-  | combine[N "470",  T "2" H] {% () => 'T2H' %}
-  | combine[N "750",  U "2" J] {% () => 'U2J' %}
-  | combine[N "1000", Q "3" K] {% () => 'Q3K' %}
-  | combine[N "1500", P "3" K] {% () => 'P3K' %}
+    C "0" G  {% () => 'C0G' %} | N P "0" {% () => 'C0G' %}
+  | P "100"  {% () => 'M7G' %} | M "7" G {% () => 'M7G' %}
+  | N "33"   {% () => 'H2G' %} | H "2" G {% () => 'H2G' %}
+  | N "75"   {% () => 'L2G' %} | L "2" G {% () => 'L2G' %}
+  | N "150"  {% () => 'P2H' %} | P "2" H {% () => 'P2H' %}
+  | N "220"  {% () => 'R2H' %} | R "2" H {% () => 'R2H' %}
+  | N "330"  {% () => 'S2H' %} | S "2" H {% () => 'S2H' %}
+  | N "470"  {% () => 'T2H' %} | T "2" H {% () => 'T2H' %}
+  | N "750"  {% () => 'U2J' %} | U "2" J {% () => 'U2J' %}
+  | N "1000" {% () => 'Q3K' %} | Q "3" K {% () => 'Q3K' %}
+  | N "1500" {% () => 'P3K' %} | P "3" K {% () => 'P3K' %}
 
 class2 -> class2_letter class2_number class2_code
   {% d => d.join('').toUpperCase() %}
