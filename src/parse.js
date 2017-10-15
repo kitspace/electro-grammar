@@ -22,13 +22,17 @@ function parse(str, {returnIgnored} = {}) {
     const r = words.reduce((prev, word) => {
         // if it fails, roll it back
         let ignored = prev.ignored
+        let maybeIgnored = prev.maybeIgnored
         let failed = false
         try {
             parser.feed(word)
         } catch(e) {
             failed = true
             parser.restore(info)
-            ignored += word
+            // if it has failed, this word and any numbers coming before it
+            // were definitely ignored
+            ignored += maybeIgnored + word
+            maybeIgnored = ''
         }
         let component = assignAll(parser.results[0] || [])
         const empty = Object.keys(component).length === 0
@@ -38,18 +42,28 @@ function parse(str, {returnIgnored} = {}) {
         if (!failed) {
             const hasPrev = Object.keys(prev.component).length !== 0
             const eq = equals(component, prev.component)
+            maybeIgnored = ''
             if (hasPrev && (eq || empty)) {
-                ignored += word
+                // the parser waits for further input on numbers so we can't be
+                // sure if it has been ignored
+                const isNumber = !isNaN(parseFloat(word))
+                if (isNumber) {
+                    maybeIgnored = word
+                } else {
+                    ignored += word
+                }
             }
             else {
                 info = parser.save()
             }
         }
-        return {component: component || prev.component, ignored}
-    }, {component: {}, ignored: ''})
+        return {component: component || prev.component, ignored, maybeIgnored}
+    }, {component: {}, ignored: '', maybeIgnored: ''})
+
+    const ignored = (r.ignored + r.maybeIgnored).trim()
 
     if (returnIgnored) {
-        return {component: r.component, ignored: r.ignored.trim()}
+        return {component: r.component, ignored}
     }
 
     return r.component
