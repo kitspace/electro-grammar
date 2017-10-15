@@ -9,15 +9,15 @@ var component = document.getElementById('component')
 var cplids    = document.getElementById('cplids')
 
 function setOutput() {
-  var c = parse(input.value || input.placeholder)
-  component.innerHTML = JSON.stringify(c, null, 2)
-  cplids.innerHTML    = JSON.stringify(matchCPL(c), null, 2)
+  var r = parse(input.value || input.placeholder, {returnIgnored: true})
+  component.innerHTML = JSON.stringify(r, null, 2)
+  cplids.innerHTML    = JSON.stringify(matchCPL(r.component), null, 2)
 }
 
 setOutput()
 input.oninput = setOutput
 
-},{"../lib/index":6}],2:[function(require,module,exports){
+},{"../lib/index":7}],2:[function(require,module,exports){
 module.exports = [
   {
     "type": "capacitor",
@@ -1085,6 +1085,41 @@ module.exports = [
 },{}],5:[function(require,module,exports){
 'use strict';
 
+function equals(c1, c2) {
+  c1 = c1 || {};
+  c2 = c2 || {};
+  if (!c1.type && !c2.type) {
+    return true;
+  }
+  if (c1.type !== c2.type) {
+    return false;
+  }
+  switch (c1.type) {
+    case 'resistor':
+      return sameResistor(c1, c2);
+    case 'capacitor':
+      return sameCapacitor(c1, c2);
+    case 'led':
+      return sameLED(c1, c2);
+  }
+}
+
+function sameCapacitor(c1, c2) {
+  return c1.capacitance === c2.capacitance && c1.size === c2.size && c1.characteristic === c2.characteristic && c1.tolerance === c2.tolerance && c1.voltage_rating === c2.voltage_rating;
+}
+
+function sameResistor(c1, c2) {
+  return c1.resistance === c2.resistance && c1.size === c2.size && c1.tolerance === c2.tolerance && c1.power_rating === c2.power_rating;
+}
+
+function sameLED(c1, c2) {
+  return c1.color === c2.color && c1.size === c2.size;
+}
+
+module.exports = equals;
+},{}],6:[function(require,module,exports){
+'use strict';
+
 // Generated automatically by nearley, version 2.11.0
 // http://github.com/Hardmath123/nearley
 (function () {
@@ -1289,15 +1324,7 @@ module.exports = [
                 return d.join('');
             } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "main", "symbols": ["component"], "postprocess": function postprocess(d) {
                 return filter(flatten(d));
-            } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor') }, { "name": "component", "symbols": ["resistor"], "postprocess": type('resistor') }, { "name": "component", "symbols": ["led"], "postprocess": type('led') }, { "name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
-                return null;
-            } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"] }, { "name": "capacitor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
-                return null;
-            } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor$ebnf$3", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$3", "symbols": [], "postprocess": function postprocess(d) {
-                return null;
-            } }, { "name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitance"] }, { "name": "capacitor$ebnf$4", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$4", "symbols": [], "postprocess": function postprocess(d) {
-                return null;
-            } }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"] }, { "name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id }, { "name": "cap$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor') }, { "name": "component", "symbols": ["resistor"], "postprocess": type('resistor') }, { "name": "component", "symbols": ["led"], "postprocess": type('led') }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$1", "cSpecs"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs"] }, { "name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id }, { "name": "cap$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "cap$ebnf$2", "symbols": ["P"], "postprocess": id }, { "name": "cap$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
@@ -1315,7 +1342,7 @@ module.exports = [
                 return null;
             } }, { "name": "cap", "symbols": ["C", "cap$ebnf$1", "cap$ebnf$2", "cap$ebnf$3", "cap$ebnf$4", "cap$ebnf$5", "cap$ebnf$6", "cap$ebnf$7", "cap$ebnf$8"], "postprocess": nuller }, { "name": "cSpecs$ebnf$1", "symbols": [] }, { "name": "cSpecs$ebnf$1$subexpression$1", "symbols": ["_", "cSpec", "_"] }, { "name": "cSpecs$ebnf$1", "symbols": ["cSpecs$ebnf$1", "cSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "cSpecs", "symbols": ["cSpecs$ebnf$1"] }, { "name": "cSpecs", "symbols": ["__"] }, { "name": "cSpec", "symbols": ["tolerance"] }, { "name": "cSpec", "symbols": ["characteristic"] }, { "name": "cSpec", "symbols": ["voltage_rating"] }, { "name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": function postprocess(d) {
+            } }, { "name": "cSpecs", "symbols": ["cSpecs$ebnf$1"] }, { "name": "cSpecs", "symbols": ["__"] }, { "name": "cSpec", "symbols": ["tolerance"] }, { "name": "cSpec", "symbols": ["characteristic"] }, { "name": "cSpec", "symbols": ["voltage_rating"] }, { "name": "cSpec", "symbols": ["packageSize"] }, { "name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": function postprocess(d) {
                 return { voltage_rating: d[0] };
             } }, { "name": "characteristic", "symbols": ["characteristic_"], "postprocess": function postprocess(d) {
                 return { characteristic: d[0][0] };
@@ -1397,13 +1424,9 @@ module.exports = [
                 return null;
             } }, { "name": "capacitance", "symbols": ["decimal", "_", "capacitance$ebnf$1", "_", "farad"], "postprocess": capacitance }, { "name": "capacitanceNoFarad$ebnf$1", "symbols": ["cMetricPrefix"], "postprocess": id }, { "name": "capacitanceNoFarad$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
-            } }, { "name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceNoFarad$ebnf$1"], "postprocess": capacitance }, { "name": "farad", "symbols": ["F"], "postprocess": nuller }, { "name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
-                return null;
-            } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"] }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
-                return null;
-            } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"] }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
+            } }, { "name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceNoFarad$ebnf$1"], "postprocess": capacitance }, { "name": "farad", "symbols": ["F"], "postprocess": nuller }, { "name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs"] }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating$ebnf$1", "symbols": ["powerMetricPrefix"], "postprocess": id }, { "name": "power_rating$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "rSpec", "symbols": ["packageSize"] }, { "name": "power_rating$ebnf$1", "symbols": ["powerMetricPrefix"], "postprocess": id }, { "name": "power_rating$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "power_rating", "symbols": ["decimal", "_", "power_rating$ebnf$1", "_", "watts"], "postprocess": function postprocess(d) {
                 var quantity = d[0];
@@ -1477,13 +1500,13 @@ module.exports = [
         window.grammar = grammar;
     }
 })();
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 var parse = require('./parse');
 var matchCPL = require('./match_cpl');
 module.exports = { parse: parse, matchCPL: matchCPL };
-},{"./match_cpl":7,"./parse":8}],7:[function(require,module,exports){
+},{"./match_cpl":8,"./parse":9}],8:[function(require,module,exports){
 'use strict';
 
 var resistors = require('./cpl_resistors');
@@ -1542,41 +1565,66 @@ function matchLED(c) {
 }
 
 module.exports = matchCPL;
-},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],8:[function(require,module,exports){
+},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],9:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var nearley = require('nearley');
 var grammar = require('./grammar');
+var equals = require('./equals');
 
 function assignAll(objs) {
-  return objs.reduce(function (prev, obj) {
-    return _extends(prev, obj);
-  }, {});
+    return objs.reduce(function (prev, obj) {
+        return _extends(prev, obj);
+    }, {});
 }
 
 function parse(str) {
-  var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart, { keepHistory: true });
-  var words = str.split(' ');
-  var info = parser.save();
-  var res = words.reduce(function (prev, word) {
-    word = word.replace(/,|;/, '') + ' ';
-    //if it fails, roll it back
-    try {
-      parser.feed(word);
-    } catch (e) {
-      parser.restore(info);
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        returnIgnored = _ref.returnIgnored;
+
+    var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart, { keepHistory: true });
+
+    var words = str.split(/;|,| /).filter(function (word) {
+        return word !== '';
+    }).map(function (word) {
+        return word + ' ';
+    });
+
+    var info = parser.save();
+
+    var r = words.reduce(function (prev, word) {
+        // if it fails, roll it back
+        var ignored = prev.ignored;
+        var failed = false;
+        try {
+            parser.feed(word);
+        } catch (e) {
+            failed = true;
+            parser.restore(info);
+            ignored += word;
+        }
+        var component = assignAll(parser.results[0] || []);
+        if (!failed) {
+            if (Object.keys(prev.component).length > 0 && equals(component, prev.component)) {
+                parser.restore(info);
+                ignored += word;
+            }
+            info = parser.save();
+        }
+        return { component: component || prev.component, ignored: ignored };
+    }, { component: {}, ignored: '' });
+
+    if (returnIgnored) {
+        return { component: r.component, ignored: r.ignored.trim() };
     }
-    info = parser.save();
-    //return the latest valid result
-    return parser.results[0] || prev;
-  }, []);
-  return assignAll(res);
+
+    return r.component;
 }
 
 module.exports = parse;
-},{"./grammar":5,"nearley":9}],9:[function(require,module,exports){
+},{"./equals":5,"./grammar":6,"nearley":10}],10:[function(require,module,exports){
 (function(root, factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();

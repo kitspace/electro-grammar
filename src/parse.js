@@ -32,7 +32,7 @@ function parse(str, {returnIgnored} = {}) {
         }
         const component = assignAll(parser.results[0] || [])
         if (!failed) {
-            if (Object.keys(prev.component) > 0 && equals(component, prev.component)) {
+            if (Object.keys(prev.component).length > 0 && equals(component, prev.component)) {
                 parser.restore(info)
                 ignored += word
             }

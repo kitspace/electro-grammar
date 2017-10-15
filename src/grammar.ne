@@ -24,17 +24,16 @@ component ->
 # the description can come in any order
 # if it starts with 'c' or 'capacitor' then F or farad can be ommitted
 capacitor ->
-    cSpecs capacitance cSpecs packageSize:? cSpecs
-  | cSpecs packageSize:? cSpecs capacitance cSpecs
-  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs
-  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs
-
+    cSpecs capacitance cSpecs
+  | cSpecs capacitance cSpecs
+  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs
+  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs
 
 cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% nuller %}
 
 cSpecs -> (_ cSpec _):* | __
 
-cSpec -> tolerance | characteristic | voltage_rating
+cSpec -> tolerance | characteristic | voltage_rating | packageSize
 
 voltage_rating -> decimal _ V {% function(d) { return {voltage_rating: d[0]} } %}
 
@@ -103,14 +102,12 @@ farad -> F {% nuller %} | F A R A D {% nuller %}
 
 ## Resistors ##
 
-resistor ->
-    rSpecs resistance rSpecs packageSize:? rSpecs
-  | rSpecs packageSize:? rSpecs resistance rSpecs
+resistor -> rSpecs resistance rSpecs
 
 
 rSpecs -> (_ rSpec _):* | __
 
-rSpec -> tolerance | power_rating
+rSpec -> tolerance | power_rating | packageSize
 
 power_rating -> decimal _ powerMetricPrefix:? _ watts {%
     function(d) {
