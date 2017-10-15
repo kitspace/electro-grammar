@@ -12,7 +12,9 @@ component ->
 
 @{%
     function type(t) {
-      return function(d) { return  [{type: t}].concat(d)}
+        return function(d) {
+            return  [{type: t}].concat(d)
+        }
     }
 %}
 
@@ -34,9 +36,9 @@ cSpecs -> (_ cSpec _):* | __
 
 cSpec -> tolerance | characteristic | voltage_rating
 
-voltage_rating -> decimal _ V {% function(d) { return ({voltage_rating: d[0]}) } %}
+voltage_rating -> decimal _ V {% function(d) { return {voltage_rating: d[0]} } %}
 
-characteristic -> characteristic_ {% function(d) { return ({characteristic: d[0][0]}) } %}
+characteristic -> characteristic_ {% function(d) { return {characteristic: d[0][0]} } %}
 
 # see https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitor
 # https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitor
@@ -61,7 +63,7 @@ class1_ceramic_name ->
   | N "1000" {% function() { return 'Q3K' } %}
   | N "1500" {% function() { return 'P3K' } %}
 
-class1_eia_code -> 
+class1_eia_code ->
   N P "0" {% function() { return 'C0G' } %}
 | M "7" G {% function() { return 'M7G' } %}
 | H "2" G {% function() { return 'H2G' } %}
@@ -80,7 +82,7 @@ class2_letter -> X | Y | Z
 class2_number -> "4" | "5" | "6" | "7" | "8" | "9"
 class2_code -> P | R | S | T | U | V
 
-tolerance -> (plusMinus _):? decimal _ "%" {% function(d) { return ({tolerance: d[1]}) } %}
+tolerance -> (plusMinus _):? decimal _ "%" {% function(d) { return {tolerance: d[1]} } %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
@@ -110,11 +112,13 @@ rSpecs -> (_ rSpec _):* | __
 
 rSpec -> tolerance | power_rating
 
-power_rating -> decimal _ powerMetricPrefix:? _ watts {% function (d) {
-  var quantity = d[0]
-  var metricPrefix = d[2]
-  return {power_rating: parseFloat(quantity + (metricPrefix || ''))}
-} %}
+power_rating -> decimal _ powerMetricPrefix:? _ watts {%
+    function(d) {
+        var quantity = d[0]
+        var metricPrefix = d[2]
+        return {power_rating: parseFloat(quantity + (metricPrefix || ''))}
+    }
+%}
 
 watts -> watts_ {% nuller %}
 watts_ -> W | W A T T S
@@ -159,7 +163,7 @@ ledSpecs -> (_ ledSpec _):+
 
 ledSpec -> packageSize | color
 
-color -> color_name {% function(d) { return ({color: d[0]}) } %}
+color -> color_name {% function(d) { return {color: d[0]} } %}
 color_name ->
     R E D                   {% function() { return 'red' } %}
   | G R E E N               {% function() { return 'green' } %}

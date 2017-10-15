@@ -1,6 +1,8 @@
-packageSize -> _packageSize {% function(d) {
-  return ({size: filter(flatten(d)).join('')})
-}%}
+packageSize -> _packageSize {%
+    function(d) {
+      return {size: filter(flatten(d)).join('')}
+    }
+%}
 _packageSize -> _imperialSize | _metricSize
 _imperialSize ->
     "01005"

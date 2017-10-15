@@ -52,7 +52,9 @@ function id(x) { return x[0]; }
 
 
     function type(t) {
-      return function(d) { return  [{type: t}].concat(d)}
+        return function(d) {
+            return  [{type: t}].concat(d)
+        }
     }
 
 
@@ -264,9 +266,11 @@ var grammar = {
     {"name": "femto", "symbols": ["F", "E", "M", "T", "O"]},
     {"name": "atto", "symbols": [{"literal":"a"}]},
     {"name": "atto", "symbols": ["A", "T", "T", "O"]},
-    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess":  function(d) {
-          return ({size: filter(flatten(d)).join('')})
-        }},
+    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": 
+        function(d) {
+          return {size: filter(flatten(d)).join('')}
+        }
+        },
     {"name": "_packageSize", "symbols": ["_imperialSize"]},
     {"name": "_packageSize", "symbols": ["_metricSize"]},
     {"name": "_imperialSize$string$1", "symbols": [{"literal":"0"}, {"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
@@ -366,8 +370,8 @@ var grammar = {
     {"name": "cSpec", "symbols": ["tolerance"]},
     {"name": "cSpec", "symbols": ["characteristic"]},
     {"name": "cSpec", "symbols": ["voltage_rating"]},
-    {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": function(d) { return ({voltage_rating: d[0]}) }},
-    {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": function(d) { return ({characteristic: d[0][0]}) }},
+    {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": function(d) { return {voltage_rating: d[0]} }},
+    {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": function(d) { return {characteristic: d[0][0]} }},
     {"name": "characteristic_", "symbols": ["class1"]},
     {"name": "characteristic_", "symbols": ["class2"]},
     {"name": "class1", "symbols": ["class1_ceramic_name"], "postprocess": id},
@@ -425,7 +429,7 @@ var grammar = {
     {"name": "tolerance$ebnf$1$subexpression$1", "symbols": ["plusMinus", "_"]},
     {"name": "tolerance$ebnf$1", "symbols": ["tolerance$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "tolerance$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "tolerance", "symbols": ["tolerance$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": function(d) { return ({tolerance: d[1]}) }},
+    {"name": "tolerance", "symbols": ["tolerance$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": function(d) { return {tolerance: d[1]} }},
     {"name": "plusMinus$string$1", "symbols": [{"literal":"+"}, {"literal":"/"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plusMinus", "symbols": ["plusMinus$string$1"]},
     {"name": "plusMinus", "symbols": [{"literal":"±"}]},
@@ -454,11 +458,13 @@ var grammar = {
     {"name": "rSpec", "symbols": ["power_rating"]},
     {"name": "power_rating$ebnf$1", "symbols": ["powerMetricPrefix"], "postprocess": id},
     {"name": "power_rating$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "power_rating", "symbols": ["decimal", "_", "power_rating$ebnf$1", "_", "watts"], "postprocess":  function (d) {
-          var quantity = d[0]
-          var metricPrefix = d[2]
-          return {power_rating: parseFloat(quantity + (metricPrefix || ''))}
-        } },
+    {"name": "power_rating", "symbols": ["decimal", "_", "power_rating$ebnf$1", "_", "watts"], "postprocess": 
+        function(d) {
+            var quantity = d[0]
+            var metricPrefix = d[2]
+            return {power_rating: parseFloat(quantity + (metricPrefix || ''))}
+        }
+        },
     {"name": "watts", "symbols": ["watts_"], "postprocess": nuller},
     {"name": "watts_", "symbols": ["W"]},
     {"name": "watts_", "symbols": ["W", "A", "T", "T", "S"]},
@@ -485,7 +491,7 @@ var grammar = {
     {"name": "ledSpecs", "symbols": ["ledSpecs$ebnf$1"]},
     {"name": "ledSpec", "symbols": ["packageSize"]},
     {"name": "ledSpec", "symbols": ["color"]},
-    {"name": "color", "symbols": ["color_name"], "postprocess": function(d) { return ({color: d[0]}) }},
+    {"name": "color", "symbols": ["color_name"], "postprocess": function(d) { return {color: d[0]} }},
     {"name": "color_name", "symbols": ["R", "E", "D"], "postprocess": function() { return 'red' }},
     {"name": "color_name", "symbols": ["G", "R", "E", "E", "N"], "postprocess": function() { return 'green' }},
     {"name": "color_name", "symbols": ["B", "L", "U", "E"], "postprocess": function() { return 'blue' }},
