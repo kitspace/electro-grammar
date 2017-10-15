@@ -3,16 +3,29 @@
 (function () {
 function id(x) { return x[0]; }
 
-  const flatten = require('./flatten')
-
-  const filter = d => d.filter(t => t !== null)
-
-  const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
-
-  const nuller = () => null
+'use strict';
 
 
-  const toImperial = {
+function flat(arr, res) {
+  var i = 0, cur;
+  var len = arr.length;
+  for (; i < len; i++) {
+    cur = arr[i];
+    Array.isArray(cur) ? flat(cur, res) : res.push(cur);
+  }
+  return res;
+}
+
+function flatten (arr) {
+  return flat(arr, []);
+}
+
+  var filter = function(d) { return  d.filter(function(t){ return t !== null }) }
+
+  var nuller = function() {return  null}
+
+
+  var toImperial = {
     '0402': '01005',
     '0603': '0201',
     '1005': '0402',
@@ -29,28 +42,33 @@ function id(x) { return x[0]; }
 
 
     function type(t) {
-      return d => [{type: t}].concat(d)
+      return function(d) { return  [{type: t}].concat(d)}
     }
 
 
   function capacitance(d) {
-    const [quantity, , metricPrefix, , farad] = d
+    var quantity = d[0]
+    var metricPrefix = d[2]
+    var farad = d[4]
 
-    return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
+    return {capacitance: parseFloat(quantity + (metricPrefix || ''))}
   }
 
 
   function resistance(d, i, reject) {
-    const [integral, , [metricPrefix, fractional, ohm]] = d
+    var integral = d[0]
+    var metricPrefix = d[2][0]
+    var fractional = d[2][1]
+    var ohm = d[2][2]
     if (fractional) {
       if (/\./.test(integral.toString())) {
         return reject
       }
-      var quantity = `${integral}.${fractional}`
+      var quantity = integral + '.' + fractional
     } else {
       var quantity = integral
     }
-    return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
+    return {resistance: parseFloat(quantity + (metricPrefix || ''))}
   }
 var grammar = {
     Lexer: undefined,
@@ -143,10 +161,10 @@ var grammar = {
         },
     {"name": "_$ebnf$1", "symbols": []},
     {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": () => null},
+    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function() { return null }},
     {"name": "__$ebnf$1", "symbols": [/[\s]/]},
     {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": () => null},
+    {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": function() { return null }},
     {"name": "A", "symbols": [{"literal":"A"}]},
     {"name": "A", "symbols": [{"literal":"a"}]},
     {"name": "B", "symbols": [{"literal":"B"}]},
@@ -236,7 +254,7 @@ var grammar = {
     {"name": "femto", "symbols": ["F", "E", "M", "T", "O"]},
     {"name": "atto", "symbols": [{"literal":"a"}]},
     {"name": "atto", "symbols": ["A", "T", "T", "O"]},
-    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": d => ({size: filter(flatten(d))[0]})},
+    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": function(d) { return ({size: filter(flatten(d))[0]}) }},
     {"name": "_packageSize", "symbols": ["_imperialSize"]},
     {"name": "_packageSize", "symbols": ["_metricSize"]},
     {"name": "_imperialSize$string$1", "symbols": [{"literal":"0"}, {"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
@@ -263,11 +281,11 @@ var grammar = {
     {"name": "_imperialSize", "symbols": ["_imperialSize$string$11"]},
     {"name": "_metricSize$ebnf$1", "symbols": []},
     {"name": "_metricSize$ebnf$1", "symbols": ["_metricSize$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "_metricSize", "symbols": ["__metricSize", "_metricSize$ebnf$1", "M", "E", "T", "R", "I", "C"], "postprocess": d => toImperial[d[0]]},
+    {"name": "_metricSize", "symbols": ["__metricSize", "_metricSize$ebnf$1", "M", "E", "T", "R", "I", "C"], "postprocess": function(d) { return toImperial[d[0]] }},
     {"name": "_metricSize$ebnf$2", "symbols": []},
     {"name": "_metricSize$ebnf$2", "symbols": ["_metricSize$ebnf$2", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "_metricSize", "symbols": ["M", "E", "T", "R", "I", "C", "_metricSize$ebnf$2", "__metricSize"], "postprocess": d => toImperial[d[7]]},
-    {"name": "_metricSize", "symbols": ["unambigiousMetricSize"], "postprocess": d => toImperial[d[0]]},
+    {"name": "_metricSize", "symbols": ["M", "E", "T", "R", "I", "C", "_metricSize$ebnf$2", "__metricSize"], "postprocess": function(d) { return toImperial[d[7]] }},
+    {"name": "_metricSize", "symbols": ["unambigiousMetricSize"], "postprocess": function(d) { return toImperial[d[0]] }},
     {"name": "unambigiousMetricSize$string$1", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "unambigiousMetricSize", "symbols": ["unambigiousMetricSize$string$1"]},
     {"name": "unambigiousMetricSize$string$2", "symbols": [{"literal":"1"}, {"literal":"6"}, {"literal":"0"}, {"literal":"8"}], "postprocess": function joiner(d) {return d.join('');}},
@@ -291,19 +309,7 @@ var grammar = {
     {"name": "__metricSize", "symbols": ["__metricSize$string$1"]},
     {"name": "__metricSize$string$2", "symbols": [{"literal":"0"}, {"literal":"6"}, {"literal":"0"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "__metricSize", "symbols": ["__metricSize$string$2"]},
-    {"name": "M", "symbols": [{"literal":"M"}]},
-    {"name": "M", "symbols": [{"literal":"m"}]},
-    {"name": "E", "symbols": [{"literal":"E"}]},
-    {"name": "E", "symbols": [{"literal":"e"}]},
-    {"name": "T", "symbols": [{"literal":"T"}]},
-    {"name": "T", "symbols": [{"literal":"t"}]},
-    {"name": "R", "symbols": [{"literal":"R"}]},
-    {"name": "R", "symbols": [{"literal":"r"}]},
-    {"name": "I", "symbols": [{"literal":"I"}]},
-    {"name": "I", "symbols": [{"literal":"i"}]},
-    {"name": "C", "symbols": [{"literal":"C"}]},
-    {"name": "C", "symbols": [{"literal":"c"}]},
-    {"name": "main", "symbols": ["component"], "postprocess": d => assignAll(filter(flatten(d)))},
+    {"name": "main", "symbols": ["component"], "postprocess": function(d) { return filter(flatten(d)) }},
     {"name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor')},
     {"name": "component", "symbols": ["resistor"], "postprocess": type('resistor')},
     {"name": "component", "symbols": ["led"], "postprocess": type('led')},
@@ -348,98 +354,43 @@ var grammar = {
     {"name": "cSpec", "symbols": ["tolerance"]},
     {"name": "cSpec", "symbols": ["characteristic"]},
     {"name": "cSpec", "symbols": ["voltage_rating"]},
-    {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": d => ({voltage_rating: d[0]})},
-    {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": d => ({characteristic: d[0][0]})},
+    {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": function(d) { return ({voltage_rating: d[0]}) }},
+    {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": function(d) { return ({characteristic: d[0][0]}) }},
     {"name": "characteristic_", "symbols": ["class1"]},
     {"name": "characteristic_", "symbols": ["class2"]},
-    {"name": "class1$macrocall$2", "symbols": ["C", {"literal":"0"}, "G"]},
-    {"name": "class1$macrocall$3", "symbols": ["N", "P", {"literal":"0"}]},
-    {"name": "class1$macrocall$1", "symbols": ["class1$macrocall$2"]},
-    {"name": "class1$macrocall$1", "symbols": ["class1$macrocall$3"]},
-    {"name": "class1$macrocall$1", "symbols": ["class1$macrocall$2", {"literal":"/"}, "class1$macrocall$3"]},
-    {"name": "class1$macrocall$1", "symbols": ["class1$macrocall$3", {"literal":"/"}, "class1$macrocall$2"]},
-    {"name": "class1", "symbols": ["class1$macrocall$1"], "postprocess": () => 'C0G'},
-    {"name": "class1$macrocall$5$string$1", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$5", "symbols": ["P", "class1$macrocall$5$string$1"]},
-    {"name": "class1$macrocall$6", "symbols": ["M", {"literal":"7"}, "G"]},
-    {"name": "class1$macrocall$4", "symbols": ["class1$macrocall$5"]},
-    {"name": "class1$macrocall$4", "symbols": ["class1$macrocall$6"]},
-    {"name": "class1$macrocall$4", "symbols": ["class1$macrocall$5", {"literal":"/"}, "class1$macrocall$6"]},
-    {"name": "class1$macrocall$4", "symbols": ["class1$macrocall$6", {"literal":"/"}, "class1$macrocall$5"]},
-    {"name": "class1", "symbols": ["class1$macrocall$4"], "postprocess": () => 'M7G'},
-    {"name": "class1$macrocall$8$string$1", "symbols": [{"literal":"3"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$8", "symbols": ["N", "class1$macrocall$8$string$1"]},
-    {"name": "class1$macrocall$9", "symbols": ["H", {"literal":"2"}, "G"]},
-    {"name": "class1$macrocall$7", "symbols": ["class1$macrocall$8"]},
-    {"name": "class1$macrocall$7", "symbols": ["class1$macrocall$9"]},
-    {"name": "class1$macrocall$7", "symbols": ["class1$macrocall$8", {"literal":"/"}, "class1$macrocall$9"]},
-    {"name": "class1$macrocall$7", "symbols": ["class1$macrocall$9", {"literal":"/"}, "class1$macrocall$8"]},
-    {"name": "class1", "symbols": ["class1$macrocall$7"], "postprocess": () => 'H2G'},
-    {"name": "class1$macrocall$11$string$1", "symbols": [{"literal":"7"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$11", "symbols": ["N", "class1$macrocall$11$string$1"]},
-    {"name": "class1$macrocall$12", "symbols": ["L", {"literal":"2"}, "G"]},
-    {"name": "class1$macrocall$10", "symbols": ["class1$macrocall$11"]},
-    {"name": "class1$macrocall$10", "symbols": ["class1$macrocall$12"]},
-    {"name": "class1$macrocall$10", "symbols": ["class1$macrocall$11", {"literal":"/"}, "class1$macrocall$12"]},
-    {"name": "class1$macrocall$10", "symbols": ["class1$macrocall$12", {"literal":"/"}, "class1$macrocall$11"]},
-    {"name": "class1", "symbols": ["class1$macrocall$10"], "postprocess": () => 'L2G'},
-    {"name": "class1$macrocall$14$string$1", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$14", "symbols": ["N", "class1$macrocall$14$string$1"]},
-    {"name": "class1$macrocall$15", "symbols": ["P", {"literal":"2"}, "H"]},
-    {"name": "class1$macrocall$13", "symbols": ["class1$macrocall$14"]},
-    {"name": "class1$macrocall$13", "symbols": ["class1$macrocall$15"]},
-    {"name": "class1$macrocall$13", "symbols": ["class1$macrocall$14", {"literal":"/"}, "class1$macrocall$15"]},
-    {"name": "class1$macrocall$13", "symbols": ["class1$macrocall$15", {"literal":"/"}, "class1$macrocall$14"]},
-    {"name": "class1", "symbols": ["class1$macrocall$13"], "postprocess": () => 'P2H'},
-    {"name": "class1$macrocall$17$string$1", "symbols": [{"literal":"2"}, {"literal":"2"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$17", "symbols": ["N", "class1$macrocall$17$string$1"]},
-    {"name": "class1$macrocall$18", "symbols": ["R", {"literal":"2"}, "H"]},
-    {"name": "class1$macrocall$16", "symbols": ["class1$macrocall$17"]},
-    {"name": "class1$macrocall$16", "symbols": ["class1$macrocall$18"]},
-    {"name": "class1$macrocall$16", "symbols": ["class1$macrocall$17", {"literal":"/"}, "class1$macrocall$18"]},
-    {"name": "class1$macrocall$16", "symbols": ["class1$macrocall$18", {"literal":"/"}, "class1$macrocall$17"]},
-    {"name": "class1", "symbols": ["class1$macrocall$16"], "postprocess": () => 'R2H'},
-    {"name": "class1$macrocall$20$string$1", "symbols": [{"literal":"3"}, {"literal":"3"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$20", "symbols": ["N", "class1$macrocall$20$string$1"]},
-    {"name": "class1$macrocall$21", "symbols": ["S", {"literal":"2"}, "H"]},
-    {"name": "class1$macrocall$19", "symbols": ["class1$macrocall$20"]},
-    {"name": "class1$macrocall$19", "symbols": ["class1$macrocall$21"]},
-    {"name": "class1$macrocall$19", "symbols": ["class1$macrocall$20", {"literal":"/"}, "class1$macrocall$21"]},
-    {"name": "class1$macrocall$19", "symbols": ["class1$macrocall$21", {"literal":"/"}, "class1$macrocall$20"]},
-    {"name": "class1", "symbols": ["class1$macrocall$19"], "postprocess": () => 'S2H'},
-    {"name": "class1$macrocall$23$string$1", "symbols": [{"literal":"4"}, {"literal":"7"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$23", "symbols": ["N", "class1$macrocall$23$string$1"]},
-    {"name": "class1$macrocall$24", "symbols": ["T", {"literal":"2"}, "H"]},
-    {"name": "class1$macrocall$22", "symbols": ["class1$macrocall$23"]},
-    {"name": "class1$macrocall$22", "symbols": ["class1$macrocall$24"]},
-    {"name": "class1$macrocall$22", "symbols": ["class1$macrocall$23", {"literal":"/"}, "class1$macrocall$24"]},
-    {"name": "class1$macrocall$22", "symbols": ["class1$macrocall$24", {"literal":"/"}, "class1$macrocall$23"]},
-    {"name": "class1", "symbols": ["class1$macrocall$22"], "postprocess": () => 'T2H'},
-    {"name": "class1$macrocall$26$string$1", "symbols": [{"literal":"7"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$26", "symbols": ["N", "class1$macrocall$26$string$1"]},
-    {"name": "class1$macrocall$27", "symbols": ["U", {"literal":"2"}, "J"]},
-    {"name": "class1$macrocall$25", "symbols": ["class1$macrocall$26"]},
-    {"name": "class1$macrocall$25", "symbols": ["class1$macrocall$27"]},
-    {"name": "class1$macrocall$25", "symbols": ["class1$macrocall$26", {"literal":"/"}, "class1$macrocall$27"]},
-    {"name": "class1$macrocall$25", "symbols": ["class1$macrocall$27", {"literal":"/"}, "class1$macrocall$26"]},
-    {"name": "class1", "symbols": ["class1$macrocall$25"], "postprocess": () => 'U2J'},
-    {"name": "class1$macrocall$29$string$1", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$29", "symbols": ["N", "class1$macrocall$29$string$1"]},
-    {"name": "class1$macrocall$30", "symbols": ["Q", {"literal":"3"}, "K"]},
-    {"name": "class1$macrocall$28", "symbols": ["class1$macrocall$29"]},
-    {"name": "class1$macrocall$28", "symbols": ["class1$macrocall$30"]},
-    {"name": "class1$macrocall$28", "symbols": ["class1$macrocall$29", {"literal":"/"}, "class1$macrocall$30"]},
-    {"name": "class1$macrocall$28", "symbols": ["class1$macrocall$30", {"literal":"/"}, "class1$macrocall$29"]},
-    {"name": "class1", "symbols": ["class1$macrocall$28"], "postprocess": () => 'Q3K'},
-    {"name": "class1$macrocall$32$string$1", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1$macrocall$32", "symbols": ["N", "class1$macrocall$32$string$1"]},
-    {"name": "class1$macrocall$33", "symbols": ["P", {"literal":"3"}, "K"]},
-    {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$32"]},
-    {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$33"]},
-    {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$32", {"literal":"/"}, "class1$macrocall$33"]},
-    {"name": "class1$macrocall$31", "symbols": ["class1$macrocall$33", {"literal":"/"}, "class1$macrocall$32"]},
-    {"name": "class1", "symbols": ["class1$macrocall$31"], "postprocess": () => 'P3K'},
-    {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": d => d.join('').toUpperCase()},
+    {"name": "class1", "symbols": ["C", {"literal":"0"}, "G"], "postprocess": function() { return 'C0G' }},
+    {"name": "class1", "symbols": ["N", "P", {"literal":"0"}], "postprocess": function() { return 'C0G' }},
+    {"name": "class1$string$1", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["P", "class1$string$1"], "postprocess": function() { return 'M7G' }},
+    {"name": "class1", "symbols": ["M", {"literal":"7"}, "G"], "postprocess": function() { return 'M7G' }},
+    {"name": "class1$string$2", "symbols": [{"literal":"3"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$2"], "postprocess": function() { return 'H2G' }},
+    {"name": "class1", "symbols": ["H", {"literal":"2"}, "G"], "postprocess": function() { return 'H2G' }},
+    {"name": "class1$string$3", "symbols": [{"literal":"7"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$3"], "postprocess": function() { return 'L2G' }},
+    {"name": "class1", "symbols": ["L", {"literal":"2"}, "G"], "postprocess": function() { return 'L2G' }},
+    {"name": "class1$string$4", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$4"], "postprocess": function() { return 'P2H' }},
+    {"name": "class1", "symbols": ["P", {"literal":"2"}, "H"], "postprocess": function() { return 'P2H' }},
+    {"name": "class1$string$5", "symbols": [{"literal":"2"}, {"literal":"2"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$5"], "postprocess": function() { return 'R2H' }},
+    {"name": "class1", "symbols": ["R", {"literal":"2"}, "H"], "postprocess": function() { return 'R2H' }},
+    {"name": "class1$string$6", "symbols": [{"literal":"3"}, {"literal":"3"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$6"], "postprocess": function() { return 'S2H' }},
+    {"name": "class1", "symbols": ["S", {"literal":"2"}, "H"], "postprocess": function() { return 'S2H' }},
+    {"name": "class1$string$7", "symbols": [{"literal":"4"}, {"literal":"7"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$7"], "postprocess": function() { return 'T2H' }},
+    {"name": "class1", "symbols": ["T", {"literal":"2"}, "H"], "postprocess": function() { return 'T2H' }},
+    {"name": "class1$string$8", "symbols": [{"literal":"7"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$8"], "postprocess": function() { return 'U2J' }},
+    {"name": "class1", "symbols": ["U", {"literal":"2"}, "J"], "postprocess": function() { return 'U2J' }},
+    {"name": "class1$string$9", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$9"], "postprocess": function() { return 'Q3K' }},
+    {"name": "class1", "symbols": ["Q", {"literal":"3"}, "K"], "postprocess": function() { return 'Q3K' }},
+    {"name": "class1$string$10", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1", "symbols": ["N", "class1$string$10"], "postprocess": function() { return 'P3K' }},
+    {"name": "class1", "symbols": ["P", {"literal":"3"}, "K"], "postprocess": function() { return 'P3K' }},
+    {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": function(d) { return d.join('').toUpperCase() }},
     {"name": "class2_letter", "symbols": ["X"]},
     {"name": "class2_letter", "symbols": ["Y"]},
     {"name": "class2_letter", "symbols": ["Z"]},
@@ -458,14 +409,18 @@ var grammar = {
     {"name": "tolerance$ebnf$1$subexpression$1", "symbols": ["plusMinus", "_"]},
     {"name": "tolerance$ebnf$1", "symbols": ["tolerance$ebnf$1$subexpression$1"], "postprocess": id},
     {"name": "tolerance$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "tolerance", "symbols": ["tolerance$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": d => ({tolerance: d[1]})},
+    {"name": "tolerance", "symbols": ["tolerance$ebnf$1", "decimal", "_", {"literal":"%"}], "postprocess": function(d) { return ({tolerance: d[1]}) }},
     {"name": "plusMinus$string$1", "symbols": [{"literal":"+"}, {"literal":"/"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plusMinus", "symbols": ["plusMinus$string$1"]},
     {"name": "plusMinus", "symbols": [{"literal":"±"}]},
     {"name": "plusMinus$string$2", "symbols": [{"literal":"+"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plusMinus", "symbols": ["plusMinus$string$2"]},
-    {"name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance},
-    {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance},
+    {"name": "capacitance$ebnf$1", "symbols": ["cMetricPrefix"], "postprocess": id},
+    {"name": "capacitance$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitance", "symbols": ["decimal", "_", "capacitance$ebnf$1", "_", "farad"], "postprocess": capacitance},
+    {"name": "capacitanceNoFarad$ebnf$1", "symbols": ["cMetricPrefix"], "postprocess": id},
+    {"name": "capacitanceNoFarad$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceNoFarad$ebnf$1"], "postprocess": capacitance},
     {"name": "farad", "symbols": ["F"], "postprocess": nuller},
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller},
     {"name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
@@ -481,9 +436,12 @@ var grammar = {
     {"name": "rSpecs", "symbols": ["__"]},
     {"name": "rSpec", "symbols": ["tolerance"]},
     {"name": "rSpec", "symbols": ["power_rating"]},
-    {"name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess":  d => {
-          const [quantity, , metricPrefix] = d
-          return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
+    {"name": "power_rating$ebnf$1", "symbols": ["powerMetricPrefix"], "postprocess": id},
+    {"name": "power_rating$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "power_rating", "symbols": ["decimal", "_", "power_rating$ebnf$1", "_", "watts"], "postprocess":  function (d) {
+          var quantity = d[0]
+          var metricPrefix = d[2]
+          return {power_rating: parseFloat(quantity + (metricPrefix || ''))}
         } },
     {"name": "watts", "symbols": ["watts_"], "postprocess": nuller},
     {"name": "watts_", "symbols": ["W"]},
@@ -511,34 +469,32 @@ var grammar = {
     {"name": "ledSpecs", "symbols": ["ledSpecs$ebnf$1"]},
     {"name": "ledSpec", "symbols": ["packageSize"]},
     {"name": "ledSpec", "symbols": ["color"]},
-    {"name": "color", "symbols": ["color_name"], "postprocess": d => ({color: d[0]})},
-    {"name": "color_name", "symbols": ["R", "E", "D"], "postprocess": () => 'red'},
-    {"name": "color_name", "symbols": ["G", "R", "E", "E", "N"], "postprocess": () => 'green'},
-    {"name": "color_name", "symbols": ["B", "L", "U", "E"], "postprocess": () => 'blue'},
-    {"name": "color_name", "symbols": ["Y", "E", "L", "L", "O", "W"], "postprocess": () => 'yellow'},
-    {"name": "color_name", "symbols": ["O", "R", "A", "N", "G", "E"], "postprocess": () => 'orange'},
-    {"name": "color_name", "symbols": ["W", "H", "I", "T", "E"], "postprocess": () => 'white'},
-    {"name": "color_name", "symbols": ["A", "M", "B", "E", "R"], "postprocess": () => 'amber'},
-    {"name": "color_name", "symbols": ["C", "Y", "A", "N"], "postprocess": () => 'cyan'},
-    {"name": "color_name", "symbols": ["P", "U", "R", "P", "L", "E"], "postprocess": () => 'purple'},
-    {"name": "color_name", "symbols": ["Y", "E", "L", "L", "O", "W", "_", "G", "R", "E", "E", "N"], "postprocess": () => 'yellow green'},
-    {"name": "powerMetricPrefix", "symbols": ["giga"], "postprocess": () => 'e9  '},
-    {"name": "powerMetricPrefix", "symbols": ["mega"], "postprocess": () => 'e6  '},
-    {"name": "powerMetricPrefix", "symbols": ["kilo"], "postprocess": () => 'e3  '},
-    {"name": "powerMetricPrefix", "symbols": ["milli"], "postprocess": () => 'e-3 '},
-    {"name": "powerMetricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
-    {"name": "powerMetricPrefix", "symbols": ["nano"], "postprocess": () => 'e-9 '},
-    {"name": "powerMetricPrefix", "symbols": ["pico"], "postprocess": () => 'e-12'},
-    {"name": "powerMetricPrefix", "symbols": ["femto"], "postprocess": () => 'e-15'},
-    {"name": "powerMetricPrefix", "symbols": [], "postprocess": () => ''},
-    {"name": "rMetricPrefix", "symbols": ["giga"], "postprocess": () => 'e9  '},
-    {"name": "rMetricPrefix", "symbols": ["mega"], "postprocess": () => 'e6  '},
-    {"name": "rMetricPrefix", "symbols": ["kilo"], "postprocess": () => 'e3  '},
-    {"name": "rMetricPrefix", "symbols": ["R"], "postprocess": () => ''},
-    {"name": "cMetricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
-    {"name": "cMetricPrefix", "symbols": ["nano"], "postprocess": () => 'e-9 '},
-    {"name": "cMetricPrefix", "symbols": ["pico"], "postprocess": () => 'e-12'},
-    {"name": "cMetricPrefix", "symbols": [], "postprocess": () => ''}
+    {"name": "color", "symbols": ["color_name"], "postprocess": function(d) { return ({color: d[0]}) }},
+    {"name": "color_name", "symbols": ["R", "E", "D"], "postprocess": function() { return 'red' }},
+    {"name": "color_name", "symbols": ["G", "R", "E", "E", "N"], "postprocess": function() { return 'green' }},
+    {"name": "color_name", "symbols": ["B", "L", "U", "E"], "postprocess": function() { return 'blue' }},
+    {"name": "color_name", "symbols": ["Y", "E", "L", "L", "O", "W"], "postprocess": function() { return 'yellow' }},
+    {"name": "color_name", "symbols": ["O", "R", "A", "N", "G", "E"], "postprocess": function() { return 'orange' }},
+    {"name": "color_name", "symbols": ["W", "H", "I", "T", "E"], "postprocess": function() { return 'white' }},
+    {"name": "color_name", "symbols": ["A", "M", "B", "E", "R"], "postprocess": function() { return 'amber' }},
+    {"name": "color_name", "symbols": ["C", "Y", "A", "N"], "postprocess": function() { return 'cyan' }},
+    {"name": "color_name", "symbols": ["P", "U", "R", "P", "L", "E"], "postprocess": function() { return 'purple' }},
+    {"name": "color_name", "symbols": ["Y", "E", "L", "L", "O", "W", "_", "G", "R", "E", "E", "N"], "postprocess": function() { return 'yellow green' }},
+    {"name": "powerMetricPrefix", "symbols": ["giga"], "postprocess": function() { return 'e9  ' }},
+    {"name": "powerMetricPrefix", "symbols": ["mega"], "postprocess": function() { return 'e6  ' }},
+    {"name": "powerMetricPrefix", "symbols": ["kilo"], "postprocess": function() { return 'e3  ' }},
+    {"name": "powerMetricPrefix", "symbols": ["milli"], "postprocess": function() { return 'e-3 ' }},
+    {"name": "powerMetricPrefix", "symbols": ["micro"], "postprocess": function() { return 'e-6 ' }},
+    {"name": "powerMetricPrefix", "symbols": ["nano"], "postprocess": function() { return 'e-9 ' }},
+    {"name": "powerMetricPrefix", "symbols": ["pico"], "postprocess": function() { return 'e-12' }},
+    {"name": "powerMetricPrefix", "symbols": ["femto"], "postprocess": function() { return 'e-15' }},
+    {"name": "rMetricPrefix", "symbols": ["giga"], "postprocess": function() { return 'e9  ' }},
+    {"name": "rMetricPrefix", "symbols": ["mega"], "postprocess": function() { return 'e6  ' }},
+    {"name": "rMetricPrefix", "symbols": ["kilo"], "postprocess": function() { return 'e3  ' }},
+    {"name": "rMetricPrefix", "symbols": ["R"], "postprocess": function() { return ''     }},
+    {"name": "cMetricPrefix", "symbols": ["micro"], "postprocess": function() { return 'e-6 ' }},
+    {"name": "cMetricPrefix", "symbols": ["nano"], "postprocess": function() { return 'e-9 ' }},
+    {"name": "cMetricPrefix", "symbols": ["pico"], "postprocess": function() { return 'e-12' }}
 ]
   , ParserStart: "main"
 }

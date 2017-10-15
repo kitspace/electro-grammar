@@ -3,7 +3,7 @@
 @include "metric_prefix.ne"
 @include "package_size.ne"
 
-main -> component {% d => assignAll(filter(flatten(d))) %}
+main -> component {% function(d) { return filter(flatten(d)) } %}
 
 component ->
     capacitor {% type('capacitor') %}
@@ -12,7 +12,7 @@ component ->
 
 @{%
     function type(t) {
-      return d => [{type: t}].concat(d)
+      return function(d) { return  [{type: t}].concat(d)}
     }
 %}
 
@@ -34,44 +34,57 @@ cSpecs -> (_ cSpec _):* | __
 
 cSpec -> tolerance | characteristic | voltage_rating
 
-voltage_rating -> decimal _ V {% d => ({voltage_rating: d[0]}) %}
+voltage_rating -> decimal _ V {% function(d) { return ({voltage_rating: d[0]}) } %}
 
-characteristic -> characteristic_ {% d => ({characteristic: d[0][0]}) %}
+characteristic -> characteristic_ {% function(d) { return ({characteristic: d[0][0]}) } %}
 
 # see https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitor
 # https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitor
 characteristic_ -> class1 | class2
 
 class1 ->
-    C "0" G  {% () => 'C0G' %} | N P "0" {% () => 'C0G' %}
-  | P "100"  {% () => 'M7G' %} | M "7" G {% () => 'M7G' %}
-  | N "33"   {% () => 'H2G' %} | H "2" G {% () => 'H2G' %}
-  | N "75"   {% () => 'L2G' %} | L "2" G {% () => 'L2G' %}
-  | N "150"  {% () => 'P2H' %} | P "2" H {% () => 'P2H' %}
-  | N "220"  {% () => 'R2H' %} | R "2" H {% () => 'R2H' %}
-  | N "330"  {% () => 'S2H' %} | S "2" H {% () => 'S2H' %}
-  | N "470"  {% () => 'T2H' %} | T "2" H {% () => 'T2H' %}
-  | N "750"  {% () => 'U2J' %} | U "2" J {% () => 'U2J' %}
-  | N "1000" {% () => 'Q3K' %} | Q "3" K {% () => 'Q3K' %}
-  | N "1500" {% () => 'P3K' %} | P "3" K {% () => 'P3K' %}
+  C "0" G  {% function() { return 'C0G' } %}
+  | N P "0" {% function() { return 'C0G' } %}
+  | P "100"  {% function() { return 'M7G' } %}
+  | M "7" G {% function() { return 'M7G' } %}
+  | N "33"   {% function() { return 'H2G' } %}
+  | H "2" G {% function() { return 'H2G' } %}
+  | N "75"   {% function() { return 'L2G' } %}
+  | L "2" G {% function() { return 'L2G' } %}
+  | N "150"  {% function() { return 'P2H' } %}
+  | P "2" H {% function() { return 'P2H' } %}
+  | N "220"  {% function() { return 'R2H' } %}
+  | R "2" H {% function() { return 'R2H' } %}
+  | N "330"  {% function() { return 'S2H' } %}
+  | S "2" H {% function() { return 'S2H' } %}
+  | N "470"  {% function() { return 'T2H' } %}
+  | T "2" H {% function() { return 'T2H' } %}
+  | N "750"  {% function() { return 'U2J' } %}
+  | U "2" J {% function() { return 'U2J' } %}
+  | N "1000" {% function() { return 'Q3K' } %}
+  | Q "3" K {% function() { return 'Q3K' } %}
+  | N "1500" {% function() { return 'P3K' } %}
+  | P "3" K {% function() { return 'P3K' } %}
 
 class2 -> class2_letter class2_number class2_code
-  {% d => d.join('').toUpperCase() %}
+  {% function(d) { return d.join('').toUpperCase() } %}
 class2_letter -> X | Y | Z
 class2_number -> "4" | "5" | "6" | "7" | "8" | "9"
 class2_code -> P | R | S | T | U | V
 
-tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
+tolerance -> (plusMinus _):? decimal _ "%" {% function(d) { return ({tolerance: d[1]}) } %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
-capacitance -> decimal _ cMetricPrefix _ farad {% capacitance %}
-capacitanceNoFarad -> decimal _ cMetricPrefix {% capacitance %}
+capacitance -> decimal _ cMetricPrefix:? _ farad {% capacitance %}
+capacitanceNoFarad -> decimal _ cMetricPrefix:? {% capacitance %}
 @{%
   function capacitance(d) {
-    const [quantity, , metricPrefix, , farad] = d
+    var quantity = d[0]
+    var metricPrefix = d[2]
+    var farad = d[4]
 
-    return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
+    return {capacitance: parseFloat(quantity + (metricPrefix || ''))}
   }
 %}
 
@@ -89,9 +102,10 @@ rSpecs -> (_ rSpec _):* | __
 
 rSpec -> tolerance | power_rating
 
-power_rating -> decimal _ powerMetricPrefix _ watts {% d => {
-  const [quantity, , metricPrefix] = d
-  return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
+power_rating -> decimal _ powerMetricPrefix:? _ watts {% function (d) {
+  var quantity = d[0]
+  var metricPrefix = d[2]
+  return {power_rating: parseFloat(quantity + (metricPrefix || ''))}
 } %}
 
 watts -> watts_ {% nuller %}
@@ -104,16 +118,19 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 
 @{%
   function resistance(d, i, reject) {
-    const [integral, , [metricPrefix, fractional, ohm]] = d
+    var integral = d[0]
+    var metricPrefix = d[2][0]
+    var fractional = d[2][1]
+    var ohm = d[2][2]
     if (fractional) {
       if (/\./.test(integral.toString())) {
         return reject
       }
-      var quantity = `${integral}.${fractional}`
+      var quantity = integral + '.' + fractional
     } else {
       var quantity = integral
     }
-    return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
+    return {resistance: parseFloat(quantity + (metricPrefix || ''))}
   }
 %}
 
@@ -134,42 +151,40 @@ ledSpecs -> (_ ledSpec _):+
 
 ledSpec -> packageSize | color
 
-color -> color_name {% d => ({color: d[0]}) %}
+color -> color_name {% function(d) { return ({color: d[0]}) } %}
 color_name ->
-    R E D                   {% () => 'red' %}
-  | G R E E N               {% () => 'green' %}
-  | B L U E                 {% () => 'blue' %}
-  | Y E L L O W             {% () => 'yellow' %}
-  | O R A N G E             {% () => 'orange' %}
-  | W H I T E               {% () => 'white' %}
-  | A M B E R               {% () => 'amber' %}
-  | C Y A N                 {% () => 'cyan' %}
-  | P U R P L E             {% () => 'purple' %}
-  | Y E L L O W _ G R E E N {% () => 'yellow green' %}
+    R E D                   {% function() { return 'red' } %}
+  | G R E E N               {% function() { return 'green' } %}
+  | B L U E                 {% function() { return 'blue' } %}
+  | Y E L L O W             {% function() { return 'yellow' } %}
+  | O R A N G E             {% function() { return 'orange' } %}
+  | W H I T E               {% function() { return 'white' } %}
+  | A M B E R               {% function() { return 'amber' } %}
+  | C Y A N                 {% function() { return 'cyan' } %}
+  | P U R P L E             {% function() { return 'purple' } %}
+  | Y E L L O W _ G R E E N {% function() { return 'yellow green' } %}
 
 
 ## Metric Prefixes ##
 
 powerMetricPrefix ->
-    giga  {% () => 'e9  ' %}
-  | mega  {% () => 'e6  ' %}
-  | kilo  {% () => 'e3  ' %}
-  | milli {% () => 'e-3 ' %}
-  | micro {% () => 'e-6 ' %}
-  | nano  {% () => 'e-9 ' %}
-  | pico  {% () => 'e-12' %}
-  | femto {% () => 'e-15' %}
-  | null  {% () => '' %}
+    giga  {% function() { return 'e9  ' } %}
+  | mega  {% function() { return 'e6  ' } %}
+  | kilo  {% function() { return 'e3  ' } %}
+  | milli {% function() { return 'e-3 ' } %}
+  | micro {% function() { return 'e-6 ' } %}
+  | nano  {% function() { return 'e-9 ' } %}
+  | pico  {% function() { return 'e-12' } %}
+  | femto {% function() { return 'e-15' } %}
 
 rMetricPrefix ->
-    giga  {% () => 'e9  ' %}
-  | mega  {% () => 'e6  ' %}
-  | kilo  {% () => 'e3  ' %}
-  | R     {% () => ''     %}
+    giga  {% function() { return 'e9  ' } %}
+  | mega  {% function() { return 'e6  ' } %}
+  | kilo  {% function() { return 'e3  ' } %}
+  | R     {% function() { return ''     } %}
 
 cMetricPrefix ->
-    micro {% () => 'e-6 ' %}
-  | nano  {% () => 'e-9 ' %}
-  | pico  {% () => 'e-12' %}
-  | null  {% () => '' %}
+    micro {% function() { return 'e-6 ' } %}
+  | nano  {% function() { return 'e-9 ' } %}
+  | pico  {% function() { return 'e-12' } %}
 

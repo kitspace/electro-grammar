@@ -16,7 +16,7 @@ function matchCPL(component) {
 }
 
 function matchResistor(c) {
-  return resistors.reduce((prev, cpl) => {
+  return resistors.reduce(function(prev, cpl) {
     const resistance = cpl.resistance === c.resistance
     const size       = c.size == null || cpl.size === c.size
     const tolerance  = c.tolerance == null || cpl.tolerance <= c.tolerance
@@ -30,7 +30,7 @@ function matchResistor(c) {
 }
 
 function matchCapacitor(c) {
-  return capacitors.reduce((prev, cpl) => {
+  return capacitors.reduce(function(prev, cpl) {
     const capacitance = cpl.capacitance === c.capacitance
     const size        = c.size == null || cpl.size === c.size
     const characteristic = c.characteristic == null

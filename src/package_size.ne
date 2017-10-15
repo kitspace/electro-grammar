@@ -1,4 +1,4 @@
-packageSize -> _packageSize {% d => ({size: filter(flatten(d))[0]}) %}
+packageSize -> _packageSize {% function(d) { return ({size: filter(flatten(d))[0]}) } %}
 _packageSize -> _imperialSize | _metricSize
 _imperialSize ->
     "01005"
@@ -14,11 +14,11 @@ _imperialSize ->
   | "2512"
 
 _metricSize ->
-    __metricSize [\s]:* M E T R I C {% d => toImperial[d[0]] %}
-  | M E T R I C [\s]:* __metricSize {% d => toImperial[d[7]] %}
-  | unambigiousMetricSize           {% d => toImperial[d[0]] %}
+    __metricSize [\s]:* M E T R I C {% function(d) { return toImperial[d[0]] } %}
+  | M E T R I C [\s]:* __metricSize {% function(d) { return toImperial[d[7]] } %}
+  | unambigiousMetricSize           {% function(d) { return toImperial[d[0]] } %}
 @{%
-  const toImperial = {
+  var toImperial = {
     '0402': '01005',
     '0603': '0201',
     '1005': '0402',
@@ -49,10 +49,3 @@ __metricSize ->
     unambigiousMetricSize
   | "0402"
   | "0603"
-
-M -> "M" | "m"
-E -> "E" | "e"
-T -> "T" | "t"
-R -> "R" | "r"
-I -> "I" | "i"
-C -> "C" | "c"
