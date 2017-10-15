@@ -1,7 +1,9 @@
 const nearley = require('nearley')
 const grammar = require('./grammar')
 
-const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj), {})
+function assignAll(objs) {
+  return objs.reduce((prev, obj) => Object.assign(prev, obj), {})
+}
 
 function parse(str) {
   const parser = new nearley.Parser(
