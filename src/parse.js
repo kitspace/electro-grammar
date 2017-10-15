@@ -30,13 +30,20 @@ function parse(str, {returnIgnored} = {}) {
             parser.restore(info)
             ignored += word
         }
-        const component = assignAll(parser.results[0] || [])
+        let component = assignAll(parser.results[0] || [])
+        const empty = Object.keys(component).length === 0
+        if (empty) {
+            component = null
+        }
         if (!failed) {
-            if (Object.keys(prev.component).length > 0 && equals(component, prev.component)) {
-                parser.restore(info)
+            const hasPrev = Object.keys(prev.component).length !== 0
+            const eq = equals(component, prev.component)
+            if (hasPrev && (eq || empty)) {
                 ignored += word
             }
-            info = parser.save()
+            else {
+                info = parser.save()
+            }
         }
         return {component: component || prev.component, ignored}
     }, {component: {}, ignored: ''})
