@@ -254,7 +254,9 @@ var grammar = {
     {"name": "femto", "symbols": ["F", "E", "M", "T", "O"]},
     {"name": "atto", "symbols": [{"literal":"a"}]},
     {"name": "atto", "symbols": ["A", "T", "T", "O"]},
-    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess": function(d) { return ({size: filter(flatten(d))[0]}) }},
+    {"name": "packageSize", "symbols": ["_packageSize"], "postprocess":  function(d) {
+          return ({size: filter(flatten(d)).join('')})
+        }},
     {"name": "_packageSize", "symbols": ["_imperialSize"]},
     {"name": "_packageSize", "symbols": ["_metricSize"]},
     {"name": "_imperialSize$string$1", "symbols": [{"literal":"0"}, {"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
