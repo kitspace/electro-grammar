@@ -7,13 +7,13 @@ function parse(str) {
     grammar.ParserStart,
     {keepHistory: true}
   )
-  const chars = str.split(' ')
+  const words = str.split(' ')
   let info = parser.save()
-  return chars.reduce((prev, c) => {
-    c = c.replace(/,|;/, '') + ' '
+  return words.reduce((prev, word) => {
+    word = word.replace(/,|;/, '') + ' '
     //if it fails, roll it back
     try {
-      parser.feed(c)
+      parser.feed(word)
     } catch(e) {
       parser.restore(info)
     }
