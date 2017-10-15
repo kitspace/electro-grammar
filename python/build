@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+python -m lark.tools.nearley ../src/grammar.ne main ../node_modules/nearley > grammar.py

@@ -1,0 +1,2 @@
+-e git+https://github.com/erezsh/lark#egg=lark-parser
+Js2Py==0.50

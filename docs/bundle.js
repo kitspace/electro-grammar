@@ -17,7 +17,7 @@ function setOutput() {
 setOutput()
 input.oninput = setOutput
 
-},{"../lib/index":7}],2:[function(require,module,exports){
+},{"../lib/index":6}],2:[function(require,module,exports){
 module.exports = [
   {
     "type": "capacitor",
@@ -1083,35 +1083,7 @@ module.exports = [
   }
 ]
 },{}],5:[function(require,module,exports){
-/*!
- * arr-flatten <https://github.com/jonschlinkert/arr-flatten>
- *
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * Released under the MIT License.
- */
-
 'use strict';
-
-module.exports = function (arr) {
-  return flat(arr, []);
-};
-
-function flat(arr, res) {
-  var i = 0,
-      cur;
-  var len = arr.length;
-  for (; i < len; i++) {
-    cur = arr[i];
-    Array.isArray(cur) ? flat(cur, res) : res.push(cur);
-  }
-  return res;
-}
-},{}],6:[function(require,module,exports){
-'use strict';
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 // Generated automatically by nearley, version 2.11.0
 // http://github.com/Hardmath123/nearley
@@ -1120,23 +1092,37 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return x[0];
     }
 
-    var flatten = require('./flatten');
+    /*!
+     * modified from arr-flatten <https://github.com/jonschlinkert/arr-flatten>
+     *
+     * Copyright (c) 2014-2017, Jon Schlinkert.
+     * Released under the MIT License.
+     */
 
-    var filter = function filter(d) {
+    function _flatten(arr, res) {
+        var i = 0,
+            cur;
+        var len = arr.length;
+        for (; i < len; i++) {
+            cur = arr[i];
+            Array.isArray(cur) ? _flatten(cur, res) : res.push(cur);
+        }
+        return res;
+    }
+
+    function flatten(arr) {
+        return _flatten(arr, []);
+    }
+
+    function filter(d) {
         return d.filter(function (t) {
-            return t !== null;
+            return t != null;
         });
-    };
+    }
 
-    var assignAll = function assignAll(objs) {
-        return objs.reduce(function (prev, obj) {
-            return _extends(prev, obj);
-        });
-    };
-
-    var nuller = function nuller() {
+    function nuller() {
         return null;
-    };
+    }
 
     var toImperial = {
         '0402': '01005',
@@ -1160,22 +1146,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
 
     function capacitance(d) {
-        var _d = _slicedToArray(d, 5),
-            quantity = _d[0],
-            metricPrefix = _d[2],
-            farad = _d[4];
+        var quantity = d[0];
+        var metricPrefix = d[2];
+        var farad = d[4];
 
-        return { capacitance: parseFloat('' + quantity + metricPrefix) };
+        return { capacitance: parseFloat(quantity + (metricPrefix || '')) };
     }
 
     function resistance(d, i, reject) {
-        var _d2 = _slicedToArray(d, 3),
-            integral = _d2[0],
-            _d2$ = _slicedToArray(_d2[2], 3),
-            metricPrefix = _d2$[0],
-            fractional = _d2$[1],
-            ohm = _d2$[2];
-
+        var integral = d[0];
+        var metricPrefix = d[2][0];
+        var fractional = d[2][1];
+        var ohm = d[2][2];
         if (fractional) {
             if (/\./.test(integral.toString())) {
                 return reject;
@@ -1184,7 +1166,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         } else {
             var quantity = integral;
         }
-        return { resistance: parseFloat('' + quantity + metricPrefix) };
+        return { resistance: parseFloat(quantity + (metricPrefix || '')) };
     }
     var grammar = {
         Lexer: undefined,
@@ -1246,15 +1228,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             }
         }, { "name": "_$ebnf$1", "symbols": [] }, { "name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "_", "symbols": ["_$ebnf$1"], "postprocess": function postprocess() {
-                return null;
-            } }, { "name": "__$ebnf$1", "symbols": [/[\s]/] }, { "name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {
+            } }, { "name": "_", "symbols": ["_$ebnf$1"], "postprocess": nuller }, { "name": "__$ebnf$1", "symbols": [/[\s]/] }, { "name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "__", "symbols": ["__$ebnf$1"], "postprocess": function postprocess() {
-                return null;
-            } }, { "name": "A", "symbols": [{ "literal": "A" }] }, { "name": "A", "symbols": [{ "literal": "a" }] }, { "name": "B", "symbols": [{ "literal": "B" }] }, { "name": "B", "symbols": [{ "literal": "b" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "D", "symbols": [{ "literal": "D" }] }, { "name": "D", "symbols": [{ "literal": "d" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "F", "symbols": [{ "literal": "F" }] }, { "name": "F", "symbols": [{ "literal": "f" }] }, { "name": "G", "symbols": [{ "literal": "G" }] }, { "name": "G", "symbols": [{ "literal": "g" }] }, { "name": "H", "symbols": [{ "literal": "H" }] }, { "name": "H", "symbols": [{ "literal": "h" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "J", "symbols": [{ "literal": "J" }] }, { "name": "J", "symbols": [{ "literal": "j" }] }, { "name": "K", "symbols": [{ "literal": "K" }] }, { "name": "K", "symbols": [{ "literal": "k" }] }, { "name": "L", "symbols": [{ "literal": "L" }] }, { "name": "L", "symbols": [{ "literal": "l" }] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "N", "symbols": [{ "literal": "N" }] }, { "name": "N", "symbols": [{ "literal": "n" }] }, { "name": "O", "symbols": [{ "literal": "O" }] }, { "name": "O", "symbols": [{ "literal": "o" }] }, { "name": "P", "symbols": [{ "literal": "P" }] }, { "name": "P", "symbols": [{ "literal": "p" }] }, { "name": "Q", "symbols": [{ "literal": "Q" }] }, { "name": "Q", "symbols": [{ "literal": "q" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "S", "symbols": [{ "literal": "S" }] }, { "name": "S", "symbols": [{ "literal": "s" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "U", "symbols": [{ "literal": "U" }] }, { "name": "U", "symbols": [{ "literal": "u" }] }, { "name": "V", "symbols": [{ "literal": "V" }] }, { "name": "V", "symbols": [{ "literal": "v" }] }, { "name": "W", "symbols": [{ "literal": "W" }] }, { "name": "W", "symbols": [{ "literal": "w" }] }, { "name": "X", "symbols": [{ "literal": "X" }] }, { "name": "X", "symbols": [{ "literal": "x" }] }, { "name": "Y", "symbols": [{ "literal": "Y" }] }, { "name": "Y", "symbols": [{ "literal": "y" }] }, { "name": "Z", "symbols": [{ "literal": "Z" }] }, { "name": "Z", "symbols": [{ "literal": "z" }] }, { "name": "exa", "symbols": [{ "literal": "E" }] }, { "name": "exa", "symbols": ["E", "X", "A"] }, { "name": "peta", "symbols": [{ "literal": "P" }] }, { "name": "peta", "symbols": ["P", "E", "T", "A"] }, { "name": "tera", "symbols": [{ "literal": "T" }] }, { "name": "tera", "symbols": ["T", "E", "R", "A"] }, { "name": "giga", "symbols": [{ "literal": "G" }] }, { "name": "giga", "symbols": ["G", "I", "G", "A"] }, { "name": "mega", "symbols": [{ "literal": "M" }] }, { "name": "mega", "symbols": ["M", "E", "G", "A"] }, { "name": "kilo", "symbols": [{ "literal": "k" }] }, { "name": "kilo", "symbols": ["K", "I", "L", "O"] }, { "name": "hecto", "symbols": [{ "literal": "h" }] }, { "name": "hecto", "symbols": ["H", "E", "C", "T", "O"] }, { "name": "deci", "symbols": [{ "literal": "d" }] }, { "name": "deci", "symbols": ["D", "E", "C", "I"] }, { "name": "centi", "symbols": [{ "literal": "c" }] }, { "name": "centi", "symbols": ["C", "E", "N", "T", "I"] }, { "name": "milli", "symbols": [{ "literal": "m" }] }, { "name": "milli", "symbols": ["M", "I", "L", "L", "I"] }, { "name": "micro", "symbols": [{ "literal": "u" }] }, { "name": "micro", "symbols": [/[\u03BC]/] }, { "name": "micro", "symbols": [/[\u00B5]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDECD]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF07]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF41]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF7B]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDFB5]/] }, { "name": "micro", "symbols": ["M", "I", "C", "R", "O"] }, { "name": "nano", "symbols": [{ "literal": "n" }] }, { "name": "nano", "symbols": ["N", "A", "N", "O"] }, { "name": "pico", "symbols": [{ "literal": "p" }] }, { "name": "pico", "symbols": ["P", "I", "C", "O"] }, { "name": "femto", "symbols": [{ "literal": "f" }] }, { "name": "femto", "symbols": ["F", "E", "M", "T", "O"] }, { "name": "atto", "symbols": [{ "literal": "a" }] }, { "name": "atto", "symbols": ["A", "T", "T", "O"] }, { "name": "packageSize", "symbols": ["_packageSize"], "postprocess": function postprocess(d) {
-                return { size: filter(flatten(d))[0] };
-            } }, { "name": "_packageSize", "symbols": ["_imperialSize"] }, { "name": "_packageSize", "symbols": ["_metricSize"] }, { "name": "_imperialSize$string$1", "symbols": [{ "literal": "0" }, { "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "5" }], "postprocess": function joiner(d) {
+            } }, { "name": "__", "symbols": ["__$ebnf$1"], "postprocess": nuller }, { "name": "A", "symbols": [{ "literal": "A" }] }, { "name": "A", "symbols": [{ "literal": "a" }] }, { "name": "B", "symbols": [{ "literal": "B" }] }, { "name": "B", "symbols": [{ "literal": "b" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "D", "symbols": [{ "literal": "D" }] }, { "name": "D", "symbols": [{ "literal": "d" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "F", "symbols": [{ "literal": "F" }] }, { "name": "F", "symbols": [{ "literal": "f" }] }, { "name": "G", "symbols": [{ "literal": "G" }] }, { "name": "G", "symbols": [{ "literal": "g" }] }, { "name": "H", "symbols": [{ "literal": "H" }] }, { "name": "H", "symbols": [{ "literal": "h" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "J", "symbols": [{ "literal": "J" }] }, { "name": "J", "symbols": [{ "literal": "j" }] }, { "name": "K", "symbols": [{ "literal": "K" }] }, { "name": "K", "symbols": [{ "literal": "k" }] }, { "name": "L", "symbols": [{ "literal": "L" }] }, { "name": "L", "symbols": [{ "literal": "l" }] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "N", "symbols": [{ "literal": "N" }] }, { "name": "N", "symbols": [{ "literal": "n" }] }, { "name": "O", "symbols": [{ "literal": "O" }] }, { "name": "O", "symbols": [{ "literal": "o" }] }, { "name": "P", "symbols": [{ "literal": "P" }] }, { "name": "P", "symbols": [{ "literal": "p" }] }, { "name": "Q", "symbols": [{ "literal": "Q" }] }, { "name": "Q", "symbols": [{ "literal": "q" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "S", "symbols": [{ "literal": "S" }] }, { "name": "S", "symbols": [{ "literal": "s" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "U", "symbols": [{ "literal": "U" }] }, { "name": "U", "symbols": [{ "literal": "u" }] }, { "name": "V", "symbols": [{ "literal": "V" }] }, { "name": "V", "symbols": [{ "literal": "v" }] }, { "name": "W", "symbols": [{ "literal": "W" }] }, { "name": "W", "symbols": [{ "literal": "w" }] }, { "name": "X", "symbols": [{ "literal": "X" }] }, { "name": "X", "symbols": [{ "literal": "x" }] }, { "name": "Y", "symbols": [{ "literal": "Y" }] }, { "name": "Y", "symbols": [{ "literal": "y" }] }, { "name": "Z", "symbols": [{ "literal": "Z" }] }, { "name": "Z", "symbols": [{ "literal": "z" }] }, { "name": "exa", "symbols": [{ "literal": "E" }] }, { "name": "exa", "symbols": ["E", "X", "A"] }, { "name": "peta", "symbols": [{ "literal": "P" }] }, { "name": "peta", "symbols": ["P", "E", "T", "A"] }, { "name": "tera", "symbols": [{ "literal": "T" }] }, { "name": "tera", "symbols": ["T", "E", "R", "A"] }, { "name": "giga", "symbols": [{ "literal": "G" }] }, { "name": "giga", "symbols": ["G", "I", "G", "A"] }, { "name": "mega", "symbols": [{ "literal": "M" }] }, { "name": "mega", "symbols": ["M", "E", "G", "A"] }, { "name": "kilo", "symbols": [{ "literal": "k" }] }, { "name": "kilo", "symbols": ["K", "I", "L", "O"] }, { "name": "hecto", "symbols": [{ "literal": "h" }] }, { "name": "hecto", "symbols": ["H", "E", "C", "T", "O"] }, { "name": "deci", "symbols": [{ "literal": "d" }] }, { "name": "deci", "symbols": ["D", "E", "C", "I"] }, { "name": "centi", "symbols": [{ "literal": "c" }] }, { "name": "centi", "symbols": ["C", "E", "N", "T", "I"] }, { "name": "milli", "symbols": [{ "literal": "m" }] }, { "name": "milli", "symbols": ["M", "I", "L", "L", "I"] }, { "name": "micro", "symbols": [{ "literal": "u" }] }, { "name": "micro", "symbols": [/[\u03BC]/] }, { "name": "micro", "symbols": [/[\u00B5]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDECD]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF07]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF41]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF7B]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDFB5]/] }, { "name": "micro", "symbols": ["M", "I", "C", "R", "O"] }, { "name": "nano", "symbols": [{ "literal": "n" }] }, { "name": "nano", "symbols": ["N", "A", "N", "O"] }, { "name": "pico", "symbols": [{ "literal": "p" }] }, { "name": "pico", "symbols": ["P", "I", "C", "O"] }, { "name": "femto", "symbols": [{ "literal": "f" }] }, { "name": "femto", "symbols": ["F", "E", "M", "T", "O"] }, { "name": "atto", "symbols": [{ "literal": "a" }] }, { "name": "atto", "symbols": ["A", "T", "T", "O"] }, { "name": "packageSize", "symbols": ["_packageSize"], "postprocess": function postprocess(d) {
+                return { size: filter(flatten(d)).join('') };
+            }
+        }, { "name": "_packageSize", "symbols": ["_imperialSize"] }, { "name": "_packageSize", "symbols": ["_metricSize"] }, { "name": "_imperialSize$string$1", "symbols": [{ "literal": "0" }, { "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "5" }], "postprocess": function joiner(d) {
                 return d.join('');
             } }, { "name": "_imperialSize", "symbols": ["_imperialSize$string$1"] }, { "name": "_imperialSize$string$2", "symbols": [{ "literal": "0" }, { "literal": "2" }, { "literal": "0" }, { "literal": "1" }], "postprocess": function joiner(d) {
                 return d.join('');
@@ -1308,8 +1287,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return d.join('');
             } }, { "name": "__metricSize", "symbols": ["__metricSize$string$1"] }, { "name": "__metricSize$string$2", "symbols": [{ "literal": "0" }, { "literal": "6" }, { "literal": "0" }, { "literal": "3" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "main", "symbols": ["component"], "postprocess": function postprocess(d) {
-                return assignAll(filter(flatten(d)));
+            } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "main", "symbols": ["component"], "postprocess": function postprocess(d) {
+                return filter(flatten(d));
             } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor') }, { "name": "component", "symbols": ["resistor"], "postprocess": type('resistor') }, { "name": "component", "symbols": ["led"], "postprocess": type('led') }, { "name": "capacitor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs", "capacitor$ebnf$1", "cSpecs"] }, { "name": "capacitor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "capacitor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
@@ -1340,47 +1319,69 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return { voltage_rating: d[0] };
             } }, { "name": "characteristic", "symbols": ["characteristic_"], "postprocess": function postprocess(d) {
                 return { characteristic: d[0][0] };
-            } }, { "name": "characteristic_", "symbols": ["class1"] }, { "name": "characteristic_", "symbols": ["class2"] }, { "name": "class1$macrocall$2", "symbols": ["C", { "literal": "0" }, "G"] }, { "name": "class1$macrocall$3", "symbols": ["N", "P", { "literal": "0" }] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$2"] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$3"] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$2", { "literal": "/" }, "class1$macrocall$3"] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$3", { "literal": "/" }, "class1$macrocall$2"] }, { "name": "class1", "symbols": ["class1$macrocall$1"], "postprocess": function postprocess() {
+            } }, { "name": "characteristic_", "symbols": ["class1"] }, { "name": "characteristic_", "symbols": ["class2"] }, { "name": "class1", "symbols": ["class1_ceramic_name"], "postprocess": id }, { "name": "class1", "symbols": ["class1_eia_code"], "postprocess": id }, { "name": "class1", "symbols": ["class1_ceramic_name", "_", { "literal": "/" }, "_", "class1_eia_code"], "postprocess": id }, { "name": "class1", "symbols": ["class1_eia_code", "_", { "literal": "/" }, "_", "class1_ceramic_name"], "postprocess": id }, { "name": "class1_ceramic_name", "symbols": ["C", { "literal": "0" }, "G"], "postprocess": function postprocess() {
                 return 'C0G';
-            } }, { "name": "class1$macrocall$5$string$1", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$1", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$5", "symbols": ["P", "class1$macrocall$5$string$1"] }, { "name": "class1$macrocall$6", "symbols": ["M", { "literal": "7" }, "G"] }, { "name": "class1$macrocall$4", "symbols": ["class1$macrocall$5"] }, { "name": "class1$macrocall$4", "symbols": ["class1$macrocall$6"] }, { "name": "class1$macrocall$4", "symbols": ["class1$macrocall$5", { "literal": "/" }, "class1$macrocall$6"] }, { "name": "class1$macrocall$4", "symbols": ["class1$macrocall$6", { "literal": "/" }, "class1$macrocall$5"] }, { "name": "class1", "symbols": ["class1$macrocall$4"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["P", "class1_ceramic_name$string$1"], "postprocess": function postprocess() {
                 return 'M7G';
-            } }, { "name": "class1$macrocall$8$string$1", "symbols": [{ "literal": "3" }, { "literal": "3" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$2", "symbols": [{ "literal": "3" }, { "literal": "3" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$8", "symbols": ["N", "class1$macrocall$8$string$1"] }, { "name": "class1$macrocall$9", "symbols": ["H", { "literal": "2" }, "G"] }, { "name": "class1$macrocall$7", "symbols": ["class1$macrocall$8"] }, { "name": "class1$macrocall$7", "symbols": ["class1$macrocall$9"] }, { "name": "class1$macrocall$7", "symbols": ["class1$macrocall$8", { "literal": "/" }, "class1$macrocall$9"] }, { "name": "class1$macrocall$7", "symbols": ["class1$macrocall$9", { "literal": "/" }, "class1$macrocall$8"] }, { "name": "class1", "symbols": ["class1$macrocall$7"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$2"], "postprocess": function postprocess() {
                 return 'H2G';
-            } }, { "name": "class1$macrocall$11$string$1", "symbols": [{ "literal": "7" }, { "literal": "5" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$3", "symbols": [{ "literal": "7" }, { "literal": "5" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$11", "symbols": ["N", "class1$macrocall$11$string$1"] }, { "name": "class1$macrocall$12", "symbols": ["L", { "literal": "2" }, "G"] }, { "name": "class1$macrocall$10", "symbols": ["class1$macrocall$11"] }, { "name": "class1$macrocall$10", "symbols": ["class1$macrocall$12"] }, { "name": "class1$macrocall$10", "symbols": ["class1$macrocall$11", { "literal": "/" }, "class1$macrocall$12"] }, { "name": "class1$macrocall$10", "symbols": ["class1$macrocall$12", { "literal": "/" }, "class1$macrocall$11"] }, { "name": "class1", "symbols": ["class1$macrocall$10"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$3"], "postprocess": function postprocess() {
                 return 'L2G';
-            } }, { "name": "class1$macrocall$14$string$1", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$4", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$14", "symbols": ["N", "class1$macrocall$14$string$1"] }, { "name": "class1$macrocall$15", "symbols": ["P", { "literal": "2" }, "H"] }, { "name": "class1$macrocall$13", "symbols": ["class1$macrocall$14"] }, { "name": "class1$macrocall$13", "symbols": ["class1$macrocall$15"] }, { "name": "class1$macrocall$13", "symbols": ["class1$macrocall$14", { "literal": "/" }, "class1$macrocall$15"] }, { "name": "class1$macrocall$13", "symbols": ["class1$macrocall$15", { "literal": "/" }, "class1$macrocall$14"] }, { "name": "class1", "symbols": ["class1$macrocall$13"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$4"], "postprocess": function postprocess() {
                 return 'P2H';
-            } }, { "name": "class1$macrocall$17$string$1", "symbols": [{ "literal": "2" }, { "literal": "2" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$5", "symbols": [{ "literal": "2" }, { "literal": "2" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$17", "symbols": ["N", "class1$macrocall$17$string$1"] }, { "name": "class1$macrocall$18", "symbols": ["R", { "literal": "2" }, "H"] }, { "name": "class1$macrocall$16", "symbols": ["class1$macrocall$17"] }, { "name": "class1$macrocall$16", "symbols": ["class1$macrocall$18"] }, { "name": "class1$macrocall$16", "symbols": ["class1$macrocall$17", { "literal": "/" }, "class1$macrocall$18"] }, { "name": "class1$macrocall$16", "symbols": ["class1$macrocall$18", { "literal": "/" }, "class1$macrocall$17"] }, { "name": "class1", "symbols": ["class1$macrocall$16"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$5"], "postprocess": function postprocess() {
                 return 'R2H';
-            } }, { "name": "class1$macrocall$20$string$1", "symbols": [{ "literal": "3" }, { "literal": "3" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$6", "symbols": [{ "literal": "3" }, { "literal": "3" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$20", "symbols": ["N", "class1$macrocall$20$string$1"] }, { "name": "class1$macrocall$21", "symbols": ["S", { "literal": "2" }, "H"] }, { "name": "class1$macrocall$19", "symbols": ["class1$macrocall$20"] }, { "name": "class1$macrocall$19", "symbols": ["class1$macrocall$21"] }, { "name": "class1$macrocall$19", "symbols": ["class1$macrocall$20", { "literal": "/" }, "class1$macrocall$21"] }, { "name": "class1$macrocall$19", "symbols": ["class1$macrocall$21", { "literal": "/" }, "class1$macrocall$20"] }, { "name": "class1", "symbols": ["class1$macrocall$19"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$6"], "postprocess": function postprocess() {
                 return 'S2H';
-            } }, { "name": "class1$macrocall$23$string$1", "symbols": [{ "literal": "4" }, { "literal": "7" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$7", "symbols": [{ "literal": "4" }, { "literal": "7" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$23", "symbols": ["N", "class1$macrocall$23$string$1"] }, { "name": "class1$macrocall$24", "symbols": ["T", { "literal": "2" }, "H"] }, { "name": "class1$macrocall$22", "symbols": ["class1$macrocall$23"] }, { "name": "class1$macrocall$22", "symbols": ["class1$macrocall$24"] }, { "name": "class1$macrocall$22", "symbols": ["class1$macrocall$23", { "literal": "/" }, "class1$macrocall$24"] }, { "name": "class1$macrocall$22", "symbols": ["class1$macrocall$24", { "literal": "/" }, "class1$macrocall$23"] }, { "name": "class1", "symbols": ["class1$macrocall$22"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$7"], "postprocess": function postprocess() {
                 return 'T2H';
-            } }, { "name": "class1$macrocall$26$string$1", "symbols": [{ "literal": "7" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$8", "symbols": [{ "literal": "7" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$26", "symbols": ["N", "class1$macrocall$26$string$1"] }, { "name": "class1$macrocall$27", "symbols": ["U", { "literal": "2" }, "J"] }, { "name": "class1$macrocall$25", "symbols": ["class1$macrocall$26"] }, { "name": "class1$macrocall$25", "symbols": ["class1$macrocall$27"] }, { "name": "class1$macrocall$25", "symbols": ["class1$macrocall$26", { "literal": "/" }, "class1$macrocall$27"] }, { "name": "class1$macrocall$25", "symbols": ["class1$macrocall$27", { "literal": "/" }, "class1$macrocall$26"] }, { "name": "class1", "symbols": ["class1$macrocall$25"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$8"], "postprocess": function postprocess() {
                 return 'U2J';
-            } }, { "name": "class1$macrocall$29$string$1", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$9", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$29", "symbols": ["N", "class1$macrocall$29$string$1"] }, { "name": "class1$macrocall$30", "symbols": ["Q", { "literal": "3" }, "K"] }, { "name": "class1$macrocall$28", "symbols": ["class1$macrocall$29"] }, { "name": "class1$macrocall$28", "symbols": ["class1$macrocall$30"] }, { "name": "class1$macrocall$28", "symbols": ["class1$macrocall$29", { "literal": "/" }, "class1$macrocall$30"] }, { "name": "class1$macrocall$28", "symbols": ["class1$macrocall$30", { "literal": "/" }, "class1$macrocall$29"] }, { "name": "class1", "symbols": ["class1$macrocall$28"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$9"], "postprocess": function postprocess() {
                 return 'Q3K';
-            } }, { "name": "class1$macrocall$32$string$1", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$10", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1$macrocall$32", "symbols": ["N", "class1$macrocall$32$string$1"] }, { "name": "class1$macrocall$33", "symbols": ["P", { "literal": "3" }, "K"] }, { "name": "class1$macrocall$31", "symbols": ["class1$macrocall$32"] }, { "name": "class1$macrocall$31", "symbols": ["class1$macrocall$33"] }, { "name": "class1$macrocall$31", "symbols": ["class1$macrocall$32", { "literal": "/" }, "class1$macrocall$33"] }, { "name": "class1$macrocall$31", "symbols": ["class1$macrocall$33", { "literal": "/" }, "class1$macrocall$32"] }, { "name": "class1", "symbols": ["class1$macrocall$31"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$10"], "postprocess": function postprocess() {
+                return 'P3K';
+            } }, { "name": "class1_eia_code", "symbols": ["N", "P", { "literal": "0" }], "postprocess": function postprocess() {
+                return 'C0G';
+            } }, { "name": "class1_eia_code", "symbols": ["M", { "literal": "7" }, "G"], "postprocess": function postprocess() {
+                return 'M7G';
+            } }, { "name": "class1_eia_code", "symbols": ["H", { "literal": "2" }, "G"], "postprocess": function postprocess() {
+                return 'H2G';
+            } }, { "name": "class1_eia_code", "symbols": ["L", { "literal": "2" }, "G"], "postprocess": function postprocess() {
+                return 'L2G';
+            } }, { "name": "class1_eia_code", "symbols": ["P", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'P2H';
+            } }, { "name": "class1_eia_code", "symbols": ["R", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'R2H';
+            } }, { "name": "class1_eia_code", "symbols": ["S", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'S2H';
+            } }, { "name": "class1_eia_code", "symbols": ["T", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'T2H';
+            } }, { "name": "class1_eia_code", "symbols": ["U", { "literal": "2" }, "J"], "postprocess": function postprocess() {
+                return 'U2J';
+            } }, { "name": "class1_eia_code", "symbols": ["Q", { "literal": "3" }, "K"], "postprocess": function postprocess() {
+                return 'Q3K';
+            } }, { "name": "class1_eia_code", "symbols": ["P", { "literal": "3" }, "K"], "postprocess": function postprocess() {
                 return 'P3K';
             } }, { "name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": function postprocess(d) {
                 return d.join('').toUpperCase();
@@ -1392,19 +1393,24 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return d.join('');
             } }, { "name": "plusMinus", "symbols": ["plusMinus$string$1"] }, { "name": "plusMinus", "symbols": [{ "literal": "±" }] }, { "name": "plusMinus$string$2", "symbols": [{ "literal": "+" }, { "literal": "-" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "plusMinus", "symbols": ["plusMinus$string$2"] }, { "name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance }, { "name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance }, { "name": "farad", "symbols": ["F"], "postprocess": nuller }, { "name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "plusMinus", "symbols": ["plusMinus$string$2"] }, { "name": "capacitance$ebnf$1", "symbols": ["cMetricPrefix"], "postprocess": id }, { "name": "capacitance$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+                return null;
+            } }, { "name": "capacitance", "symbols": ["decimal", "_", "capacitance$ebnf$1", "_", "farad"], "postprocess": capacitance }, { "name": "capacitanceNoFarad$ebnf$1", "symbols": ["cMetricPrefix"], "postprocess": id }, { "name": "capacitanceNoFarad$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+                return null;
+            } }, { "name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceNoFarad$ebnf$1"], "postprocess": capacitance }, { "name": "farad", "symbols": ["F"], "postprocess": nuller }, { "name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"] }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"] }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess": function postprocess(d) {
-                var _d3 = _slicedToArray(d, 3),
-                    quantity = _d3[0],
-                    metricPrefix = _d3[2];
-
-                return { power_rating: parseFloat('' + quantity + metricPrefix) };
-            } }, { "name": "watts", "symbols": ["watts_"], "postprocess": nuller }, { "name": "watts_", "symbols": ["W"] }, { "name": "watts_", "symbols": ["W", "A", "T", "T", "S"] }, { "name": "resistance", "symbols": ["decimal", "_", "rest"], "postprocess": resistance }, { "name": "rest$ebnf$1", "symbols": ["int"], "postprocess": id }, { "name": "rest$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating$ebnf$1", "symbols": ["powerMetricPrefix"], "postprocess": id }, { "name": "power_rating$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+                return null;
+            } }, { "name": "power_rating", "symbols": ["decimal", "_", "power_rating$ebnf$1", "_", "watts"], "postprocess": function postprocess(d) {
+                var quantity = d[0];
+                var metricPrefix = d[2];
+                return { power_rating: parseFloat(quantity + (metricPrefix || '')) };
+            }
+        }, { "name": "watts", "symbols": ["watts_"], "postprocess": nuller }, { "name": "watts_", "symbols": ["W"] }, { "name": "watts_", "symbols": ["W", "A", "T", "T", "S"] }, { "name": "resistance", "symbols": ["decimal", "_", "rest"], "postprocess": resistance }, { "name": "rest$ebnf$1", "symbols": ["int"], "postprocess": id }, { "name": "rest$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "rest$ebnf$2$subexpression$1", "symbols": ["_", "ohm"] }, { "name": "rest$ebnf$2", "symbols": ["rest$ebnf$2$subexpression$1"], "postprocess": id }, { "name": "rest$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
@@ -1448,8 +1454,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return 'e-12';
             } }, { "name": "powerMetricPrefix", "symbols": ["femto"], "postprocess": function postprocess() {
                 return 'e-15';
-            } }, { "name": "powerMetricPrefix", "symbols": [], "postprocess": function postprocess() {
-                return '';
             } }, { "name": "rMetricPrefix", "symbols": ["giga"], "postprocess": function postprocess() {
                 return 'e9  ';
             } }, { "name": "rMetricPrefix", "symbols": ["mega"], "postprocess": function postprocess() {
@@ -1464,8 +1468,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return 'e-9 ';
             } }, { "name": "cMetricPrefix", "symbols": ["pico"], "postprocess": function postprocess() {
                 return 'e-12';
-            } }, { "name": "cMetricPrefix", "symbols": [], "postprocess": function postprocess() {
-                return '';
             } }],
         ParserStart: "main"
     };
@@ -1475,13 +1477,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         window.grammar = grammar;
     }
 })();
-},{"./flatten":5}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 var parse = require('./parse');
 var matchCPL = require('./match_cpl');
 module.exports = { parse: parse, matchCPL: matchCPL };
-},{"./match_cpl":8,"./parse":9}],8:[function(require,module,exports){
+},{"./match_cpl":7,"./parse":8}],7:[function(require,module,exports){
 'use strict';
 
 var resistors = require('./cpl_resistors');
@@ -1540,17 +1542,25 @@ function matchLED(c) {
 }
 
 module.exports = matchCPL;
-},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],9:[function(require,module,exports){
+},{"./cpl_capacitors":2,"./cpl_leds":3,"./cpl_resistors":4}],8:[function(require,module,exports){
 'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var nearley = require('nearley');
 var grammar = require('./grammar');
+
+function assignAll(objs) {
+  return objs.reduce(function (prev, obj) {
+    return _extends(prev, obj);
+  }, {});
+}
 
 function parse(str) {
   var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart, { keepHistory: true });
   var words = str.split(' ');
   var info = parser.save();
-  return words.reduce(function (prev, word) {
+  var res = words.reduce(function (prev, word) {
     word = word.replace(/,|;/, '') + ' ';
     //if it fails, roll it back
     try {
@@ -1561,11 +1571,12 @@ function parse(str) {
     info = parser.save();
     //return the latest valid result
     return parser.results[0] || prev;
-  }, {});
+  }, []);
+  return assignAll(res);
 }
 
 module.exports = parse;
-},{"./grammar":6,"nearley":10}],10:[function(require,module,exports){
+},{"./grammar":5,"nearley":9}],9:[function(require,module,exports){
 (function(root, factory) {
     if (typeof module === 'object' && module.exports) {
         module.exports = factory();

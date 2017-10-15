@@ -1,6 +1,10 @@
 const nearley = require('nearley')
 const grammar = require('./grammar')
 
+function assignAll(objs) {
+  return objs.reduce((prev, obj) => Object.assign(prev, obj), {})
+}
+
 function parse(str) {
   const parser = new nearley.Parser(
     grammar.ParserRules,
@@ -9,7 +13,7 @@ function parse(str) {
   )
   const words = str.split(' ')
   let info = parser.save()
-  return words.reduce((prev, word) => {
+  const res = words.reduce((prev, word) => {
     word = word.replace(/,|;/, '') + ' '
     //if it fails, roll it back
     try {
@@ -20,7 +24,8 @@ function parse(str) {
     info = parser.save()
     //return the latest valid result
     return parser.results[0] || prev
-  }, {})
+  }, [])
+  return assignAll(res)
 }
 
 module.exports = parse

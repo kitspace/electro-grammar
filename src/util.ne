@@ -1,13 +1,36 @@
 #whitespace
-_  -> [\s]:*  {% () => null %}
-__ -> [\s]:+  {% () => null %}
+_  -> [\s]:*  {% nuller %}
+__ -> [\s]:+  {% nuller %}
 
 @{%
-  const flatten = require('./flatten')
+    /*!
+     * modified from arr-flatten <https://github.com/jonschlinkert/arr-flatten>
+     *
+     * Copyright (c) 2014-2017, Jon Schlinkert.
+     * Released under the MIT License.
+     */
 
-  const filter = d => d.filter(t => t !== null)
+    function _flatten(arr, res) {
+        var i = 0, cur
+        var len = arr.length
+        for (; i < len; i++) {
+            cur = arr[i]
+            Array.isArray(cur) ? _flatten(cur, res) : res.push(cur)
+        }
+        return res
+    }
 
-  const assignAll = objs => objs.reduce((prev, obj) => Object.assign(prev, obj))
+    function flatten (arr) {
+        return _flatten(arr, [])
+    }
 
-  const nuller = () => null
+    function filter(d) {
+        return  d.filter(function(t) {
+            return t != null
+        })
+    }
+
+    function nuller() {
+        return  null
+    }
 %}
