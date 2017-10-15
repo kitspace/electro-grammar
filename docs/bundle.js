@@ -24,6 +24,7 @@ module.exports = [
     "capacitance": 1e-12,
     "voltage_rating": 50,
     "size": "0402",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0402-1PF-50V"
   },
   {
@@ -31,6 +32,7 @@ module.exports = [
     "capacitance": 1e-12,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-1PF-50V"
   },
   {
@@ -39,6 +41,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0402-10PF-50V"
   },
   {
@@ -47,6 +50,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-10PF-50V"
   },
   {
@@ -55,6 +59,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-12PF-50V"
   },
   {
@@ -63,6 +68,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-18PF-50V"
   },
   {
@@ -71,6 +77,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0402",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0402-22PF-50V"
   },
   {
@@ -79,6 +86,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-22PF-50V"
   },
   {
@@ -87,6 +95,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-27PF-50V"
   },
   {
@@ -95,6 +104,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-33PF-50V"
   },
   {
@@ -103,6 +113,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-100PF-50V"
   },
   {
@@ -111,6 +122,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-220PF-50V"
   },
   {
@@ -119,6 +131,7 @@ module.exports = [
     "tolerance": 5,
     "voltage_rating": 50,
     "size": "0603",
+    "characteristic": "C0G",
     "cplid": "CPL-CAP-C0G-0603-1NF-50V"
   },
   {
@@ -1079,32 +1092,37 @@ module.exports = [
         return x[0];
     }
 
-    'use strict';
+    /*!
+     * modified from arr-flatten <https://github.com/jonschlinkert/arr-flatten>
+     *
+     * Copyright (c) 2014-2017, Jon Schlinkert.
+     * Released under the MIT License.
+     */
 
-    function flat(arr, res) {
+    function _flatten(arr, res) {
         var i = 0,
             cur;
         var len = arr.length;
         for (; i < len; i++) {
             cur = arr[i];
-            Array.isArray(cur) ? flat(cur, res) : res.push(cur);
+            Array.isArray(cur) ? _flatten(cur, res) : res.push(cur);
         }
         return res;
     }
 
     function flatten(arr) {
-        return flat(arr, []);
+        return _flatten(arr, []);
     }
 
-    var filter = function filter(d) {
+    function filter(d) {
         return d.filter(function (t) {
-            return t !== null;
+            return t != null;
         });
-    };
+    }
 
-    var nuller = function nuller() {
+    function nuller() {
         return null;
-    };
+    }
 
     var toImperial = {
         '0402': '01005',
@@ -1210,13 +1228,9 @@ module.exports = [
             }
         }, { "name": "_$ebnf$1", "symbols": [] }, { "name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "_", "symbols": ["_$ebnf$1"], "postprocess": function postprocess() {
-                return null;
-            } }, { "name": "__$ebnf$1", "symbols": [/[\s]/] }, { "name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {
+            } }, { "name": "_", "symbols": ["_$ebnf$1"], "postprocess": nuller }, { "name": "__$ebnf$1", "symbols": [/[\s]/] }, { "name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "__", "symbols": ["__$ebnf$1"], "postprocess": function postprocess() {
-                return null;
-            } }, { "name": "A", "symbols": [{ "literal": "A" }] }, { "name": "A", "symbols": [{ "literal": "a" }] }, { "name": "B", "symbols": [{ "literal": "B" }] }, { "name": "B", "symbols": [{ "literal": "b" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "D", "symbols": [{ "literal": "D" }] }, { "name": "D", "symbols": [{ "literal": "d" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "F", "symbols": [{ "literal": "F" }] }, { "name": "F", "symbols": [{ "literal": "f" }] }, { "name": "G", "symbols": [{ "literal": "G" }] }, { "name": "G", "symbols": [{ "literal": "g" }] }, { "name": "H", "symbols": [{ "literal": "H" }] }, { "name": "H", "symbols": [{ "literal": "h" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "J", "symbols": [{ "literal": "J" }] }, { "name": "J", "symbols": [{ "literal": "j" }] }, { "name": "K", "symbols": [{ "literal": "K" }] }, { "name": "K", "symbols": [{ "literal": "k" }] }, { "name": "L", "symbols": [{ "literal": "L" }] }, { "name": "L", "symbols": [{ "literal": "l" }] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "N", "symbols": [{ "literal": "N" }] }, { "name": "N", "symbols": [{ "literal": "n" }] }, { "name": "O", "symbols": [{ "literal": "O" }] }, { "name": "O", "symbols": [{ "literal": "o" }] }, { "name": "P", "symbols": [{ "literal": "P" }] }, { "name": "P", "symbols": [{ "literal": "p" }] }, { "name": "Q", "symbols": [{ "literal": "Q" }] }, { "name": "Q", "symbols": [{ "literal": "q" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "S", "symbols": [{ "literal": "S" }] }, { "name": "S", "symbols": [{ "literal": "s" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "U", "symbols": [{ "literal": "U" }] }, { "name": "U", "symbols": [{ "literal": "u" }] }, { "name": "V", "symbols": [{ "literal": "V" }] }, { "name": "V", "symbols": [{ "literal": "v" }] }, { "name": "W", "symbols": [{ "literal": "W" }] }, { "name": "W", "symbols": [{ "literal": "w" }] }, { "name": "X", "symbols": [{ "literal": "X" }] }, { "name": "X", "symbols": [{ "literal": "x" }] }, { "name": "Y", "symbols": [{ "literal": "Y" }] }, { "name": "Y", "symbols": [{ "literal": "y" }] }, { "name": "Z", "symbols": [{ "literal": "Z" }] }, { "name": "Z", "symbols": [{ "literal": "z" }] }, { "name": "exa", "symbols": [{ "literal": "E" }] }, { "name": "exa", "symbols": ["E", "X", "A"] }, { "name": "peta", "symbols": [{ "literal": "P" }] }, { "name": "peta", "symbols": ["P", "E", "T", "A"] }, { "name": "tera", "symbols": [{ "literal": "T" }] }, { "name": "tera", "symbols": ["T", "E", "R", "A"] }, { "name": "giga", "symbols": [{ "literal": "G" }] }, { "name": "giga", "symbols": ["G", "I", "G", "A"] }, { "name": "mega", "symbols": [{ "literal": "M" }] }, { "name": "mega", "symbols": ["M", "E", "G", "A"] }, { "name": "kilo", "symbols": [{ "literal": "k" }] }, { "name": "kilo", "symbols": ["K", "I", "L", "O"] }, { "name": "hecto", "symbols": [{ "literal": "h" }] }, { "name": "hecto", "symbols": ["H", "E", "C", "T", "O"] }, { "name": "deci", "symbols": [{ "literal": "d" }] }, { "name": "deci", "symbols": ["D", "E", "C", "I"] }, { "name": "centi", "symbols": [{ "literal": "c" }] }, { "name": "centi", "symbols": ["C", "E", "N", "T", "I"] }, { "name": "milli", "symbols": [{ "literal": "m" }] }, { "name": "milli", "symbols": ["M", "I", "L", "L", "I"] }, { "name": "micro", "symbols": [{ "literal": "u" }] }, { "name": "micro", "symbols": [/[\u03BC]/] }, { "name": "micro", "symbols": [/[\u00B5]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDECD]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF07]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF41]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF7B]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDFB5]/] }, { "name": "micro", "symbols": ["M", "I", "C", "R", "O"] }, { "name": "nano", "symbols": [{ "literal": "n" }] }, { "name": "nano", "symbols": ["N", "A", "N", "O"] }, { "name": "pico", "symbols": [{ "literal": "p" }] }, { "name": "pico", "symbols": ["P", "I", "C", "O"] }, { "name": "femto", "symbols": [{ "literal": "f" }] }, { "name": "femto", "symbols": ["F", "E", "M", "T", "O"] }, { "name": "atto", "symbols": [{ "literal": "a" }] }, { "name": "atto", "symbols": ["A", "T", "T", "O"] }, { "name": "packageSize", "symbols": ["_packageSize"], "postprocess": function postprocess(d) {
+            } }, { "name": "__", "symbols": ["__$ebnf$1"], "postprocess": nuller }, { "name": "A", "symbols": [{ "literal": "A" }] }, { "name": "A", "symbols": [{ "literal": "a" }] }, { "name": "B", "symbols": [{ "literal": "B" }] }, { "name": "B", "symbols": [{ "literal": "b" }] }, { "name": "C", "symbols": [{ "literal": "C" }] }, { "name": "C", "symbols": [{ "literal": "c" }] }, { "name": "D", "symbols": [{ "literal": "D" }] }, { "name": "D", "symbols": [{ "literal": "d" }] }, { "name": "E", "symbols": [{ "literal": "E" }] }, { "name": "E", "symbols": [{ "literal": "e" }] }, { "name": "F", "symbols": [{ "literal": "F" }] }, { "name": "F", "symbols": [{ "literal": "f" }] }, { "name": "G", "symbols": [{ "literal": "G" }] }, { "name": "G", "symbols": [{ "literal": "g" }] }, { "name": "H", "symbols": [{ "literal": "H" }] }, { "name": "H", "symbols": [{ "literal": "h" }] }, { "name": "I", "symbols": [{ "literal": "I" }] }, { "name": "I", "symbols": [{ "literal": "i" }] }, { "name": "J", "symbols": [{ "literal": "J" }] }, { "name": "J", "symbols": [{ "literal": "j" }] }, { "name": "K", "symbols": [{ "literal": "K" }] }, { "name": "K", "symbols": [{ "literal": "k" }] }, { "name": "L", "symbols": [{ "literal": "L" }] }, { "name": "L", "symbols": [{ "literal": "l" }] }, { "name": "M", "symbols": [{ "literal": "M" }] }, { "name": "M", "symbols": [{ "literal": "m" }] }, { "name": "N", "symbols": [{ "literal": "N" }] }, { "name": "N", "symbols": [{ "literal": "n" }] }, { "name": "O", "symbols": [{ "literal": "O" }] }, { "name": "O", "symbols": [{ "literal": "o" }] }, { "name": "P", "symbols": [{ "literal": "P" }] }, { "name": "P", "symbols": [{ "literal": "p" }] }, { "name": "Q", "symbols": [{ "literal": "Q" }] }, { "name": "Q", "symbols": [{ "literal": "q" }] }, { "name": "R", "symbols": [{ "literal": "R" }] }, { "name": "R", "symbols": [{ "literal": "r" }] }, { "name": "S", "symbols": [{ "literal": "S" }] }, { "name": "S", "symbols": [{ "literal": "s" }] }, { "name": "T", "symbols": [{ "literal": "T" }] }, { "name": "T", "symbols": [{ "literal": "t" }] }, { "name": "U", "symbols": [{ "literal": "U" }] }, { "name": "U", "symbols": [{ "literal": "u" }] }, { "name": "V", "symbols": [{ "literal": "V" }] }, { "name": "V", "symbols": [{ "literal": "v" }] }, { "name": "W", "symbols": [{ "literal": "W" }] }, { "name": "W", "symbols": [{ "literal": "w" }] }, { "name": "X", "symbols": [{ "literal": "X" }] }, { "name": "X", "symbols": [{ "literal": "x" }] }, { "name": "Y", "symbols": [{ "literal": "Y" }] }, { "name": "Y", "symbols": [{ "literal": "y" }] }, { "name": "Z", "symbols": [{ "literal": "Z" }] }, { "name": "Z", "symbols": [{ "literal": "z" }] }, { "name": "exa", "symbols": [{ "literal": "E" }] }, { "name": "exa", "symbols": ["E", "X", "A"] }, { "name": "peta", "symbols": [{ "literal": "P" }] }, { "name": "peta", "symbols": ["P", "E", "T", "A"] }, { "name": "tera", "symbols": [{ "literal": "T" }] }, { "name": "tera", "symbols": ["T", "E", "R", "A"] }, { "name": "giga", "symbols": [{ "literal": "G" }] }, { "name": "giga", "symbols": ["G", "I", "G", "A"] }, { "name": "mega", "symbols": [{ "literal": "M" }] }, { "name": "mega", "symbols": ["M", "E", "G", "A"] }, { "name": "kilo", "symbols": [{ "literal": "k" }] }, { "name": "kilo", "symbols": ["K", "I", "L", "O"] }, { "name": "hecto", "symbols": [{ "literal": "h" }] }, { "name": "hecto", "symbols": ["H", "E", "C", "T", "O"] }, { "name": "deci", "symbols": [{ "literal": "d" }] }, { "name": "deci", "symbols": ["D", "E", "C", "I"] }, { "name": "centi", "symbols": [{ "literal": "c" }] }, { "name": "centi", "symbols": ["C", "E", "N", "T", "I"] }, { "name": "milli", "symbols": [{ "literal": "m" }] }, { "name": "milli", "symbols": ["M", "I", "L", "L", "I"] }, { "name": "micro", "symbols": [{ "literal": "u" }] }, { "name": "micro", "symbols": [/[\u03BC]/] }, { "name": "micro", "symbols": [/[\u00B5]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDECD]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF07]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF41]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDF7B]/] }, { "name": "micro", "symbols": [/[\uD835]/, /[\uDFB5]/] }, { "name": "micro", "symbols": ["M", "I", "C", "R", "O"] }, { "name": "nano", "symbols": [{ "literal": "n" }] }, { "name": "nano", "symbols": ["N", "A", "N", "O"] }, { "name": "pico", "symbols": [{ "literal": "p" }] }, { "name": "pico", "symbols": ["P", "I", "C", "O"] }, { "name": "femto", "symbols": [{ "literal": "f" }] }, { "name": "femto", "symbols": ["F", "E", "M", "T", "O"] }, { "name": "atto", "symbols": [{ "literal": "a" }] }, { "name": "atto", "symbols": ["A", "T", "T", "O"] }, { "name": "packageSize", "symbols": ["_packageSize"], "postprocess": function postprocess(d) {
                 return { size: filter(flatten(d)).join('') };
             } }, { "name": "_packageSize", "symbols": ["_imperialSize"] }, { "name": "_packageSize", "symbols": ["_metricSize"] }, { "name": "_imperialSize$string$1", "symbols": [{ "literal": "0" }, { "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "5" }], "postprocess": function joiner(d) {
                 return d.join('');
@@ -1304,69 +1318,69 @@ module.exports = [
                 return { voltage_rating: d[0] };
             } }, { "name": "characteristic", "symbols": ["characteristic_"], "postprocess": function postprocess(d) {
                 return { characteristic: d[0][0] };
-            } }, { "name": "characteristic_", "symbols": ["class1"] }, { "name": "characteristic_", "symbols": ["class2"] }, { "name": "class1", "symbols": ["C", { "literal": "0" }, "G"], "postprocess": function postprocess() {
+            } }, { "name": "characteristic_", "symbols": ["class1"] }, { "name": "characteristic_", "symbols": ["class2"] }, { "name": "class1", "symbols": ["class1_ceramic_name"], "postprocess": id }, { "name": "class1", "symbols": ["class1_eia_code"], "postprocess": id }, { "name": "class1", "symbols": ["class1_ceramic_name", "_", { "literal": "/" }, "_", "class1_eia_code"], "postprocess": id }, { "name": "class1", "symbols": ["class1_eia_code", "_", { "literal": "/" }, "_", "class1_ceramic_name"], "postprocess": id }, { "name": "class1_ceramic_name", "symbols": ["C", { "literal": "0" }, "G"], "postprocess": function postprocess() {
                 return 'C0G';
-            } }, { "name": "class1", "symbols": ["N", "P", { "literal": "0" }], "postprocess": function postprocess() {
-                return 'C0G';
-            } }, { "name": "class1$string$1", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$1", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["P", "class1$string$1"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["P", "class1_ceramic_name$string$1"], "postprocess": function postprocess() {
                 return 'M7G';
-            } }, { "name": "class1", "symbols": ["M", { "literal": "7" }, "G"], "postprocess": function postprocess() {
-                return 'M7G';
-            } }, { "name": "class1$string$2", "symbols": [{ "literal": "3" }, { "literal": "3" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$2", "symbols": [{ "literal": "3" }, { "literal": "3" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$2"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$2"], "postprocess": function postprocess() {
                 return 'H2G';
-            } }, { "name": "class1", "symbols": ["H", { "literal": "2" }, "G"], "postprocess": function postprocess() {
-                return 'H2G';
-            } }, { "name": "class1$string$3", "symbols": [{ "literal": "7" }, { "literal": "5" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$3", "symbols": [{ "literal": "7" }, { "literal": "5" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$3"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$3"], "postprocess": function postprocess() {
                 return 'L2G';
-            } }, { "name": "class1", "symbols": ["L", { "literal": "2" }, "G"], "postprocess": function postprocess() {
-                return 'L2G';
-            } }, { "name": "class1$string$4", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$4", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$4"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$4"], "postprocess": function postprocess() {
                 return 'P2H';
-            } }, { "name": "class1", "symbols": ["P", { "literal": "2" }, "H"], "postprocess": function postprocess() {
-                return 'P2H';
-            } }, { "name": "class1$string$5", "symbols": [{ "literal": "2" }, { "literal": "2" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$5", "symbols": [{ "literal": "2" }, { "literal": "2" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$5"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$5"], "postprocess": function postprocess() {
                 return 'R2H';
-            } }, { "name": "class1", "symbols": ["R", { "literal": "2" }, "H"], "postprocess": function postprocess() {
-                return 'R2H';
-            } }, { "name": "class1$string$6", "symbols": [{ "literal": "3" }, { "literal": "3" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$6", "symbols": [{ "literal": "3" }, { "literal": "3" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$6"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$6"], "postprocess": function postprocess() {
                 return 'S2H';
-            } }, { "name": "class1", "symbols": ["S", { "literal": "2" }, "H"], "postprocess": function postprocess() {
-                return 'S2H';
-            } }, { "name": "class1$string$7", "symbols": [{ "literal": "4" }, { "literal": "7" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$7", "symbols": [{ "literal": "4" }, { "literal": "7" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$7"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$7"], "postprocess": function postprocess() {
                 return 'T2H';
-            } }, { "name": "class1", "symbols": ["T", { "literal": "2" }, "H"], "postprocess": function postprocess() {
-                return 'T2H';
-            } }, { "name": "class1$string$8", "symbols": [{ "literal": "7" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$8", "symbols": [{ "literal": "7" }, { "literal": "5" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$8"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$8"], "postprocess": function postprocess() {
                 return 'U2J';
-            } }, { "name": "class1", "symbols": ["U", { "literal": "2" }, "J"], "postprocess": function postprocess() {
-                return 'U2J';
-            } }, { "name": "class1$string$9", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$9", "symbols": [{ "literal": "1" }, { "literal": "0" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$9"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$9"], "postprocess": function postprocess() {
                 return 'Q3K';
-            } }, { "name": "class1", "symbols": ["Q", { "literal": "3" }, "K"], "postprocess": function postprocess() {
-                return 'Q3K';
-            } }, { "name": "class1$string$10", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
+            } }, { "name": "class1_ceramic_name$string$10", "symbols": [{ "literal": "1" }, { "literal": "5" }, { "literal": "0" }, { "literal": "0" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "class1", "symbols": ["N", "class1$string$10"], "postprocess": function postprocess() {
+            } }, { "name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$10"], "postprocess": function postprocess() {
                 return 'P3K';
-            } }, { "name": "class1", "symbols": ["P", { "literal": "3" }, "K"], "postprocess": function postprocess() {
+            } }, { "name": "class1_eia_code", "symbols": ["N", "P", { "literal": "0" }], "postprocess": function postprocess() {
+                return 'C0G';
+            } }, { "name": "class1_eia_code", "symbols": ["M", { "literal": "7" }, "G"], "postprocess": function postprocess() {
+                return 'M7G';
+            } }, { "name": "class1_eia_code", "symbols": ["H", { "literal": "2" }, "G"], "postprocess": function postprocess() {
+                return 'H2G';
+            } }, { "name": "class1_eia_code", "symbols": ["L", { "literal": "2" }, "G"], "postprocess": function postprocess() {
+                return 'L2G';
+            } }, { "name": "class1_eia_code", "symbols": ["P", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'P2H';
+            } }, { "name": "class1_eia_code", "symbols": ["R", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'R2H';
+            } }, { "name": "class1_eia_code", "symbols": ["S", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'S2H';
+            } }, { "name": "class1_eia_code", "symbols": ["T", { "literal": "2" }, "H"], "postprocess": function postprocess() {
+                return 'T2H';
+            } }, { "name": "class1_eia_code", "symbols": ["U", { "literal": "2" }, "J"], "postprocess": function postprocess() {
+                return 'U2J';
+            } }, { "name": "class1_eia_code", "symbols": ["Q", { "literal": "3" }, "K"], "postprocess": function postprocess() {
+                return 'Q3K';
+            } }, { "name": "class1_eia_code", "symbols": ["P", { "literal": "3" }, "K"], "postprocess": function postprocess() {
                 return 'P3K';
             } }, { "name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": function postprocess(d) {
                 return d.join('').toUpperCase();
@@ -1534,11 +1548,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 var nearley = require('nearley');
 var grammar = require('./grammar');
 
-var assignAll = function assignAll(objs) {
+function assignAll(objs) {
   return objs.reduce(function (prev, obj) {
     return _extends(prev, obj);
   }, {});
-};
+}
 
 function parse(str) {
   var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart, { keepHistory: true });

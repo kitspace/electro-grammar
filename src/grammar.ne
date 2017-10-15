@@ -43,28 +43,36 @@ characteristic -> characteristic_ {% function(d) { return ({characteristic: d[0]
 characteristic_ -> class1 | class2
 
 class1 ->
-  C "0" G  {% function() { return 'C0G' } %}
-  | N P "0" {% function() { return 'C0G' } %}
+    class1_ceramic_name                          {% id %}
+  | class1_eia_code                              {% id %}
+  | class1_ceramic_name _ "/" _ class1_eia_code  {% id %}
+  | class1_eia_code _ "/" _ class1_ceramic_name  {% id %}
+
+class1_ceramic_name ->
+    C "0" G  {% function() { return 'C0G' } %}
   | P "100"  {% function() { return 'M7G' } %}
-  | M "7" G {% function() { return 'M7G' } %}
   | N "33"   {% function() { return 'H2G' } %}
-  | H "2" G {% function() { return 'H2G' } %}
   | N "75"   {% function() { return 'L2G' } %}
-  | L "2" G {% function() { return 'L2G' } %}
   | N "150"  {% function() { return 'P2H' } %}
-  | P "2" H {% function() { return 'P2H' } %}
   | N "220"  {% function() { return 'R2H' } %}
-  | R "2" H {% function() { return 'R2H' } %}
   | N "330"  {% function() { return 'S2H' } %}
-  | S "2" H {% function() { return 'S2H' } %}
   | N "470"  {% function() { return 'T2H' } %}
-  | T "2" H {% function() { return 'T2H' } %}
   | N "750"  {% function() { return 'U2J' } %}
-  | U "2" J {% function() { return 'U2J' } %}
   | N "1000" {% function() { return 'Q3K' } %}
-  | Q "3" K {% function() { return 'Q3K' } %}
   | N "1500" {% function() { return 'P3K' } %}
-  | P "3" K {% function() { return 'P3K' } %}
+
+class1_eia_code -> 
+  N P "0" {% function() { return 'C0G' } %}
+| M "7" G {% function() { return 'M7G' } %}
+| H "2" G {% function() { return 'H2G' } %}
+| L "2" G {% function() { return 'L2G' } %}
+| P "2" H {% function() { return 'P2H' } %}
+| R "2" H {% function() { return 'R2H' } %}
+| S "2" H {% function() { return 'S2H' } %}
+| T "2" H {% function() { return 'T2H' } %}
+| U "2" J {% function() { return 'U2J' } %}
+| Q "3" K {% function() { return 'Q3K' } %}
+| P "3" K {% function() { return 'P3K' } %}
 
 class2 -> class2_letter class2_number class2_code
   {% function(d) { return d.join('').toUpperCase() } %}

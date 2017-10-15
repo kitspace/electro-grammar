@@ -3,26 +3,36 @@
 (function () {
 function id(x) { return x[0]; }
 
-'use strict';
+    /*!
+     * modified from arr-flatten <https://github.com/jonschlinkert/arr-flatten>
+     *
+     * Copyright (c) 2014-2017, Jon Schlinkert.
+     * Released under the MIT License.
+     */
 
+    function _flatten(arr, res) {
+        var i = 0, cur
+        var len = arr.length
+        for (; i < len; i++) {
+            cur = arr[i]
+            Array.isArray(cur) ? _flatten(cur, res) : res.push(cur)
+        }
+        return res
+    }
 
-function flat(arr, res) {
-  var i = 0, cur;
-  var len = arr.length;
-  for (; i < len; i++) {
-    cur = arr[i];
-    Array.isArray(cur) ? flat(cur, res) : res.push(cur);
-  }
-  return res;
-}
+    function flatten (arr) {
+        return _flatten(arr, [])
+    }
 
-function flatten (arr) {
-  return flat(arr, []);
-}
+    function filter(d) {
+        return  d.filter(function(t) {
+            return t != null
+        })
+    }
 
-  var filter = function(d) { return  d.filter(function(t){ return t !== null }) }
-
-  var nuller = function() {return  null}
+    function nuller() {
+        return  null
+    }
 
 
   var toImperial = {
@@ -161,10 +171,10 @@ var grammar = {
         },
     {"name": "_$ebnf$1", "symbols": []},
     {"name": "_$ebnf$1", "symbols": ["_$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": function() { return null }},
+    {"name": "_", "symbols": ["_$ebnf$1"], "postprocess": nuller},
     {"name": "__$ebnf$1", "symbols": [/[\s]/]},
     {"name": "__$ebnf$1", "symbols": ["__$ebnf$1", /[\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": function() { return null }},
+    {"name": "__", "symbols": ["__$ebnf$1"], "postprocess": nuller},
     {"name": "A", "symbols": [{"literal":"A"}]},
     {"name": "A", "symbols": [{"literal":"a"}]},
     {"name": "B", "symbols": [{"literal":"B"}]},
@@ -360,38 +370,42 @@ var grammar = {
     {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": function(d) { return ({characteristic: d[0][0]}) }},
     {"name": "characteristic_", "symbols": ["class1"]},
     {"name": "characteristic_", "symbols": ["class2"]},
-    {"name": "class1", "symbols": ["C", {"literal":"0"}, "G"], "postprocess": function() { return 'C0G' }},
-    {"name": "class1", "symbols": ["N", "P", {"literal":"0"}], "postprocess": function() { return 'C0G' }},
-    {"name": "class1$string$1", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["P", "class1$string$1"], "postprocess": function() { return 'M7G' }},
-    {"name": "class1", "symbols": ["M", {"literal":"7"}, "G"], "postprocess": function() { return 'M7G' }},
-    {"name": "class1$string$2", "symbols": [{"literal":"3"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$2"], "postprocess": function() { return 'H2G' }},
-    {"name": "class1", "symbols": ["H", {"literal":"2"}, "G"], "postprocess": function() { return 'H2G' }},
-    {"name": "class1$string$3", "symbols": [{"literal":"7"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$3"], "postprocess": function() { return 'L2G' }},
-    {"name": "class1", "symbols": ["L", {"literal":"2"}, "G"], "postprocess": function() { return 'L2G' }},
-    {"name": "class1$string$4", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$4"], "postprocess": function() { return 'P2H' }},
-    {"name": "class1", "symbols": ["P", {"literal":"2"}, "H"], "postprocess": function() { return 'P2H' }},
-    {"name": "class1$string$5", "symbols": [{"literal":"2"}, {"literal":"2"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$5"], "postprocess": function() { return 'R2H' }},
-    {"name": "class1", "symbols": ["R", {"literal":"2"}, "H"], "postprocess": function() { return 'R2H' }},
-    {"name": "class1$string$6", "symbols": [{"literal":"3"}, {"literal":"3"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$6"], "postprocess": function() { return 'S2H' }},
-    {"name": "class1", "symbols": ["S", {"literal":"2"}, "H"], "postprocess": function() { return 'S2H' }},
-    {"name": "class1$string$7", "symbols": [{"literal":"4"}, {"literal":"7"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$7"], "postprocess": function() { return 'T2H' }},
-    {"name": "class1", "symbols": ["T", {"literal":"2"}, "H"], "postprocess": function() { return 'T2H' }},
-    {"name": "class1$string$8", "symbols": [{"literal":"7"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$8"], "postprocess": function() { return 'U2J' }},
-    {"name": "class1", "symbols": ["U", {"literal":"2"}, "J"], "postprocess": function() { return 'U2J' }},
-    {"name": "class1$string$9", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$9"], "postprocess": function() { return 'Q3K' }},
-    {"name": "class1", "symbols": ["Q", {"literal":"3"}, "K"], "postprocess": function() { return 'Q3K' }},
-    {"name": "class1$string$10", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
-    {"name": "class1", "symbols": ["N", "class1$string$10"], "postprocess": function() { return 'P3K' }},
-    {"name": "class1", "symbols": ["P", {"literal":"3"}, "K"], "postprocess": function() { return 'P3K' }},
+    {"name": "class1", "symbols": ["class1_ceramic_name"], "postprocess": id},
+    {"name": "class1", "symbols": ["class1_eia_code"], "postprocess": id},
+    {"name": "class1", "symbols": ["class1_ceramic_name", "_", {"literal":"/"}, "_", "class1_eia_code"], "postprocess": id},
+    {"name": "class1", "symbols": ["class1_eia_code", "_", {"literal":"/"}, "_", "class1_ceramic_name"], "postprocess": id},
+    {"name": "class1_ceramic_name", "symbols": ["C", {"literal":"0"}, "G"], "postprocess": function() { return 'C0G' }},
+    {"name": "class1_ceramic_name$string$1", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["P", "class1_ceramic_name$string$1"], "postprocess": function() { return 'M7G' }},
+    {"name": "class1_ceramic_name$string$2", "symbols": [{"literal":"3"}, {"literal":"3"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$2"], "postprocess": function() { return 'H2G' }},
+    {"name": "class1_ceramic_name$string$3", "symbols": [{"literal":"7"}, {"literal":"5"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$3"], "postprocess": function() { return 'L2G' }},
+    {"name": "class1_ceramic_name$string$4", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$4"], "postprocess": function() { return 'P2H' }},
+    {"name": "class1_ceramic_name$string$5", "symbols": [{"literal":"2"}, {"literal":"2"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$5"], "postprocess": function() { return 'R2H' }},
+    {"name": "class1_ceramic_name$string$6", "symbols": [{"literal":"3"}, {"literal":"3"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$6"], "postprocess": function() { return 'S2H' }},
+    {"name": "class1_ceramic_name$string$7", "symbols": [{"literal":"4"}, {"literal":"7"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$7"], "postprocess": function() { return 'T2H' }},
+    {"name": "class1_ceramic_name$string$8", "symbols": [{"literal":"7"}, {"literal":"5"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$8"], "postprocess": function() { return 'U2J' }},
+    {"name": "class1_ceramic_name$string$9", "symbols": [{"literal":"1"}, {"literal":"0"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$9"], "postprocess": function() { return 'Q3K' }},
+    {"name": "class1_ceramic_name$string$10", "symbols": [{"literal":"1"}, {"literal":"5"}, {"literal":"0"}, {"literal":"0"}], "postprocess": function joiner(d) {return d.join('');}},
+    {"name": "class1_ceramic_name", "symbols": ["N", "class1_ceramic_name$string$10"], "postprocess": function() { return 'P3K' }},
+    {"name": "class1_eia_code", "symbols": ["N", "P", {"literal":"0"}], "postprocess": function() { return 'C0G' }},
+    {"name": "class1_eia_code", "symbols": ["M", {"literal":"7"}, "G"], "postprocess": function() { return 'M7G' }},
+    {"name": "class1_eia_code", "symbols": ["H", {"literal":"2"}, "G"], "postprocess": function() { return 'H2G' }},
+    {"name": "class1_eia_code", "symbols": ["L", {"literal":"2"}, "G"], "postprocess": function() { return 'L2G' }},
+    {"name": "class1_eia_code", "symbols": ["P", {"literal":"2"}, "H"], "postprocess": function() { return 'P2H' }},
+    {"name": "class1_eia_code", "symbols": ["R", {"literal":"2"}, "H"], "postprocess": function() { return 'R2H' }},
+    {"name": "class1_eia_code", "symbols": ["S", {"literal":"2"}, "H"], "postprocess": function() { return 'S2H' }},
+    {"name": "class1_eia_code", "symbols": ["T", {"literal":"2"}, "H"], "postprocess": function() { return 'T2H' }},
+    {"name": "class1_eia_code", "symbols": ["U", {"literal":"2"}, "J"], "postprocess": function() { return 'U2J' }},
+    {"name": "class1_eia_code", "symbols": ["Q", {"literal":"3"}, "K"], "postprocess": function() { return 'Q3K' }},
+    {"name": "class1_eia_code", "symbols": ["P", {"literal":"3"}, "K"], "postprocess": function() { return 'P3K' }},
     {"name": "class2", "symbols": ["class2_letter", "class2_number", "class2_code"], "postprocess": function(d) { return d.join('').toUpperCase() }},
     {"name": "class2_letter", "symbols": ["X"]},
     {"name": "class2_letter", "symbols": ["Y"]},
