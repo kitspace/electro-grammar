@@ -8,7 +8,7 @@
     "build:lib": "babel src/ -d lib/",
     "build:cpl": "node prepare_cpl.js",
     "demo": "browserify docs/index.js > docs/bundle.js",
-    "build": "npm run build:grammar && npm run build:cpl && npm run build:lib",
+    "build": "npm run build:grammar && npm run build:lib",
     "pretest": "npm run build",
     "test": "nyc -- mocha --check-leaks",
     "coverage": "nyc report",

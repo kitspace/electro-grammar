@@ -81,13 +81,21 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
   })
   it('ignores extra words 3', () => {
-    const c = parse('capacitor 100nF 0603, warehouse 5')
+    const {component: c, ignored} = parse(
+      'capacitor 100nF 0603, warehouse 5',
+      {returnIgnored: true}
+    )
+    assert(ignored === 'warehouse 5')
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
   it('ignores extra words 4', () => {
-    const c = parse('adjalkjd 0603 akjdlkjda 100nF kajdlkja alkdjlkajd')
+    const {component: c, ignored} = parse(
+      'adjalkjd 0603 akjdlkjda 100nF kajdlkja alkdjlkajd',
+      {returnIgnored: true}
+    )
+    assert(ignored === 'adjalkjd akjdlkjda kajdlkja alkdjlkajd')
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
@@ -209,6 +217,12 @@ describe('SMD Capacitors', () => {
 describe('SMD Resistors', () => {
   it('parses a resistor', () => {
     const c = parse('1k 0603')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses a resistor with extra package sizes at the start', () => {
+    const c = parse('0603 0805 1k')
     assert(c.type === 'resistor')
     assert(c.resistance === 1000, 'resistance value is wrong')
     assert(c.size === '0603', 'size is wrong')
