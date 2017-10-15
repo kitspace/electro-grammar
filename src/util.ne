@@ -1,6 +1,6 @@
 #whitespace
-_  -> [\s]:*  {% nuller %}
-__ -> [\s]:+  {% nuller %}
+_  -> [\s]:* {% nuller %}
+__ -> [\s]:+ {% nuller %}
 
 @{%
     /*!
@@ -25,7 +25,7 @@ __ -> [\s]:+  {% nuller %}
     }
 
     function filter(d) {
-        return  d.filter(function(t) {
+        return d.filter(function(t) {
             return t != null
         })
     }

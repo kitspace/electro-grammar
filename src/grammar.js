@@ -25,7 +25,7 @@ function id(x) { return x[0]; }
     }
 
     function filter(d) {
-        return  d.filter(function(t) {
+        return d.filter(function(t) {
             return t != null
         })
     }
