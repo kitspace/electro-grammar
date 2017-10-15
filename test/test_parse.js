@@ -148,13 +148,13 @@ describe('SMD Capacitors', () => {
     assert(c.size === '0603', 'size is wrong')
     assert(c.characteristic === 'C0G', 'characteristic is wrong')
   })
-  it('parses characteristic C0G/NP0', () => {
-    const c = parse('100nF 0603 C0G/NP0')
-    assert(c.type === 'capacitor')
-    assert(c.capacitance === 100e-9, 'capacitance is wrong')
-    assert(c.size === '0603', 'size is wrong')
-    assert(c.characteristic === 'C0G', 'characteristic is wrong')
-  })
+  //it('parses characteristic C0G/NP0', () => {
+  //  const c = parse('100nF 0603 C0G/NP0')
+  //  assert(c.type === 'capacitor')
+  //  assert(c.capacitance === 100e-9, 'capacitance is wrong')
+  //  assert(c.size === '0603', 'size is wrong')
+  //  assert(c.characteristic === 'C0G', 'characteristic is wrong')
+  //})
   it('parses without metric prefix', () => {
     const c = parse('1F 0603 25V')
     assert(c.type === 'capacitor')
