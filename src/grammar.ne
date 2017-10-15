@@ -3,7 +3,9 @@
 @include "metric_prefix.ne"
 @include "package_size.ne"
 
-main -> component {% function(d) { return filter(flatten(d)) } %}
+main -> _ main_ _ {% function(d) { return filter(flatten(d)) } %}
+
+main_ -> packageSize {% type('unknown') %} | component
 
 component ->
     capacitor {% type('capacitor') %}

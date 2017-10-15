@@ -10,6 +10,9 @@ describe('parsing', () => {
   it('returns empty object on empty', () => {
     assert(parse('').type == null)
   })
+  it('returns unknown type when encountering package size', () => {
+    assert(parse('0603').type === 'unknown')
+  })
 })
 
 describe('SMD Capacitors', () => {
@@ -116,6 +119,36 @@ describe('SMD Capacitors', () => {
       {returnIgnored: true}
     )
     assert(ignored === 'warehouse')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('ignores extra words 7', () => {
+    const {component: c, ignored} = parse(
+      'x5527 100nF 0603, warehouse 5%',
+      {returnIgnored: true}
+    )
+    assert(ignored === 'x5527 warehouse')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('ignores extra words 8', () => {
+    const {component: c, ignored} = parse(
+      '5527 x 100nF 0603, warehouse 5%',
+      {returnIgnored: true}
+    )
+    assert(ignored === '5527 x warehouse')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('ignores extra words 9', () => {
+    const {component: c, ignored} = parse(
+      '5527 100nF 0603, warehouse 5%',
+      {returnIgnored: true}
+    )
+    assert(ignored === '5527 warehouse')
     assert(c.type === 'capacitor')
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
