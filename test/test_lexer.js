@@ -9,19 +9,14 @@ describe('lexer', () => {
     assert(t.value === '1k')
   })
   it('globs together numbers 2', () => {
+    lexer.reset('100 uF')
+    const t = lexer.next()
+    assert(t.value === '100uF')
+  })
+  it('leaves numbers globbed together', () => {
     lexer.reset('1k')
     const t = lexer.next()
     assert(t.value === '1k')
-  })
-  it('globs together numbers 3', () => {
-    lexer.reset('100 uF')
-    const t = lexer.next()
-    assert(t.value === '100uF')
-  })
-  it('globs together numbers 3', () => {
-    lexer.reset('100 uF')
-    const t = lexer.next()
-    assert(t.value === '100uF')
   })
   it('globs together all the various ways of saying micro', () => {
     const cases = [
@@ -35,6 +30,24 @@ describe('lexer', () => {
     ]
     cases.forEach(([result, description]) => {
       lexer.reset(description)
+      const t = lexer.next()
+      assert(t.value === result)
+    })
+  })
+  it('lexes', () => {
+    const description = 'adjalkjd 100 µF akjdlkjda 100µF 0603 kajdlkja 8000 alkdjlkajd boojjk'
+    const expected = ['adjalkjd', '100µF', 'akjdlkjda', '100µF', '0603kajdlkja', '8000alkdjlkajd', 'boojjk']
+    lexer.reset(description)
+    expected.forEach(result => {
+      const t = lexer.next()
+      assert(t.value === result)
+    })
+  })
+  it('can deal with multiple spaces', () => {
+    const description = 'adjalkjd 100   µF   akjdlkjda     100µF 0603 kajdlkja    8000 alkdjlkajd boojjk'
+    const expected = ['adjalkjd', '100µF', 'akjdlkjda', '100µF', '0603kajdlkja', '8000alkdjlkajd', 'boojjk']
+    lexer.reset(description)
+    expected.forEach(result => {
       const t = lexer.next()
       assert(t.value === result)
     })
