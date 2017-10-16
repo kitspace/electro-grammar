@@ -61,4 +61,32 @@ describe('lexer', () => {
       assert(t.value === result)
     })
   })
+  it("recognizes percent", () => {
+    const description = '10% +- 10%  ± 1 %'
+    const expected = ['10%', '+-10%', '±1%']
+    lexer.reset(description)
+    expected.forEach(result => {
+      const t = lexer.next()
+      assert(t.value === result)
+      assert(t.type === 'percent')
+    })
+  })
+  it("doesn't glob together percent plus and minus after a number", () => {
+    const description = '10 +/- 10% +- 10% 500 ± 1 %'
+    const expected = ['10', '+/-10%', '+-10%', '500', '±1%']
+    lexer.reset(description)
+    expected.forEach(result => {
+      const t = lexer.next()
+      assert(t.value === result)
+    })
+  })
+  it("deals with things already together", () => {
+    const description = '100k ohm 5 k'
+    const expected = ['100k', 'ohm', '5k']
+    lexer.reset(description)
+    expected.forEach(result => {
+      const t = lexer.next()
+      assert(t.value === result)
+    })
+  })
 })
