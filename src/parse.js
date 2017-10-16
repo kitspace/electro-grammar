@@ -1,3 +1,4 @@
+const moo     = require('moo')
 const nearley = require('nearley')
 const grammar = require('./grammar')
 const equals  = require('./equals')

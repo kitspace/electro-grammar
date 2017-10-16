@@ -18,6 +18,7 @@
     "test:sauce": "zuul -- test-lib/*.js"
   },
   "dependencies": {
+    "moo": "^0.4.3",
     "nearley": "https://github.com/kasbah/nearley#fix-include"
   },
   "devDependencies": {
