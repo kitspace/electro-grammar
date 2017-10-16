@@ -1,18 +1,16 @@
 const moo = require('moo')
 const nearley = require('nearley')
-const grammar = require('./grammar')
 const equals = require('./equals')
+
+const compiledGrammar = require('./grammar')
+const grammar = nearley.Grammar.fromCompiled(compiledGrammar)
 
 function assignAll(objs) {
     return objs.reduce((prev, obj) => Object.assign(prev, obj), {})
 }
 
 function parse(str, { returnIgnored } = {}) {
-    const parser = new nearley.Parser(
-        grammar.ParserRules,
-        grammar.ParserStart,
-        { keepHistory: true }
-    )
+    const parser = new nearley.Parser(grammar)
 
     const words = str
         .split(/;|,| /)

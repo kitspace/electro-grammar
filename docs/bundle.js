@@ -1086,34 +1086,34 @@ module.exports = [
 'use strict';
 
 function equals(c1, c2) {
-  c1 = c1 || {};
-  c2 = c2 || {};
-  if (!c1.type && !c2.type) {
-    return true;
-  }
-  if (c1.type !== c2.type) {
-    return false;
-  }
-  switch (c1.type) {
-    case 'resistor':
-      return sameResistor(c1, c2);
-    case 'capacitor':
-      return sameCapacitor(c1, c2);
-    case 'led':
-      return sameLED(c1, c2);
-  }
+    c1 = c1 || {};
+    c2 = c2 || {};
+    if (!c1.type && !c2.type) {
+        return true;
+    }
+    if (c1.type !== c2.type) {
+        return false;
+    }
+    switch (c1.type) {
+        case 'resistor':
+            return sameResistor(c1, c2);
+        case 'capacitor':
+            return sameCapacitor(c1, c2);
+        case 'led':
+            return sameLED(c1, c2);
+    }
 }
 
 function sameCapacitor(c1, c2) {
-  return c1.capacitance === c2.capacitance && c1.size === c2.size && c1.characteristic === c2.characteristic && c1.tolerance === c2.tolerance && c1.voltage_rating === c2.voltage_rating;
+    return c1.capacitance === c2.capacitance && c1.size === c2.size && c1.characteristic === c2.characteristic && c1.tolerance === c2.tolerance && c1.voltage_rating === c2.voltage_rating;
 }
 
 function sameResistor(c1, c2) {
-  return c1.resistance === c2.resistance && c1.size === c2.size && c1.tolerance === c2.tolerance && c1.power_rating === c2.power_rating;
+    return c1.resistance === c2.resistance && c1.size === c2.size && c1.tolerance === c2.tolerance && c1.power_rating === c2.power_rating;
 }
 
 function sameLED(c1, c2) {
-  return c1.color === c2.color && c1.size === c2.size;
+    return c1.color === c2.color && c1.size === c2.size;
 }
 
 module.exports = equals;
@@ -1514,54 +1514,54 @@ var capacitors = require('./cpl_capacitors');
 var leds = require('./cpl_leds');
 
 function matchCPL(component) {
-  component = component || {};
-  switch (component.type) {
-    case 'capacitor':
-      return matchCapacitor(component);
-    case 'resistor':
-      return matchResistor(component);
-    case 'led':
-      return matchLED(component);
-  }
-  return [];
+    component = component || {};
+    switch (component.type) {
+        case 'capacitor':
+            return matchCapacitor(component);
+        case 'resistor':
+            return matchResistor(component);
+        case 'led':
+            return matchLED(component);
+    }
+    return [];
 }
 
 function matchResistor(c) {
-  return resistors.reduce(function (prev, cpl) {
-    var resistance = cpl.resistance === c.resistance;
-    var size = c.size == null || cpl.size === c.size;
-    var tolerance = c.tolerance == null || cpl.tolerance <= c.tolerance;
-    var power_rating = c.power_rating == null || cpl.power_rating >= c.power_rating;
-    if (resistance && size && tolerance && power_rating) {
-      return prev.concat([cpl.cplid]);
-    }
-    return prev;
-  }, []);
+    return resistors.reduce(function (prev, cpl) {
+        var resistance = cpl.resistance === c.resistance;
+        var size = c.size == null || cpl.size === c.size;
+        var tolerance = c.tolerance == null || cpl.tolerance <= c.tolerance;
+        var power_rating = c.power_rating == null || cpl.power_rating >= c.power_rating;
+        if (resistance && size && tolerance && power_rating) {
+            return prev.concat([cpl.cplid]);
+        }
+        return prev;
+    }, []);
 }
 
 function matchCapacitor(c) {
-  return capacitors.reduce(function (prev, cpl) {
-    var capacitance = cpl.capacitance === c.capacitance;
-    var size = c.size == null || cpl.size === c.size;
-    var characteristic = c.characteristic == null || cpl.characteristic === c.characteristic;
-    var tolerance = c.tolerance == null || cpl.tolerance <= c.tolerance;
-    var voltage_rating = c.voltage_rating == null || cpl.voltage_rating >= c.voltage_rating;
-    if (capacitance && size && characteristic && tolerance && voltage_rating) {
-      return prev.concat([cpl.cplid]);
-    }
-    return prev;
-  }, []);
+    return capacitors.reduce(function (prev, cpl) {
+        var capacitance = cpl.capacitance === c.capacitance;
+        var size = c.size == null || cpl.size === c.size;
+        var characteristic = c.characteristic == null || cpl.characteristic === c.characteristic;
+        var tolerance = c.tolerance == null || cpl.tolerance <= c.tolerance;
+        var voltage_rating = c.voltage_rating == null || cpl.voltage_rating >= c.voltage_rating;
+        if (capacitance && size && characteristic && tolerance && voltage_rating) {
+            return prev.concat([cpl.cplid]);
+        }
+        return prev;
+    }, []);
 }
 
 function matchLED(c) {
-  return leds.reduce(function (prev, cpl) {
-    var color = c.color == null || cpl.color === c.color;
-    var size = c.size == null || cpl.size === c.size;
-    if (color && size) {
-      return prev.concat([cpl.cplid]);
-    }
-    return prev;
-  }, []);
+    return leds.reduce(function (prev, cpl) {
+        var color = c.color == null || cpl.color === c.color;
+        var size = c.size == null || cpl.size === c.size;
+        if (color && size) {
+            return prev.concat([cpl.cplid]);
+        }
+        return prev;
+    }, []);
 }
 
 module.exports = matchCPL;
@@ -1572,8 +1572,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var moo = require('moo');
 var nearley = require('nearley');
-var grammar = require('./grammar');
 var equals = require('./equals');
+
+var g = require('./grammar');
+var grammar = nearley.Grammar.fromCompiled(g);
 
 function assignAll(objs) {
     return objs.reduce(function (prev, obj) {
@@ -1585,7 +1587,7 @@ function parse(str) {
     var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
         returnIgnored = _ref.returnIgnored;
 
-    var parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart, { keepHistory: true });
+    var parser = new nearley.Parser(grammar);
 
     var words = str.split(/;|,| /).filter(function (word) {
         return word !== '';
@@ -1640,7 +1642,11 @@ function parse(str) {
                 info = parser.save();
             }
         }
-        return { component: _extends(prev.component, component), ignored: ignored, maybeIgnored: maybeIgnored };
+        return {
+            component: _extends(prev.component, component),
+            ignored: ignored,
+            maybeIgnored: maybeIgnored
+        };
     }, { component: {}, ignored: '', maybeIgnored: '' });
 
     var ignored = (r.ignored + r.maybeIgnored).trim();
