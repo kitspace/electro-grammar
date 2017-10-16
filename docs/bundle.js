@@ -1322,9 +1322,9 @@ module.exports = equals;
                 return d.join('');
             } }, { "name": "__metricSize", "symbols": ["__metricSize$string$1"] }, { "name": "__metricSize$string$2", "symbols": [{ "literal": "0" }, { "literal": "6" }, { "literal": "0" }, { "literal": "3" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "main", "symbols": ["component"], "postprocess": function postprocess(d) {
+            } }, { "name": "__metricSize", "symbols": ["__metricSize$string$2"] }, { "name": "main", "symbols": ["_", "main_", "_"], "postprocess": function postprocess(d) {
                 return filter(flatten(d));
-            } }, { "name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor') }, { "name": "component", "symbols": ["resistor"], "postprocess": type('resistor') }, { "name": "component", "symbols": ["led"], "postprocess": type('led') }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$1", "cSpecs"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$2", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs"] }, { "name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id }, { "name": "cap$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "main_", "symbols": ["packageSize"], "postprocess": type('unknown') }, { "name": "main_", "symbols": ["component"] }, { "name": "component", "symbols": ["capacitor"], "postprocess": type('capacitor') }, { "name": "component", "symbols": ["resistor"], "postprocess": type('resistor') }, { "name": "component", "symbols": ["led"], "postprocess": type('led') }, { "name": "capacitor", "symbols": ["cSpecs", "capacitance", "cSpecs"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"] }, { "name": "capacitor$subexpression$1", "symbols": ["capacitance"] }, { "name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$1", "cSpecs"] }, { "name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id }, { "name": "cap$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "cap$ebnf$2", "symbols": ["P"], "postprocess": id }, { "name": "cap$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
@@ -1593,45 +1593,53 @@ function parse(str) {
     });
 
     var info = parser.save();
+    var initialInfo = parser.save();
 
     var r = words.reduce(function (prev, word) {
         // if it fails, roll it back
         var ignored = prev.ignored;
         var maybeIgnored = prev.maybeIgnored;
         var failed = false;
+        var hasPrev = Object.keys(prev.component).length !== 0;
         try {
             parser.feed(word);
         } catch (e) {
-            failed = true;
-            parser.restore(info);
-            // if it has failed, this word and any numbers coming before it
-            // were definitely ignored
-            ignored += maybeIgnored + word;
-            maybeIgnored = '';
+            if (!hasPrev) {
+                try {
+                    parser.restore(initialInfo);
+                    parser.feed(word);
+                    ignored += maybeIgnored;
+                } catch (e) {
+                    failed = true;
+                    parser.restore(info);
+                    ignored += maybeIgnored + word;
+                    maybeIgnored = '';
+                }
+            } else {
+                failed = true;
+                parser.restore(info);
+                ignored += maybeIgnored + word;
+                maybeIgnored = '';
+            }
         }
         var component = assignAll(parser.results[0] || []);
         var empty = Object.keys(component).length === 0;
-        if (empty) {
-            component = null;
-        }
         if (!failed) {
-            var hasPrev = Object.keys(prev.component).length !== 0;
             var eq = equals(component, prev.component);
-            maybeIgnored = '';
-            if (hasPrev && (eq || empty)) {
+            var isNumber = !isNaN(parseFloat(word));
+            if (isNumber && (eq || empty)) {
                 // the parser waits for further input on numbers so we can't be
-                // sure if it has been ignored
-                var isNumber = !isNaN(parseFloat(word));
-                if (isNumber) {
-                    maybeIgnored = word;
-                } else {
-                    ignored += word;
-                }
+                // sure it has been ignored
+                maybeIgnored += word;
+            } else if (hasPrev && (eq || empty)) {
+                ignored += maybeIgnored + word;
+                maybeIgnored = '';
             } else {
+                maybeIgnored = '';
                 info = parser.save();
             }
         }
-        return { component: component || prev.component, ignored: ignored, maybeIgnored: maybeIgnored };
+        return { component: _extends(prev.component, component), ignored: ignored, maybeIgnored: maybeIgnored };
     }, { component: {}, ignored: '', maybeIgnored: '' });
 
     var ignored = (r.ignored + r.maybeIgnored).trim();

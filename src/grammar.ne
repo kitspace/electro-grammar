@@ -27,8 +27,6 @@ component ->
 # if it starts with 'c' or 'capacitor' then F or farad can be ommitted
 capacitor ->
     cSpecs capacitance cSpecs
-  | cSpecs capacitance cSpecs
-  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs
   | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs
 
 cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% nuller %}
