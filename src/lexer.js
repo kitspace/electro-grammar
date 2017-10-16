@@ -2,7 +2,7 @@ const moo = require('moo')
 
 const lexer = moo.compile({
     number: {
-        match: /\d+?\.?\d*?\s*\D\S*(?:\s+|$)/,
+        match: /(?:\+\/-|±|\+-)?\s*\d+?\.?\d*?\s*\D\S*(?:\s+|$)/,
         value: x => x.split(' ').join(''),
     },
     word: {

@@ -52,4 +52,13 @@ describe('lexer', () => {
       assert(t.value === result)
     })
   })
+  it('lexes percent numbers correctly', () => {
+    const description = '+/- 10% +/- 10 %  ± 1 % +- 5% +-5%'
+    const expected = ['+/-10%', '+/-10%', '±1%', '+-5%', '+-5%']
+    lexer.reset(description)
+    expected.forEach(result => {
+      const t = lexer.next()
+      assert(t.value === result)
+    })
+  })
 })
