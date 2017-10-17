@@ -9,7 +9,7 @@ function assignAll(objs) {
     return objs.reduce((prev, obj) => Object.assign(prev, obj), {})
 }
 
-function parse(str, { returnIgnored } = {}) {
+function parse(str) {
     const parser = new nearley.Parser(grammar)
 
     const words = str
@@ -74,13 +74,10 @@ function parse(str, { returnIgnored } = {}) {
         { component: {}, ignored: '', maybeIgnored: '' }
     )
 
-    const ignored = (r.ignored + r.maybeIgnored).trim()
-
-    if (returnIgnored) {
-        return { component: r.component, ignored }
+    return {
+        component: r.component,
+        ignored: (r.ignored + r.maybeIgnored).trim(),
     }
-
-    return r.component
 }
 
 module.exports = parse

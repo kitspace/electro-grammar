@@ -1574,8 +1574,8 @@ var moo = require('moo');
 var nearley = require('nearley');
 var equals = require('./equals');
 
-var g = require('./grammar');
-var grammar = nearley.Grammar.fromCompiled(g);
+var compiledGrammar = require('./grammar');
+var grammar = nearley.Grammar.fromCompiled(compiledGrammar);
 
 function assignAll(objs) {
     return objs.reduce(function (prev, obj) {
@@ -1584,9 +1584,6 @@ function assignAll(objs) {
 }
 
 function parse(str) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        returnIgnored = _ref.returnIgnored;
-
     var parser = new nearley.Parser(grammar);
 
     var words = str.split(/;|,| /).filter(function (word) {
@@ -1649,13 +1646,10 @@ function parse(str) {
         };
     }, { component: {}, ignored: '', maybeIgnored: '' });
 
-    var ignored = (r.ignored + r.maybeIgnored).trim();
-
-    if (returnIgnored) {
-        return { component: r.component, ignored: ignored };
-    }
-
-    return r.component;
+    return {
+        component: r.component,
+        ignored: (r.ignored + r.maybeIgnored).trim()
+    };
 }
 
 module.exports = parse;

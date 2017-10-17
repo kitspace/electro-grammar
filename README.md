@@ -16,7 +16,7 @@ const {parse, matchCPL} = require('electro-grammar')
 Parses capacitance, package size, characteristic, tolerance and voltage rating for capacitors.
 
 ```js
-> parse('100nF 0603 C0G 10% 25V')
+> parse('100nF 0603 C0G 10% 25V').component
 { type: 'capacitor',
   capacitance: 1e-7,
   size: '0603',
@@ -30,11 +30,11 @@ For [class 2][CLASS-2] only EIA letter codes are understood.
 In both cases only EIA letter codes are returned.
 
 ```js
-> parse('10pF C0G/NP0')
+> parse('10pF C0G/NP0').component
 { type: 'capacitor', capacitance: 1e-11, characteristic: 'C0G' }
-> parse('10pF NP0')
+> parse('10pF NP0').component
 { type: 'capacitor', capacitance: 1e-11, characteristic: 'C0G' }
-> parse('10pF X7R')
+> parse('10pF X7R').component
 { type: 'capacitor', capacitance: 1e-11, characteristic: 'X7R' }
 ```
 
@@ -42,7 +42,7 @@ In both cases only EIA letter codes are returned.
 Parses resistance, package size, tolerance and power rating for resistors.
 
 ```js
-> parse('1k 0805 5% 125mW')
+> parse('1k 0805 5% 125mW').component
 { type: 'resistor',
   resistance: 1000,
   size: '0805',
@@ -53,17 +53,17 @@ Parses resistance, package size, tolerance and power rating for resistors.
 Electro-grammar supports several different ways to express resistance.
 
 ```js
-> parse('1.5k')
+> parse('1.5k').component
 { type: 'resistor', resistance: 1500 }
-> parse('1k5')
+> parse('1k5').component
 { type: 'resistor', resistance: 1500 }
-> parse('500R')
+> parse('500R').component
 { type: 'resistor', resistance: 500 }
-> parse('1500 ohm')
+> parse('1500 ohm').component
 { type: 'resistor', resistance: 1500 }
-> parse('1500.0 ohm')
+> parse('1500.0 ohm').component
 { type: 'resistor', resistance: 1500 }
-> parse('1500 Ω')
+> parse('1500 Ω').component
 { type: 'resistor', resistance: 1500 }
 ```
 
@@ -72,12 +72,12 @@ Electro-grammar supports several different ways to express resistance.
 LEDs need to include the word 'LED' or 'led'.
 
 ```js
-> parse('LED red')
-{ color: 'red', type: 'led' }
-> parse('LED 0603')
-{ size: '0603', type: 'led' }
-> parse('green led 1206')
-{ color: 'green', type: 'led', size: '1206' }
+> parse('LED red').component
+{ type: 'led', color: 'red' }
+> parse('LED 0603').component
+{ type: 'led', size: '0603' }
+> parse('green led 1206').component
+{ type: 'led', color: 'green', size: '1206' }
 ```
 
 
@@ -86,59 +86,62 @@ LEDs need to include the word 'LED' or 'led'.
 Converts all units to floating point numbers.
 
 ```js
-> parse('100nF')
+> parse('100nF').component
 { type: 'capacitor', capacitance: 1e-7 }
-> parse('0.1uF')
+> parse('0.1uF').component
 { type: 'capacitor', capacitance: 1e-7 }
 ```
 
 The order of the terms doesn't matter.
 
 ```js
-> parse('1% 0603 1uF')
+> parse('1% 0603 1uF').component
 { type: 'capacitor'
   capacitance: 0.000001,
   tolerance: 1,
   size: "0603" }
-> parse('0603 1% 1uF')
+> parse('0603 1% 1uF').component
 { type: 'capacitor',
   capacitance: 0.000001,
   tolerance: 1,
   size: "0603" }
 ```
 
-If no match is found and empty object is returned.
+If no match is found component is an empty object.
 
 ```js
-> parse('')
-{}
-> parse('NE555P')
-{}
+> parse('').component
+{ component: {}, ignored: '' }
+> parse('NE555P').component
+{ component: {}, ignored: 'NE555P' }
 ```
 
-But invalid input types will throw.
+Invalid input types will throw.
 
 ```js
 > parse({})
 TypeError: str.split is not a function
 ```
 
-Text that is not part of the grammar is simply ignored.
+Any text not recognized as part of the grammar is returned in the ignored field.
 
 ```js
 > parse('NE555P 1uF')
-{ type: 'capacitor', capacitance: 0.000001 }
+{ component: { type: 'capacitor', capacitance: 0.000001 },
+  ignored: 'NE555P' }
 > parse('these words 1k are ignored 0805')
-{ type: 'resistor', resistance: 1000, size: '0805' }
+{ component: { type: 'resistor', resistance: 1000, size: '0805' },
+  ignored: 'these words are ignored' }
 ```
 
-You can use metric package sizes as long as you make it clear by using the `metric` keyword.
-Output for package sizes is always in imperial.
+You can use metric package sizes but if it's ambigious you have to make it clear by using the `metric` keyword. Output for package sizes is always in imperial.
 
 ```js
-> parse('1k metric 0603')
+> parse('1k 1608').component
+{ type: 'resistor', resistance: 1000, size: '0603' }
+> parse('1k metric 0603').component
 { type: 'resistor', resistance: 1000, size: '0201' }
-> parse('1k 0603 metric')
+> parse('1k 0603 metric').component
 { type: 'resistor', resistance: 1000, size: '0201' }
 ```
 
@@ -148,7 +151,7 @@ You could match these against [CPL data][CPL-DATA] or search for them on Octopar
 If no matches are found or the function is given invalid input an empty array is returned.
 
 ```js
-> c = parse('0.1uF 0805 25V')
+> c = parse('0.1uF 0805 25V').component
 { type: 'capacitor',
   capacitance: 1e-7,
   size: '0805',
@@ -156,13 +159,13 @@ If no matches are found or the function is given invalid input an empty array is
 > matchCPL(c)
 [ 'CPL-CAP-X7R-0805-100NF-50V' ]
 
-> r = parse('10k 0603')
+> r = parse('10k 0603').component
 { type: 'resistor', resistance: 10000, size: '0603' }
 > matchCPL(r)
 [ 'CPL-RES-0603-10K-0.1W' ]
 
 > // I don't think it's possible to make such a resistor
-> r = parse('1k 1000000W')
+> r = parse('1k 1000000W').component
 { type: 'resistor', resistance: 1000, power_rating: 1000000 }
 > matchCPL(r)
 []
