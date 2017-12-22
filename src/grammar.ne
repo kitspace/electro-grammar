@@ -5,12 +5,17 @@
 
 main -> _ main_ _ {% function(d) { return filter(flatten(d)) } %}
 
-main_ -> packageSize {% type('unknown') %} | component
+main_ -> component
 
 component ->
-    capacitor {% type('capacitor') %}
-  | resistor {% type('resistor') %}
-  | led {% type('led') %}
+    capacitor      {% type('capacitor') %}
+  | resistor       {% type('resistor')  %}
+  | led            {% type('led')       %}
+  | packageSize    {% type('unknown')   %}
+  | tolerance      {% type('unknown')   %}
+  | voltage_rating {% type('unknown')   %}
+  | cap_           {% type('capacitor') %}
+  | res_           {% type('resistor')  %}
 
 @{%
     function type(t) {
@@ -29,7 +34,8 @@ capacitor ->
     cSpecs capacitance cSpecs
   | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs
 
-cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% nuller %}
+cap -> cap_ __  {% nuller %}
+cap_ -> "c"i | "cap"i | "capacitor"i
 
 cSpecs -> (_ cSpec _):* | __
 
@@ -102,7 +108,10 @@ farad -> F {% nuller %} | F A R A D {% nuller %}
 
 ## Resistors ##
 
-resistor -> rSpecs resistance rSpecs
+resistor -> res:? rSpecs resistance rSpecs
+
+res -> res_ __ {% nuller %}
+res_ -> "r"i | "res"i | "resistor"i
 
 
 rSpecs -> (_ rSpec _):* | __
