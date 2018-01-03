@@ -33,6 +33,7 @@ In as much as possible the output should match that of the existing JS implement
 
 ## Open Questions
 
+- Is floating point a good unit for capcitance, resistance e.t.c.? I noticed some floating point errors in the Python port when using them for calculation. What's a good alternative?
 - Should we use Antlr or Pest or something else?
 - Should we align the types with Octopart's taxonomy? (e.g. browsing parts from https://octopart.com)
 
