@@ -1,3 +1,43 @@
+# Electro Grammar Next
+
+## Goals
+
+- Parse descriptions of common electronic components
+  - Primary:
+    - Resistors
+    - Capacitors
+    - LEDs
+  - Secondary
+    - Inductors
+    - Transistors
+  - Tertiary:
+    - Try and cover the [Common Parts Library][CPL]
+- Be usable from multiple languages:
+  - Primary:
+    - Javascript (Browser & Node)
+    - Python
+    - Go
+    - Java
+  - Optional:
+    - Rust
+    - Haskell
+
+## Output Details
+In as much as possible the output should match that of the existing JS implementation except for:
+
+- Unused i.e. ignored input should be returned. I made a [demo]( http://cloud.monostable.co.uk/egignore/) of an initial implementation but we need to change the lexing strategy to eek out th edge cases
+- The grammar itself should work on "incomplete" descriptions i.e. component specs. E.g. the input `50V` should result in `{voltage_rating: 50}`.
+- `size` should be renamed to `package`
+- `characteristic` should be renamed to `dielectric` or `capacitor_dielectric`
+
+
+## Open Questions
+
+- Should we use Antlr or Pest or something else?
+- Should we align the types with Octopart's taxonomy? (e.g. browsing parts from https://octopart.com)
+
+---
+
 # Electro Grammar [![Build Status][BADGE]][BUILD]
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/electro-grammar.svg)](https://saucelabs.com/u/electro-grammar)
