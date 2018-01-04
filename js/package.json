@@ -4,12 +4,8 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "scripts": {
-    "build:grammar": "nearleyc src/grammar.ne --out src/grammar.js",
-    "build:lib": "babel src/ -d lib/",
-    "build:cpl": "node prepare_cpl.js",
-    "demo": "browserify docs/index.js > docs/bundle.js",
-    "build": "npm run build:grammar && npm run build:lib",
-    "pretest": "npm run build",
+    "build:cpl": "node ../prepare_cpl.js",
+    "demo": "cp demo/{index.html,favicon.ico} ../ && browserify demo/index.js > ../bundle.js",
     "test": "nyc -- mocha --check-leaks",
     "coverage": "nyc report",
     "coverage:html": "nyc report --reporter=html",
@@ -18,8 +14,6 @@
     "test:sauce": "zuul -- test-lib/*.js"
   },
   "dependencies": {
-    "moo": "^0.4.3",
-    "nearley": "https://github.com/kasbah/nearley#fix-include"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
