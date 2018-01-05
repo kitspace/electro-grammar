@@ -1,8 +1,19 @@
-java:
-	antlr4 electro_grammar/ElectroGrammar.g4 -o java
-	javac java/electro_grammar/*.java -d java/electro_grammar
+ANTLR=antlr4 -Xexact-output-dir
+GRAMMAR=src/ElectroGrammar.g4
 
-python3:
-	antlr4 -Dlanguage=Python3 electro_grammar/ElectroGrammar.g4 -o python3
+java: $(GRAMMAR)
+	$(ANTLR) $< -o java/
+	javac java/*.java -d java/
 
-.PHONY: python3 java
+clean-java:
+	rm -f java/*
+
+python3: $(GRAMMAR)
+	$(ANTLR) -Dlanguage=Python3 $< -o python3/
+
+clean-python3:
+	rm -f python3/*
+
+clean: clean-java clean-python3
+
+.PHONY: python3 java clean-python3 clean-java clean
