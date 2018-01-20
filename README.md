@@ -174,6 +174,11 @@ If no matches are found or the function is given invalid input an empty array is
 []
 ```
 
+## License
+
+Electro Grammar is currently licensed under the AGPLv3. See the
+[LICENSE.md](LICENSE.md) file for details.
+
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
 [BADGE]: https://travis-ci.org/monostable/electro-grammar.svg?branch=master
