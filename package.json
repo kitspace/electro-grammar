@@ -1,0 +1,6 @@
+{
+  "name": "_electro-grammar",
+  "devDependencies": {
+    "js-yaml": "^3.9.1"
+  }
+}
