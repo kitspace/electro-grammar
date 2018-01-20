@@ -1,4 +1,4 @@
-const nearley = require('nearley')
+/*const nearley = require('nearley')
 const assert = require('better-assert')
 
 const grammar = require('../lib/grammar')
@@ -66,3 +66,4 @@ describe('grammar', () => {
         assert(p.results.length === 0, 'has a result')
     })
 })
+*/
