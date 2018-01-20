@@ -5,6 +5,8 @@
 grammar ElectroGrammar;
 import Alphabet;
 
+electro_grammar : capacitance;
+
 capacitance : NUMBER CPREFIX FARAD?;
 
 fragment DIGIT: [0-9];

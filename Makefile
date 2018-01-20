@@ -2,7 +2,7 @@ ANTLR=antlr4 -Xexact-output-dir
 GRAMMAR=src/ElectroGrammar.g4
 GRAMMAR_FILES=$(wildcard src/*.g4)
 
-all: js
+all: js python3
 
 java: $(GRAMMAR) $(GRAMMAR_FILES)
 	$(ANTLR) $< -o java/
@@ -11,11 +11,12 @@ java: $(GRAMMAR) $(GRAMMAR_FILES)
 clean-java:
 	rm -f java/*
 
+
 python3: $(GRAMMAR) $(GRAMMAR_FILES)
 	$(ANTLR) -Dlanguage=Python3 $< -o python3/
 
 clean-python3:
-	rm -f python3/*
+	rm -f python3/ElectroGrammar*
 
 
 js: $(GRAMMAR) $(GRAMMAR_FILES)
@@ -23,6 +24,7 @@ js: $(GRAMMAR) $(GRAMMAR_FILES)
 
 clean-js:
 	rm -f js/lib/ElectroGrammar*
+
 
 clean: clean-java clean-python3 clean-js
 

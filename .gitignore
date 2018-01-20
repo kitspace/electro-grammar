@@ -2,3 +2,6 @@ coverage/
 .nyc_output/
 node_modules/
 test-lib/
+
+js/**/ElectroGrammar*
+python3/**/ElectroGrammar*
