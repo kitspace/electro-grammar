@@ -1,6 +1,6 @@
-/*const assert = require('better-assert');
+const assert = require('better-assert');
 
-const {parse} = require('../lib/index');
+const {parse} = require('../lib/lax_parser')
 
 describe('parsing', () => {
     it("doesn't parse nonsense", () => {
@@ -267,6 +267,7 @@ describe('SMD Capacitors', () => {
     })
 })
 
+/*
 describe('SMD Resistors', () => {
     it('parses a resistor', () => {
         const c = parse('1k 0603').component
