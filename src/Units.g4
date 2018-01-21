@@ -2,15 +2,15 @@ grammar Units;
 import Alphabet;
 
 
-unit: voltage
+unit: (voltage
     | current
     | power
-    | resistance
+    /*| resistance*/
     | capacitance
     | inductance
     | frequency
     | time
-    | temperature;
+    | temperature);
 
 
 fragment DIGIT: [0-9];
@@ -30,11 +30,11 @@ tolerance: PLUSMINUS? NUMBER '%';
 PLUSMINUS: '+/-' | '±' | '+-';
 
 
-voltage: NUMBER VPREFIX? VOLT tolerance?;
+voltage: NUMBER (VPREFIX? VOLT) tolerance?;
 VPREFIX: KILO | MILI;
-VOLT: V | V O L T;
+VOLT: V O L T | V;
 
-current: NUMBER APREFIX? AMPERE tolerance?;
+current: NUMBER (APREFIX? AMPERE) tolerance?;
 APREFIX: MILI | MICRO | NANO | PICO;
 AMPERE: A | A M P E R E;
 
@@ -42,7 +42,7 @@ power: NUMBER PPREFIX? WATT tolerance?;
 PPREFIX: MILI;
 WATT: W | W A T T;
 
-resistance: NUMBER RPREFIX? OHM tolerance?;
+resistance: NUMBER RPREFIX? OHM? tolerance?;
 RPREFIX: MEGA | KILO | MILI;
 OHM: R | '\u{2126}' | O H M;
 
