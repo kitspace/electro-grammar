@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+java -jar "$TRAVIS_BUILD_DIR/travis/antlr-4.7.1-complete.jar" $@
