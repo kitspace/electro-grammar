@@ -2,7 +2,7 @@ const assert = require('better-assert');
 
 const {parse} = require('../lib/index');
 
-describe('Capacitance', () => {
+describe('strict capacitance', () => {
   it('parses uF correctly', () => {
     const cases = [
       '10uF',
