@@ -10,8 +10,8 @@ describe('Capacitance', () => {
 
     cases.forEach((text) => {
       const obj = parse(text);
-      console.log(text, obj['capacitance']);
-      assert(obj['capacitance'] === 10e-5);
+      console.log(text, obj.capacitance);
+      assert(obj.capacitance === 10e-5);
     });
   });
 
@@ -22,8 +22,8 @@ describe('Capacitance', () => {
 
     cases.forEach((text) => {
       const obj = parse(text);
-      console.log(text, obj['capacitance']);
-      assert(obj['capacitance'] === 10e-8);
+      console.log(text, obj.capacitance);
+      assert(obj.capacitance === 10e-8);
     });
   });
 
@@ -34,8 +34,8 @@ describe('Capacitance', () => {
 
     cases.forEach((text) => {
       const obj = parse(text);
-      console.log(text, obj['capacitance']);
-      assert(obj['capacitance'] === 10e-11);
+      console.log(text, obj.capacitance);
+      assert(obj.capacitance === 10e-11);
     });
   });
 });
