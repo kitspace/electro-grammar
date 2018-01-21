@@ -9,10 +9,10 @@ class ElectroGrammarToObjectListener extends ElectroGrammarListener {
     this.obj = {};
   }
   enterCapacitance(ctx) {
-    const cprefix_lookup = {u: 10e-6, n: 10e-9, p: 10e-12};
-    const number = Number(ctx.NUMBER().getText());
+    const cprefix_lookup = {u: 'e-6', n: 'e-9', p: 'e-12'};
+    const number = ctx.NUMBER().getText();
     const cprefix = cprefix_lookup[ctx.CPREFIX().getText()];
-    this.obj.capacitance = number * cprefix;
+    this.obj.capacitance = Number(number + cprefix);
     this.obj.type = 'capacitor';
   }
 }
