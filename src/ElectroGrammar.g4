@@ -3,10 +3,8 @@
  */
 
 grammar ElectroGrammar;
-import PackageSize, Units;
+import Passive, Semi;
 
-electro_grammar : capacitor;
+electro_grammar: (passive | semi) EOF;
 
-capacitor : capacitance package_size?;
-
-WHITESPACE : [\p{White_Space}] -> skip;
+WHITESPACE: [\p{White_Space}] -> skip;
