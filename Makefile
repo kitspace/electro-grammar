@@ -13,10 +13,10 @@ clean-java:
 
 
 python3: $(GRAMMAR) $(GRAMMAR_FILES)
-	$(ANTLR) -Dlanguage=Python3 $< -o python3/
+	$(ANTLR) -Dlanguage=Python3 $< -o python3/electro_grammar/
 
 clean-python3:
-	rm -f python3/ElectroGrammar*
+	rm -f python3/electro_grammar/ElectroGrammar*
 
 
 js: $(GRAMMAR) $(GRAMMAR_FILES)
