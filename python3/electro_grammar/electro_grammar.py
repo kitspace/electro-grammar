@@ -85,6 +85,9 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
     def exitTemperature(self, ctx):
         self.obj['temperature'] = handle_unit(ctx)
 
+    def exitTolerance(self, ctx):
+        self.obj['tolerance'] = handle_unit(ctx)
+
 
 def get_parser(start_rule):
     def parse(input):
