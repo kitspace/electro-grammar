@@ -6,8 +6,8 @@ passive: resistor | capacitor | inductor | oscillator;
 
 
 resistor: resistance rspec*;
-rspec: r_type | package_size | power | POT;
-r_type: POT;
+rspec: rtype | package_size | power;
+rtype: POT;
 POT: P O T | P O T E N T I O M E T E R;
 
 capacitor: capacitance cspec*;
