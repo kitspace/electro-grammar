@@ -1,4 +1,6 @@
 from antlr4 import *
+from antlr4.error.DiagnosticErrorListener import DiagnosticErrorListener
+from antlr4.atn.PredictionMode import PredictionMode
 from decimal import Decimal
 from electro_grammar.ElectroGrammarLexer import ElectroGrammarLexer
 from electro_grammar.ElectroGrammarListener import ElectroGrammarListener
@@ -32,6 +34,13 @@ def parse(input):
     lexer = ElectroGrammarLexer(input)
     stream = CommonTokenStream(lexer)
     parser = ElectroGrammarParser(stream)
+
+    # adding ambiguity diagnostics, see antlr book page 157
+    # https://github.com/antlr/antlr4/issues/2206
+    parser.removeErrorListeners()
+    parser.addErrorListener(DiagnosticErrorListener())
+    parser._interp.predictionMode = PredictionMode.LL_EXACT_AMBIG_DETECTION
+
     tree = parser.electro_grammar()
     listener = ElectroGrammarToObjectListener()
     walker = ParseTreeWalker()
