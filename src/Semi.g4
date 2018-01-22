@@ -12,10 +12,10 @@ fragment CODE: [a-zA-Z0-9];
 diode: DIODE? dspec+;
 
 DIODE: D | D I O D E;
-dspec: diode_type | DIODE_CODE;
+dspec: diode_type; /*| diode_code;*/
 
 diode_type: signal | rectifier | led | schottky | zener;
-DIODE_CODE: '1' N CODE+;
+/* diode_code: '1' N CODE+; */
 
 
 signal: SIGNAL;
@@ -48,10 +48,10 @@ ZENER: Z | Z E N | Z E N E R;
 transistor: TRANSISTOR? tspec+;
 
 TRANSISTOR: T | T R A N | T R A N S I S T O R;
-tspec: transistor_type | TRANSISTOR_CODE;
+tspec: transistor_type; /*| transistor_code;*/
 
 transistor_type: bjt | mos;
-TRANSISTOR_CODE: '2' N CODE+;
+/*transistor_code: '2' N CODE+;*/
 
 
 bjt: BJT? bjt_type;
