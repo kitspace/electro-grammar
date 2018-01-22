@@ -283,3 +283,123 @@ class ParsePassiveTests(unittest.TestCase):
         assert osc['frequency'] == 16 * mega
         assert osc['tolerance'] == 1
         assert osc['capacitance'] == 12 * pico
+
+
+class ParseDiodeTests(unittest.TestCase):
+    def test_parse_code(self):
+        parse = parser('electro_grammar', key=False)
+        d = parse('1N4148')
+        assert d['type'] == 'diode'
+        assert d['code'] == '1N4148'
+
+    def test_parse_signal(self):
+        parse = parser('electro_grammar', key=False)
+        d = parse('sig')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'signal'
+
+        d = parse('sig 1N4148')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'signal'
+        assert d['code'] == '1N4148'
+
+        d = parse('1N4148 sig')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'signal'
+        assert d['code'] == '1N4148'
+
+    def test_parse_rectifier(self):
+        parse = parser('electro_grammar', key=False)
+        d = parse('rect')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'rectifier'
+
+        d = parse('rect 1N4007')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'rectifier'
+        assert d['code'] == '1N4007'
+
+        d = parse('1N4007 rect')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'rectifier'
+        assert d['code'] == '1N4007'
+
+    def test_parse_schottky(self):
+        parse = parser('electro_grammar', key=False)
+        d = parse('sk')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'schottky'
+
+        d = parse('sk BAT54S')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'schottky'
+        assert d['code'] == 'BAT54S'
+
+        d = parse('BAT54S sk')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'schottky'
+        assert d['code'] == 'BAT54S'
+
+    def test_parse_led(self):
+        parse = parser('electro_grammar', key=False)
+        d = parse('led white')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'led'
+        assert d['color'] == 'white'
+
+    def test_parse_zener(self):
+        parse = parser('electro_grammar', key=False)
+        d = parse('z 5V')
+        assert d['type'] == 'diode'
+        assert d['dtype'] == 'zener'
+        assert d['voltage'] == 5
+
+
+class ParseTransistorTests(unittest.TestCase):
+    def test_parse_code(self):
+        parse = parser('electro_grammar', key=False)
+        q = parse('2N2222')
+        assert q['type'] == 'transistor'
+        assert q['code'] == '2N2222'
+
+    def test_parse_npn(self):
+        parse = parser('electro_grammar', key=False)
+        q = parse('npn 2N2222')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'npn'
+        assert q['code'] == '2N2222'
+
+        q = parse('2N2222 npn')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'npn'
+        assert q['code'] == '2N2222'
+
+    def test_parse_pnp(self):
+        parse = parser('electro_grammar', key=False)
+        q = parse('pnp BC547')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'pnp'
+        assert q['code'] == 'BC547'
+
+        q = parse('BC547 pnp')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'pnp'
+        assert q['code'] == 'BC547'
+
+    def test_parse_nmos(self):
+        parse = parser('electro_grammar', key=False)
+        q = parse('nmos 2N7000')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'nmos'
+        assert q['code'] == '2N7000'
+
+        q = parse('2N7000 nmos')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'nmos'
+        assert q['code'] == '2N7000'
+
+    def test_parse_pmos(self):
+        parse = parser('electro_grammar', key=False)
+        q = parse('pmos')
+        assert q['type'] == 'transistor'
+        assert q['ttype'] == 'pmos'
