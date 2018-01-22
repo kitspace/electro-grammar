@@ -2,67 +2,65 @@ grammar Units;
 import Alphabet;
 
 
-unit: (voltage
-    | current
-    | power
-    /*| resistance*/
-    | capacitance
-    | inductance
-    | frequency
-    | time
-    | temperature);
-
-
 fragment DIGIT: [0-9];
 NUMBER: DIGIT* '.'? DIGIT+ | DIGIT+ '.'? DIGIT*;
 
 
-fragment GIGA:   G  | G I G A;
-fragment MEGA:  'M' | M E G A;
-fragment KILO:   K  | K I L O;
-fragment MILI:  'm' | M I L I;
-fragment MICRO:  U  | M I C R O;
-fragment NANO:   N  | N A N O;
-fragment PICO:   P  | P I C O;
+GIGA:   G  | G I G A;
+MEGA:  'M' | M E G A;
+KILO:   K  | K I L O;
+MILI:  'm' | M I L I;
+MICRO:  U  | M I C R O;
+NANO:   N  | N A N O;
+PICO:   P  | P I C O;
 
+VOLT:    V   | V O L T;
+AMPERE:  A   | A M P E R E;
+WATT:    W   | W A T T;
+OHM:     R   | O H M         | '\u{2126}';
+FARAD:   F   | F A R A D;
+HENRY:   H   | H E N R Y;
+HERZ:    H Z | H E R Z;
+SECOND:  S   | S E C O N D;
+CELSIUS: C   | C E L S I U S;
 
-tolerance: PLUSMINUS? NUMBER '%';
 PLUSMINUS: '+/-' | '±' | '+-';
 
 
-voltage: NUMBER (VPREFIX? VOLT) tolerance?;
-VPREFIX: KILO | MILI;
-VOLT: V O L T | V;
+unit: voltage
+    | current
+    | power
+    | resistance
+    | capacitance
+    | inductance
+    | frequency
+    | time
+    | temperature;
 
-current: NUMBER (APREFIX? AMPERE) tolerance?;
-APREFIX: MILI | MICRO | NANO | PICO;
-AMPERE: A | A M P E R E;
+tolerance: PLUSMINUS? NUMBER '%';
 
-power: NUMBER PPREFIX? WATT tolerance?;
-PPREFIX: MILI;
-WATT: W | W A T T;
+voltage: NUMBER vprefix? VOLT tolerance?;
+vprefix: KILO | MILI;
 
-resistance: NUMBER RPREFIX? OHM? tolerance?;
-RPREFIX: MEGA | KILO | MILI;
-OHM: R | '\u{2126}' | O H M;
+current: NUMBER aprefix? AMPERE tolerance?;
+aprefix: MILI | MICRO | NANO | PICO;
 
-capacitance: NUMBER CPREFIX FARAD tolerance?;
-CPREFIX: MICRO | NANO | PICO;
-FARAD: F | F A R A D;
+power: NUMBER pprefix? WATT tolerance?;
+pprefix: MILI;
 
-inductance: NUMBER LPREFIX? HENRY tolerance?;
-LPREFIX: MILI | MICRO | NANO;
-HENRY: H | H E N R Y;
+resistance: NUMBER (rprefix | OHM) tolerance?;
+rprefix: MEGA | KILO | MILI;
 
-frequency: NUMBER FPREFIX? HERZ tolerance?;
-FPREFIX: GIGA | MEGA | KILO;
-HERZ: H Z | H E R Z;
+capacitance: NUMBER cprefix FARAD tolerance?;
+cprefix: MICRO | NANO | PICO;
 
-time: NUMBER TPREFIX? SECONDS tolerance?;
-TPREFIX: MILI | NANO | PICO;
-SECONDS: S | S E C | S E C O N D S;
+inductance: NUMBER lprefix? HENRY tolerance?;
+lprefix: MILI | MICRO | NANO;
 
-temperature: NUMBER tunit tolerance?;
-tunit: KELVIN | 'u{00b0}'? CELSIUS;
-KELVIN:  K | K E L V I N;
-CELSIUS: C | C E L S I U S;
+frequency: NUMBER fprefix? HERZ tolerance?;
+fprefix: GIGA | MEGA | KILO;
+
+time: NUMBER tprefix? SECOND tolerance?;
+tprefix: MILI | NANO | PICO;
+
+temperature: NUMBER 'u{00b0}'? CELSIUS tolerance?;
