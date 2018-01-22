@@ -183,6 +183,39 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
         if ctx.POT():
             self.obj['rtype'] = 'pot'
 
+    def exitDiode(self, ctx):
+        self.obj['type'] = 'diode'
+
+    def exitDcode(self, ctx):
+        self.obj['code'] = ctx.DCODE().getText().upper()
+
+    def exitSignal(self, ctx):
+        self.obj['dtype'] = 'signal'
+
+    def exitRectifier(self, ctx):
+        self.obj['dtype'] = 'rectifier'
+
+    def exitLed(self, ctx):
+        self.obj['dtype'] = 'led'
+
+    def exitSchottky(self, ctx):
+        self.obj['dtype'] = 'schottky'
+
+    def exitZener(self, ctx):
+        self.obj['dtype'] = 'zener'
+
+    def exitColor(self, ctx):
+        self.obj['color'] = ctx.COLOR().getText().lower()
+
+    def exitTransistor(self, ctx):
+        self.obj['type'] = 'transistor'
+
+    def exitTtype(self, ctx):
+        self.obj['ttype'] = ctx.TTYPE().getText().lower()
+
+    def exitTcode(self, ctx):
+        self.obj['code'] = ctx.TCODE().getText().upper()
+
 
 def get_parser(start_rule):
     def parse(input):
