@@ -47,48 +47,56 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
 
     def exitVoltage(self, ctx):
         self.obj['voltage'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitAprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitCurrent(self, ctx):
         self.obj['current'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitPprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitPower(self, ctx):
         self.obj['power'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitRprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitResistance(self, ctx):
         self.obj['resistance'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitCprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitCapacitance(self, ctx):
         self.obj['capacitance'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitLprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitInductance(self, ctx):
         self.obj['inductance'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitFprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitFrequency(self, ctx):
         self.obj['frequency'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitTprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
 
     def exitTime(self, ctx):
         self.obj['time'] = handle_unit(ctx) * self.prefix
+        self.prefix = 1
 
     def exitTemperature(self, ctx):
         self.obj['temperature'] = handle_unit(ctx)
@@ -158,6 +166,22 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
 
     def exitTan(self, ctx):
         self.obj['dielectric'] = 'TAN'
+
+    def exitResistor(self, ctx):
+        self.obj['type'] = 'resistor'
+
+    def exitCapacitor(self, ctx):
+        self.obj['type'] = 'capacitor'
+
+    def exitInductor(self, ctx):
+        self.obj['type'] = 'inductor'
+
+    def exitOscillator(self, ctx):
+        self.obj['type'] = 'oscillator'
+
+    def exitRtype(self, ctx):
+        if ctx.POT():
+            self.obj['rtype'] = 'pot'
 
 
 def get_parser(start_rule):
