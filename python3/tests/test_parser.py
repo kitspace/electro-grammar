@@ -142,3 +142,29 @@ class ParsePackageSizeTests(unittest.TestCase):
         #assert parse('0603m') == '0201'
         assert parse('metric 0603') == '0201'
         assert parse('0603 metric') == '0201'
+
+
+class ParseDielectricTests(unittest.TestCase):
+    def test_parse_class1(self):
+        parse = parser('dielectric')
+        assert parse('M7G') == 'M7G'
+        assert parse('TH') == 'T2H'
+        assert parse('N1500') == 'P3K'
+
+    def test_parse_class2(self):
+        parse = parser('dielectric')
+        assert parse('x4p') == 'X4P'
+        assert parse('y5r') == 'Y5R'
+        assert parse('z6s') == 'Z6S'
+
+    def test_parse_alu(self):
+        parse = parser('dielectric')
+        assert parse('alu') == 'ALU'
+        assert parse('Aluminium') == 'ALU'
+        assert parse('Elco') == 'ALU'
+        assert parse('Electrolytic') == 'ALU'
+
+    def test_parse_tan(self):
+        parse = parser('dielectric')
+        assert parse('tan') == 'TAN'
+        assert parse('tantalum') == 'TAN'

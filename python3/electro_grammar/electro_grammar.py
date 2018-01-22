@@ -124,6 +124,41 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
         print('Warn: Ambiguous package size found')
         self.obj['package_size'] = handle_package_size(ctx)
 
+    def exitClass1(self, ctx):
+        if ctx.M7G():
+            dielectric = 'M7G'
+        elif ctx.C0G():
+            dielectric = 'C0G'
+        elif ctx.H2G():
+            dielectric = 'H2G'
+        elif ctx.L2G():
+            dielectric = 'L2G'
+        elif ctx.P2H():
+            dielectric = 'P2H'
+        elif ctx.R2H():
+            dielectric = 'R2H'
+        elif ctx.S2H():
+            dielectric = 'S2H'
+        elif ctx.T2H():
+            dielectric = 'T2H'
+        elif ctx.U2J():
+            dielectric = 'U2J'
+        elif ctx.Q3K():
+            dielectric = 'Q3K'
+        elif ctx.P3K():
+            dielectric = 'P3K'
+
+        self.obj['dielectric'] = dielectric
+
+    def exitClass2(self, ctx):
+        self.obj['dielectric'] = ctx.CLASS2().getText().upper()
+
+    def exitAlu(self, ctx):
+        self.obj['dielectric'] = 'ALU'
+
+    def exitTan(self, ctx):
+        self.obj['dielectric'] = 'TAN'
+
 
 def get_parser(start_rule):
     def parse(input):
