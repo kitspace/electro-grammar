@@ -22,6 +22,19 @@ function parse(input) {
   const lexer = new ElectroGrammarLexer(chars);
   const tokens = new antlr4.CommonTokenStream(lexer);
   const parser = new ElectroGrammarParser(tokens);
+
+  // enable grammar ambiguity diagnostic output, see Antlr book ch 9.2
+  parser.removeErrorListeners();
+  parser.addErrorListener(new antlr4.error.DiagnosticErrorListener());
+  // we should also be doing something like the following, but it doesn't work in JS yet
+  // https://github.com/antlr/antlr4/issues/2206
+  //
+  //  parser
+  //    .getInterpreter()
+  //    .setPredictionMode(antlr.atn.PredictionMode.LL_EXACT_AMBIG_DETECTION);
+  //
+  // maybe we just have to test for ambiguity in Java (or Python?)
+
   parser.buildParseTrees = true;
 
   const tree = parser.electro_grammar();
