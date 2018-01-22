@@ -5,6 +5,6 @@
 grammar ElectroGrammar;
 import Passive, Semi;
 
-electro_grammar: unit; /*passive | semi;*/
+electro_grammar: (passive | semi) EOF;
 
 WHITESPACE: [\p{White_Space}] -> skip;
