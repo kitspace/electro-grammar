@@ -2,40 +2,37 @@ const assert = require('better-assert');
 
 const {parse} = require('../lib/index');
 
-describe('Capacitance', () => {
-  it('uF is parsed correctly', () => {
+describe('strict capacitance', () => {
+  it('parses uF correctly', () => {
     const cases = [
       '10uF',
     ];
 
     cases.forEach((text) => {
       const obj = parse(text);
-      console.log(text, obj['capacitance']);
-      assert(obj['capacitance'] === 10e-5);
+      assert(obj.capacitance === 10e-6);
     });
   });
 
-  it('nF is parsed correctly', () => {
+  it('parses nF correctly', () => {
     const cases = [
       '10nF',
     ];
 
     cases.forEach((text) => {
       const obj = parse(text);
-      console.log(text, obj['capacitance']);
-      assert(obj['capacitance'] === 10e-8);
+      assert(obj.capacitance === 10e-9);
     });
   });
 
-  it('pF is parsed correctly', () => {
+  it('parses pF correctly', () => {
     const cases = [
       '10pF',
     ];
 
     cases.forEach((text) => {
       const obj = parse(text);
-      console.log(text, obj['capacitance']);
-      assert(obj['capacitance'] === 10e-11);
+      assert(obj.capacitance === 10e-12);
     });
   });
 });

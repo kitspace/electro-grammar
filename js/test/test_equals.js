@@ -2,7 +2,7 @@
 const assert = require('better-assert')
 
 const equals = require('../lib/equals')
-const parse = require('../lib/parse')
+const parse = require('../lib/lax_parser')
 
 describe('equality check', () => {
     it('does not equal components of different types', () => {
