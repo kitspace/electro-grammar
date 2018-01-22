@@ -5,17 +5,14 @@ import Alphabet, Units;
 semi: diode | transistor;
 
 
-fragment CODE: [a-zA-Z0-9];
-
-
 /* Diodes */
-diode: DIODE? dspec+;
+diode: dspec+;
 
-DIODE: D | D I O D E;
-dspec: diode_type; /*| diode_code;*/
-
-diode_type: signal | rectifier | led | schottky | zener;
-/* diode_code: '1' N CODE+; */
+dspec: dtype? dcode
+     | dcode? dtype;
+dtype: signal | rectifier | led | schottky | zener;
+dcode: DCODE;
+DCODE: JEDEC_DIODE_CODE | PRO_ELECTRON_DIODE_CODE;
 
 
 signal: SIGNAL;
@@ -24,8 +21,10 @@ SIGNAL: S I G | S I G N A L;
 rectifier: RECTIFIER;
 RECTIFIER: R E C T | R E C T I F I E R;
 
-led: LED? COLOR;
+led: LED? color;
 LED: L E D;
+
+color: COLOR;
 COLOR: R E D
      | G R E E N
      | B L U E
@@ -45,23 +44,32 @@ ZENER: Z | Z E N | Z E N E R;
 
 
 /* Transistors */
-transistor: TRANSISTOR? tspec+;
+transistor: ttype? tcode
+          | tcode? ttype;
+ttype: TTYPE;
+tcode: TCODE;
+TCODE: JEDEC_TRANSISTOR_CODE | PRO_ELECTRON_TRANSISTOR_CODE;
 
-TRANSISTOR: T | T R A N | T R A N S I S T O R;
-tspec: transistor_type; /*| transistor_code;*/
+TTYPE: NPN | PNP | NMOS | PMOS;
+fragment NPN: N P N;
+fragment PNP: P N P;
+fragment NMOS: N M O S;
+fragment PMOS: P M O S;
 
-transistor_type: bjt | mos;
-/*transistor_code: '2' N CODE+;*/
 
+/* Device codes */
+fragment ALPHANUM: [0-9a-zA-Z];
 
-bjt: BJT? bjt_type;
-BJT: Q | B J T;
-bjt_type: NPN | PNP;
-NPN: N P N;
-PNP: P N P;
+JEDEC_DIODE_CODE: '1' N DIGIT+;
+JEDEC_TRANSISTOR_CODE: [23] N DIGIT+;
 
-mos: MOS? mos_type;
-MOS: M | M O S | M O S F E T;
-mos_type: NMOS | PMOS;
-NMOS: N M O S;
-PMOS: P M O S;
+fragment PRO_ELECTRON_MATERIAL: A | B | C | R;
+
+fragment PRO_ELECTRON_DIODE_TYPE: A | B | E | H | X | Y | Z;
+fragment PRO_ELECTRON_TRANSISTOR_TYPE: C | D | F | L | S | U;
+fragment PRO_ELECTRON_OTHER_TYPE: G | N | P | Q | R | T | W;
+
+fragment PRO_ELECTRON_SERIAL: ALPHANUM DIGIT DIGIT ALPHANUM*;
+
+PRO_ELECTRON_DIODE_CODE: PRO_ELECTRON_MATERIAL PRO_ELECTRON_DIODE_TYPE PRO_ELECTRON_SERIAL;
+PRO_ELECTRON_TRANSISTOR_CODE: PRO_ELECTRON_MATERIAL PRO_ELECTRON_TRANSISTOR_TYPE PRO_ELECTRON_SERIAL;
