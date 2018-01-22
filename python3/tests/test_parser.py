@@ -4,9 +4,16 @@ import unittest
 import electro_grammar as eg;
 
 
-def parser(unit):
+def parser(unit, key=None):
+    if key is None:
+        key = unit
+
     def parse(input):
-        return eg.get_parser(unit)(input)[unit]
+        obj = eg.get_parser(unit)(input)
+        if key:
+            return obj[key]
+        else:
+            return obj
     return parse
 
 
@@ -168,3 +175,111 @@ class ParseDielectricTests(unittest.TestCase):
         parse = parser('dielectric')
         assert parse('tan') == 'TAN'
         assert parse('tantalum') == 'TAN'
+
+
+class ParsePassiveTests(unittest.TestCase):
+    def test_parse_resistor(self):
+        parse = parser('passive', key=False)
+        res = parse('10k')
+        assert res['type'] == 'resistor'
+        assert res['resistance'] == 10 * kilo
+
+        res = parse('10k 10%')
+        assert res['type'] == 'resistor'
+        assert res['tolerance'] == 10
+
+        res = parse('10k 0805')
+        assert res['type'] == 'resistor'
+        assert res['package_size'] == '0805'
+
+        res = parse('10k 125mW')
+        assert res['type'] == 'resistor'
+        assert res['power'] == 125 * mili
+
+        res = parse('10k 10% 0805 125mW')
+        assert res['type'] == 'resistor'
+        assert res['resistance'] == 10 * kilo
+        assert res['tolerance'] == 10
+        assert res['package_size'] == '0805'
+        assert res['power'] == 125 * mili
+
+        res = parse('10k pot')
+        assert res['type'] == 'resistor'
+        assert res['rtype'] == 'pot'
+
+    def test_parse_capacitor(self):
+        parse = parser('passive', key=False)
+        cap = parse('10nF')
+        assert cap['type'] == 'capacitor'
+        assert cap['capacitance'] == 10 * nano
+
+        cap = parse('10nF 10%')
+        assert cap['type'] == 'capacitor'
+        assert cap['tolerance'] == 10
+
+        cap = parse('10nF 0805')
+        assert cap['type'] == 'capacitor'
+        assert cap['package_size'] == '0805'
+
+        cap = parse('10nF 25V')
+        assert cap['type'] == 'capacitor'
+        assert cap['voltage'] == 25
+
+        cap = parse('10uF alu')
+        assert cap['type'] == 'capacitor'
+        assert cap['dielectric'] == 'ALU'
+
+        cap = parse('10nF 10% 0805 25V X7R')
+        assert cap['type'] == 'capacitor'
+        assert cap['capacitance'] == 10 * nano
+        assert cap['tolerance'] == 10
+        assert cap['package_size'] == '0805'
+        assert cap['voltage'] == 25
+        assert cap['dielectric'] == 'X7R'
+
+
+    def test_parse_inductor(self):
+        parse = parser('passive', key=False)
+        ind = parse('10mH')
+        assert ind['type'] == 'inductor'
+        assert ind['inductance'] == 10 * mili
+
+        ind = parse('10mH 10%')
+        assert ind['type'] == 'inductor'
+        assert ind['tolerance'] == 10
+
+        ind = parse('10mH 0805')
+        assert ind['type'] == 'inductor'
+        assert ind['package_size'] == '0805'
+
+        ind = parse('10mH 500mA')
+        assert ind['type'] == 'inductor'
+        assert ind['current'] == 500 * mili
+
+        ind = parse('10mH 10% 0805 500mA')
+        assert ind['type'] == 'inductor'
+        assert ind['inductance'] == 10 * mili
+        assert ind['tolerance'] == 10
+        assert ind['package_size'] == '0805'
+        assert ind['current'] == 500 * mili
+
+    def test_parse_oscillator(self):
+        parse = parser('passive', key=False)
+        osc = parse('16MHz')
+        assert osc['type'] == 'oscillator'
+        assert osc['frequency'] == 16 * mega
+
+        # should be defined in ppm
+        osc = parse('16MHz 1%')
+        assert osc['type'] == 'oscillator'
+        assert osc['tolerance'] == 1
+
+        osc = parse('16MHz 12pF')
+        assert osc['type'] == 'oscillator'
+        assert osc['capacitance'] == 12 * pico
+
+        osc = parse('16MHz 1% 12pF')
+        assert osc['type'] == 'oscillator'
+        assert osc['frequency'] == 16 * mega
+        assert osc['tolerance'] == 1
+        assert osc['capacitance'] == 12 * pico
