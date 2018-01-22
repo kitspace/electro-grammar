@@ -78,3 +78,10 @@ class ParseUnitsTests(unittest.TestCase):
         parse = parser('temperature')
         assert parse('1C') == 1
         assert parse('1°C')
+
+    def test_parse_tolerance(self):
+        parse = parser('tolerance')
+        assert parse('1%') == 1
+        assert parse('+-1%') == 1
+        assert parse('+/-1%') == 1
+        assert parse('±1%') == 1
