@@ -85,3 +85,60 @@ class ParseUnitsTests(unittest.TestCase):
         assert parse('+-1%') == 1
         assert parse('+/-1%') == 1
         assert parse('±1%') == 1
+
+
+class ParsePackageSizeTests(unittest.TestCase):
+    def test_parse_imperial(self):
+        parse = parser('package_size')
+        assert parse('008004') == '008004'
+        assert parse('009005') == '009005'
+        assert parse('01005') == '01005'
+        assert parse('0805') == '0805'
+        assert parse('1008') == '1008'
+        assert parse('1206') == '1206'
+        assert parse('1210') == '1210'
+        assert parse('1806') == '1806'
+        assert parse('1825') == '1825'
+        assert parse('2010') == '2010'
+        assert parse('2512') == '2512'
+        assert parse('2920') == '2920'
+
+        assert parse('imperial 0201') == '0201'
+        assert parse('imperial 0402') == '0402'
+        assert parse('imperial 0603') == '0603'
+
+    def test_parse_metric(self):
+        parse = parser('package_size')
+        assert parse('03015') == '009005'
+        assert parse('1005') == '0402'
+        assert parse('1608') == '0603'
+        assert parse('2012') == '0805'
+        assert parse('2520') == '1008'
+        assert parse('3216') == '1206'
+        assert parse('3225') == '1210'
+        assert parse('4516') == '1806'
+        assert parse('4532') == '1812'
+        assert parse('4564') == '1825'
+        assert parse('5025') == '2010'
+        assert parse('6332') == '2512'
+        assert parse('7451') == '2920'
+
+        assert parse('metric 0201') == '008004'
+        assert parse('metric 0402') == '01005'
+        assert parse('metric 0603') == '0201'
+
+    def test_parse_ambiguous(self):
+        parse = parser('package_size')
+        assert parse('0201') == '0201'
+        assert parse('0402') == '0402'
+        assert parse('0603') == '0603'
+
+        assert parse('i0402') == '0402'
+        assert parse('0402i') == '0402'
+        assert parse('imperial 0402') == '0402'
+        assert parse('0402 imperial') == '0402'
+
+        #assert parse('m0603') == '0201'
+        #assert parse('0603m') == '0201'
+        assert parse('metric 0603') == '0201'
+        assert parse('0603 metric') == '0201'

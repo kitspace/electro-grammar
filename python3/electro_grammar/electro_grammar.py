@@ -29,6 +29,14 @@ def handle_prefix(ctx):
     return 1
 
 
+def handle_package_size(ctx):
+    if hasattr(ctx, 'METRIC_SIZE') and ctx.METRIC_SIZE():
+        return ctx.METRIC_SIZE().getText()
+    if hasattr(ctx, 'IMPERIAL_SIZE') and ctx.IMPERIAL_SIZE():
+        return ctx.IMPERIAL_SIZE().getText()
+    if hasattr(ctx, 'AMBIGUOUS_SIZE') and ctx.AMBIGUOUS_SIZE():
+        return ctx.AMBIGUOUS_SIZE().getText()
+
 class ElectroGrammarToObjectListener(ElectroGrammarListener):
     def __init__(self):
         self.obj = {}
@@ -87,6 +95,34 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
 
     def exitTolerance(self, ctx):
         self.obj['tolerance'] = handle_unit(ctx)
+
+    def exitMetric_size(self, ctx):
+        imperial_lookup = {
+            '0201': '008004',
+            '03015': '009005',
+            '0402': '01005',
+            '0603': '0201',
+            '1005': '0402',
+            '1608': '0603',
+            '2012': '0805',
+            '2520': '1008',
+            '3216': '1206',
+            '3225': '1210',
+            '4516': '1806',
+            '4532': '1812',
+            '4564': '1825',
+            '5025': '2010',
+            '6332': '2512',
+            '7451': '2920'
+        }
+        self.obj['package_size'] = imperial_lookup[handle_package_size(ctx)]
+
+    def exitImperial_size(self, ctx):
+        self.obj['package_size'] = handle_package_size(ctx)
+
+    def exitAmbiguous_size(self, ctx):
+        print('Warn: Ambiguous package size found')
+        self.obj['package_size'] = handle_package_size(ctx)
 
 
 def get_parser(start_rule):
