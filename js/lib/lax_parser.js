@@ -1,6 +1,6 @@
 const {ElectroGrammarLexer} = require('./ElectroGrammarLexer');
 const {ElectroGrammarParser} = require('./ElectroGrammarParser');
-const {ElectroGrammarListener} = require('./electro_grammar_listener');
+const {ToObjectListener} = require('./to_object_listener');
 const antlr4 = require('antlr4');
 
 class LexerIgnoreListener extends antlr4.error.ErrorListener {
@@ -42,7 +42,7 @@ function parse(input) {
   parser.addErrorListener(parserIgnorer);
 
   const tree = parser.electro_grammar();
-  const listener = new ElectroGrammarListener();
+  const listener = new ToObjectListener();
   const walker = antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
   console.log({lexer: lexerIgnorer.ignored, parser: parserIgnorer.ignored});
   return {component: listener.obj, ignored: lexerIgnorer.ignored};

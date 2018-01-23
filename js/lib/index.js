@@ -1,6 +1,6 @@
 const {ElectroGrammarLexer} = require('./ElectroGrammarLexer');
 const {ElectroGrammarParser} = require('./ElectroGrammarParser');
-const {ElectroGrammarListener} = require('./electro_grammar_listener');
+const {ToObjectListener} = require('./to_object_listener');
 const antlr4 = require('antlr4');
 
 function get_parser(start_rule) {
@@ -21,7 +21,7 @@ function get_parser(start_rule) {
     parser.buildParseTrees = true;
 
     const tree = parser[start_rule]();
-    const listener = new ElectroGrammarListener();
+    const listener = new ToObjectListener();
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
     return listener.obj;
   }

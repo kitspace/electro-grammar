@@ -42,7 +42,7 @@ function handle_package_size(ctx) {
   return '';
 }
 
-class ElectroGrammarToObjectListener extends ElectroGrammarListener {
+class ToObjectListener extends ElectroGrammarListener {
   constructor() {
     super();
     this.obj = {};
@@ -236,4 +236,4 @@ class ElectroGrammarToObjectListener extends ElectroGrammarListener {
   }
 }
 
-exports.ElectroGrammarListener = ElectroGrammarToObjectListener;
+exports.ToObjectListener = ToObjectListener;
