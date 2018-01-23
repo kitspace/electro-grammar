@@ -10,14 +10,14 @@ GIGA:   G  | G I G A;
 MEGA:  'M' | M E G A;
 KILO:   K  | K I L O;
 MILI:  'm' | M I L I;
-MICRO:  U  | M I C R O;
+MICRO:  U  | M I C R O       | 'µ';
 NANO:   N  | N A N O;
 PICO:   P  | P I C O;
 
 VOLT:    V   | V O L T;
 AMPERE:  A   | A M P E R E;
 WATT:    W   | W A T T;
-OHM:     R   | O H M         | '\u{2126}';
+OHM:     R   | O H M         | 'Ω';
 FARAD:   F   | F A R A D;
 HENRY:   H   | H E N R Y;
 HERZ:    H Z | H E R Z;
@@ -63,4 +63,4 @@ fprefix: GIGA | MEGA | KILO;
 time: NUMBER tprefix? SECOND tolerance?;
 tprefix: MILI | MICRO | NANO | PICO;
 
-temperature: NUMBER 'u{00b0}'? CELSIUS tolerance?;
+temperature: NUMBER '°'? CELSIUS tolerance?;
