@@ -1,10 +1,8 @@
-/*
- * Lexer Rules
- */
-
 grammar ElectroGrammar;
-import Passive, Semi;
+import Passive;
 
-electro_grammar: (passive | semi) EOF;
+electro_grammar: passive EOF;
 
-WHITESPACE: [\p{White_Space}] -> skip;
+ignored: UNKNOWN* EOF;
+
+UNKNOWN: .+?;
