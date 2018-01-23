@@ -1,6 +1,6 @@
 const yaml  = require('js-yaml');
 const fs    = require('fs');
-const {parse} = require('./js/lib/index.js');
+const {parse} = require('./js/lib/lax_parser.js');
 
 let resistors = fs.readFileSync('./cpl-data/CPL for Production/Resistors.yaml');
 resistors = yaml.safeLoad(resistors);
