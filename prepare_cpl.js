@@ -32,10 +32,11 @@ fs.writeFileSync('./js/lib/cpl_capacitors.js', capacitors);
 
 let leds = fs.readFileSync('./cpl-data/CPL for Production/LEDs.yaml');
 leds = yaml.safeLoad(leds);
-leds = leds.rows.map(c => {
-  const v = parse(c.title);
+leds = leds.rows.map(d => {
+  console.log(d.title);
+  const v = parse(d.title);
   if (v.type === 'led') {
-    v.cplid = c.cplid;
+    v.cplid = d.cplid;
     return v;
   }
 }).filter(v => v);

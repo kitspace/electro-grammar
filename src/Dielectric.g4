@@ -2,8 +2,9 @@ grammar Dielectric;
 import Alphabet;
 
 
-dielectric: class1 | class2 | alu | tan;
+dielectric: class1_ | class2 | alu | tan;
 
+class1_: class1 ('/' class1)?;
 
 class1: M7G | C0G | H2G | L2G | P2H | R2H | S2H | T2H | U2J | Q3K | P3K;
 class2: CLASS2;
