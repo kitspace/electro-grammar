@@ -5,6 +5,5 @@ test-lib/
 
 java/
 js/**/ElectroGrammar*
-js/**/cpl_*
 python3/**/ElectroGrammar*
-python3/**/cpl_*
+db/*.json
