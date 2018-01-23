@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "scripts": {
-    "build:cpl": "node ../prepare_cpl.js",
     "demo": "cp demo/{index.html,favicon.ico} ../ && browserify demo/index.js > ../bundle.js",
     "test": "nyc -- mocha --check-leaks",
     "coverage": "nyc report",
@@ -12,7 +11,8 @@
     "test:browser": "zuul --local -- test/*.js",
     "pretest:sauce": "babel test/ -d test-lib/",
     "test:sauce": "zuul -- test-lib/*.js",
-    "fmt": "prettier --write test/**/*.js lib/**/*.js"
+    "fmt": "prettier --write test/**/*.js lib/**/*.js",
+    "dbg": "node --inspect-brk bin/electro-grammar.js"
   },
   "dependencies": {
     "antlr4": "^4.7.1"
