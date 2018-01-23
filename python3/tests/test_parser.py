@@ -37,6 +37,7 @@ class ParseUnitsTests(unittest.TestCase):
         parse = parser('current')
         assert parse('1A') == 1
         assert parse('1mA') == mili
+        assert parse('1uA') == micro
         assert parse('1nA') == nano
         assert parse('1pA') == pico
 
@@ -64,6 +65,7 @@ class ParseUnitsTests(unittest.TestCase):
         parse = parser('inductance')
         assert parse('1H') == 1
         assert parse('1mH') == mili
+        assert parse('1uH') == micro
         assert parse('1nH') == nano
 
     def test_parse_frequency(self):
@@ -78,13 +80,14 @@ class ParseUnitsTests(unittest.TestCase):
         parse = parser('time')
         assert parse('1s') == 1
         assert parse('1ms') == mili
+        assert parse('1us') == micro
         assert parse('1ns') == nano
         assert parse('1ps') == pico
 
     def test_parse_temperature(self):
         parse = parser('temperature')
         assert parse('1C') == 1
-        assert parse('1°C')
+        assert parse('1°C') == 1
 
     def test_parse_tolerance(self):
         parse = parser('tolerance')

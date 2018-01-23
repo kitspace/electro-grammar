@@ -61,6 +61,6 @@ frequency: NUMBER fprefix? HERZ tolerance?;
 fprefix: GIGA | MEGA | KILO;
 
 time: NUMBER tprefix? SECOND tolerance?;
-tprefix: MILI | NANO | PICO;
+tprefix: MILI | MICRO | NANO | PICO;
 
 temperature: NUMBER 'u{00b0}'? CELSIUS tolerance?;
