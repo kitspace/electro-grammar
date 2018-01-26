@@ -3,11 +3,7 @@ const {execSync} = require('child_process');
 const {format} = require('util');
 
 const get_js_parser = require('../js/lib/index.js').get_parser;
-
-let bin_py = 'python3 python3/cli.py';
-if (process.env.TRAVIS === 'true') {
-  bin_py = 'pipenv run python3 python3/cli.py'
-}
+const bin_py = 'python3 python3/cli.py';
 
 const originalIt = global.it;
 
