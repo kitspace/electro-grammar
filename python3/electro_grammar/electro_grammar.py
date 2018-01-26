@@ -1,10 +1,27 @@
 from antlr4 import *
 from antlr4.error.DiagnosticErrorListener import DiagnosticErrorListener
 from antlr4.atn.PredictionMode import PredictionMode
+from enum import Enum
 from decimal import Decimal
 from electro_grammar.ElectroGrammarLexer import ElectroGrammarLexer
 from electro_grammar.ElectroGrammarListener import ElectroGrammarListener
 from electro_grammar.ElectroGrammarParser import ElectroGrammarParser
+
+
+class Warnings(Enum):
+    ambiguous_size = 0;
+
+
+class Warning(object):
+    def __init__(self, ty, message):
+        self.ty = ty
+        self.message = message
+
+    def __str__(self):
+        return 'warning: %s: %s' % (self.ty.name, self.message)
+
+    def __repr__(self):
+        return self.ty.name
 
 
 def handle_unit(ctx):
@@ -40,7 +57,12 @@ def handle_package_size(ctx):
 class ElectroGrammarToObjectListener(ElectroGrammarListener):
     def __init__(self):
         self.obj = {}
+        self.warnings = []
         self.prefix = 1
+
+    def warn(self, wty, ctx):
+        warning = Warning(wty, ctx.getText())
+        self.warnings.append(warning)
 
     def exitVprefix(self, ctx):
         self.prefix = handle_prefix(ctx)
@@ -129,7 +151,7 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
         self.obj['package_size'] = handle_package_size(ctx)
 
     def exitAmbiguous_size(self, ctx):
-        print('Warn: Ambiguous package size found')
+        self.warn(Warnings.ambiguous_size, ctx)
         self.obj['package_size'] = handle_package_size(ctx)
 
     def exitClass1(self, ctx):
@@ -217,7 +239,7 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
         self.obj['code'] = ctx.TCODE().getText().upper()
 
 
-def get_parser(start_rule):
+def get_parser(parser='strict', rule='electro_grammar'):
     def parse(input):
         input = InputStream(input)
         lexer = ElectroGrammarLexer(input)
@@ -230,11 +252,11 @@ def get_parser(start_rule):
         parser.addErrorListener(DiagnosticErrorListener())
         parser._interp.predictionMode = PredictionMode.LL_EXACT_AMBIG_DETECTION
 
-        tree = getattr(parser, start_rule)()
+        tree = getattr(parser, rule)()
         listener = ElectroGrammarToObjectListener()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-        return listener.obj
+        return {'result': listener.obj, 'warnings': listener.warnings};
     return parse
 
 
