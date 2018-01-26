@@ -28,31 +28,135 @@ def handle_unit(ctx):
     return Decimal(ctx.NUMBER().getText())
 
 
+def handle_option(ctx, options):
+    for k, v in options.items():
+        if hasattr(ctx, k) and getattr(ctx, k)():
+            return v
+
 def handle_prefix(ctx):
-    if hasattr(ctx, 'GIGA') and ctx.GIGA():
-        return Decimal('1e9')
-    if hasattr(ctx, 'MEGA') and ctx.MEGA():
-        return Decimal('1e6')
-    if hasattr(ctx, 'KILO') and ctx.KILO():
-        return Decimal('1e3')
-    if hasattr(ctx, 'MILI') and ctx.MILI():
-        return Decimal('1e-3')
-    if hasattr(ctx, 'MICRO') and ctx.MICRO():
-        return Decimal('1e-6')
-    if hasattr(ctx, 'NANO') and ctx.NANO():
-        return Decimal('1e-9')
-    if hasattr(ctx, 'PICO') and ctx.PICO():
-        return Decimal('1e-12')
-    return 1
+    prefix = {
+        'GIGA': Decimal('1e9'),
+        'MEGA': Decimal('1e6'),
+        'KILO': Decimal('1e3'),
+        'MILI': Decimal('1e-3'),
+        'MICRO': Decimal('1e-6'),
+        'NANO': Decimal('1e-9'),
+        'PICO': Decimal('1e-12')
+    }
+    return handle_option(ctx, prefix)
 
 
-def handle_package_size(ctx):
-    if hasattr(ctx, 'METRIC_SIZE') and ctx.METRIC_SIZE():
-        return ctx.METRIC_SIZE().getText()
-    if hasattr(ctx, 'IMPERIAL_SIZE') and ctx.IMPERIAL_SIZE():
-        return ctx.IMPERIAL_SIZE().getText()
-    if hasattr(ctx, 'AMBIGUOUS_SIZE') and ctx.AMBIGUOUS_SIZE():
-        return ctx.AMBIGUOUS_SIZE().getText()
+def handle_package_chip(ctx):
+    chip = {
+        'CHIP_0201': '0201',
+        'CHIP_0402': '0402',
+        'CHIP_0603': '0603',
+        'CHIP_i008004': '008004',
+        'CHIP_i009005': '009005',
+        'CHIP_i01005': '01005',
+        'CHIP_i0201': '0201',
+        'CHIP_i0402': '0402',
+        'CHIP_i0603': '0603',
+        'CHIP_i0805': '0805',
+        'CHIP_i1008': '1008',
+        'CHIP_i1206': '1206',
+        'CHIP_i1210': '1210',
+        'CHIP_i1806': '1806',
+        'CHIP_i1812': '1812',
+        'CHIP_i1825': '1825',
+        'CHIP_i2010': '2010',
+        'CHIP_i2512': '2512',
+        'CHIP_i2920': '2920'
+    }
+    return handle_option(ctx, chip)
+
+
+def handle_package_eia(ctx):
+    eia = {
+        'EIA_2012_12': 'EIA-2012-12',
+        'EIA_3216_10': 'EIA-3216-10',
+        'EIA_3216_12': 'EIA-3216-12',
+        'EIA_3216_18': 'EIA-3216-18',
+        'EIA_3528_12': 'EIA-3528-12',
+        'EIA_3528_21': 'EIA-3528-21',
+        'EIA_6032_15': 'EIA-6032-15',
+        'EIA_6032_28': 'EIA-6032-28',
+        'EIA_7260_38': 'EIA-7260-38',
+        'EIA_7343_20': 'EIA-7343-20',
+        'EIA_7343_31': 'EIA-7343-31',
+        'EIA_7343_43': 'EIA-7343-43'
+    }
+    return handle_option(ctx, eia)
+
+
+def handle_package_panasonic(ctx):
+    panasonic = {
+        'PANASONIC_A': 'PANASONIC A',
+        'PANASONIC_B': 'PANASONIC B',
+        'PANASONIC_C': 'PANASONIC C',
+        'PANASONIC_D': 'PANASONIC D',
+        'PANASONIC_E': 'PANASONIC E',
+        'PANASONIC_G': 'PANASONIC G',
+        'PANASONIC_H': 'PANASONIC H',
+        'PANASONIC_J': 'PANASONIC J',
+        'PANASONIC_K': 'PANASONIC K',
+        'CHEMICON_K': 'CHEMICON K'
+    }
+    return handle_option(ctx, panasonic)
+
+
+def handle_package_sod(ctx):
+    sod = {
+        'SOD_723': 'SOD723',
+        'SOD_523': 'SOD523',
+        'SOD_323': 'SOD323',
+        'SOD_128': 'SOD128',
+        'SOD_123': 'SOD123',
+        'SOD_80C': 'SOD80C'
+    }
+    return handle_option(ctx, sod)
+
+
+def handle_package_melf(ctx):
+    melf = {
+        'MICRO_MELF': 'MICRO MELF',
+        'MINI_MELF': 'MINI MELF',
+        'DEF_MELF': 'MELF'
+    }
+    return handle_option(ctx, melf)
+
+
+def handle_package_do214(ctx):
+    do214 = {
+        'DO214_AA': 'DO214AA',
+        'DO214_AB': 'DO214AB',
+        'DO214_AC': 'DO214AC'
+    }
+    return handle_option(ctx, do214)
+
+
+def handle_package_sot(ctx):
+    sot = {
+        'SOT223': 'SOT223',
+        'SOT89': 'SOT89',
+        'SOT23': 'SOT23',
+        'SOT323': 'SOT323',
+        'SOT416': 'SOT416',
+        'SOT663': 'SOT663',
+        'SOT723': 'SOT723',
+        'SOT883': 'SOT883'
+    }
+    return handle_option(ctx, sot)
+
+
+def handle_package_dpak(ctx):
+    dpak = {
+        'DPAK': 'DPAK',
+        'D2PAK': 'D2PAK',
+        'D3PAK': 'D3PAK'
+    }
+    return handle_option(ctx, dpak)
+
 
 class ElectroGrammarToObjectListener(ElectroGrammarListener):
     def __init__(self):
@@ -126,59 +230,49 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
     def exitTolerance(self, ctx):
         self.obj['tolerance'] = handle_unit(ctx)
 
-    def exitMetric_size(self, ctx):
-        imperial_lookup = {
-            '0201': '008004',
-            '03015': '009005',
-            '0402': '01005',
-            '0603': '0201',
-            '1005': '0402',
-            '1608': '0603',
-            '2012': '0805',
-            '2520': '1008',
-            '3216': '1206',
-            '3225': '1210',
-            '4516': '1806',
-            '4532': '1812',
-            '4564': '1825',
-            '5025': '2010',
-            '6332': '2512',
-            '7451': '2920'
-        }
-        self.obj['package_size'] = imperial_lookup[handle_package_size(ctx)]
-
-    def exitImperial_size(self, ctx):
-        self.obj['package_size'] = handle_package_size(ctx)
-
-    def exitAmbiguous_size(self, ctx):
+    def exitPackage_chip_ambiguous(self, ctx):
+        self.obj['package'] = handle_package_chip(ctx)
         self.warn(Warnings.ambiguous_size, ctx)
-        self.obj['package_size'] = handle_package_size(ctx)
+
+    def exitPackage_chip_unambiguous(self, ctx):
+        self.obj['package'] = handle_package_chip(ctx)
+
+    def exitPackage_eia(self, ctx):
+        self.obj['package'] = handle_package_eia(ctx)
+
+    def exitPackage_panasonic(self, ctx):
+        self.obj['package'] = handle_package_panasonic(ctx)
+
+    def exitPackage_sod(self, ctx):
+        self.obj['package'] = handle_package_sod(ctx)
+
+    def exitPackage_melf(self, ctx):
+        self.obj['package'] = handle_package_melf(ctx)
+
+    def exitPackage_do214(self, ctx):
+        self.obj['package'] = handle_package_do214(ctx)
+
+    def exitPackage_sot(self, ctx):
+        self.obj['package'] = handle_package_sot(ctx)
+
+    def exitPackage_dpak(self, ctx):
+        self.obj['package'] = handle_package_dpak(ctx)
 
     def exitClass1(self, ctx):
-        if ctx.M7G():
-            dielectric = 'M7G'
-        elif ctx.C0G():
-            dielectric = 'C0G'
-        elif ctx.H2G():
-            dielectric = 'H2G'
-        elif ctx.L2G():
-            dielectric = 'L2G'
-        elif ctx.P2H():
-            dielectric = 'P2H'
-        elif ctx.R2H():
-            dielectric = 'R2H'
-        elif ctx.S2H():
-            dielectric = 'S2H'
-        elif ctx.T2H():
-            dielectric = 'T2H'
-        elif ctx.U2J():
-            dielectric = 'U2J'
-        elif ctx.Q3K():
-            dielectric = 'Q3K'
-        elif ctx.P3K():
-            dielectric = 'P3K'
-
-        self.obj['dielectric'] = dielectric
+        dielectric = {
+            'M7G': 'M7G',
+            'C0G': 'C0G',
+            'H2G': 'H2G',
+            'L2G': 'L2G',
+            'P2H': 'P2H',
+            'R2H': 'R2H',
+            'S2H': 'S2H',
+            'T2H': 'T2H',
+            'U2J': 'U2J',
+            'Q3K': 'Q3K',
+            'P3K': 'P3K'
+        };
+        self.obj['dielectric'] = handle_option(ctx, dielectric)
 
     def exitClass2(self, ctx):
         self.obj['dielectric'] = ctx.CLASS2().getText().upper()

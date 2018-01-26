@@ -10,45 +10,132 @@ function handle_option(ctx, options) {
 }
 
 function handle_unit(ctx, prefix) {
-  return  Number(ctx.NUMBER().getText() + prefix);
+  return Number(ctx.NUMBER().getText() + prefix);
 }
 
 function handle_prefix(ctx) {
-  if ('GIGA' in ctx && ctx.GIGA()) {
-    return 'e9';
-  }
-  if ('MEGA' in ctx && ctx.MEGA()) {
-    return 'e6';
-  }
-  if ('KILO' in ctx && ctx.KILO()) {
-    return 'e3';
-  }
-  if ('MILI' in ctx && ctx.MILI()) {
-    return 'e-3';
-  }
-  if ('MICRO' in ctx && ctx.MICRO()) {
-    return 'e-6';
-  }
-  if ('NANO' in ctx && ctx.NANO()) {
-    return 'e-9';
-  }
-  if ('PICO' in ctx && ctx.PICO()) {
-    return 'e-12';
-  }
-  return '';
+  const prefix = {
+    GIGA: 'e9',
+    MEGA: 'e6',
+    KILO: 'e3',
+    MILI: 'e-3',
+    MICRO: 'e-6',
+    NANO: 'e-9',
+    PICO: 'e-12',
+  };
+  return handle_option(ctx, prefix);
 }
 
-function handle_package_size(ctx) {
-  if ('METRIC_SIZE' in ctx && ctx.METRIC_SIZE()) {
-    return ctx.METRIC_SIZE().getText();
-  }
-  if ('IMPERIAL_SIZE' in ctx && ctx.IMPERIAL_SIZE()) {
-    return ctx.IMPERIAL_SIZE().getText();
-  }
-  if ('AMBIGUOUS_SIZE' in ctx && ctx.AMBIGUOUS_SIZE()) {
-    return ctx.AMBIGUOUS_SIZE().getText();
-  }
-  return '';
+function handle_package_chip(ctx) {
+  const chip = {
+    CHIP_0201: '0201',
+    CHIP_0402: '0402',
+    CHIP_0603: '0603',
+    CHIP_i008004: '008004',
+    CHIP_i009005: '009005',
+    CHIP_i01005: '01005',
+    CHIP_i0201: '0201',
+    CHIP_i0402: '0402',
+    CHIP_i0603: '0603',
+    CHIP_i0805: '0805',
+    CHIP_i1008: '1008',
+    CHIP_i1206: '1206',
+    CHIP_i1210: '1210',
+    CHIP_i1806: '1806',
+    CHIP_i1812: '1812',
+    CHIP_i1825: '1825',
+    CHIP_i2010: '2010',
+    CHIP_i2512: '2512',
+    CHIP_i2920: '2920',
+  };
+  return handle_option(ctx, chip);
+}
+
+function handle_package_eia(ctx) {
+  const eia = {
+    EIA_2012_12: 'EIA-2012-12',
+    EIA_3216_10: 'EIA-3216-10',
+    EIA_3216_12: 'EIA-3216-12',
+    EIA_3216_18: 'EIA-3216-18',
+    EIA_3528_12: 'EIA-3528-12',
+    EIA_3528_21: 'EIA-3528-21',
+    EIA_6032_15: 'EIA-6032-15',
+    EIA_6032_28: 'EIA-6032-28',
+    EIA_7260_38: 'EIA-7260-38',
+    EIA_7343_20: 'EIA-7343-20',
+    EIA_7343_31: 'EIA-7343-31',
+    EIA_7343_43: 'EIA-7343-43',
+  };
+  return handle_option(ctx, eia);
+}
+
+function handle_package_panasonic(ctx) {
+  const panasonic = {
+    PANASONIC_A: 'PANASONIC A',
+    PANASONIC_B: 'PANASONIC B',
+    PANASONIC_C: 'PANASONIC C',
+    PANASONIC_D: 'PANASONIC D',
+    PANASONIC_E: 'PANASONIC E',
+    PANASONIC_G: 'PANASONIC G',
+    PANASONIC_H: 'PANASONIC H',
+    PANASONIC_J: 'PANASONIC J',
+    PANASONIC_K: 'PANASONIC K',
+    CHEMICON_K: 'CHEMICON K',
+  };
+  return handle_option(ctx, panasonic);
+}
+
+function handle_package_sod(ctx) {
+  const sod = {
+    SOD_723: 'SOD723',
+    SOD_523: 'SOD523',
+    SOD_323: 'SOD323',
+    SOD_128: 'SOD128',
+    SOD_123: 'SOD123',
+    SOD_80C: 'SOD80C',
+  };
+  return handle_option(ctx, sod);
+}
+
+function handle_package_melf(ctx) {
+  const melf = {
+    MICRO_MELF: 'MICRO MELF',
+    MINI_MELF: 'MINI MELF',
+    DEF_MELF: 'MELF',
+  };
+  return handle_option(ctx, melf);
+}
+
+function handle_package_do214(ctx) {
+  const do214 = {
+    DO214_AA: 'DO214AA',
+    DO214_AB: 'DO214AB',
+    DO214_AC: 'DO214AC',
+  };
+  return handle_option(ctx, do214);
+}
+
+function handle_package_sot(ctx) {
+  const sot = {
+    SOT223: 'SOT223',
+    SOT89: 'SOT89',
+    SOT23: 'SOT23',
+    SOT323: 'SOT323',
+    SOT416: 'SOT416',
+    SOT663: 'SOT663',
+    SOT723: 'SOT723',
+    SOT883: 'SOT883',
+  };
+  return handle_option(ctx, sot);
+}
+
+function handle_package_dpak(ctx) {
+  const dpak = {
+    DPAK: 'DPAK',
+    D2PAK: 'D2PAK',
+    D3PAK: 'D3PAK',
+  };
+  return handle_option(ctx, dpak);
 }
 
 class ToObjectListener extends ElectroGrammarListener {
@@ -119,74 +206,55 @@ class ToObjectListener extends ElectroGrammarListener {
   exitTolerance(ctx) {
     this.obj['tolerance'] = handle_unit(ctx, '');
   }
-  exitMetric_size(ctx) {
-    var imperial_lookup = {
-      '0201': '008004',
-      '03015': '009005',
-      '0402': '01005',
-      '0603': '0201',
-      '1005': '0402',
-      '1608': '0603',
-      '2012': '0805',
-      '2520': '1008',
-      '3216': '1206',
-      '3225': '1210',
-      '4516': '1806',
-      '4532': '1812',
-      '4564': '1825',
-      '5025': '2010',
-      '6332': '2512',
-      '7451': '2920'
-    };
-    this.obj['package_size'] = imperial_lookup[handle_package_size(ctx)];
+  exitPackage_chip_ambiguous(ctx) {
+    this.obj['package'] = handle_package_chip(ctx);
+    console.log('warning: ambiguous_size: ' + this.obj['package']);
   }
-  exitImperial_size(ctx) {
-    this.obj['package_size'] = handle_package_size(ctx);
+  exitPackage_chip_unambiguous(ctx) {
+    this.obj['package'] = handle_package_chip(ctx);
   }
-  exitAmbiguous_size(ctx) {
-    console.log('Warn: Ambiguous package size found');
-    this.obj['package_size'] = handle_package_size(ctx);
+  exitPackage_eia(ctx) {
+    this.obj['package'] = handle_package_eia(ctx);
+  }
+  exitPackage_panasonic(ctx) {
+    this.obj['package'] = handle_package_panasonic(ctx);
+  }
+  exitPackage_sod(ctx) {
+    this.obj['package'] = handle_package_sod(ctx);
+  }
+  exitPackage_melf(ctx) {
+    this.obj['package'] = handle_package_melf(ctx);
+  }
+  exitPackage_do214(ctx) {
+    this.obj['package'] = handle_package_do214(ctx);
+  }
+  exitPackage_sot(ctx) {
+    this.obj['package'] = handle_package_sot(ctx);
+  }
+  exitPackage_dpak(ctx) {
+    this.obj['package'] = handle_package_dpak(ctx);
   }
   exitClass1(ctx) {
-    var dielectric;
-    if (ctx.M7G()) {
-      dielectric = 'M7G';
-    }
-    else if (ctx.C0G()) {
-      dielectric = 'C0G';
-    }
-    else if (ctx.H2G()) {
-      dielectric = 'H2G';
-    }
-    else if (ctx.L2G()) {
-      dielectric = 'L2G';
-    }
-    else if (ctx.P2H()) {
-      dielectric = 'P2H';
-    }
-    else if (ctx.R2H()) {
-      dielectric = 'R2H';
-    }
-    else if (ctx.S2H()) {
-      dielectric = 'S2H';
-    }
-    else if (ctx.T2H()) {
-      dielectric = 'T2H';
-    }
-    else if (ctx.U2J()) {
-      dielectric = 'U2J';
-    }
-    else if (ctx.Q3K()) {
-      dielectric = 'Q3K';
-    }
-    else if (ctx.P3K()) {
-      dielectric = 'P3K';
-    }
-
-    this.obj['dielectric'] = dielectric;
+    const dielectric = {
+      M7G: 'M7G',
+      C0G: 'C0G',
+      H2G: 'H2G',
+      L2G: 'L2G',
+      P2H: 'P2H',
+      R2H: 'R2H',
+      S2H: 'S2H',
+      T2H: 'T2H',
+      U2J: 'U2J',
+      Q3K: 'Q3K',
+      P3K: 'P3K',
+    };
+    this.obj['dielectric'] = handle_option(ctx, dielectric);
   }
   exitClass2(ctx) {
-    this.obj['dielectric'] = ctx.CLASS2().getText().toUpperCase();
+    this.obj['dielectric'] = ctx
+      .CLASS2()
+      .getText()
+      .toUpperCase();
   }
   exitAlu(ctx) {
     this.obj['dielectric'] = 'ALU';
@@ -207,14 +275,16 @@ class ToObjectListener extends ElectroGrammarListener {
     this.obj['type'] = 'oscillator';
   }
   exitRtype(ctx) {
-    if (ctx.POT())
-      this.obj['rtype'] = 'pot';
+    if (ctx.POT()) this.obj['rtype'] = 'pot';
   }
   exitDiode(ctx) {
     this.obj['type'] = 'diode';
   }
   exitDcode(ctx) {
-    this.obj['code'] = ctx.DCODE().getText().toUpperCase();
+    this.obj['code'] = ctx
+      .DCODE()
+      .getText()
+      .toUpperCase();
   }
   exitSignal(ctx) {
     this.obj['dtype'] = 'signal';
@@ -232,16 +302,25 @@ class ToObjectListener extends ElectroGrammarListener {
     this.obj['dtype'] = 'zener';
   }
   exitColor(ctx) {
-    this.obj['color'] = ctx.COLOR().getText().toLowerCase();
+    this.obj['color'] = ctx
+      .COLOR()
+      .getText()
+      .toLowerCase();
   }
   exitTransistor(ctx) {
     this.obj['type'] = 'transistor';
   }
   exitTtype(ctx) {
-    this.obj['ttype'] = ctx.TTYPE().getText().toLowerCase();
+    this.obj['ttype'] = ctx
+      .TTYPE()
+      .getText()
+      .toLowerCase();
   }
   exitTcode(ctx) {
-    this.obj['code'] = ctx.TCODE().getText().toUpperCase();
+    this.obj['code'] = ctx
+      .TCODE()
+      .getText()
+      .toUpperCase();
   }
 }
 

@@ -27,7 +27,7 @@ function get_parser(parser, rule) {
     const tree = parser[rule]();
     const listener = new ToObjectListener();
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-    return {'result': listener.obj};
+    return {result: listener.obj};
   }
   return parse;
 }
