@@ -1,5 +1,14 @@
 const {ElectroGrammarListener} = require('./ElectroGrammarListener');
 
+function handle_option(ctx, options) {
+  const key = Object.keys(options).find(key => {
+    if (key in ctx && ctx[key]()) {
+      return key;
+    }
+  });
+  return options[key];
+}
+
 function handle_unit(ctx, prefix) {
   return  Number(ctx.NUMBER().getText() + prefix);
 }

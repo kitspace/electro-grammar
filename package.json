@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "nyc -- mocha --check-leaks --recursive --timeout 5000",
+    "test-no-python": "DISABLE_PYTHON_TESTS=1 npm test",
     "coverage": "nyc report",
     "coverage:html": "nyc report --reporter=html"
   },
