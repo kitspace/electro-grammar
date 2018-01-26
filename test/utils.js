@@ -4,7 +4,11 @@ const {format} = require('util');
 
 const get_js_parser = require('../js/lib/index').get_parser;
 const disable_python_tests = process.env.DISABLE_PYTHON_TESTS;
-const bin_py = 'python3 python3/cli.py';
+
+var bin_py = 'python3 python3/cli.py';
+if (process.env.TRAVIS === 'true') {
+  bin_py = 'pipenv run python3 python3/cli.py';
+}
 
 function eg_config(parser, rule) {
   return {parser, rule};

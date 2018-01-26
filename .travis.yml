@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-  - "6"
   - "8"
   - "node"
 matrix:
@@ -13,9 +12,9 @@ before_install:
   - export CLASSPATH=".:$TRAVIS_BUILD_DIR/travis/antlr-4.7.1-complete.jar:$CLASSPATH"
   - export PATH=$PATH:$TRAVIS_BUILD_DIR/travis
   - cd ..
+  - cd js && npm install && cd ..
+  - pip install --user pipenv
+  - pipenv install --dev
 script:
   - make
-  - cd js
-  - yarn
-  - yarn test
-  - if [ "${TEST_BROWSERS}" = "true" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then yarn test:sauce; fi
+  - npm test
