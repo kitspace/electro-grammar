@@ -8,7 +8,7 @@
     "prettier": "^1.10.2"
   },
   "scripts": {
-    "test": "nyc -- mocha --check-leaks --recursive --timeout 6000",
+    "test": "pipenv run nyc -- mocha --check-leaks --recursive --timeout 6000",
     "test-no-python": "DISABLE_PYTHON_TESTS=1 npm test",
     "coverage": "nyc report",
     "coverage:html": "nyc report --reporter=html",
