@@ -3,7 +3,7 @@ const {ElectroGrammarParser} = require('./ElectroGrammarParser');
 const {ElectroGrammarListener} = require('./electro_grammar_listener');
 const antlr4 = require('antlr4');
 
-function get_parser(start_rule) {
+function get_parser(parser, rule) {
   function parse(input) {
     const chars = new antlr4.InputStream(input);
     const lexer = new ElectroGrammarLexer(chars);
@@ -20,10 +20,13 @@ function get_parser(start_rule) {
 
     parser.buildParseTrees = true;
 
-    const tree = parser[start_rule]();
+    if (!(rule in parser)) {
+      throw new Error('Unknown rule ' + rule);
+    }
+    const tree = parser[rule]();
     const listener = new ElectroGrammarListener();
     const walker = antlr4.tree.ParseTreeWalker.DEFAULT.walk(listener, tree);
-    return listener.obj;
+    return {'result': listener.obj};
   }
   return parse;
 }
