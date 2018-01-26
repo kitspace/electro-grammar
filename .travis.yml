@@ -18,3 +18,5 @@ before_install:
 script:
   - make
   - npm test
+  - npm run fmt
+  - git diff --quiet
