@@ -9,7 +9,7 @@ from electro_grammar.ElectroGrammarParser import ElectroGrammarParser
 
 
 class Warnings(Enum):
-    ambiguous_size = 0;
+    ambiguous_size = 0
 
 
 class Warning(object):
@@ -32,6 +32,7 @@ def handle_option(ctx, options):
     for k, v in options.items():
         if hasattr(ctx, k) and getattr(ctx, k)():
             return v
+
 
 def handle_prefix(ctx):
     prefix = {
@@ -271,7 +272,7 @@ class ElectroGrammarToObjectListener(ElectroGrammarListener):
             'U2J': 'U2J',
             'Q3K': 'Q3K',
             'P3K': 'P3K'
-        };
+        }
         self.obj['dielectric'] = handle_option(ctx, dielectric)
 
     def exitClass2(self, ctx):
@@ -342,7 +343,7 @@ def get_parser(parser='strict', rule='electro_grammar'):
 
         # adding ambiguity diagnostics, see antlr book page 157
         # https://github.com/antlr/antlr4/issues/2206
-        #parser.removeErrorListeners()
+        # parser.removeErrorListeners()
         parser.addErrorListener(DiagnosticErrorListener())
         parser._interp.predictionMode = PredictionMode.LL_EXACT_AMBIG_DETECTION
 
@@ -350,7 +351,7 @@ def get_parser(parser='strict', rule='electro_grammar'):
         listener = ElectroGrammarToObjectListener()
         walker = ParseTreeWalker()
         walker.walk(listener, tree)
-        return {'result': listener.obj, 'warnings': listener.warnings};
+        return {'result': listener.obj, 'warnings': listener.warnings}
     return parse
 
 
