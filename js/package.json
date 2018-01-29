@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "scripts": {
-    "build:cpl": "node ../prepare_cpl.js",
     "demo": "cp demo/{index.html,favicon.ico} ../ && browserify demo/index.js > ../bundle.js",
     "test": "nyc -- mocha --check-leaks",
     "coverage": "nyc report",
@@ -12,22 +11,12 @@
     "test:browser": "zuul --local -- test/*.js",
     "pretest:sauce": "babel test/ -d test-lib/",
     "test:sauce": "zuul -- test-lib/*.js",
-    "fmt": "prettier --write test/**/*.js lib/**/*.js"
+    "fmt": "prettier --write test/**/*.js lib/**/*.js",
+    "dbg": "node --inspect-brk bin/electro-grammar.js"
   },
   "dependencies": {
-    "antlr4": "^4.7.1"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "better-assert": "^1.0.2",
-    "browserify": "^14.4.0",
-    "js-yaml": "^3.9.1",
-    "mocha": "^3.3.0",
-    "nyc": "^11.1.0",
-    "prettier": "^1.10.2",
-    "zuul": "^3.11.1"
+    "antlr4": "^4.7.1",
+    "cli": "^1.0.1"
   },
   "babel": {
     "presets": [
