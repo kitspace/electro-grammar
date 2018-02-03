@@ -1,6 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
+os.system('make python3')
 python3dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(python3dir)
 
