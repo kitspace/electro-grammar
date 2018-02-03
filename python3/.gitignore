@@ -3,3 +3,4 @@ dist/
 MANIFEST
 .cache/
 *.pyc
+*.egg-info
