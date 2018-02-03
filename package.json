@@ -1,5 +1,6 @@
 {
-  "name": "_electro-grammar",
+  "name": "electro-grammar",
+  "private": true,
   "devDependencies": {
     "better-assert": "^1.0.2",
     "js-yaml": "^3.9.1",
