@@ -2,7 +2,7 @@ import argparse
 import decimal
 import json
 import sys
-import electro_grammar as eg;
+import electro_grammar as eg
 
 
 class DecimalEncoder(json.JSONEncoder):
