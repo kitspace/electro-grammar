@@ -48,8 +48,8 @@ aprefix: MILI | MICRO | NANO | PICO;
 power: NUMBER pprefix? WATT tolerance?;
 pprefix: MILI;
 
-resistance: NUMBER (rprefix | OHM) tolerance?;
-rprefix: MEGA | KILO | MILI;
+resistance: NUMBER (RPREFIX | OHM);
+RPREFIX: MEGA | KILO | MILI;
 
 capacitance: NUMBER cprefix FARAD tolerance?;
 cprefix: MICRO | NANO | PICO;

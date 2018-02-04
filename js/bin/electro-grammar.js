@@ -1,5 +1,5 @@
 const cli = require('cli');
-const lib = require('../lib/index');
+const lib = require('../lib/lax_parser');
 
 const args = cli.parse({
   parser: [ 'p', 'Parser to use (strict | lax)', 'string', 'strict' ],
