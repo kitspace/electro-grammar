@@ -5,10 +5,13 @@
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors, capacitors and LEDs.
 A function to match the result to parts in the [Common Parts Library][CPL] is also provided.
 
+
 ```js
 const {parse, matchCPL} = require('electro-grammar')
 ```
 [:zap: demo](https://monostable.github.io/electro-grammar/)
+
+[![Gitter](https://badges.gitter.im/monostable/electro-grammar.svg)][CHAT]
 
 ## Parsing
 
@@ -177,9 +180,31 @@ If no matches are found or the function is given invalid input an empty array is
 []
 ```
 
+## Roadmap
+
+We are currently working on v2 of Electro Grammar which will have parsers in many more languages:
+
+### v1
+
+- JavaScript only
+- Capacitors, resistors and LEDs (SMD only)
+- Lax parser only (any-order, ignores invalid input)
+
+### v2
+
+- Work in progress!
+- Uses Antlr4: JavaScript (API compatible with v1), Python, Java, C (& C++), Go
+- Capacitors, resistors, LEDs, diodes, transistors (SMD & through-hole)
+- Strict and lax parser
+
+Head to the [issue tracker][ISSUES] or the [Gitter Room][CHAT] if you want to help or need to know more details.
+
+
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
 [BADGE]: https://travis-ci.org/monostable/electro-grammar.svg?branch=master
 [BUILD]: https://travis-ci.org/monostable/electro-grammar
 [CLASS-1]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitors
 [CLASS-2]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitors
+[ISSUES]: https://github.com/monostable/electro-grammar/issues
+[CHAT]: https://gitter.im/monostable/electro-grammar
