@@ -1,14 +1,23 @@
 language: node_js
 node_js:
-  - "6"
   - "8"
   - "node"
 matrix:
   include:
   - node_js: node
     env: TEST_BROWSERS=true
+before_install:
+  - cd travis
+  - wget --no-check-certificate https://www.antlr.org/download/antlr-4.7.1-complete.jar
+  - export CLASSPATH=".:$TRAVIS_BUILD_DIR/travis/antlr-4.7.1-complete.jar:$CLASSPATH"
+  - export PATH=$PATH:$TRAVIS_BUILD_DIR/travis
+  - cd ..
+  - cd js && npm install && cd ..
+  - pip install --user pipenv
+  - pipenv install --dev
 script:
-  - yarn test
-  - yarn demo
+  - make
+  - npm test
+  - npm run fmt
+  - git diff
   - git diff --quiet
-  - if [ "${TEST_BROWSERS}" = "true" ] && [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then yarn test:sauce; fi

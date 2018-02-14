@@ -1,0 +1,236 @@
+grammar PackageSize;
+import Alphabet, Units;
+
+/* Rule for testing package parsing */
+all_packages:
+  package_chip
+| package_eia
+| package_panasonic
+| package_sod
+| package_melf
+| package_do214
+| package_sot
+| package_dpak;
+
+
+/* Lexer rules for recognizing package names */
+// https://en.wikipedia.org/wiki/Surface-mount_technology
+
+/* Chip packages */
+package_chip: package_chip_unambiguous | package_chip_ambiguous;
+
+package_chip_ambiguous:
+  CHIP_0201
+| CHIP_0402
+| CHIP_0603;
+
+package_chip_unambiguous:
+  CHIP_i008004
+| CHIP_i009005
+| CHIP_i01005
+| CHIP_i0201
+| CHIP_i0402
+| CHIP_i0603
+| CHIP_i0805
+| CHIP_i1008
+| CHIP_i1206
+| CHIP_i1210
+| CHIP_i1806
+| CHIP_i1812
+| CHIP_i1825
+| CHIP_i2010
+| CHIP_i2512
+| CHIP_i2920;
+
+CHIP_i008004: '008004' | IMPERIAL '008004' | '008004' IMPERIAL | CHIP_m0201;
+CHIP_i009005: '009005' | IMPERIAL '009005' | '009005' IMPERIAL | CHIP_m03015;
+CHIP_i01005:   '01005' | IMPERIAL  '01005' |  '01005' IMPERIAL | CHIP_m0402;
+CHIP_i0201:              IMPERIAL   CHIP_0201 |   CHIP_0201 IMPERIAL | CHIP_m0603;
+CHIP_i0402:              IMPERIAL   CHIP_0402 |   CHIP_0402 IMPERIAL | CHIP_m1005;
+CHIP_i0603:              IMPERIAL   CHIP_0603 |   CHIP_0603 IMPERIAL | CHIP_m1608;
+CHIP_i0805:     '0805' | IMPERIAL   '0805' |   '0805' IMPERIAL | CHIP_m2012;
+CHIP_i1008:     '1008' | IMPERIAL   '1008' |   '1008' IMPERIAL | CHIP_m2520;
+CHIP_i1206:     '1206' | IMPERIAL   '1206' |   '1206' IMPERIAL | CHIP_m3216;
+CHIP_i1210:     '1210' | IMPERIAL   '1210' |   '1210' IMPERIAL | CHIP_m3225;
+CHIP_i1806:     '1806' | IMPERIAL   '1806' |   '1806' IMPERIAL | CHIP_m4516;
+CHIP_i1812:     '1812' | IMPERIAL   '1812' |   '1812' IMPERIAL | CHIP_m4532;
+CHIP_i1825:     '1825' | IMPERIAL   '1825' |   '1825' IMPERIAL | CHIP_m4564;
+CHIP_i2010:     '2010' | IMPERIAL   '2010' |   '2010' IMPERIAL | CHIP_m5025;
+CHIP_i2512:     '2512' | IMPERIAL   '2512' |   '2512' IMPERIAL | CHIP_m6332;
+CHIP_i2920:     '2920' | IMPERIAL   '2920' |   '2920' IMPERIAL | CHIP_m7451;
+
+CHIP_m0201:            METRIC  CHIP_0201 |  CHIP_0201 METRIC;
+CHIP_m03015: '03015' | METRIC '03015' | '03015' METRIC;
+CHIP_m0402:            METRIC  CHIP_0402 |  CHIP_0402 METRIC;
+CHIP_m0603:            METRIC  CHIP_0603 |  CHIP_0603 METRIC;
+CHIP_m1005:   '1005' | METRIC  '1005' |  '1005' METRIC;
+CHIP_m1608:   '1608' | METRIC  '1608' |  '1608' METRIC;
+CHIP_m2012:   '2012' | METRIC  '2012' |  '2012' METRIC;
+CHIP_m2520:   '2520' | METRIC  '2520' |  '2520' METRIC;
+CHIP_m3216:   '3216' | METRIC  '3216' |  '3216' METRIC;
+CHIP_m3225:   '3225' | METRIC  '3225' |  '3225' METRIC;
+CHIP_m4516:   '4516' | METRIC  '4516' |  '4516' METRIC;
+CHIP_m4532:   '4532' | METRIC  '4532' |  '4532' METRIC;
+CHIP_m4564:   '4564' | METRIC  '4564' |  '4564' METRIC;
+CHIP_m5025:   '5025' | METRIC  '5025' |  '5025' METRIC;
+CHIP_m6332:   '6332' | METRIC  '6332' |  '6332' METRIC;
+CHIP_m7451:   '7451' | METRIC  '7451' |  '7451' METRIC;
+
+CHIP_0201: '0201';
+CHIP_0402: '0402';
+CHIP_0603: '0603';
+
+METRIC: ' '* M E T R I C ' '*;
+IMPERIAL: I | ' '* I M P E R I A L ' '*;
+/* Chip packages */
+
+
+/* EIA packages */
+package_eia:
+  EIA_2012_12
+| EIA_3216_10
+| EIA_3216_12
+| EIA_3216_18
+| EIA_3528_12
+| EIA_3528_21
+| EIA_6032_15
+| EIA_6032_28
+| EIA_7260_38
+| EIA_7343_20
+| EIA_7343_31
+| EIA_7343_43;
+
+EIA_2012_12: EIA '-2012-12' | KEMET R | AVX R;
+EIA_3216_10: EIA '-3216-10' | KEMET I | AVX K;
+EIA_3216_12: EIA '-3216-12' | KEMET S | AVX S;
+EIA_3216_18: EIA '-3216-18' | KEMET A | AVX A;
+EIA_3528_12: EIA '-3528-12' | KEMET T | AVX T;
+EIA_3528_21: EIA '-3528-21' | KEMET B | AVX B;
+EIA_6032_15: EIA '-6032-15' | KEMET U | AVX W;
+EIA_6032_28: EIA '-6032-28' | KEMET C | AVX C;
+EIA_7260_38: EIA '-7260-38' | KEMET E | AVX V;
+EIA_7343_20: EIA '-7343-20' | KEMET V | AVX Y;
+EIA_7343_31: EIA '-7343-31' | KEMET D | AVX D;
+EIA_7343_43: EIA '-7343-43' | KEMET X | AVX E;
+
+fragment EIA: E I A;
+fragment KEMET: K E M E T ' '*;
+fragment AVX: A V X ' '*;
+/* EIA packages */
+
+
+/* Panasonic packages */
+package_panasonic:
+  PANASONIC_A
+| PANASONIC_B
+| PANASONIC_C
+| PANASONIC_D
+| PANASONIC_E
+| PANASONIC_G
+| PANASONIC_H
+| PANASONIC_J
+| PANASONIC_K
+| CHEMICON_K;
+
+PANASONIC_A: PANASONIC A | CHEMICON B;
+PANASONIC_B: PANASONIC B | CHEMICON D;
+PANASONIC_C: PANASONIC C | CHEMICON E;
+PANASONIC_D: PANASONIC D | CHEMICON F;
+PANASONIC_E: PANASONIC (E | F) | CHEMICON H;
+PANASONIC_G: PANASONIC G | CHEMICON J;
+CHEMICON_K: CHEMICON K;
+PANASONIC_H: PANASONIC H;
+PANASONIC_J: PANASONIC J | CHEMICON L;
+PANASONIC_K: PANASONIC K | CHEMICON M;
+
+fragment PANASONIC: P A N A S O N I C ' '*;
+fragment CHEMICON: C H E M I C O N ' '*;
+/* Panasonic packages */
+
+
+/* SOD packages */
+package_sod:
+  SOD_723
+| SOD_523
+| SOD_323
+| SOD_128
+| SOD_123
+| SOD_80C;
+
+SOD_723: SOD '723';
+SOD_523: SOD '523' | SC '79';
+SOD_323: SOD '323' | SC '90';
+SOD_128: SOD '128';
+SOD_123: SOD '123';
+SOD_80C: SOD '80' C;
+
+fragment SOD: S O D;
+fragment SC: S C;
+/* SOD packages */
+
+
+/* MELF packages */
+package_melf:
+  MICRO_MELF
+| MINI_MELF
+| DEF_MELF;
+
+MICRO_MELF: MICRO MELF | '0102';
+MINI_MELF: (MILI | MINI) MELF | '0204';
+DEF_MELF: MELF | '0207';
+
+fragment MINI: M I N I;
+fragment MELF: ' '* M E L F;
+/* MELF packages */
+
+
+/* DO-214 packages */
+package_do214:
+  DO214_AA
+| DO214_AB
+| DO214_AC;
+
+DO214_AA: DO214 A A;
+DO214_AB: DO214 A B;
+DO214_AC: DO214 A C;
+
+fragment DO214: D O '214';
+/* DO-214 packages */
+
+
+/* SOT packages 3/4 Terminal */
+package_sot:
+  SOT223
+| SOT89
+| SOT23
+| SOT323
+| SOT416
+| SOT663
+| SOT723
+| SOT883;
+
+SOT223: SOT '223';
+SOT89: SOT '89';
+SOT23: SOT '23';
+SOT323: SOT '323';
+SOT416: SOT '416';
+SOT663: SOT '663';
+SOT723: SOT '723';
+SOT883: SOT '883';
+
+fragment SOT: S O T;
+/* SOT packages */
+
+/* DPAK packages */
+package_dpak:
+  DPAK
+| D2PAK
+| D3PAK;
+
+DPAK: D PAK | TO '252' | SOT '428';
+D2PAK: D '2' PAK | TO '263' | SOT '404';
+D3PAK: D '3' PAK | TO '268';
+
+fragment PAK: P A K;
+fragment TO: T O;
+/* DPAK packages */

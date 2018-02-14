@@ -1,43 +1,21 @@
 {
   "name": "electro-grammar",
-  "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
-  "version": "1.0.0",
-  "main": "lib/index.js",
+  "private": true,
+  "devDependencies": {
+    "better-assert": "^1.0.2",
+    "js-yaml": "^3.9.1",
+    "mocha": "^5.0.0",
+    "nyc": "^11.4.1",
+    "prettier": "^1.10.2"
+  },
   "scripts": {
-    "build:grammar": "nearleyc src/grammar.ne --out src/grammar.js",
-    "build:lib": "babel src/ -d lib/",
-    "build:cpl": "node prepare_cpl.js",
-    "demo": "browserify docs/index.js > docs/bundle.js",
-    "build": "npm run build:grammar && npm run build:lib",
-    "pretest": "npm run build",
-    "test": "nyc -- mocha --check-leaks",
+    "test": "pipenv run nyc -- mocha --check-leaks --recursive --timeout 6000",
+    "test-no-python": "DISABLE_PYTHON_TESTS=1 npm test",
     "coverage": "nyc report",
     "coverage:html": "nyc report --reporter=html",
-    "test:browser": "zuul --local -- test/*.js",
-    "pretest:sauce": "babel test/ -d test-lib/",
-    "test:sauce": "zuul -- test-lib/*.js"
+    "fmt:js": "prettier --write test/**/*.js js/lib/**/*.js",
+    "fmt:py": "pipenv run autopep8 --in-place python3/**/*.py",
+    "fmt": "npm run fmt:js && npm run fmt:py"
   },
-  "dependencies": {
-    "moo": "^0.4.3",
-    "nearley": "https://github.com/kasbah/nearley#fix-include"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "better-assert": "^1.0.2",
-    "browserify": "^14.4.0",
-    "js-yaml": "^3.9.1",
-    "mocha": "^3.3.0",
-    "nyc": "^11.1.0",
-    "zuul": "^3.11.1"
-  },
-  "babel": {
-    "presets": [
-      "es2015"
-    ],
-    "plugins": [
-      "transform-object-assign"
-    ]
-  }
+  "dependencies": {}
 }

@@ -1,0 +1,29 @@
+{
+  "name": "electro-grammar",
+  "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "scripts": {
+    "demo": "cp demo/{index.html,favicon.ico} ../ && browserify demo/index.js > ../bundle.js",
+    "test": "nyc -- mocha --check-leaks",
+    "coverage": "nyc report",
+    "coverage:html": "nyc report --reporter=html",
+    "test:browser": "zuul --local -- test/*.js",
+    "pretest:sauce": "babel test/ -d test-lib/",
+    "test:sauce": "zuul -- test-lib/*.js",
+    "fmt": "prettier --write test/**/*.js lib/**/*.js",
+    "dbg": "node --inspect-brk bin/electro-grammar.js"
+  },
+  "dependencies": {
+    "antlr4": "^4.7.1",
+    "cli": "^1.0.1"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-object-assign"
+    ]
+  }
+}
