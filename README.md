@@ -198,7 +198,7 @@ Head to the [issue tracker][ISSUES] or the [Gitter Room][CHAT] if you want to he
 
 Electro Grammar is MIT licensed. It can be freely used in open source and
 propietary work as long as you include the copyright notice in all copies. See
-[LICENSE.md](LICENSE.md) file for details.
+the [LICENSE.md][LICENSE] file for details.
 
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
@@ -208,3 +208,4 @@ propietary work as long as you include the copyright notice in all copies. See
 [CLASS-2]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitors
 [ISSUES]: https://github.com/monostable/electro-grammar/issues
 [CHAT]: https://gitter.im/monostable/electro-grammar
+[LICENSE]: https://github.com/monostable/electro-grammar/blob/master/LICENSE.md
