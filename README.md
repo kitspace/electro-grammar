@@ -18,6 +18,12 @@ npm install electro-grammar
 const {parse, matchCPL} = require('electro-grammar')
 ```
 
+## Where is this used?
+
+- [1-click BOM browser extension](https://1clickbom.com)
+- [Kitspace BOM Builder](https://bom-builder.kitspace.org) (currently in alpha)
+- [electron-lang](https://github.com/electron-lang/electron) for [@CPL](https://github.com/electron-lang/electron/blob/master/docs/reference.md#cpldescr)
+
 ## Parsing
 
 ### Capacitors
