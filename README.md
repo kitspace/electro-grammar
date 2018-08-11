@@ -1,15 +1,22 @@
-# Electro Grammar [![Build Status][BADGE]][BUILD]
+# Electro Grammar
+
+[⚡ demo](https://monostable.github.io/electro-grammar/)
+
+[![npm](https://img.shields.io/npm/v/electro-grammar.svg?maxAge=3600)](https://www.npmjs.com/package/electro-grammar)
+[![travis][BADGE]][BUILD]
+[![gitter](https://badges.gitter.im/monostable/electro-grammar.svg)][CHAT]
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors, capacitors and LEDs.
 A function to match the result to parts in the [Common Parts Library][CPL] is also provided.
+
+```
+npm install electro-grammar
+```
 
 
 ```js
 const {parse, matchCPL} = require('electro-grammar')
 ```
-[:zap: demo](https://monostable.github.io/electro-grammar/)
-
-[![Gitter](https://badges.gitter.im/monostable/electro-grammar.svg)][CHAT]
 
 ## Parsing
 
