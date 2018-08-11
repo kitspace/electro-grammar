@@ -18,7 +18,7 @@
     "test:sauce": "zuul -- test-lib/*.js"
   },
   "dependencies": {
-    "nearley": "https://github.com/Hardmath123/nearley"
+    "nearley": "^2.15.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
