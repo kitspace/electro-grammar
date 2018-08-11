@@ -74,11 +74,11 @@ LEDs need to include the word 'LED' or 'led'.
 
 ```js
 > parse('LED red')
-{ color: 'red', type: 'led' }
+{ type: 'led', color: 'red' }
 > parse('LED 0603')
-{ size: '0603', type: 'led' }
+{ type: 'led', size: '0603' }
 > parse('green led 1206')
-{ color: 'green', type: 'led', size: '1206' }
+{ type: 'led', color: 'green', size: '1206' }
 ```
 
 
@@ -196,7 +196,9 @@ Head to the [issue tracker][ISSUES] or the [Gitter Room][CHAT] if you want to he
 
 ## License
 
-Electro Grammar is MIT licensed. It can be freely used in open source and propietary work as long as you include the copyright notice in all copies. See [LICENSE.md](LICENSE.md) file for details.
+Electro Grammar is MIT licensed. It can be freely used in open source and
+propietary work as long as you include the copyright notice in all copies. See
+[LICENSE.md](LICENSE.md) file for details.
 
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
