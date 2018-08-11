@@ -3,7 +3,12 @@
   "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
   "version": "1.0.0",
   "main": "lib/index.js",
-  "keywords": ["electronics", "grammar", "parser", "pcb"],
+  "keywords": [
+    "electronics",
+    "grammar",
+    "parser",
+    "pcb"
+  ],
   "license": "MIT",
   "repository": "https://github.com/monostable/electro-grammar",
   "scripts": {
