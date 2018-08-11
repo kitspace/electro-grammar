@@ -3,12 +3,7 @@ node_js:
   - "6"
   - "8"
   - "node"
-matrix:
-  include:
-  - node_js: node
-    env: TEST_BROWSERS=true
 script:
   - yarn test
   - yarn demo
   - git diff --quiet
-  - if [ "${TEST_BROWSERS}" = "true" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then yarn test:sauce; fi
