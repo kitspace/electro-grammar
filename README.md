@@ -196,8 +196,7 @@ Head to the [issue tracker][ISSUES] or the [Gitter Room][CHAT] if you want to he
 
 ## License
 
-Electro Grammar is currently licensed under the AGPLv3 and may be re-licensed under a more permissive license in the future. See the
-[LICENSE.md](LICENSE.md) file for details.
+Electro Grammar is MIT licensed. It can be freely used in open source and propietary work as long as you include the copyright notice in all copies. See [LICENSE.md](LICENSE.md) file for details.
 
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
