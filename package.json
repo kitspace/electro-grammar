@@ -3,6 +3,7 @@
   "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
   "version": "1.0.0",
   "main": "lib/index.js",
+  "keywords": ["electronics", "grammar", "parser", "pcb"],
   "scripts": {
     "build:grammar": "nearleyc src/grammar.ne --out src/grammar.js",
     "build:lib": "babel src/ -d lib/",
