@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "keywords": ["electronics", "grammar", "parser", "pcb"],
   "license": "MIT",
+  "repository": "https://github.com/monostable/electro-grammar",
   "scripts": {
     "build:grammar": "nearleyc src/grammar.ne --out src/grammar.js",
     "build:lib": "babel src/ -d lib/",
