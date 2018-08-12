@@ -22,7 +22,7 @@ const {parse, matchCPL} = require('electro-grammar')
 
 - [1-click BOM browser extension](https://1clickbom.com)
 - [Kitspace BOM Builder](https://bom-builder.kitspace.org) (currently in alpha)
-- [electron-lang](https://github.com/electron-lang/electron) for [@CPL](https://github.com/electron-lang/electron/blob/master/docs/reference.md#cpldescr)
+- [electron-lang](https://github.com/electron-lang/electron) for [`@cpl`](https://github.com/electron-lang/electron/blob/master/docs/reference.md#cpldescr)
 
 ## Parsing
 
@@ -121,7 +121,7 @@ The order of the terms doesn't matter.
   size: "0603" }
 ```
 
-If no match is found and empty object is returned.
+If no match is found an empty object is returned.
 
 ```js
 > parse('')
