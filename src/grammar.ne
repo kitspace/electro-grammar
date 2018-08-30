@@ -119,7 +119,7 @@ rest -> rMetricPrefix int:? (_ ohm):? | ohm
 %}
 
 ohm -> ohm_ {% nuller %}
-ohm_ -> O H M | "Ω" | "Ω"
+ohm_ -> O H M (S:?) | "Ω" | "Ω"
 
 
 ## LEDs ##
@@ -173,4 +173,3 @@ cMetricPrefix ->
   | nano  {% () => 'e-9 ' %}
   | pico  {% () => 'e-12' %}
   | null  {% () => '' %}
-
