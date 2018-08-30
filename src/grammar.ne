@@ -88,7 +88,7 @@ resistor ->
 
 rSpecs -> (_ rSpec _):* | __
 
-rSpec -> tolerance | power_rating
+rSpec -> tolerance | J U M P E R {% () => ({ tolerance: 0 }) %} | power_rating
 
 power_rating -> decimal _ powerMetricPrefix _ watts {% d => {
   const [quantity, , metricPrefix] = d

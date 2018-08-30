@@ -480,6 +480,7 @@ var grammar = {
     {"name": "rSpecs", "symbols": ["rSpecs$ebnf$1"]},
     {"name": "rSpecs", "symbols": ["__"]},
     {"name": "rSpec", "symbols": ["tolerance"]},
+    {"name": "rSpec", "symbols": ["J", "U", "M", "P", "E", "R"], "postprocess": () => ({ tolerance: 0 })},
     {"name": "rSpec", "symbols": ["power_rating"]},
     {"name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess":  d => {
           const [quantity, , metricPrefix] = d
