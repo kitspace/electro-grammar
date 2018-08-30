@@ -167,6 +167,8 @@ rMetricPrefix ->
   | mega  {% () => 'e6  ' %}
   | kilo  {% () => 'e3  ' %}
   | R     {% () => ''     %}
+  | milli {% () => 'e-3 ' %}
+  | micro {% () => 'e-6 ' %}
 
 cMetricPrefix ->
     micro {% () => 'e-6 ' %}

@@ -1472,6 +1472,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return 'e3  ';
             } }, { "name": "rMetricPrefix", "symbols": ["R"], "postprocess": function postprocess() {
                 return '';
+            } }, { "name": "rMetricPrefix", "symbols": ["milli"], "postprocess": function postprocess() {
+                return 'e-3 ';
+            } }, { "name": "rMetricPrefix", "symbols": ["micro"], "postprocess": function postprocess() {
+                return 'e-6 ';
             } }, { "name": "cMetricPrefix", "symbols": ["micro"], "postprocess": function postprocess() {
                 return 'e-6 ';
             } }, { "name": "cMetricPrefix", "symbols": ["nano"], "postprocess": function postprocess() {

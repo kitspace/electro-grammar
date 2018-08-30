@@ -271,6 +271,21 @@ describe('SMD Resistors', () => {
     assert(c.type === 'resistor')
     assert(c.resistance === 100, 'resistance value is wrong')
   })
+  it('parses "1 mOhm"', () => {
+    const c = parse('1 mOhm')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 0.001, 'resistance value is wrong')
+  })
+  it('parses "1 MOhm"', () => {
+    const c = parse('1 MOhm')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000000, 'resistance value is wrong')
+  })
+  it('parses "100 uΩ"', () => {
+    const c = parse('100 uΩ')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 0.0001, 'resistance value is wrong')
+  })
   it('parses tolerance', () => {
     const c = parse('1k 0805 5%')
     assert(c.type === 'resistor')
