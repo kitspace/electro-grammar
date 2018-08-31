@@ -293,13 +293,6 @@ describe('SMD Resistors', () => {
     assert(c.tolerance === 5, 'tolerance value is wrong')
     assert(c.size === '0805', 'size is wrong')
   })
-  it('parses jumper', () => {
-    const c = parse('0k 0805 jumper')
-    assert(c.type === 'resistor')
-    assert(c.resistance === 0, 'resistance value is wrong')
-    assert(c.tolerance === 0, 'tolerance value is wrong')
-    assert(c.size === '0805', 'size is wrong')
-  })
   it('parses power rating', () => {
     const c = parse('1k 0805 5% 100mW')
     assert(c.type === 'resistor')
