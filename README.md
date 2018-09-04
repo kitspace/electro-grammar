@@ -1,6 +1,6 @@
 # Electro Grammar
 
-[⚡ demo](https://monostable.github.io/electro-grammar/)
+[⚡ demo](https://kitspace.github.io/electro-grammar/)
 
 [![npm](https://img.shields.io/npm/v/electro-grammar.svg?maxAge=3600)](https://www.npmjs.com/package/electro-grammar)
 [![travis][BADGE]][BUILD]
@@ -215,10 +215,11 @@ the [LICENSE.md][LICENSE] file for details.
 
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
-[BADGE]: https://travis-ci.org/monostable/electro-grammar.svg?branch=master
-[BUILD]: https://travis-ci.org/monostable/electro-grammar
+[BADGE]: https://travis-ci.org/kitspace/electro-grammar.svg?branch=master
+[BUILD]: https://travis-ci.org/kitspace/electro-grammar
 [CLASS-1]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitors
 [CLASS-2]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitors
-[ISSUES]: https://github.com/monostable/electro-grammar/issues
-[CHAT]: https://gitter.im/monostable/electro-grammar
+[ISSUES]: https://github.com/kitspace/electro-grammar/issues
+[CHAT]: https://
+.im/monostable/electro-grammar
 [LICENSE]: https://github.com/monostable/electro-grammar/blob/master/LICENSE.md
