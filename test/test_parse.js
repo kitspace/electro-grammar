@@ -10,6 +10,20 @@ describe('parsing', () => {
   it('returns empty object on empty', () => {
     assert(parse('').type == null)
   })
+  it('can have R/C/LED prefixes on footprints', () => {
+    let c = parse('2uF R0603')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    c = parse('2uF C0603')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    c = parse('LED0603 2uF ')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 2e-6, 'capacitance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
 })
 
 describe('SMD Capacitors', () => {
