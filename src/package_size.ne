@@ -1,4 +1,4 @@
-packageSize -> _packageSize {% d => ({size: filter(flatten(d))[0]}) %}
+packageSize -> _ignoredPackagePrefix:? _packageSize {% d => ({size: filter(flatten(d))[0]}) %}
 _packageSize -> _imperialSize | _metricSize
 _imperialSize ->
     "01005"
@@ -56,3 +56,7 @@ T -> "T" | "t"
 R -> "R" | "r"
 I -> "I" | "i"
 C -> "C" | "c"
+L -> "L" | "l"
+D -> "D" | "d"
+
+_ignoredPackagePrefix -> R {% nuller %} | C {% nuller %} | L E D {% nuller %}
