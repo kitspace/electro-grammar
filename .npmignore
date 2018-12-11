@@ -1,0 +1,10 @@
+src/
+test/
+docs/
+coverage/
+.nyc_output/
+prepare_cpl.js
+cpl-data/
+.gitmodules
+.travis.yml
+.zuul.yml

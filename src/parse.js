@@ -34,7 +34,7 @@ function parse(str, {returnIgnored} = {}) {
     return {component: component || prev.component, ignored}
   }, {component: {}, ignored: ''})
   if (returnIgnored) {
-    return {component: r.component, ignored: r.ignored.trim()}
+    r.component.ignored = r.ignored.trim()
   }
   return r.component
 }

@@ -8,9 +8,21 @@ var component = document.getElementById('component')
 var cplids    = document.getElementById('cplids')
 
 function setOutput() {
-  var r = parse(input.value || input.placeholder, {returnIgnored: true})
-  component.innerHTML = JSON.stringify(r, null, 2)
-  cplids.innerHTML    = JSON.stringify(matchCPL(r.component), null, 2)
+  var c = parse(input.value || input.placeholder, {returnIgnored: true})
+  component.innerHTML = JSON.stringify(c, null, 2)
+  var cplParts = matchCPL(c)
+  while (cplids.hasChildNodes()) {
+      cplids.removeChild(cplids.lastChild);
+  }
+  cplParts.forEach(function(p) {
+    var li = document.createElement('li')
+    var a = document.createElement('a')
+    a.href = 'https://octopart.com/common-parts-library#' + p
+    a.appendChild(document.createTextNode(p))
+    li.appendChild(a)
+    cplids.appendChild(li)
+  })
+
 }
 
 setOutput()

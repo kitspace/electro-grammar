@@ -3,6 +3,14 @@
   "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
   "version": "1.0.0",
   "main": "lib/index.js",
+  "keywords": [
+    "electronics",
+    "grammar",
+    "parser",
+    "pcb"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/monostable/electro-grammar",
   "scripts": {
     "build:grammar": "nearleyc src/grammar.ne --out src/grammar.js",
     "build:lib": "babel src/ -d lib/",
@@ -18,18 +26,18 @@
     "test:sauce": "zuul -- test-lib/*.js"
   },
   "dependencies": {
-    "nearley": "https://github.com/Hardmath123/nearley"
+    "nearley": "^2.15.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-object-assign": "^6.22.0",
     "babel-preset-es2015": "^6.24.1",
     "better-assert": "^1.0.2",
-    "browserify": "^14.4.0",
+    "browserify": "^16.2.2",
     "js-yaml": "^3.9.1",
-    "mocha": "^3.3.0",
-    "nyc": "^11.1.0",
-    "zuul": "^3.11.1"
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "zuul": "^3.12.0"
   },
   "babel": {
     "presets": [

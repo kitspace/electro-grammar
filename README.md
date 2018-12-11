@@ -1,14 +1,28 @@
-# Electro Grammar [![Build Status][BADGE]][BUILD]
+# Electro Grammar
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/electro-grammar.svg)](https://saucelabs.com/u/electro-grammar)
+[⚡ demo](https://kitspace.github.io/electro-grammar/)
+
+[![npm](https://img.shields.io/npm/v/electro-grammar.svg?maxAge=3600)](https://www.npmjs.com/package/electro-grammar)
+[![travis][BADGE]][BUILD]
+[![chat](https://badges.gitter.im/monostable/electro-grammar.svg)][CHAT]
 
 This is a parser using [Nearley](http://nearley.js.org/) that defines a grammar for describing generic electronic components such as surface mount resistors, capacitors and LEDs.
 A function to match the result to parts in the [Common Parts Library][CPL] is also provided.
 
+```
+npm install electro-grammar
+```
+
+
 ```js
 const {parse, matchCPL} = require('electro-grammar')
 ```
-[:zap: demo](https://monostable.github.io/electro-grammar/)
+
+## Where is this used?
+
+- [1-click BOM browser extension](https://1clickbom.com)
+- [Kitspace BOM Builder](https://bom-builder.kitspace.org) (currently in alpha)
+- [electron-lang](https://github.com/electron-lang/electron) for [`@cpl`](https://github.com/electron-lang/electron/blob/master/docs/reference.md#cpldescr)
 
 ## Parsing
 
@@ -73,11 +87,11 @@ LEDs need to include the word 'LED' or 'led'.
 
 ```js
 > parse('LED red')
-{ color: 'red', type: 'led' }
+{ type: 'led', color: 'red' }
 > parse('LED 0603')
-{ size: '0603', type: 'led' }
+{ type: 'led', size: '0603' }
 > parse('green led 1206')
-{ color: 'green', type: 'led', size: '1206' }
+{ type: 'led', color: 'green', size: '1206' }
 ```
 
 
@@ -107,7 +121,7 @@ The order of the terms doesn't matter.
   size: "0603" }
 ```
 
-If no match is found and empty object is returned.
+If no match is found an empty object is returned.
 
 ```js
 > parse('')
@@ -174,9 +188,37 @@ If no matches are found or the function is given invalid input an empty array is
 []
 ```
 
+## Roadmap
+
+We are currently working on v2 of Electro Grammar which will have parsers in many more languages:
+
+### v1
+
+- JavaScript only
+- Capacitors, resistors and LEDs (SMD only)
+- Lax parser only (any-order, ignores invalid input)
+
+### v2
+
+- Work in progress!
+- Uses Antlr4: JavaScript (API compatible with v1), Python, Java, C (& C++), Go
+- Capacitors, resistors, LEDs, diodes, transistors (SMD & through-hole)
+- Strict and lax parser
+
+Head to the [issue tracker][ISSUES] or the [Gitter Room][CHAT] if you want to help or need to know more details.
+
+## License
+
+Electro Grammar is MIT licensed. It can be freely used in open source and
+propietary work as long as you include the copyright notice in all copies. See
+the [LICENSE.md][LICENSE] file for details.
+
 [CPL]: https://octopart.com/common-parts-library#Resistors
 [CPL-DATA]: https://github.com/octopart/CPL-Data
-[BADGE]: https://travis-ci.org/monostable/electro-grammar.svg?branch=master
-[BUILD]: https://travis-ci.org/monostable/electro-grammar
+[BADGE]: https://travis-ci.org/kitspace/electro-grammar.svg?branch=master
+[BUILD]: https://travis-ci.org/kitspace/electro-grammar
 [CLASS-1]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_1_ceramic_capacitors
 [CLASS-2]: https://en.wikipedia.org/wiki/Ceramic_capacitor#Class_2_ceramic_capacitors
+[ISSUES]: https://github.com/kitspace/electro-grammar/issues
+[CHAT]: https://gitter.im/monostable/electro-grammar
+[LICENSE]: https://github.com/kitspace/electro-grammar/blob/master/LICENSE.md
