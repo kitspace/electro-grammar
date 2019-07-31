@@ -33,9 +33,17 @@ function id(x) { return x[0]; }
     }
 
 
-  function capacitance(d) {
-    const [quantity, , metricPrefix, , farad] = d
-
+  function capacitance(d, i, reject) {
+    const [integral, , [metricPrefix, fractional]] = d
+    if (fractional) {
+      console.log({integral, metricPrefix, fractional})
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 
@@ -474,8 +482,11 @@ var grammar = {
     {"name": "plusMinus", "symbols": [{"literal":"±"}]},
     {"name": "plusMinus$string$2", "symbols": [{"literal":"+"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plusMinus", "symbols": ["plusMinus$string$2"]},
-    {"name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance},
-    {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance},
+    {"name": "capacitance", "symbols": ["capacitanceNoFarad", "_", "farad"], "postprocess": id},
+    {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceRest"], "postprocess": capacitance},
+    {"name": "capacitanceRest$ebnf$1", "symbols": ["int"], "postprocess": id},
+    {"name": "capacitanceRest$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitanceRest", "symbols": ["cMetricPrefix", "capacitanceRest$ebnf$1"]},
     {"name": "farad", "symbols": ["F"], "postprocess": nuller},
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller},
     {"name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},

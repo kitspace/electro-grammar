@@ -67,12 +67,22 @@ tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
-capacitance -> decimal _ cMetricPrefix _ farad {% capacitance %}
-capacitanceNoFarad -> decimal _ cMetricPrefix {% capacitance %}
-@{%
-  function capacitance(d) {
-    const [quantity, , metricPrefix, , farad] = d
+capacitance -> capacitanceNoFarad _ farad {% id %}
+capacitanceNoFarad -> decimal _ capacitanceRest {% capacitance %}
 
+capacitanceRest -> cMetricPrefix int:?
+
+@{%
+  function capacitance(d, i, reject) {
+    const [integral, , [metricPrefix, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 %}

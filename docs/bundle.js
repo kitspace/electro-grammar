@@ -1171,12 +1171,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     }
 
-    function capacitance(d) {
-        var _d = _slicedToArray(d, 5),
-            quantity = _d[0],
-            metricPrefix = _d[2],
-            farad = _d[4];
+    function capacitance(d, i, reject) {
+        var _d = _slicedToArray(d, 3),
+            integral = _d[0],
+            _d$ = _slicedToArray(_d[2], 2),
+            metricPrefix = _d$[0],
+            fractional = _d$[1];
 
+        if (fractional) {
+            console.log({ integral: integral, metricPrefix: metricPrefix, fractional: fractional });
+            if (/\./.test(integral.toString())) {
+                return reject;
+            }
+            var quantity = integral + '.' + fractional;
+        } else {
+            var quantity = integral;
+        }
         return { capacitance: parseFloat('' + quantity + metricPrefix) };
     }
 
@@ -1406,7 +1416,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return d.join('');
             } }, { "name": "plusMinus", "symbols": ["plusMinus$string$1"] }, { "name": "plusMinus", "symbols": [{ "literal": "±" }] }, { "name": "plusMinus$string$2", "symbols": [{ "literal": "+" }, { "literal": "-" }], "postprocess": function joiner(d) {
                 return d.join('');
-            } }, { "name": "plusMinus", "symbols": ["plusMinus$string$2"] }, { "name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance }, { "name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance }, { "name": "farad", "symbols": ["F"], "postprocess": nuller }, { "name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+            } }, { "name": "plusMinus", "symbols": ["plusMinus$string$2"] }, { "name": "capacitance", "symbols": ["capacitanceNoFarad", "_", "farad"], "postprocess": id }, { "name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceRest"], "postprocess": capacitance }, { "name": "capacitanceRest$ebnf$1", "symbols": ["int"], "postprocess": id }, { "name": "capacitanceRest$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+                return null;
+            } }, { "name": "capacitanceRest", "symbols": ["cMetricPrefix", "capacitanceRest$ebnf$1"] }, { "name": "farad", "symbols": ["F"], "postprocess": nuller }, { "name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller }, { "name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
             } }, { "name": "resistor", "symbols": ["rSpecs", "resistance", "rSpecs", "resistor$ebnf$1", "rSpecs"] }, { "name": "resistor$ebnf$2", "symbols": ["packageSize"], "postprocess": id }, { "name": "resistor$ebnf$2", "symbols": [], "postprocess": function postprocess(d) {
                 return null;
