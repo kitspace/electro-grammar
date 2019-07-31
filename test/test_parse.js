@@ -92,6 +92,20 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it('parses 100NF', () => {
+    const c = parse('100NF 0603 X7R')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'X7R', 'characteristic is wrong')
+  })
+  it('parses 100UF', () => {
+    const c = parse('100UF 0603 X7R')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-6, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'X7R', 'characteristic is wrong')
+  })
   it('parses characteristic X7R', () => {
     const c = parse('100nF 0603 X7R')
     assert(c.type === 'capacitor')
@@ -231,6 +245,30 @@ describe('SMD Resistors', () => {
     assert(c.resistance === 1000, 'resistance value is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it('parses "1MEG"', () => {
+    const c = parse('1MEG 0603')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000000, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses "1M"', () => {
+    const c = parse('1M 0603')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000000, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses "1K ohms"', () => {
+    const c = parse('1K ohms 0603')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses "1M1 ohms"', () => {
+    const c = parse('1M1 ohms 0603')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1100000, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
   it('parses "1k5"', () => {
     const c = parse('1k5 0402')
     assert(c.type === 'resistor')
@@ -239,6 +277,12 @@ describe('SMD Resistors', () => {
   })
   it('parses "2r7"', () => {
     const c = parse('2r7 0402')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 2.7, 'resistance value is wrong')
+    assert(c.size === '0402', 'size is wrong')
+  })
+  it('parses "2R7"', () => {
+    const c = parse('2R7 0402')
     assert(c.type === 'resistor')
     assert(c.resistance === 2.7, 'resistance value is wrong')
     assert(c.size === '0402', 'size is wrong')
