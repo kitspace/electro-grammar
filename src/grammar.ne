@@ -45,6 +45,7 @@ characteristic_ -> class1 | class2
 combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 class1 ->
     combine[C "0" G,  N P "0"] {% () => 'C0G' %}
+  | combine[C  O  G,  N P O] {% () => 'C0G' %}
   | combine[P "100",  M "7" G] {% () => 'M7G' %}
   | combine[N "33",   H "2" G] {% () => 'H2G' %}
   | combine[N "75",   L "2" G] {% () => 'L2G' %}
