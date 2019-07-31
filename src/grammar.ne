@@ -34,7 +34,25 @@ cSpecs -> (_ cSpec _):* | __
 
 cSpec -> tolerance | characteristic | voltage_rating
 
-voltage_rating -> decimal _ V {% d => ({voltage_rating: d[0]}) %}
+voltage_rating ->
+  decimal _ voltageRest {% voltage_rating %}
+
+voltageRest -> V int:?
+
+@{%
+  function voltage_rating(d, i, reject) {
+    const [integral, , [v, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
+    return {voltage_rating: parseFloat(quantity)}
+  }
+%}
 
 characteristic -> characteristic_ {% d => ({characteristic: d[0][0]}) %}
 

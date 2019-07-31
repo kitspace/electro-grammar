@@ -1171,15 +1171,32 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     }
 
-    function capacitance(d, i, reject) {
+    function voltage_rating(d, i, reject) {
         var _d = _slicedToArray(d, 3),
             integral = _d[0],
             _d$ = _slicedToArray(_d[2], 2),
-            metricPrefix = _d$[0],
+            v = _d$[0],
             fractional = _d$[1];
 
         if (fractional) {
-            console.log({ integral: integral, metricPrefix: metricPrefix, fractional: fractional });
+            if (/\./.test(integral.toString())) {
+                return reject;
+            }
+            var quantity = integral + '.' + fractional;
+        } else {
+            var quantity = integral;
+        }
+        return { voltage_rating: parseFloat(quantity) };
+    }
+
+    function capacitance(d, i, reject) {
+        var _d2 = _slicedToArray(d, 3),
+            integral = _d2[0],
+            _d2$ = _slicedToArray(_d2[2], 2),
+            metricPrefix = _d2$[0],
+            fractional = _d2$[1];
+
+        if (fractional) {
             if (/\./.test(integral.toString())) {
                 return reject;
             }
@@ -1191,12 +1208,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     }
 
     function resistance(d, i, reject) {
-        var _d2 = _slicedToArray(d, 3),
-            integral = _d2[0],
-            _d2$ = _slicedToArray(_d2[2], 3),
-            metricPrefix = _d2$[0],
-            fractional = _d2$[1],
-            ohm = _d2$[2];
+        var _d3 = _slicedToArray(d, 3),
+            integral = _d3[0],
+            _d3$ = _slicedToArray(_d3[2], 3),
+            metricPrefix = _d3$[0],
+            fractional = _d3$[1],
+            ohm = _d3$[2];
 
         if (fractional) {
             if (/\./.test(integral.toString())) {
@@ -1360,7 +1377,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return d[0].concat([d[1]]);
             } }, { "name": "cSpecs", "symbols": ["cSpecs$ebnf$1"] }, { "name": "cSpecs", "symbols": ["__"] }, { "name": "cSpec", "symbols": ["tolerance"] }, { "name": "cSpec", "symbols": ["characteristic"] }, { "name": "cSpec", "symbols": ["voltage_rating"] }, { "name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": function postprocess(d) {
                 return { voltage_rating: d[0] };
-            } }, { "name": "characteristic", "symbols": ["characteristic_"], "postprocess": function postprocess(d) {
+            } }, { "name": "voltage_rating", "symbols": ["decimal", "_", "voltageRest"], "postprocess": voltage_rating }, { "name": "voltageRest$ebnf$1", "symbols": ["int"], "postprocess": id }, { "name": "voltageRest$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {
+                return null;
+            } }, { "name": "voltageRest", "symbols": ["V", "voltageRest$ebnf$1"] }, { "name": "characteristic", "symbols": ["characteristic_"], "postprocess": function postprocess(d) {
                 return { characteristic: d[0][0] };
             } }, { "name": "characteristic_", "symbols": ["class1"] }, { "name": "characteristic_", "symbols": ["class2"] }, { "name": "class1$macrocall$2", "symbols": ["C", { "literal": "0" }, "G"] }, { "name": "class1$macrocall$3", "symbols": ["N", "P", { "literal": "0" }] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$2"] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$3"] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$2", { "literal": "/" }, "class1$macrocall$3"] }, { "name": "class1$macrocall$1", "symbols": ["class1$macrocall$3", { "literal": "/" }, "class1$macrocall$2"] }, { "name": "class1", "symbols": ["class1$macrocall$1"], "postprocess": function postprocess() {
                 return 'C0G';
@@ -1425,9 +1444,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             } }, { "name": "resistor", "symbols": ["rSpecs", "resistor$ebnf$2", "rSpecs", "resistance", "rSpecs"] }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
             } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess": function postprocess(d) {
-                var _d3 = _slicedToArray(d, 3),
-                    quantity = _d3[0],
-                    metricPrefix = _d3[2];
+                var _d4 = _slicedToArray(d, 3),
+                    quantity = _d4[0],
+                    metricPrefix = _d4[2];
 
                 return { power_rating: parseFloat('' + quantity + metricPrefix) };
             } }, { "name": "watts", "symbols": ["watts_"], "postprocess": nuller }, { "name": "watts_", "symbols": ["W"] }, { "name": "watts_", "symbols": ["W", "A", "T", "T", "S"] }, { "name": "resistance", "symbols": ["decimal", "_", "rest"], "postprocess": resistance }, { "name": "rest$ebnf$1", "symbols": ["int"], "postprocess": id }, { "name": "rest$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {

@@ -33,10 +33,23 @@ function id(x) { return x[0]; }
     }
 
 
+  function voltage_rating(d, i, reject) {
+    const [integral, , [v, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
+    return {voltage_rating: parseFloat(quantity)}
+  }
+
+
   function capacitance(d, i, reject) {
     const [integral, , [metricPrefix, fractional]] = d
     if (fractional) {
-      console.log({integral, metricPrefix, fractional})
       if (/\./.test(integral.toString())) {
         return reject
       }
@@ -360,6 +373,10 @@ var grammar = {
     {"name": "cSpec", "symbols": ["characteristic"]},
     {"name": "cSpec", "symbols": ["voltage_rating"]},
     {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": d => ({voltage_rating: d[0]})},
+    {"name": "voltage_rating", "symbols": ["decimal", "_", "voltageRest"], "postprocess": voltage_rating},
+    {"name": "voltageRest$ebnf$1", "symbols": ["int"], "postprocess": id},
+    {"name": "voltageRest$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "voltageRest", "symbols": ["V", "voltageRest$ebnf$1"]},
     {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": d => ({characteristic: d[0][0]})},
     {"name": "characteristic_", "symbols": ["class1"]},
     {"name": "characteristic_", "symbols": ["class2"]},
