@@ -6,4 +6,3 @@ node_js:
 script:
   - yarn test
   - yarn demo
-  - git diff --quiet
