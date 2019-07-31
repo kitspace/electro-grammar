@@ -92,6 +92,13 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it('parses 1n5F', () => {
+    const c = parse('1n5F 0603 X7R')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 1.5e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.characteristic === 'X7R', 'characteristic is wrong')
+  })
   it('parses 100NF', () => {
     const c = parse('100NF 0603 X7R')
     assert(c.type === 'capacitor')
@@ -213,6 +220,34 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
     assert(c.voltage_rating === 25, 'rating is wrong')
+  })
+  it('parses 6v3', () => {
+    const c = parse('100nF 0603 6v3')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.voltage_rating === 6.3, 'rating is wrong')
+  })
+  it('parses 6V3', () => {
+    const c = parse('100nF 0603 6V3')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.voltage_rating === 6.3, 'rating is wrong')
+  })
+  it('parses 6.3V', () => {
+    const c = parse('100nF 0603 6.3V')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.voltage_rating === 6.3, 'rating is wrong')
+  })
+  it('parses 6.3v', () => {
+    const c = parse('100nF 0603 6.3v')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 100e-9, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+    assert(c.voltage_rating === 6.3, 'rating is wrong')
   })
   it('parses voltage rating with small v and space', () => {
     const c = parse('100nF 0603 25 v')

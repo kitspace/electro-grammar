@@ -33,9 +33,30 @@ function id(x) { return x[0]; }
     }
 
 
-  function capacitance(d) {
-    const [quantity, , metricPrefix, , farad] = d
+  function voltage_rating(d, i, reject) {
+    const [integral, , [v, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
+    return {voltage_rating: parseFloat(quantity)}
+  }
 
+
+  function capacitance(d, i, reject) {
+    const [integral, , [metricPrefix, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 
@@ -352,6 +373,10 @@ var grammar = {
     {"name": "cSpec", "symbols": ["characteristic"]},
     {"name": "cSpec", "symbols": ["voltage_rating"]},
     {"name": "voltage_rating", "symbols": ["decimal", "_", "V"], "postprocess": d => ({voltage_rating: d[0]})},
+    {"name": "voltage_rating", "symbols": ["decimal", "_", "voltageRest"], "postprocess": voltage_rating},
+    {"name": "voltageRest$ebnf$1", "symbols": ["int"], "postprocess": id},
+    {"name": "voltageRest$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "voltageRest", "symbols": ["V", "voltageRest$ebnf$1"]},
     {"name": "characteristic", "symbols": ["characteristic_"], "postprocess": d => ({characteristic: d[0][0]})},
     {"name": "characteristic_", "symbols": ["class1"]},
     {"name": "characteristic_", "symbols": ["class2"]},
@@ -474,8 +499,11 @@ var grammar = {
     {"name": "plusMinus", "symbols": [{"literal":"±"}]},
     {"name": "plusMinus$string$2", "symbols": [{"literal":"+"}, {"literal":"-"}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "plusMinus", "symbols": ["plusMinus$string$2"]},
-    {"name": "capacitance", "symbols": ["decimal", "_", "cMetricPrefix", "_", "farad"], "postprocess": capacitance},
-    {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "cMetricPrefix"], "postprocess": capacitance},
+    {"name": "capacitance", "symbols": ["capacitanceNoFarad", "_", "farad"], "postprocess": id},
+    {"name": "capacitanceNoFarad", "symbols": ["decimal", "_", "capacitanceRest"], "postprocess": capacitance},
+    {"name": "capacitanceRest$ebnf$1", "symbols": ["int"], "postprocess": id},
+    {"name": "capacitanceRest$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitanceRest", "symbols": ["cMetricPrefix", "capacitanceRest$ebnf$1"]},
     {"name": "farad", "symbols": ["F"], "postprocess": nuller},
     {"name": "farad", "symbols": ["F", "A", "R", "A", "D"], "postprocess": nuller},
     {"name": "resistor$ebnf$1", "symbols": ["packageSize"], "postprocess": id},
