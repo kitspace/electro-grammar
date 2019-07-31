@@ -34,7 +34,25 @@ cSpecs -> (_ cSpec _):* | __
 
 cSpec -> tolerance | characteristic | voltage_rating
 
-voltage_rating -> decimal _ V {% d => ({voltage_rating: d[0]}) %}
+voltage_rating ->
+  decimal _ voltageRest {% voltage_rating %}
+
+voltageRest -> V int:?
+
+@{%
+  function voltage_rating(d, i, reject) {
+    const [integral, , [v, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
+    return {voltage_rating: parseFloat(quantity)}
+  }
+%}
 
 characteristic -> characteristic_ {% d => ({characteristic: d[0][0]}) %}
 
@@ -45,6 +63,7 @@ characteristic_ -> class1 | class2
 combine[X, Y] -> $X | $Y | $X "/" $Y | $Y "/" $X
 class1 ->
     combine[C "0" G,  N P "0"] {% () => 'C0G' %}
+  | combine[C  O  G,  N P O] {% () => 'C0G' %}
   | combine[P "100",  M "7" G] {% () => 'M7G' %}
   | combine[N "33",   H "2" G] {% () => 'H2G' %}
   | combine[N "75",   L "2" G] {% () => 'L2G' %}
@@ -66,12 +85,22 @@ tolerance -> (plusMinus _):? decimal _ "%" {% d => ({tolerance: d[1]}) %}
 
 plusMinus -> "+/-" | "±" | "+-"
 
-capacitance -> decimal _ cMetricPrefix _ farad {% capacitance %}
-capacitanceNoFarad -> decimal _ cMetricPrefix {% capacitance %}
-@{%
-  function capacitance(d) {
-    const [quantity, , metricPrefix, , farad] = d
+capacitance -> capacitanceNoFarad _ farad {% id %}
+capacitanceNoFarad -> decimal _ capacitanceRest {% capacitance %}
 
+capacitanceRest -> cMetricPrefix int:?
+
+@{%
+  function capacitance(d, i, reject) {
+    const [integral, , [metricPrefix, fractional]] = d
+    if (fractional) {
+      if (/\./.test(integral.toString())) {
+        return reject
+      }
+      var quantity = `${integral}.${fractional}`
+    } else {
+      var quantity = integral
+    }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
   }
 %}
