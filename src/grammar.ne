@@ -110,10 +110,15 @@ farad -> F {% nuller %} | F A R A D {% nuller %}
 
 ## Resistors ##
 
+# the description can come in any order
+# if it starts with 'r' or 'resistor' then k, R etc can be ommitted
 resistor ->
-    rSpecs resistance rSpecs packageSize:? rSpecs
-  | rSpecs packageSize:? rSpecs resistance rSpecs
+    resistor_prefix:? rSpecs resistance rSpecs packageSize:? rSpecs
+  | resistor_prefix:? rSpecs packageSize:? rSpecs resistance rSpecs
+  | resistor_prefix rSpecs resistanceNoR rSpecs packageSize:? rSpecs
+  | resistor_prefix rSpecs packageSize:? rSpecs resistanceNoR rSpecs
 
+resistor_prefix -> R {% nuller %} | R E S {% nuller %} | R E S I S T O R {% nuller %}
 
 rSpecs -> (_ rSpec _):* | __
 
@@ -131,6 +136,9 @@ resistance ->
   decimal _ rest {% resistance %}
 
 rest -> rMetricPrefix int:? (_ ohm):? | ohm
+
+# just a number, no R, K, ohm etc
+resistanceNoR -> decimal {% d => ({resistance: d[0]}) %}
 
 @{%
   function resistance(d, i, reject) {

@@ -79,6 +79,8 @@ Electro-grammar supports several different ways to express resistance.
 { type: 'resistor', resistance: 1500 }
 > parse('1500 Ω')
 { type: 'resistor', resistance: 1500 }
+> parse('resistor 1500')
+{ type: 'resistor', resistance: 1500 }
 ```
 
 ### LEDs
@@ -154,6 +156,21 @@ Output for package sizes is always in imperial.
 { type: 'resistor', resistance: 1000, size: '0201' }
 > parse('1k 0603 metric')
 { type: 'resistor', resistance: 1000, size: '0201' }
+```
+
+You can give it a hint to the type of component by starting off with that. For instance you can leave of F or farad if you start off with 'capacitor' or 'c'
+
+```js
+> parse('capacitor 1u')
+{ type: 'capacitor', capacitance: 0.000001 }
+> parse('c 1u')
+{ type: 'capacitor', capacitance: 0.000001 }
+> parse('resistor 100')
+{ type: 'resistor', resistance: 100 }
+> parse('res 100')
+{ type: 'resistor', resistance: 100 }
+> parse('r 100')
+{ type: 'resistor', resistance: 100 }
 ```
 
 ## CPL Matching
