@@ -1232,7 +1232,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             fractional = _d2$[1];
 
         if (fractional) {
-            if (/\./.test(integral.toString())) {
+            if (/\./.test(integral.toString()) || metricPrefix === "") {
                 return reject;
             }
             var quantity = integral + '.' + fractional;
@@ -1554,6 +1554,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return 'e-3 ';
             } }, { "name": "rMetricPrefix", "symbols": ["micro"], "postprocess": function postprocess() {
                 return 'e-6 ';
+            } }, { "name": "cMetricPrefix", "symbols": ["milli"], "postprocess": function postprocess() {
+                return 'e-3 ';
             } }, { "name": "cMetricPrefix", "symbols": ["micro"], "postprocess": function postprocess() {
                 return 'e-6 ';
             } }, { "name": "cMetricPrefix", "symbols": ["nano"], "postprocess": function postprocess() {

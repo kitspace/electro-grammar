@@ -296,6 +296,24 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 100e-9, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it('parses 0.0001F', () => {
+    const c = parse('0603 0.0001F')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 0.0001, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses 0.0001 F', () => {
+    const c = parse('0603 0.0001 F')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 0.0001, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it('parses 0.1mF', () => {
+    const c = parse('0603 0.1mF')
+    assert(c.type === 'capacitor')
+    assert(c.capacitance === 0.0001, 'capacitance is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
 })
 
 describe('SMD Resistors', () => {

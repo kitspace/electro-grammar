@@ -50,7 +50,7 @@ function id(x) { return x[0]; }
   function capacitance(d, i, reject) {
     const [integral, , [metricPrefix, fractional]] = d
     if (fractional) {
-      if (/\./.test(integral.toString())) {
+      if (/\./.test(integral.toString()) || metricPrefix === "") {
         return reject
       }
       var quantity = `${integral}.${fractional}`
@@ -600,6 +600,7 @@ var grammar = {
     {"name": "rMetricPrefix", "symbols": ["R"], "postprocess": () => ''},
     {"name": "rMetricPrefix", "symbols": ["milli"], "postprocess": () => 'e-3 '},
     {"name": "rMetricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
+    {"name": "cMetricPrefix", "symbols": ["milli"], "postprocess": () => 'e-3 '},
     {"name": "cMetricPrefix", "symbols": ["micro"], "postprocess": () => 'e-6 '},
     {"name": "cMetricPrefix", "symbols": ["nano"], "postprocess": () => 'e-9 '},
     {"name": "cMetricPrefix", "symbols": ["pico"], "postprocess": () => 'e-12'},
