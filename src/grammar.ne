@@ -94,7 +94,7 @@ capacitanceRest -> cMetricPrefix int:?
   function capacitance(d, i, reject) {
     const [integral, , [metricPrefix, fractional]] = d
     if (fractional) {
-      if (/\./.test(integral.toString())) {
+      if (/\./.test(integral.toString()) || metricPrefix === "") {
         return reject
       }
       var quantity = `${integral}.${fractional}`
@@ -208,7 +208,8 @@ rMetricPrefix ->
   | micro {% () => 'e-6 ' %}
 
 cMetricPrefix ->
-    micro {% () => 'e-6 ' %}
+    milli {% () => 'e-3 ' %}
+  | micro {% () => 'e-6 ' %}
   | nano  {% () => 'e-9 ' %}
   | pico  {% () => 'e-12' %}
   | null  {% () => '' %}
