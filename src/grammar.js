@@ -531,7 +531,13 @@ var grammar = {
     {"name": "rSpecs", "symbols": ["__"]},
     {"name": "rSpec", "symbols": ["tolerance"]},
     {"name": "rSpec", "symbols": ["power_rating"]},
-    {"name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess":  d => {
+    {"name": "power_rating", "symbols": ["power_rating_decimal"]},
+    {"name": "power_rating", "symbols": ["power_rating_fraction"]},
+    {"name": "power_rating_fraction", "symbols": ["decimal", {"literal":"/"}, "decimal", "_", "watts"], "postprocess":  d => {
+          const [n1, _, n2] = d
+          return {power_rating: n1 / n2}
+        } },
+    {"name": "power_rating_decimal", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess":  d => {
           const [quantity, , metricPrefix] = d
           return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
         } },
