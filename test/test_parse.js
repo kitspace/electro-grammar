@@ -469,6 +469,20 @@ describe('SMD Resistors', () => {
     assert(c.size === '0201', 'size is wrong')
     assert(c.power_rating === 0.125, 'power rating is wrong')
   })
+  it('parses fractional power rating', () => {
+    const c = parse('0 ohm 0201 1/8W')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 0, 'resistance value is wrong')
+    assert(c.size === '0201', 'size is wrong')
+    assert(c.power_rating === 0.125, 'power rating is wrong')
+  })
+  it('parses fractional power rating 2', () => {
+    const c = parse('resistor 1k 0201 1/2 watts')
+    assert(c.type === 'resistor')
+    assert(c.resistance === 1000, 'resistance value is wrong')
+    assert(c.size === '0201', 'size is wrong')
+    assert(c.power_rating === 0.5, 'power rating is wrong')
+  })
 })
 
 describe('SMD LEDs', () => {
