@@ -1449,10 +1449,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 return null;
             } }, { "name": "resistor", "symbols": ["resistor_prefix", "rSpecs", "resistor$ebnf$6", "rSpecs", "resistanceNoR", "rSpecs"] }, { "name": "resistor_prefix", "symbols": ["R"], "postprocess": nuller }, { "name": "resistor_prefix", "symbols": ["R", "E", "S"], "postprocess": nuller }, { "name": "resistor_prefix", "symbols": ["R", "E", "S", "I", "S", "T", "O", "R"], "postprocess": nuller }, { "name": "rSpecs$ebnf$1", "symbols": [] }, { "name": "rSpecs$ebnf$1$subexpression$1", "symbols": ["_", "rSpec", "_"] }, { "name": "rSpecs$ebnf$1", "symbols": ["rSpecs$ebnf$1", "rSpecs$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {
                 return d[0].concat([d[1]]);
-            } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess": function postprocess(d) {
+            } }, { "name": "rSpecs", "symbols": ["rSpecs$ebnf$1"] }, { "name": "rSpecs", "symbols": ["__"] }, { "name": "rSpec", "symbols": ["tolerance"] }, { "name": "rSpec", "symbols": ["power_rating"] }, { "name": "power_rating", "symbols": ["power_rating_decimal"] }, { "name": "power_rating", "symbols": ["power_rating_fraction"] }, { "name": "power_rating_fraction", "symbols": ["decimal", { "literal": "/" }, "decimal", "_", "watts"], "postprocess": function postprocess(d) {
                 var _d4 = _slicedToArray(d, 3),
-                    quantity = _d4[0],
-                    metricPrefix = _d4[2];
+                    n1 = _d4[0],
+                    _ = _d4[1],
+                    n2 = _d4[2];
+
+                return { power_rating: n1 / n2 };
+            } }, { "name": "power_rating_decimal", "symbols": ["decimal", "_", "powerMetricPrefix", "_", "watts"], "postprocess": function postprocess(d) {
+                var _d5 = _slicedToArray(d, 3),
+                    quantity = _d5[0],
+                    metricPrefix = _d5[2];
 
                 return { power_rating: parseFloat('' + quantity + metricPrefix) };
             } }, { "name": "watts", "symbols": ["watts_"], "postprocess": nuller }, { "name": "watts_", "symbols": ["W"] }, { "name": "watts_", "symbols": ["W", "A", "T", "T", "S"] }, { "name": "resistance", "symbols": ["decimal", "_", "rest"], "postprocess": resistance }, { "name": "rest$ebnf$1", "symbols": ["int"], "postprocess": id }, { "name": "rest$ebnf$1", "symbols": [], "postprocess": function postprocess(d) {

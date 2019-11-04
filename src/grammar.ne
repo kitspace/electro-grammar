@@ -124,7 +124,14 @@ rSpecs -> (_ rSpec _):* | __
 
 rSpec -> tolerance | power_rating
 
-power_rating -> decimal _ powerMetricPrefix _ watts {% d => {
+power_rating -> power_rating_decimal | power_rating_fraction
+
+power_rating_fraction -> decimal "/" decimal _ watts {% d => {
+  const [n1, _, n2] = d
+  return {power_rating: n1 / n2}
+} %}
+
+power_rating_decimal -> decimal _ powerMetricPrefix _ watts {% d => {
   const [quantity, , metricPrefix] = d
   return {power_rating: parseFloat(`${quantity}${metricPrefix}`)}
 } %}
