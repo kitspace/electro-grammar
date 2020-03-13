@@ -24,8 +24,8 @@ component ->
 capacitor ->
     cSpecs capacitance cSpecs packageSize:? cSpecs
   | cSpecs packageSize:? cSpecs capacitance cSpecs
-  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance) cSpecs
-  | cap cSpecs (capacitanceNoFarad | capacitance) cSpecs packageSize:? cSpecs
+  | cap cSpecs packageSize:? cSpecs (capacitanceNoFarad | capacitance):? cSpecs
+  | cap cSpecs (capacitanceNoFarad | capacitance):? cSpecs packageSize:? cSpecs
 
 
 cap -> C A:? P:? A:? C:? I:? T:? O:? R:? {% nuller %}
@@ -94,11 +94,14 @@ capacitanceRest -> cMetricPrefix int:?
   function capacitance(d, i, reject) {
     const [integral, , [metricPrefix, fractional]] = d
     if (fractional) {
-      if (/\./.test(integral.toString()) || metricPrefix === "") {
+      if (/\./.test(integral) || metricPrefix === "") {
         return reject
       }
       var quantity = `${integral}.${fractional}`
     } else {
+      if (/1005|201|402|603|805|1206/.test(integral.toString())) {
+        return reject
+      }
       var quantity = integral
     }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
@@ -115,8 +118,8 @@ farad -> F {% nuller %} | F A R A D {% nuller %}
 resistor ->
     resistor_prefix:? rSpecs resistance rSpecs packageSize:? rSpecs
   | resistor_prefix:? rSpecs packageSize:? rSpecs resistance rSpecs
-  | resistor_prefix rSpecs resistanceNoR rSpecs packageSize:? rSpecs
-  | resistor_prefix rSpecs packageSize:? rSpecs resistanceNoR rSpecs
+  | resistor_prefix rSpecs resistanceNoR:? rSpecs packageSize:? rSpecs
+  | resistor_prefix rSpecs packageSize:? rSpecs resistanceNoR:? rSpecs
 
 resistor_prefix -> R {% nuller %} | R E S {% nuller %} | R E S I S T O R {% nuller %}
 
@@ -156,6 +159,9 @@ resistanceNoR -> decimal {% d => ({resistance: d[0]}) %}
       }
       var quantity = `${integral}.${fractional}`
     } else {
+      if (/1005|201|402|603|805|1206/.test(integral.toString())) {
+        return reject
+      }
       var quantity = integral
     }
     return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
