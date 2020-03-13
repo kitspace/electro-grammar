@@ -55,6 +55,9 @@ function id(x) { return x[0]; }
       }
       var quantity = `${integral}.${fractional}`
     } else {
+      if (/1005|201|402|603|805|1206/.test(integral.toString())) {
+        return reject
+      }
       var quantity = integral
     }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
@@ -69,6 +72,9 @@ function id(x) { return x[0]; }
       }
       var quantity = `${integral}.${fractional}`
     } else {
+      if (/1005|201|402|603|805|1206/.test(integral.toString())) {
+        return reject
+      }
       var quantity = integral
     }
     return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
@@ -348,14 +354,18 @@ var grammar = {
     {"name": "capacitor", "symbols": ["cSpecs", "capacitor$ebnf$2", "cSpecs", "capacitance", "cSpecs"]},
     {"name": "capacitor$ebnf$3", "symbols": ["packageSize"], "postprocess": id},
     {"name": "capacitor$ebnf$3", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor$subexpression$1", "symbols": ["capacitanceNoFarad"]},
-    {"name": "capacitor$subexpression$1", "symbols": ["capacitance"]},
-    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$subexpression$1", "cSpecs"]},
-    {"name": "capacitor$subexpression$2", "symbols": ["capacitanceNoFarad"]},
-    {"name": "capacitor$subexpression$2", "symbols": ["capacitance"]},
-    {"name": "capacitor$ebnf$4", "symbols": ["packageSize"], "postprocess": id},
+    {"name": "capacitor$ebnf$4$subexpression$1", "symbols": ["capacitanceNoFarad"]},
+    {"name": "capacitor$ebnf$4$subexpression$1", "symbols": ["capacitance"]},
+    {"name": "capacitor$ebnf$4", "symbols": ["capacitor$ebnf$4$subexpression$1"], "postprocess": id},
     {"name": "capacitor$ebnf$4", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$subexpression$2", "cSpecs", "capacitor$ebnf$4", "cSpecs"]},
+    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$3", "cSpecs", "capacitor$ebnf$4", "cSpecs"]},
+    {"name": "capacitor$ebnf$5$subexpression$1", "symbols": ["capacitanceNoFarad"]},
+    {"name": "capacitor$ebnf$5$subexpression$1", "symbols": ["capacitance"]},
+    {"name": "capacitor$ebnf$5", "symbols": ["capacitor$ebnf$5$subexpression$1"], "postprocess": id},
+    {"name": "capacitor$ebnf$5", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitor$ebnf$6", "symbols": ["packageSize"], "postprocess": id},
+    {"name": "capacitor$ebnf$6", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "capacitor", "symbols": ["cap", "cSpecs", "capacitor$ebnf$5", "cSpecs", "capacitor$ebnf$6", "cSpecs"]},
     {"name": "cap$ebnf$1", "symbols": ["A"], "postprocess": id},
     {"name": "cap$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "cap$ebnf$2", "symbols": ["P"], "postprocess": id},
@@ -524,12 +534,16 @@ var grammar = {
     {"name": "resistor$ebnf$4", "symbols": ["packageSize"], "postprocess": id},
     {"name": "resistor$ebnf$4", "symbols": [], "postprocess": function(d) {return null;}},
     {"name": "resistor", "symbols": ["resistor$ebnf$3", "rSpecs", "resistor$ebnf$4", "rSpecs", "resistance", "rSpecs"]},
-    {"name": "resistor$ebnf$5", "symbols": ["packageSize"], "postprocess": id},
+    {"name": "resistor$ebnf$5", "symbols": ["resistanceNoR"], "postprocess": id},
     {"name": "resistor$ebnf$5", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistor", "symbols": ["resistor_prefix", "rSpecs", "resistanceNoR", "rSpecs", "resistor$ebnf$5", "rSpecs"]},
     {"name": "resistor$ebnf$6", "symbols": ["packageSize"], "postprocess": id},
     {"name": "resistor$ebnf$6", "symbols": [], "postprocess": function(d) {return null;}},
-    {"name": "resistor", "symbols": ["resistor_prefix", "rSpecs", "resistor$ebnf$6", "rSpecs", "resistanceNoR", "rSpecs"]},
+    {"name": "resistor", "symbols": ["resistor_prefix", "rSpecs", "resistor$ebnf$5", "rSpecs", "resistor$ebnf$6", "rSpecs"]},
+    {"name": "resistor$ebnf$7", "symbols": ["packageSize"], "postprocess": id},
+    {"name": "resistor$ebnf$7", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "resistor$ebnf$8", "symbols": ["resistanceNoR"], "postprocess": id},
+    {"name": "resistor$ebnf$8", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "resistor", "symbols": ["resistor_prefix", "rSpecs", "resistor$ebnf$7", "rSpecs", "resistor$ebnf$8", "rSpecs"]},
     {"name": "resistor_prefix", "symbols": ["R"], "postprocess": nuller},
     {"name": "resistor_prefix", "symbols": ["R", "E", "S"], "postprocess": nuller},
     {"name": "resistor_prefix", "symbols": ["R", "E", "S", "I", "S", "T", "O", "R"], "postprocess": nuller},

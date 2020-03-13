@@ -314,6 +314,42 @@ describe('SMD Capacitors', () => {
     assert(c.capacitance === 0.0001, 'capacitance is wrong')
     assert(c.size === '0603', 'size is wrong')
   })
+  it("doesn't accidentally parse 01005 as value", () => {
+    const c = parse('capacitor 01005')
+    assert(c.type === 'capacitor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '01005', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0201 as value", () => {
+    const c = parse('capacitor 0201')
+    assert(c.type === 'capacitor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0201', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0402 as value", () => {
+    const c = parse('capacitor 0402')
+    assert(c.type === 'capacitor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0402', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0603 as value", () => {
+    const c = parse('capacitor 0603')
+    assert(c.type === 'capacitor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0805 as value", () => {
+    const c = parse('capacitor 0805')
+    assert(c.type === 'capacitor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0805', 'size is wrong')
+  })
+  it("doesn't accidentally parse 1206 as value", () => {
+    const c = parse('capacitor 1206')
+    assert(c.type === 'capacitor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '1206', 'size is wrong')
+  })
 })
 
 describe('SMD Resistors', () => {
@@ -482,6 +518,42 @@ describe('SMD Resistors', () => {
     assert(c.resistance === 1000, 'resistance value is wrong')
     assert(c.size === '0201', 'size is wrong')
     assert(c.power_rating === 0.5, 'power rating is wrong')
+  })
+  it("doesn't accidentally parse 01005 as value", () => {
+    const c = parse('resistor 01005')
+    assert(c.type === 'resistor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '01005', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0201 as value", () => {
+    const c = parse('resistor 0201')
+    assert(c.type === 'resistor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0201', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0402 as value", () => {
+    const c = parse('resistor 0402')
+    assert(c.type === 'resistor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0402', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0603 as value", () => {
+    const c = parse('resistor 0603')
+    assert(c.type === 'resistor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0603', 'size is wrong')
+  })
+  it("doesn't accidentally parse 0805 as value", () => {
+    const c = parse('resistor 0805')
+    assert(c.type === 'resistor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '0805', 'size is wrong')
+  })
+  it("doesn't accidentally parse 1206 as value", () => {
+    const c = parse('resistor 1206')
+    assert(c.type === 'resistor')
+    assert(c.resistance == null, 'resistance value is wrong')
+    assert(c.size === '1206', 'size is wrong')
   })
 })
 

@@ -1,7 +1,7 @@
 {
   "name": "electro-grammar",
   "description": "Parser electronic components descriptions such as surface-mount resistors and capacitors.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "lib/index.js",
   "keywords": [
     "electronics",
