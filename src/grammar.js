@@ -50,11 +50,14 @@ function id(x) { return x[0]; }
   function capacitance(d, i, reject) {
     const [integral, , [metricPrefix, fractional]] = d
     if (fractional) {
-      if (/\./.test(integral.toString()) || metricPrefix === "") {
+      if (/\./.test(integral) || metricPrefix === "") {
         return reject
       }
       var quantity = `${integral}.${fractional}`
     } else {
+      if (/1005|201|402|603|805|1206/.test(integral.toString())) {
+        return reject
+      }
       var quantity = integral
     }
     return {capacitance: parseFloat(`${quantity}${metricPrefix}`)}
@@ -69,6 +72,9 @@ function id(x) { return x[0]; }
       }
       var quantity = `${integral}.${fractional}`
     } else {
+      if (/1005|201|402|603|805|1206/.test(integral.toString())) {
+        return reject
+      }
       var quantity = integral
     }
     return {resistance: parseFloat(`${quantity}${metricPrefix}`)}
