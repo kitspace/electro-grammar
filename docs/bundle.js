@@ -18,7 +18,7 @@ function setOutput() {
   cplParts.forEach(function(p) {
     var li = document.createElement('li')
     var a = document.createElement('a')
-    a.href = 'https://octopart.com/common-parts-library#' + p
+    a.href = 'https://octopart.com/search?q=' + p
     a.appendChild(document.createTextNode(p))
     li.appendChild(a)
     cplids.appendChild(li)
